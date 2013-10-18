@@ -25,6 +25,7 @@
     if (self) {
         // Custom initialization
         enc = [[[SettingStore shareStore] getSettings]enc];
+        parser = [[ParserMsg alloc] init];
     }
     return self;
 }
@@ -72,12 +73,13 @@
     
     NSString *msg = [[NSString alloc] initWithData:data encoding:enc];
     NSLog(@"didReadData data = %@, tag = %ld", msg, tag);
+    [parser parserString:msg];
     [sock readDataWithTimeout:-1 tag:tag];
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag
 {
-    NSLog(@"didReadPartialDataOfLength... %ld", partialLength);
+    NSLog(@"didReadPartialDataOfLength... %ld", tag);
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag

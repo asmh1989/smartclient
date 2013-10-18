@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A43D1FEF1810C5F90067FB2B /* ParserMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = A43D1FEE1810C5F90067FB2B /* ParserMsg.m */; };
 		A4632034180F80E3000F9C69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4632033180F80E3000F9C69 /* Foundation.framework */; };
 		A4632036180F80E3000F9C69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4632035180F80E3000F9C69 /* CoreGraphics.framework */; };
 		A4632038180F80E3000F9C69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4632037180F80E3000F9C69 /* UIKit.framework */; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A43D1FED1810C5F90067FB2B /* ParserMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserMsg.h; sourceTree = "<group>"; };
+		A43D1FEE1810C5F90067FB2B /* ParserMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParserMsg.m; sourceTree = "<group>"; };
 		A4632030180F80E3000F9C69 /* SmartClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4632033180F80E3000F9C69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4632035180F80E3000F9C69 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -137,6 +140,8 @@
 				A4632043180F80E3000F9C69 /* SmartClinetAppDelegate.m */,
 				A4632062180F8114000F9C69 /* SmartClinetViewController.h */,
 				A4632063180F8114000F9C69 /* SmartClinetViewController.m */,
+				A43D1FED1810C5F90067FB2B /* ParserMsg.h */,
+				A43D1FEE1810C5F90067FB2B /* ParserMsg.m */,
 				A463207F180FDEBB000F9C69 /* SettingStore.h */,
 				A4632080180FDEBB000F9C69 /* SettingStore.m */,
 				A4632067180F853B000F9C69 /* SettingForConnect.h */,
@@ -287,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4632065180F8114000F9C69 /* SmartClinetViewController.m in Sources */,
+				A43D1FEF1810C5F90067FB2B /* ParserMsg.m in Sources */,
 				A4632079180FB7AD000F9C69 /* GCDAsyncSocket.m in Sources */,
 				A463207E180FD152000F9C69 /* DefaultSettings.m in Sources */,
 				A4632069180F853B000F9C69 /* SettingForConnect.m in Sources */,
@@ -496,6 +502,7 @@
 				A463205E180F80E4000F9C69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A463205F180F80E4000F9C69 /* Build configuration list for PBXNativeTarget "SmartClientTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +511,7 @@
 				A4632061180F80E4000F9C69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

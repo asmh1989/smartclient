@@ -34,6 +34,7 @@
     
     if (self) {
         // vt服务器信息
+//        [self setHostIp:@"searching-info.com"];
         [self setHostIp:@"192.168.8.239"];
         [self setHostPort:23];
         

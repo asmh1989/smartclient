@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "GCDAsyncSocket.h"
+#import "ParserMsg.h"
 
 @interface SmartClinetViewController : UIViewController <GCDAsyncSocketDelegate>
 {
     GCDAsyncSocket *socket;
     NSStringEncoding enc;
+    ParserMsg *parser;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *content;
