@@ -7,6 +7,8 @@
 //
 
 #import "SmartClinetAppDelegate.h"
+#import "SmartClinetViewController.h"
+#import "SettingStore.h"
 
 @implementation SmartClinetAppDelegate
 
@@ -14,6 +16,11 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    SmartClinetViewController *svc = [[SmartClinetViewController alloc] init];
+    
+    [self.window setRootViewController:svc];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -29,6 +36,12 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+   BOOL success = [[SettingStore shareStore] saveSettingsConfig];
+    if (success) {
+        NSLog(@"success save data");
+    } else {
+        NSLog(@"error to save");
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

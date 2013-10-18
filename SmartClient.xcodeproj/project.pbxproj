@@ -19,6 +19,14 @@
 		A463204F180F80E4000F9C69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4632037180F80E3000F9C69 /* UIKit.framework */; };
 		A4632057180F80E4000F9C69 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4632055180F80E4000F9C69 /* InfoPlist.strings */; };
 		A4632059180F80E4000F9C69 /* SmartClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632058180F80E4000F9C69 /* SmartClientTests.m */; };
+		A4632065180F8114000F9C69 /* SmartClinetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632063180F8114000F9C69 /* SmartClinetViewController.m */; };
+		A4632066180F8114000F9C69 /* SmartClinetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4632064180F8114000F9C69 /* SmartClinetViewController.xib */; };
+		A4632069180F853B000F9C69 /* SettingForConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632068180F853B000F9C69 /* SettingForConnect.m */; };
+		A463206E180FA4AB000F9C69 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A463206D180FA4AB000F9C69 /* CFNetwork.framework */; };
+		A4632079180FB7AD000F9C69 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632076180FB7AD000F9C69 /* GCDAsyncSocket.m */; };
+		A463207A180FB7AD000F9C69 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632078180FB7AD000F9C69 /* GCDAsyncUdpSocket.m */; };
+		A463207E180FD152000F9C69 /* DefaultSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A463207D180FD152000F9C69 /* DefaultSettings.m */; };
+		A4632081180FDEBB000F9C69 /* SettingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632080180FDEBB000F9C69 /* SettingStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +56,20 @@
 		A4632054180F80E4000F9C69 /* SmartClientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SmartClientTests-Info.plist"; sourceTree = "<group>"; };
 		A4632056180F80E4000F9C69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A4632058180F80E4000F9C69 /* SmartClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartClientTests.m; sourceTree = "<group>"; };
+		A4632062180F8114000F9C69 /* SmartClinetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartClinetViewController.h; sourceTree = "<group>"; };
+		A4632063180F8114000F9C69 /* SmartClinetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartClinetViewController.m; sourceTree = "<group>"; };
+		A4632064180F8114000F9C69 /* SmartClinetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartClinetViewController.xib; sourceTree = "<group>"; };
+		A4632067180F853B000F9C69 /* SettingForConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingForConnect.h; sourceTree = "<group>"; };
+		A4632068180F853B000F9C69 /* SettingForConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingForConnect.m; sourceTree = "<group>"; };
+		A463206D180FA4AB000F9C69 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A4632075180FB7AD000F9C69 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncSocket.h; path = ../GCDAsyncSocket.h; sourceTree = "<group>"; };
+		A4632076180FB7AD000F9C69 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncSocket.m; path = ../GCDAsyncSocket.m; sourceTree = "<group>"; };
+		A4632077180FB7AD000F9C69 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncUdpSocket.h; path = ../GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		A4632078180FB7AD000F9C69 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncUdpSocket.m; path = ../GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		A463207C180FD152000F9C69 /* DefaultSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultSettings.h; sourceTree = "<group>"; };
+		A463207D180FD152000F9C69 /* DefaultSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultSettings.m; sourceTree = "<group>"; };
+		A463207F180FDEBB000F9C69 /* SettingStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingStore.h; path = ../SettingStore.h; sourceTree = "<group>"; };
+		A4632080180FDEBB000F9C69 /* SettingStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingStore.m; path = ../SettingStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A463206E180FA4AB000F9C69 /* CFNetwork.framework in Frameworks */,
 				A4632036180F80E3000F9C69 /* CoreGraphics.framework in Frameworks */,
 				A4632038180F80E3000F9C69 /* UIKit.framework in Frameworks */,
 				A4632034180F80E3000F9C69 /* Foundation.framework in Frameworks */,
@@ -77,6 +100,8 @@
 		A4632027180F80E3000F9C69 = {
 			isa = PBXGroup;
 			children = (
+				A463207C180FD152000F9C69 /* DefaultSettings.h */,
+				A463207D180FD152000F9C69 /* DefaultSettings.m */,
 				A4632039180F80E3000F9C69 /* SmartClient */,
 				A4632052180F80E4000F9C69 /* SmartClientTests */,
 				A4632032180F80E3000F9C69 /* Frameworks */,
@@ -96,6 +121,7 @@
 		A4632032180F80E3000F9C69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A463206D180FA4AB000F9C69 /* CFNetwork.framework */,
 				A4632033180F80E3000F9C69 /* Foundation.framework */,
 				A4632035180F80E3000F9C69 /* CoreGraphics.framework */,
 				A4632037180F80E3000F9C69 /* UIKit.framework */,
@@ -109,7 +135,15 @@
 			children = (
 				A4632042180F80E3000F9C69 /* SmartClinetAppDelegate.h */,
 				A4632043180F80E3000F9C69 /* SmartClinetAppDelegate.m */,
+				A4632062180F8114000F9C69 /* SmartClinetViewController.h */,
+				A4632063180F8114000F9C69 /* SmartClinetViewController.m */,
+				A463207F180FDEBB000F9C69 /* SettingStore.h */,
+				A4632080180FDEBB000F9C69 /* SettingStore.m */,
+				A4632067180F853B000F9C69 /* SettingForConnect.h */,
+				A4632068180F853B000F9C69 /* SettingForConnect.m */,
+				A4632064180F8114000F9C69 /* SmartClinetViewController.xib */,
 				A4632045180F80E3000F9C69 /* Images.xcassets */,
+				A463207B180FD0DF000F9C69 /* GCDAsyncSocket */,
 				A463203A180F80E3000F9C69 /* Supporting Files */,
 			);
 			path = SmartClient;
@@ -142,6 +176,17 @@
 				A4632055180F80E4000F9C69 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A463207B180FD0DF000F9C69 /* GCDAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				A4632075180FB7AD000F9C69 /* GCDAsyncSocket.h */,
+				A4632076180FB7AD000F9C69 /* GCDAsyncSocket.m */,
+				A4632077180FB7AD000F9C69 /* GCDAsyncUdpSocket.h */,
+				A4632078180FB7AD000F9C69 /* GCDAsyncUdpSocket.m */,
+			);
+			name = GCDAsyncSocket;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,6 +267,7 @@
 			files = (
 				A463203E180F80E3000F9C69 /* InfoPlist.strings in Resources */,
 				A4632046180F80E3000F9C69 /* Images.xcassets in Resources */,
+				A4632066180F8114000F9C69 /* SmartClinetViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +286,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4632065180F8114000F9C69 /* SmartClinetViewController.m in Sources */,
+				A4632079180FB7AD000F9C69 /* GCDAsyncSocket.m in Sources */,
+				A463207E180FD152000F9C69 /* DefaultSettings.m in Sources */,
+				A4632069180F853B000F9C69 /* SettingForConnect.m in Sources */,
+				A4632081180FDEBB000F9C69 /* SettingStore.m in Sources */,
 				A4632040180F80E3000F9C69 /* main.m in Sources */,
+				A463207A180FB7AD000F9C69 /* GCDAsyncUdpSocket.m in Sources */,
 				A4632044180F80E3000F9C69 /* SmartClinetAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
