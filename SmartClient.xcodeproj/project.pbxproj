@@ -28,6 +28,12 @@
 		A463207A180FB7AD000F9C69 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632078180FB7AD000F9C69 /* GCDAsyncUdpSocket.m */; };
 		A463207E180FD152000F9C69 /* DefaultSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A463207D180FD152000F9C69 /* DefaultSettings.m */; };
 		A4632081180FDEBB000F9C69 /* SettingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632080180FDEBB000F9C69 /* SettingStore.m */; };
+		A47552A5181606420033D224 /* SettingForRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552A4181606420033D224 /* SettingForRuntime.m */; };
+		A47552A818160E460033D224 /* Mode.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552A718160E460033D224 /* Mode.m */; };
+		A47552AB181610E30033D224 /* Chars.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552AA181610E30033D224 /* Chars.m */; };
+		A47552AE181640D30033D224 /* CharAttribs.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552AD181640D30033D224 /* CharAttribs.m */; };
+		A47552B2181646C30033D224 /* Caret.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552B1181646C30033D224 /* Caret.m */; };
+		A47552B5181657E20033D224 /* CaretAttribs.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552B4181657E20033D224 /* CaretAttribs.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +79,18 @@
 		A463207D180FD152000F9C69 /* DefaultSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultSettings.m; sourceTree = "<group>"; };
 		A463207F180FDEBB000F9C69 /* SettingStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingStore.h; path = ../SettingStore.h; sourceTree = "<group>"; };
 		A4632080180FDEBB000F9C69 /* SettingStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingStore.m; path = ../SettingStore.m; sourceTree = "<group>"; };
+		A47552A3181606420033D224 /* SettingForRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingForRuntime.h; sourceTree = "<group>"; };
+		A47552A4181606420033D224 /* SettingForRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingForRuntime.m; sourceTree = "<group>"; };
+		A47552A618160E460033D224 /* Mode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mode.h; path = SmartClient/Mode.h; sourceTree = "<group>"; };
+		A47552A718160E460033D224 /* Mode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mode.m; path = SmartClient/Mode.m; sourceTree = "<group>"; };
+		A47552A9181610E30033D224 /* Chars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chars.h; path = SmartClient/Chars.h; sourceTree = "<group>"; };
+		A47552AA181610E30033D224 /* Chars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chars.m; path = SmartClient/Chars.m; sourceTree = "<group>"; };
+		A47552AC181640D30033D224 /* CharAttribs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CharAttribs.h; path = SmartClient/CharAttribs.h; sourceTree = "<group>"; };
+		A47552AD181640D30033D224 /* CharAttribs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CharAttribs.m; path = SmartClient/CharAttribs.m; sourceTree = "<group>"; };
+		A47552B0181646C30033D224 /* Caret.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Caret.h; sourceTree = "<group>"; };
+		A47552B1181646C30033D224 /* Caret.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Caret.m; sourceTree = "<group>"; };
+		A47552B3181657E20033D224 /* CaretAttribs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaretAttribs.h; sourceTree = "<group>"; };
+		A47552B4181657E20033D224 /* CaretAttribs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaretAttribs.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,12 +160,15 @@
 				A4632063180F8114000F9C69 /* SmartClinetViewController.m */,
 				A43D1FED1810C5F90067FB2B /* ParserMsg.h */,
 				A43D1FEE1810C5F90067FB2B /* ParserMsg.m */,
+				A47552A3181606420033D224 /* SettingForRuntime.h */,
+				A47552A4181606420033D224 /* SettingForRuntime.m */,
 				A463207F180FDEBB000F9C69 /* SettingStore.h */,
 				A4632080180FDEBB000F9C69 /* SettingStore.m */,
 				A4632067180F853B000F9C69 /* SettingForConnect.h */,
 				A4632068180F853B000F9C69 /* SettingForConnect.m */,
 				A4632064180F8114000F9C69 /* SmartClinetViewController.xib */,
 				A4632045180F80E3000F9C69 /* Images.xcassets */,
+				A47552AF1816460E0033D224 /* SmartClientCore */,
 				A463207B180FD0DF000F9C69 /* GCDAsyncSocket */,
 				A463203A180F80E3000F9C69 /* Supporting Files */,
 			);
@@ -192,6 +213,24 @@
 				A4632078180FB7AD000F9C69 /* GCDAsyncUdpSocket.m */,
 			);
 			name = GCDAsyncSocket;
+			sourceTree = "<group>";
+		};
+		A47552AF1816460E0033D224 /* SmartClientCore */ = {
+			isa = PBXGroup;
+			children = (
+				A47552AC181640D30033D224 /* CharAttribs.h */,
+				A47552AD181640D30033D224 /* CharAttribs.m */,
+				A47552A9181610E30033D224 /* Chars.h */,
+				A47552AA181610E30033D224 /* Chars.m */,
+				A47552A618160E460033D224 /* Mode.h */,
+				A47552A718160E460033D224 /* Mode.m */,
+				A47552B0181646C30033D224 /* Caret.h */,
+				A47552B1181646C30033D224 /* Caret.m */,
+				A47552B3181657E20033D224 /* CaretAttribs.h */,
+				A47552B4181657E20033D224 /* CaretAttribs.m */,
+			);
+			name = SmartClientCore;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,8 +331,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4632065180F8114000F9C69 /* SmartClinetViewController.m in Sources */,
+				A47552A818160E460033D224 /* Mode.m in Sources */,
+				A47552A5181606420033D224 /* SettingForRuntime.m in Sources */,
+				A47552AB181610E30033D224 /* Chars.m in Sources */,
+				A47552B5181657E20033D224 /* CaretAttribs.m in Sources */,
+				A47552AE181640D30033D224 /* CharAttribs.m in Sources */,
 				A43D1FEF1810C5F90067FB2B /* ParserMsg.m in Sources */,
 				A4632079180FB7AD000F9C69 /* GCDAsyncSocket.m in Sources */,
+				A47552B2181646C30033D224 /* Caret.m in Sources */,
 				A463207E180FD152000F9C69 /* DefaultSettings.m in Sources */,
 				A4632069180F853B000F9C69 /* SettingForConnect.m in Sources */,
 				A4632081180FDEBB000F9C69 /* SettingStore.m in Sources */,
