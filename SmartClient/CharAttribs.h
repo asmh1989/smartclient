@@ -11,41 +11,41 @@
 @interface CharAttribs : NSObject
 
 //是否是粗体
-@property (nonatomic, assign) BOOL IsBold;
-@property (nonatomic, assign) BOOL IsDim;
+@property (nonatomic) BOOL IsBold;
+@property (nonatomic) BOOL IsDim;
 
 //是否有下划线
-@property (nonatomic, assign) BOOL IsUnderscored;
-@property (nonatomic, assign) BOOL IsBlinking;
+@property (nonatomic) BOOL IsUnderscored;
+@property (nonatomic) BOOL IsBlinking;
 
 // 是否反转颜色
-@property (nonatomic, assign) BOOL IsInverse;
-@property (nonatomic, assign) BOOL IsPrimaryFont;
-@property (nonatomic, assign) BOOL IsAlternateFont;
+@property (nonatomic) BOOL IsInverse;
+@property (nonatomic) BOOL IsPrimaryFont;
+@property (nonatomic) BOOL IsAlternateFont;
 
 //是否使用前景色
-@property (nonatomic, assign) BOOL UseAltColor;
+@property (nonatomic) BOOL UseAltColor;
 
 //前景颜色
-@property (nonatomic, assign) int AltColor;
+@property (nonatomic, strong) UIColor *AltColor;
 
 //是否用背景颜色
-@property (nonatomic, assign) BOOL UseAltBGColor;
+@property (nonatomic) BOOL UseAltBGColor;
 
 //背景颜色
-@property (nonatomic, assign) int AltBGColor;
+@property (nonatomic, strong) UIColor *AltBGColor;
 
 //uc_Chars GL
-@property (nonatomic, assign) Chars *GL;
+@property (nonatomic, strong) Chars *GL;
 
 //uc_Chars GR
-@property (nonatomic, assign) Chars *GR;
+@property (nonatomic, strong) Chars *GR;
 
 //uc_Chars GS
-@property (nonatomic, assign) Chars *GS;
+@property (nonatomic, strong) Chars *GS;
 
 //Decompose Constructive Solid Geometry into minimal regions???
-@property (nonatomic, assign) BOOL IsDECSG;
+@property (nonatomic) BOOL IsDECSG;
 
 - (id) initWithCharAttribs:(BOOL)p1
                      IsDim:(BOOL)p2
@@ -55,9 +55,9 @@
              IsPrimaryFont:(BOOL)p6
            IsAlternateFont:(BOOL)p7
                UseAltColor:(BOOL)p8
-                  AltColor:(int)p9
+                  AltColor:(UIColor *)p9
              UseAltBGColor:(BOOL)p10
-                AltBGColor:(int)p11
+                AltBGColor:(UIColor *)p11
                         GL:(Chars *)p12
                         GR:(Chars *)p13
                         GS:(Chars *)p14

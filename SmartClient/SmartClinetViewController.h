@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GCDAsyncSocket.h"
 #import "ParserMsg.h"
+#import "VTSystemView.h"
 
 @interface SmartClinetViewController : UIViewController <GCDAsyncSocketDelegate>
 {
@@ -16,6 +17,7 @@
     NSStringEncoding enc;
     ParserMsg *parser;
 }
+@property (weak, nonatomic) IBOutlet VTSystemView *mView;
 
 @property (weak, nonatomic) IBOutlet UILabel *content;
 

@@ -17,6 +17,43 @@
     leftMargin, isFullScreen, isBeep, cursorHeight, fontName, fontSize,
     fontStyle;
 
+@synthesize  bgColor, fgColor, blinkColor, boldColor;
+
+- (UIColor *)bgColor
+{
+    if (!bgColor) {
+        return [UIColor whiteColor];
+    }
+    
+    return bgColor;
+}
+
+-  (UIColor *)fgColor
+{
+    if (fgColor) {
+        return fgColor;
+    }
+    
+    return [UIColor whiteColor];
+}
+
+- (UIColor *)blinkColor
+{
+    if (blinkColor) {
+        return blinkColor;
+    }
+    
+    return [UIColor redColor];
+}
+
+- (UIColor *)boldColor
+{
+    if (boldColor) {
+        return boldColor;
+    }
+    
+    return [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+}
 
 - (id)init
 {

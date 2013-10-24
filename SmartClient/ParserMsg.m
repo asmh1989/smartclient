@@ -10,6 +10,8 @@
 #import "SettingStore.h"
 #import "SettingForRuntime.h"
 #import "CaretAttribs.h"
+#import "ShowListEventArgs.h"
+
 
 enum States
 {
@@ -28,6 +30,11 @@ enum Transitions
 {
     TransitionNone, Entry, Exit
 };
+
+typedef struct nextAS{
+    enum States ns;
+    enum Actions na;
+}nextAS;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
@@ -188,15 +195,15 @@ enum Transitions
     NSMutableDictionary *elmentsDict;
     int currentIndex;
 }
-- (NSArray *) getStateEventAction:(enum States)curState curChar:(unsigned short int) curChar;
+- (nextAS) getStateEventAction:(enum States)curState curChar:(unsigned short int) curChar;
 - (void) setElemrntsDicts;
 @end
 
 @implementation CharEvnet
 
-- (NSMutableArray *)getStateEventAction:(enum States)curState curChar:(unsigned short int)curChar
+- (nextAS)getStateEventAction:(enum States)curState curChar:(unsigned short int)curChar
 {
-    NSMutableArray * stateAndAction = [[NSMutableArray alloc] init];
+    nextAS as;
     if ([[[SettingStore shareStore] getSettings] enc] == CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000)) {
         if ((int)curChar >= 0x1000) {
             currentIndex += 2;
@@ -212,21 +219,21 @@ enum Transitions
     
     for (CharEventInfo *cei in [elmentsDict objectForKey:[NSString stringWithFormat:@"%d", curState]]) {
         if ((int)curChar >= [cei charFrom] && (int) curChar <= [cei charTo]) {
-            [stateAndAction addObject:[NSString stringWithFormat:@"%d", [cei nextState]]];
-            [stateAndAction addObject:[NSString stringWithFormat:@"%d", [cei nextAction]]];
-            return stateAndAction;
+            as.ns =  [cei nextState];
+            as.na = [cei nextAction];
+            return as;
         }
     }
     
     for (CharEventInfo *cei in [elmentsDict objectForKey:[NSString stringWithFormat:@"%d", Anywhere]] ) {
         if ((int)curChar >= [cei charFrom] && (int) curChar <= [cei charTo]) {
-            [stateAndAction addObject:[NSString stringWithFormat:@"%d", [cei nextState]]];
-            [stateAndAction addObject:[NSString stringWithFormat:@"%d", [cei nextAction]]];
-            return stateAndAction;
+            as.ns =  [cei nextState];
+            as.na = [cei nextAction];
+            return as;
         }
     }
     
-    return stateAndAction;
+    return as;
 }
 
 - (void)setElemrntsDicts
@@ -271,9 +278,9 @@ enum Transitions
                             //25
                             [[CharEventInfo alloc] initWithData:Ground CharFrom:(unsigned short int)0x19 CharTo:(unsigned short int)0x19 NextActions:Execute NextState:None],
                             //28到31
-                            [[CharEventInfo alloc] initWithData:Ground CharFrom:(unsigned short int)0x0C CharTo:(unsigned short int)0x1F NextActions:Execute NextState:None],
+                            [[CharEventInfo alloc] initWithData:Ground CharFrom:(unsigned short int)0x1C CharTo:(unsigned short int)0x1F NextActions:Execute NextState:None],
                             //32(空格)到127
-                            [[CharEventInfo alloc] initWithData:Ground CharFrom:(unsigned short int)0x32 CharTo:(unsigned short int)0x127 NextActions:Print NextState:None],
+                            [[CharEventInfo alloc] initWithData:Ground CharFrom:(unsigned short int)0x20 CharTo:(unsigned short int)0x7F NextActions:Print NextState:None],
                             //汉字范围(具体的汉字范围)
                             [[CharEventInfo alloc] initWithData:Ground CharFrom:(unsigned short int)0x1000 CharTo:(unsigned short int)0xFFFF NextActions:Print NextState:None],
                             //128到143
@@ -519,6 +526,9 @@ enum Transitions
     SettingForRuntime *settings;
     SettingForConnect *settingStore;
     BOOL isReceiveBytes;
+    CGPoint curPrintParsePoint;
+    CharAttribs *printCharAttribs;
+    StringShowList *stringShowList;
 }
 
 
@@ -533,7 +543,13 @@ enum Transitions
 - (void) executeChar;
 - (void) caretToAbs:(int)Y CaretX:(int)X;
 - (void) CaretToRel:(int)Y CaretX:(int)X;
-
+- (void) clearCharAttribs;
+- (void) setCharAttribs:(Params*)curParams;
+- (void) setqmhMode:(Params *) curParams;
+- (void) setqmlMode:(Params *) curParams;
+- (void) sethMode:(Params *)curParams;
+- (void) SetlMode:(Params *)curParams;
+- (void) setScrollRegion:(Params *)curParams;
 @end
 
 @implementation ParserMsg
@@ -549,12 +565,17 @@ enum Transitions
         state = Ground;
         settings = [SettingForRuntime shareStore];
         settingStore = [[SettingStore shareStore] getSettings];
+        stringShowList = [StringShowList shareStore];
+        self.XOFF = NO;
+        printParseString = @"";
+        curSequence = @"";
+        curPrintParsePoint = CGPointMake(0, 0);
     }
     
     return self;
 }
 
-@synthesize curDefineSequence, curMessage, curSequence;
+@synthesize curDefineSequence, curMessage, curSequence, XOFF;
 - (void)parserString:(NSString *)msg
 {
     enum States nextState = None;
@@ -562,22 +583,27 @@ enum Transitions
     enum Actions stateExitAction = ActionNone;
     enum Actions stateEntryAction = ActionNone;
     
-    NSArray *states;
+    nextAS states;
     
     unsigned long len = [msg length];
     for (int i=0; i<len; i++) {
         if (isReceiveBytes) {
             return;
         }
-        
+        curChar = 0;
         curNSString = [msg substringWithRange:NSMakeRange(i, 1)];
         NSData *n = [curNSString dataUsingEncoding:[[[SettingStore shareStore] getSettings] enc]];
         [n getBytes:&curChar];
-        NSLog(@"s=%@, len=%lu, %@  un= %x", curNSString,(unsigned long)[n length], n, curChar);
+        
+//        if (curChar == 0x1b) {
+//            NSLog(@"stop... becase curChar = %@", curNSString);
+//        }
+
+        NSLog(@"s=%@, len=%lu, %@  un= %d", curNSString,(unsigned long)[n length], n, curChar);
         states = [charEvents getStateEventAction:state curChar:curChar];
         
-        nextState = (enum States) states[0];
-        nextAction = (enum Actions) states[1];
+        nextState = states.ns;
+        nextAction = states.na;
         
         if (nextState != None && nextState != state)
         {
@@ -612,22 +638,22 @@ enum Transitions
     {
         case Dispatch:
         case Collect:
-            self.curSequence = [self.curSequence stringByAppendingString:curNSString];
+            self.curSequence = [NSString stringWithFormat:@"%@%@", self.curSequence, curNSString];
             break;
         case NewCollect:
-            self.curDefineSequence = curNSString;
+            self.curDefineSequence = [NSString stringWithFormat:@"%@", curNSString];
             self.curMessage = @"";
-            self.curSequence = curNSString;
+            self.curSequence = [NSString stringWithFormat:@"%@", curNSString];
             [params Clear];
             break;
         case Param:
             [params add:curChar];
             break;
         case DefineSequence:
-            self.curDefineSequence =[self.curDefineSequence stringByAppendingString:curNSString];
+            self.curDefineSequence =[NSString stringWithFormat:@"%@%@", self.curDefineSequence, curNSString];
             break;
         case Message:
-            self.curMessage =[self.curMessage stringByAppendingString:curNSString];
+            self.curMessage =[NSString stringWithFormat:@"%@%@", self.curMessage, curNSString];
             break;
         default:
             break;
@@ -649,7 +675,7 @@ enum Transitions
             [self commandRouter:nextAction];
             break;
         case SpecialExecute :
-            self.curDefineSequence =[self.curDefineSequence stringByAppendingString:curNSString];
+            self.curDefineSequence =[NSString stringWithFormat:@"%@%@", self.curDefineSequence, curNSString];
             //去处理当前的特殊的定义的操作
             [self defineCommandRouter:nextAction];
             //因为CurSequence在当遇到27时,会有值,直接影响到正常的解析,所以要在显示完自定义的字符后,清空当前的正常TELNET的序列
@@ -675,7 +701,7 @@ enum Transitions
     //对这里的命令进行处理.用于接收字节数据.
     if (nextAction == SpecialExecute){
         if ([self.curDefineSequence isEqualToString: CUSACTIVE_IMG] || [self.curDefineSequence isEqualToString:CUSACTIVE_WAV])
-            isReceiveBytes = true;
+            isReceiveBytes = YES;
     }
     
 }
@@ -686,10 +712,10 @@ enum Transitions
     {
         case Print:
             //将需要打印的字符保存到数组中
-//            PrintChar(curChar);
+            [self printChar];
             break;
         case Execute:
-//            ExecuteChar(curChar);
+            [self executeChar];
             break;
         case Dispatch:
             break;
@@ -700,7 +726,11 @@ enum Transitions
     if ([self.curSequence length] > 0 && [printParseString length] > 0)
     {
         //当前更换CurSequence,并且printParseString存在字符并且Y坐标位置改变时.打印字符
-//        this.showStringEvent.onShowString(this, new ShowListEventArgs(curPrintParsePoint, printParseString, printCharAttribs, settings.Caret.Pos));
+        ShowListEventArgs * show = [[ShowListEventArgs alloc] initShowListEventArgs:curPrintParsePoint String:printParseString CharAttribs:printCharAttribs Point:settings.caret.pos];
+        [show AddShowList];
+        printParseString = @"";
+        curPrintParsePoint.x = 0;
+        curPrintParsePoint.y = 0;
     }
     
     int Param = 0;
@@ -712,7 +742,7 @@ enum Transitions
         //当为空的时候应当输出
         if (nextAction == Print)
         {
-            printParseString = [printParseString stringByAppendingString:curNSString];
+            printParseString = [NSString stringWithFormat:@"%@%@", printParseString, curNSString];
             if([printParseString rangeOfString:@("__")].location != NSNotFound){
 //                settings.CurBGColor = settings.charAttribs.AltBGColor;
             }
@@ -768,11 +798,11 @@ enum Transitions
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"="]]){
         //case "(char)0x1b=": // Keypad to Application mode
-        settings.mode.flags = settings.mode.flags | KeypadAppln;
+        settings.mode.flags = settings.mode.flags | MODE_KeypadAppln;
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @">"]]){
         //case "(char)0x1b>": // Keypad to Numeric mode
-        settings.mode.flags = settings.mode.flags ^ KeypadAppln;
+        settings.mode.flags = settings.mode.flags ^ MODE_KeypadAppln;
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[B"]]){
         //case "(char)0x1b[B": // CUD
@@ -841,7 +871,7 @@ enum Transitions
         if ([params Count] > 1)
         {
             id tmp = [params.elements objectAtIndex:1];
-            Inc = [tmp intValue] - 1;
+            X = [tmp intValue] - 1;
         }
         
         [self CaretToRel:Y CaretX:X];
@@ -854,7 +884,7 @@ enum Transitions
             id tmp = [params.elements objectAtIndex:0];
             Param = [tmp intValue];
         }
-        ClearDown(Param);
+        [self clearDown:Param];
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[K"]])
     {    //case "(char)0x1b[K":
@@ -864,15 +894,15 @@ enum Transitions
             id tmp = [params.elements objectAtIndex:0];
             Param = [tmp intValue];
         }
-        ClearRight(Param);
+        [self clearRight:Param];
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[L"]])
     {    //case "(char)0x1b[L": // INSERT LINE
-        //this.InsertLine(e.CurParams);
+        //InsertLine(e.CurParams);
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[M"]])
     {    //case "(char)0x1b[M": // DELETE LINE
-        //this.DeleteLine(e.CurParams);
+        //DeleteLine(e.CurParams);
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"N"]])
     {    //case "(char)0x1bN": // SS2 Single Shift (G2 -> GL)
@@ -881,24 +911,23 @@ enum Transitions
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"O"]])
     {    //case "(char)0x1bO": // SS3 Single Shift (G3 -> GL)
         settings.charAttribs.GS = settings.G3;
-        //System.Console.WriteLine ("SS3: GS = {0}", settings.charAttribs.GS);
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[m"]])
     {    //case "(char)0x1b[m"://颜色设置
-        SetCharAttribs(params);
+        [self setCharAttribs:params];
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[?h"]])
     {    //case "(char)0x1b[?h"://ESC加?加h命令
-        SetqmhMode(e.CurParams);
+        [self setqmhMode:params];
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[?l"]])
     {    //case "(char)0x1b[?l"://ESC加?加l命令
-        SetqmlMode(e.CurParams);
+        [self setqmlMode:params];
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[c"]])
     {    //case "(char)0x1b[c": // DA Device Attributes
         //                    this.DispatchMessage (this, "(char)0x1b[?64;1;2;6;7;8;9c");
-        DispatchMessage(this, (char)0x1b+"[?6c");
+//        dispatchMessage(this, (char)0x1b+"[?6c");
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[g"]])
     {    //case "(char)0x1b[g":
@@ -906,15 +935,15 @@ enum Transitions
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[h"]])
     {    //case "(char)0x1b[h":
-        SethMode(e.CurParams);
+        [self sethMode:params];
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[l"]])
     {    //case "(char)0x1b[l":
-        SetlMode(e.CurParams);
+        [self SetlMode:params];
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[r"]])
     {    //case "(char)0x1b[r": // DECSTBM Set Top and Bottom Margins
-        SetScrollRegion(e.CurParams);
+        [self setScrollRegion:params];
     }
     else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[t"]])
     {    //case "(char)0x1b[t": // DECSLPP Set Lines Per Page
@@ -958,10 +987,6 @@ enum Transitions
         
         //this.ReverseIndex(Param);
     }
-    //default:
-    //System.Console.Write ("unsupported VT sequence {0} happened\n", e.CurSequence);
-    //break;
-    
 }
 
 - (void) defineCommandRouter:(enum Actions)nextAction
@@ -972,7 +997,7 @@ enum Transitions
 //    }
 //    else if(vtProtocol.equals(settings.cusActive_Img) || vtProtocol.equals(settings.cusActive_Wav)){
 //        streamArgs = new IOStreamEventArgs(e.Action, e.CurDefineSequence, e.CurMessage);
-//        Comms.isReceiveBytes = true;
+//        Comms.isReceiveBytes = YES;
 //    }else if(vtProtocol.equals(settings.cusActive_MSGBOX) || vtProtocol.equals(settings.cusActive_CAM) ||
 //             vtProtocol.equals(settings.cusActive_GPS) || vtProtocol.equals(settings.cusActive_WEB)||
 //             vtProtocol.equals(settings.cusActive_OptionDialog) || vtProtocol.equals(settings.cusActive_VOICE)){
@@ -983,7 +1008,7 @@ enum Transitions
 - (void) printChar
 {
     if (settings.caret.EOL == YES) {
-        if ((settings.mode.flags & AutoWrap) == AutoWrap) {
+        if ((settings.mode.flags & MODE_AutoWrap) == MODE_AutoWrap) {
             settings.caret.EOL = NO;
         }
     }
@@ -995,9 +1020,9 @@ enum Transitions
     // 在当前printParseString为空的时候,记录当前的位置信息
     // 记录当前的X位置,Y位置,第一个字符的属性.放在Comms的静态变量中.
     if ([printParseString isEqualToString:@""]) {
-        Comms.curPrintParsePoint.x = X;
-        Comms.curPrintParsePoint.y = Y;
-        Comms.printCharAttribs = settings.charAttribs;
+        curPrintParsePoint.x = X;
+        curPrintParsePoint.y = Y;
+        printCharAttribs = settings.charAttribs;
     }
     
     // System.Int32 X = 10;
@@ -1008,27 +1033,30 @@ enum Transitions
     
     // uc_Chars.Get......对于中文的结果分析:
     if (settings.charAttribs.GS) {
-        curChar = [[[Chars alloc] init] Get:curChar GL:settings.charAttribs.GS.set GR:setinngs.charAttribs.GR.set];
+        curChar = [[[Chars alloc] init] Get:curChar GL:settings.charAttribs.GS.set GR:settings.charAttribs.GR.set];
         
-        if (settings.charAttribs.GS.set == DECSG)
+        if (settings.charAttribs.GS.set == CharsSet_DECSG)
             settings.charAttribs.IsDECSG = YES;
         
         settings.charAttribs.GS = nil;
     } else {
         // 对收到的字符,进行属性解析
-        curChar = [[[Chars alloc] init] Get:curChar GL:settings.charAttribs.GL.set GR:setinngs.charAttribs.GR.set];
-        if (settings.charAttribs.GL.set == DECSG)
+        curChar = [[[Chars alloc] init] Get:curChar GL:settings.charAttribs.GL.set GR:settings.charAttribs.GR.set];
+        if (settings.charAttribs.GL.set == CharsSet_DECSG)
             settings.charAttribs.IsDECSG = YES;
     }
     
+    CGPoint tmp = settings.caret.pos;
     if (curChar >= 0x1000)
     {
-        settings.caret.pos.x += 2;
+        tmp.x += 2;
     }
     else
     {
-        settings.caret.pos.x += 1;
+        tmp.x += 1;
     }
+    
+    settings.caret.pos = CGPointMake(tmp.x, tmp.y);
 }
 
 - (void) CaretToRel:(int)Y CaretX:(int)X
@@ -1045,7 +1073,7 @@ enum Transitions
      * 这个代码用于设置当我们从服务器接收到光标的位置
      */
     
-    if ((settings.mode.flags & OriginRelative) == 0)
+    if ((settings.mode.flags & MODE_OriginRelative) == 0)
     {
         [self caretToAbs:Y CaretX:X];
         return;
@@ -1070,8 +1098,7 @@ enum Transitions
 //        Y = Settings.getBottomMargin();
 //    }
     
-    settings.caret.pos.y = Y;
-    settings.caret.pos.x = X;
+    settings.caret.pos = CGPointMake(X, Y);
 }
 
 - (void) caretToAbs:(int)Y CaretX:(int)X
@@ -1083,52 +1110,481 @@ enum Transitions
         X = 0;
     }
     
-    if (Y < 0 && (settings.mode.flags & OriginRelative) == 0)
+    if (Y < 0 && (settings.mode.flags & MODE_OriginRelative) == 0)
     {
         Y = 0;
     }
     
-    settings.caret.pos.y = Y;
-    settings.caret.pos.x = X;
+    settings.caret.pos = CGPointMake(X, Y);
+}
+
+
+- (void) setqmhMode:(Params *) curParams // set mode for ESC?h command
+{
+    int OptInt = 0;
+    
+    for (NSString *curOption in curParams.elements)
+    {
+        OptInt = [curOption intValue];
+        
+        switch (OptInt)
+        {
+            case 1: // set cursor keys to application mode
+                settings.mode.flags = settings.mode.flags | MODE_CursorAppln;
+                break;
+                
+            case 2: // lock the keyboard
+                settings.mode.flags = settings.mode.flags | MODE_Locked;
+                break;
+                
+            case 3: // set terminal to 132 column mode
+                //this.SetSizeEvent(CharAndAttribGrid.Rows, 132);
+                break;
+                
+            case 5: // Light Background Mode
+                settings.mode.flags = settings.mode.flags | MODE_LightBackground;
+//                ShowBuffer();
+                break;
+                
+            case 6: // Origin Mode Relative
+                settings.mode.flags = settings.mode.flags | MODE_OriginRelative;
+                [self CaretToRel:0 CaretX:0];
+                break;
+                
+            case 7: // Autowrap On
+                settings.mode.flags = settings.mode.flags | MODE_AutoWrap;
+                break;
+                
+            case 8: // AutoRepeat On
+                settings.mode.flags = settings.mode.flags | MODE_Repeat;
+                break;
+                
+            case 42: // DECNRCM Multinational Charset
+                settings.mode.flags = settings.mode.flags | MODE_National;
+                break;
+                
+            case 66: // Numeric Keypad Application Mode On
+                settings.mode.flags = settings.mode.flags | MODE_KeypadAppln;
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+- (void) setqmlMode:(Params*) curParams // set mode for ESC?l command
+{
+    int OptInt = 0;
+    
+    for (NSString *curOption in curParams.elements)
+    {
+        OptInt = [curOption intValue];
+        
+        switch (OptInt)
+        {
+            case 1: // set cursor keys to normal cursor mode
+                settings.mode.flags = settings.mode.flags & ~MODE_CursorAppln;
+                break;
+                
+            case 2: // unlock the keyboard
+                settings.mode.flags = settings.mode.flags & ~MODE_Locked;
+                break;
+                
+            case 3: // set terminal to 80 column mode
+                //this.SetSizeEvent.Invoke(CharAndAttribGrid.Rows, 80);
+                break;
+                
+            case 5: // Dark Background Mode
+                settings.mode.flags = settings.mode.flags & ~MODE_LightBackground;
+//                ShowBuffer();
+                break;
+                
+            case 6: // Origin Mode Absolute
+                settings.mode.flags = settings.mode.flags & ~MODE_OriginRelative;
+                [self CaretToRel:0 CaretX:0];
+                break;
+                
+            case 7: // Autowrap Off
+                settings.mode.flags = settings.mode.flags & ~MODE_AutoWrap;
+                break;
+                
+            case 8: // AutoRepeat Off
+                settings.mode.flags = settings.mode.flags & ~MODE_Repeat;
+                break;
+                
+            case 42: // DECNRCM National Charset
+                settings.mode.flags = settings.mode.flags & ~MODE_National;
+                break;
+                
+            case 66: // Numeric Keypad Application Mode On
+                settings.mode.flags = settings.mode.flags & ~MODE_KeypadAppln;
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+- (void) sethMode:(Params *)curParams // set mode for ESC?h command
+{
+    int OptInt = 0;
+    
+    for (NSString *curOption in curParams.elements)
+    {
+        OptInt = [curOption intValue];
+        
+        switch (OptInt)
+        {
+            case 1: // set local echo off
+                settings.mode.flags = settings.mode.flags | MODE_LocalEchoOff;
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+- (void) SetlMode:(Params *)curParams // set mode for ESC?l command
+{
+    int OptInt = 0;
+    
+    
+    for (NSString *curOption in curParams.elements)
+    {
+        OptInt = [curOption intValue];
+        
+        switch (OptInt)
+        {
+            case 1: // set LocalEcho on
+                settings.mode.flags = settings.mode.flags & ~MODE_LocalEchoOff;
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+
+- (void) setScrollRegion:(Params *)curParams
+{
+    if (curParams.Count > 0)
+    {
+        NSString *tmp =[curParams.elements objectAtIndex:0];
+        [settingStore setTopMargin:([tmp intValue] -1)];
+    }
+    
+    if (curParams.Count  > 1)
+    {
+        NSString *tmp =[curParams.elements objectAtIndex:1];
+        [settingStore setTopMargin:([tmp intValue] -1)];
+    }
+    
+    if (settingStore.bottomMargin == 0)
+    {
+        //Settings.BottomMargin = CharAndAttribGrid.Rows - 1;
+    }
+    
+    if (settingStore.topMargin < 0)
+    {
+        settingStore.bottomMargin = 0;
+    }
+}
+
+- (void) clearCharAttribs
+{
+    settings.charAttribs.IsBold = NO;
+    settings.charAttribs.IsDim = NO;
+    settings.charAttribs.IsUnderscored = NO;
+    settings.charAttribs.IsBlinking = NO;
+    settings.charAttribs.IsInverse = NO;
+    settings.charAttribs.IsPrimaryFont = NO;
+    settings.charAttribs.IsAlternateFont = NO;
+    settings.charAttribs.UseAltBGColor = NO;
+    settings.charAttribs.UseAltColor = NO;
+    settings.charAttribs.AltColor = [UIColor whiteColor];
+    settings.charAttribs.AltBGColor = [UIColor blackColor];
+}
+
+- (void) setCharAttribs:(Params*)curParams
+{
+    if ([curParams Count] < 1)
+    {
+        [self clearCharAttribs];
+        return;
+    }
+    
+    for (int i = 0; i < curParams.Count; i++)
+    {
+        NSString *tmp = [curParams.elements objectAtIndex:i];
+        
+        if ([tmp length] == 12)
+        {
+            @try
+            {
+                int red = [[tmp substringWithRange:NSMakeRange(3, 3)] intValue];
+                int green = [[tmp substringWithRange:NSMakeRange(6, 3)] intValue];
+                int blue = [[tmp substringWithRange:NSMakeRange(9, 3)] intValue];
+                
+                CGFloat colorRed =  red /255.0F;
+                CGFloat colorGreen = green /255.0F;
+                CGFloat colorBlue = blue /255.0F;
+                
+                //38开头前景色,48开头后景色
+                if ([[tmp substringToIndex:3] isEqualToString:@"038"])
+                {
+                    settings.charAttribs.UseAltColor = YES;
+
+                    settings.charAttribs.AltColor = [UIColor colorWithRed:colorRed green:colorGreen blue:colorBlue alpha:1];
+                }
+                else if ([[tmp substringToIndex:3] isEqualToString:@"048"])
+                {
+                    settings.charAttribs.UseAltBGColor = YES;
+                    settings.charAttribs.AltBGColor =  [UIColor colorWithRed:colorRed green:colorGreen blue:colorBlue alpha:1];
+                }
+                continue;
+                //settings.charAttribs.UseAltColor = YES;
+                //settings.charAttribs.AltColor = System.Drawing.Color.FromArgb(Convert.ToInt32(argb.Substring(0, 3)),
+                //    Convert.ToInt32(argb.Substring(3, 3)),
+                //    Convert.ToInt32(argb.Substring(6, 3)));
+            }
+            @catch (NSException *exception)
+            {
+                @throw exception;
+            }
+        }
+        
+        
+        switch ([[curParams.elements objectAtIndex:i] intValue])
+        {
+            case 0:
+                [self clearCharAttribs];
+                break;
+                
+            case 1:
+                settings.charAttribs.IsBold = YES;
+                break;
+                
+            case 4:
+                settings.charAttribs.IsUnderscored = YES;
+                break;
+                
+            case 5:
+                settings.charAttribs.IsBlinking = YES;
+                break;
+                
+            case 7:
+                settings.charAttribs.IsInverse = YES;
+                break;
+                
+            case 22:
+                settings.charAttribs.IsBold = NO;
+                break;
+                
+            case 24:
+                settings.charAttribs.IsUnderscored = NO;
+                break;
+                
+            case 25:
+                settings.charAttribs.IsBlinking = NO;
+                break;
+                
+            case 27:
+                settings.charAttribs.IsInverse = NO;
+                break;
+                
+            case 30:
+                settings.charAttribs.UseAltColor = YES;
+                settings.charAttribs.AltColor = [UIColor blackColor];
+                break;
+                
+            case 31:
+                settings.charAttribs.UseAltColor = YES;
+                settings.charAttribs.AltColor = [UIColor redColor];//Color.RED;
+                break;
+                
+            case 32:
+                settings.charAttribs.UseAltColor = YES;
+                settings.charAttribs.AltColor = [UIColor greenColor];//Color.GREEN;
+                break;
+                
+            case 33:
+                settings.charAttribs.UseAltColor = YES;
+                settings.charAttribs.AltColor = [UIColor yellowColor];//Color.YELLOW;
+                break;
+                
+            case 34:
+                settings.charAttribs.UseAltColor = YES;
+                settings.charAttribs.AltColor = [UIColor blueColor];//Color.BLUE;
+                break;
+                
+            case 35:
+                settings.charAttribs.UseAltColor = YES;
+                settings.charAttribs.AltColor = [UIColor magentaColor];//Color.MAGENTA;
+                break;
+                
+            case 36:
+                settings.charAttribs.UseAltColor = YES;
+                settings.charAttribs.AltColor = [UIColor cyanColor];//Color.CYAN;
+                break;
+                
+            case 37:
+                settings.charAttribs.UseAltColor = YES;
+                settings.charAttribs.AltColor = [UIColor whiteColor];//Color.WHITE;
+                break;
+                
+            case 40:
+                settings.charAttribs.UseAltBGColor = YES;
+                settings.charAttribs.AltBGColor = [UIColor blackColor];//Color.BLACK;
+                break;
+                
+            case 41:
+                settings.charAttribs.UseAltBGColor = YES;
+                settings.charAttribs.AltBGColor = [UIColor redColor];//Color.RED;
+                break;
+                
+            case 42:
+                settings.charAttribs.UseAltBGColor = YES;
+                settings.charAttribs.AltBGColor = [UIColor greenColor];//Color.GREEN;
+                break;
+                
+            case 43:
+                settings.charAttribs.UseAltBGColor = YES;
+                settings.charAttribs.AltBGColor = [UIColor yellowColor];//Color.YELLOW;
+                break;
+                
+            case 44:
+                settings.charAttribs.UseAltBGColor = YES;
+                settings.charAttribs.AltBGColor = [UIColor blueColor];//Color.BLUE;
+                break;
+                
+            case 45:
+                settings.charAttribs.UseAltBGColor = YES;
+                settings.charAttribs.AltBGColor = [UIColor magentaColor];//Color.MAGENTA;
+                break;
+                
+            case 46:
+                settings.charAttribs.UseAltBGColor = YES;
+                settings.charAttribs.AltBGColor = [UIColor cyanColor];//Color.CYAN;
+                break;
+                
+            case 47:
+                settings.charAttribs.UseAltBGColor = YES;
+                settings.charAttribs.AltBGColor = [UIColor whiteColor];//Color.WHITE;
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+}
+
+- (void) caretDown
+{
+    settings.caret.EOL = NO;
+    settings.caret.pos = CGPointMake(settings.caret.pos.x, settings.caret.pos.y + 1);
+}
+
+- (void) caretLeft
+{
+    settings.caret.EOL = NO;
+    
+    if (settings.caret.pos.x > 0)
+    {
+        settings.caret.pos = CGPointMake(settings.caret.pos.x -1, settings.caret.pos.y);
+    }
+}
+
+- (void) caretRight
+{
+    CGPoint tmp = settings.caret.pos;
+    if (curChar >= 0x1000)
+    {
+        tmp.x += 2;
+    }
+    else
+    {
+        tmp.x += 1;
+    }
+    
+    settings.caret.pos = CGPointMake(tmp.x, tmp.y);
 }
 
 - (void) executeChar
 {
     if (curChar==0x05)
     {
-        this.DispatchMessage(this, "vt100");
+//        dispatchMessage(this, "vt100");
     }
     else if(curChar==0x07)
     {
-        if (settings.getisBeep()==true && settings.mediaPlayer != null)
-            settings.mediaPlayer.start();
+//        if (settingStore.isBeep==YES && settings.mediaPlayer != null)
+//            settings.mediaPlayer.start();
     }
     else if(curChar==0x08)
-        this.CaretLeft();
+        [self caretLeft];
     else if(curChar==0x09){}
     else if(curChar==0x0A||curChar==0x0B||curChar==0x0C||curChar==0x84)
-        Comms.printParseString +=String.valueOf(curChar);
+        printParseString = [NSString stringWithFormat:@"%@%c",printParseString, curChar];
     else if(curChar==0x0D){}
     else if(curChar==0x0E)
         settings.charAttribs.GL = settings.G1;
     else if(curChar==0x0F)
         settings.charAttribs.GL = settings.G0;
     else if(curChar==0x11){
-        this.XOFF = false;
-        this.DispatchMessage(this, "");
+        XOFF = NO;
+//        dispatchMessage(this, "");
     }
     else if(curChar==0x13){
-        this.XOFF = true;
-        Comms.printParseString += String.valueOf(curChar);
+        XOFF = YES;
+        printParseString = [NSString stringWithFormat:@"%@%c",printParseString, curChar];
     }
     else if(curChar==0x85)
-        this.CaretToAbs(settings.Caret.Pos.y, 0);
+        [self caretToAbs:settings.caret.pos.y CaretX:0];
     else if(curChar==0x88){}
     else if(curChar==0x8D){}
     else if(curChar==0x8E)
         settings.charAttribs.GS = settings.G2;
     else if(curChar==0x8F)
         settings.charAttribs.GS = settings.G3;
+}
+
+- (void) clearDown:(int)param
+{
+    switch (param) {
+            case 0: // from cursor to bottom inclusive
+                break;
+                
+            case 1: // from top to cursor inclusive
+                break;
+                
+            case 2: // entire screen
+                
+//                this.WipeScreen(Settings.getVTGraphics());
+                //this.wipeScreen=true;
+//                stringShowList.stringShowDics.clear();
+//                //stringShowList.stringShowLists.clear();
+//                stringShowList.pictureShowLists.clear();
+//                
+//                stringShowList.inputStringLists.clear();
+                [stringShowList.stringShowDics removeAllObjects];
+                curPrintParsePoint.x = 0;
+                curPrintParsePoint.y = 0;
+                settings.caret.Pos = curPrintParsePoint;
+                break;
+                
+            default:
+                break;
+        }
+}
+
+- (void)clearRight:(int)param
+{
+    
 }
 @end
 

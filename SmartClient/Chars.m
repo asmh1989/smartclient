@@ -229,7 +229,7 @@
             [[CharSet alloc] initWithCharSet:0x7C UnicodeNo:0x00F9], // u with  accent
             [[CharSet alloc] initWithCharSet:0x7D UnicodeNo:0x00E8], // e with  accent
             [[CharSet alloc] initWithCharSet:0x7E UnicodeNo:0x00FB], // u with circumflex
-                 nil];
+                        nil];
     
     NRCGerman = [[NSArray alloc] initWithObjects:
             [[CharSet alloc] initWithCharSet:0x40 UnicodeNo:0x00A7], // funny s
@@ -316,7 +316,7 @@
                 nil];
     
     ISOLAtin1S = [[NSArray alloc] initWithObjects:
-            [[CharSet alloc] initWithCharSet:0x00 UnicodeNo:0x0000], //
+            [[CharSet alloc] initWithCharSet:0x00 UnicodeNo:0x0000],
                 nil];
 }
 

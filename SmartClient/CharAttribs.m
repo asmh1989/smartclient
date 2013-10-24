@@ -12,7 +12,7 @@
 @synthesize IsAlternateFont, IsBlinking, IsBold, IsDECSG, IsDim, IsInverse,
         IsPrimaryFont, IsUnderscored, UseAltBGColor, UseAltColor, AltBGColor,
         AltColor, GL, GR, GS;
-- (id)initWithCharAttribs:(BOOL)p1 IsDim:(BOOL)p2 IsUnderscored:(BOOL)p3 IsBlinking:(BOOL)p4 IsInverse:(BOOL)p5 IsPrimaryFont:(BOOL)p6 IsAlternateFont:(BOOL)p7 UseAltColor:(BOOL)p8 AltColor:(int)p9 UseAltBGColor:(BOOL)p10 AltBGColor:(int)p11 GL:(Chars *)p12 GR:(Chars *)p13 GS:(Chars *)p14 ISDECSG:(BOOL)p15
+- (id)initWithCharAttribs:(BOOL)p1 IsDim:(BOOL)p2 IsUnderscored:(BOOL)p3 IsBlinking:(BOOL)p4 IsInverse:(BOOL)p5 IsPrimaryFont:(BOOL)p6 IsAlternateFont:(BOOL)p7 UseAltColor:(BOOL)p8 AltColor:(UIColor *)p9 UseAltBGColor:(BOOL)p10 AltBGColor:(UIColor *)p11 GL:(Chars *)p12 GR:(Chars *)p13 GS:(Chars *)p14 ISDECSG:(BOOL)p15
 {
     self = [super init];
     if (self) {

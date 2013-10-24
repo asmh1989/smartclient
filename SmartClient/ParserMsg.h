@@ -10,5 +10,10 @@
 
 @interface ParserMsg : NSObject
 
+@property (nonatomic) BOOL XOFF;
+
 - (void)parserString:(NSString *)msg;
+
+- (void) clearDown:(int)param;
+- (void) clearRight:(int)param;
 @end

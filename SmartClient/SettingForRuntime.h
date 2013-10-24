@@ -43,9 +43,9 @@
 @property (nonatomic) CharAttribs *charAttribs;
 @property (nonatomic) Caret *caret;
 @property (nonatomic) Caret *preCaret;
-@property (nonatomic) CGSize charSizeEN;
-@property (nonatomic) CGSize charSizeCN;
-
 
 + (SettingForRuntime *)shareStore;
+- (CGSize)getCharSizeCN:(UIFont *) font;
+- (CGSize)getCharSizeEN:(UIFont *) font;
+
 @end

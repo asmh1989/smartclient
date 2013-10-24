@@ -8,20 +8,37 @@
 
 #import <Foundation/Foundation.h>
 
-const int Locked = 1;
-const int BackSpace = 2;
-const int NewLine = 4;
-const int Repeat = 8;
-const int AutoWrap = 16;
-const int CursorAppln = 32;
-const int KeypadAppln = 64;
-const int DataProcessing = 128;
-const int PositionReports = 256;
-const int LocalEchoOff = 512;
-const int OriginRelative = 1024;
-const int LightBackground = 2048;
-const int National = 4096;
-const int Any = 0x80000000;
+
+
+#define MODE_Locked                      1
+#define MODE_BackSpace                   2
+#define MODE_NewLine                     4
+#define MODE_Repeat                      8
+#define MODE_AutoWrap                   16
+#define MODE_CursorAppln                32
+#define MODE_KeypadAppln                64
+#define MODE_DataProcessing            128
+#define MODE_PositionReports           256
+#define MODE_LocalEchoOff              512
+#define MODE_OriginRelative           1024
+#define MODE_LightBackground          2048
+#define MODE_National                 4096
+#define MODE_Any                0x80000000
+
+//const int MODE_Locked = 1;
+//const int MODE_BackSpace = 2;
+//const int MODE_NewLine = 4;
+//const int MODE_Repeat = 8;
+//const int MODE_AutoWrap = 16;
+//const int MODE_CursorAppln = 32;
+//const int MODE_KeypadAppln = 64;
+//const int MODE_DataProcessing = 128;
+//const int MODE_PositionReports = 256;
+//const int MODE_LocalEchoOff = 512;
+//const int MODE_OriginRelative = 1024;
+//const int MODE_LightBackground = 2048;
+//const int MODE_National = 4096;
+//const int MODE_Any = 0x80000000;
 
 @interface Mode : NSObject
 {

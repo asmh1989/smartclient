@@ -10,12 +10,12 @@
 
 
 // 公司内网
-//#define HOSTIP                @"192.168.8.239"
+#define _HOSTIP                @"192.168.8.239"
 // 外网
-#define _HOSTIP                  @"searching-info.com"   //当前服务器ip
+//#define _HOSTIP                  @"searching-info.com"   //当前服务器ip
 #define _HOSTPORT                23                      //当前服务器端口
 #define _COLUMNSPAN              0                       //列间距
-#define _ROWSPAN                 2                       //行间距
+#define _ROWSPAN                 0                       //行间距
 #define _TOPMARGIN               2                       //上边距
 #define _LEFTMARGIN              2                       //左边距
 #define _ISFULLSCREEN            NO                      //是否全屏显示
@@ -25,20 +25,20 @@
 #define _FONTSTYLE               @""                     //字体样式
 #define _FONTSIZE                20                      //字体大小
 
-NSString *const STRING_HOSTIP           = @"hostIp";
-NSString *const STRING_HOSTPORT         = @"hostPort";
-NSString *const STRING_DEVICEID         = @"deviceID";
-NSString *const STRING_ENC              = @"enc";
-NSString *const STRING_COLUMNSPAN       = @"columnSpan";
-NSString *const STRING_ROWSPAN          = @"rowSpan";
-NSString *const STRING_TOPMARGIN        = @"topMargin";
-NSString *const STRING_LEFTMARGIN       = @"leftMargin";
-NSString *const STRING_ISFULLSCREEN     = @"isFullScreen";
-NSString *const STRING_ISBEEP           = @"isBeep";
-NSString *const STRING_CURSORHEIGHT     = @"cursorHeight";
-NSString *const STRING_FONTNAME         = @"fontName";
-NSString *const STRING_FONTSTYLE        = @"fontStyle";
-NSString *const STRING_FONTSIZE         = @"fontSize";
+#define STRING_HOSTIP            @"hostIp"
+#define STRING_HOSTPORT          @"hostPort"
+#define STRING_DEVICEID          @"deviceID"
+#define STRING_ENC               @"enc"
+#define STRING_COLUMNSPAN        @"columnSpan"
+#define STRING_ROWSPAN           @"rowSpan"
+#define STRING_TOPMARGIN         @"topMargin"
+#define STRING_LEFTMARGIN        @"leftMargin"
+#define STRING_ISFULLSCREEN      @"isFullScreen"
+#define STRING_ISBEEP            @"isBeep"
+#define STRING_CURSORHEIGHT      @"cursorHeight"
+#define STRING_FONTNAME          @"fontName"
+#define STRING_FONTSTYLE         @"fontStyle"
+#define STRING_FONTSIZE          @"fontSize"
 
 
 @interface DefaultSettings : NSObject

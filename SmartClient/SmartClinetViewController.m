@@ -17,7 +17,7 @@
 @implementation SmartClinetViewController
 
 
-@synthesize content;
+@synthesize content, mView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -74,6 +74,7 @@
     NSString *msg = [[NSString alloc] initWithData:data encoding:enc];
     NSLog(@"didReadData data = %@, tag = %ld", msg, tag);
     [parser parserString:msg];
+    [mView setNeedsDisplay];
     [sock readDataWithTimeout:-1 tag:tag];
 }
 
