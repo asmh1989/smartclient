@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface VTSystemView : UIView
-
+@property (nonatomic, strong) UITextField *textView;
 @end

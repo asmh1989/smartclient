@@ -10,9 +10,4 @@
 
 @implementation Functions
 
-+ (NSString *)makeFloatTOString:(float)p
-{
-    return [NSString stringWithFormat:@"%d", (int)p];
-}
-
 @end

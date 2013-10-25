@@ -7,6 +7,7 @@
 //
 
 #import "SettingForRuntime.h"
+#import "Functions.h"
 
 @implementation SettingForRuntime
 
@@ -14,12 +15,25 @@
 
 - (CGSize)getCharSizeCN:(UIFont *) font
 {
-    return [@"我" sizeWithFont:font];
+    if (__IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_7_0) {
+        return [@"我" sizeWithFont:font];
+    }
+    
+    NSMutableDictionary *attrs = [[NSMutableDictionary alloc] init];
+    [attrs setObject:font forKey:NSFontAttributeName];
+    return [@"我" sizeWithAttributes:attrs];
+
 }
 
 -(CGSize)getCharSizeEN:(UIFont *) font
 {
-    return [@"S" sizeWithFont:font];
+    if (__IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_7_0) {
+        return [@"S" sizeWithFont:font];
+    }
+    
+    NSMutableDictionary *attrs = [[NSMutableDictionary alloc] init];
+    [attrs setObject:font forKey:NSFontAttributeName];
+    return [@"S" sizeWithAttributes:attrs];
 }
 
 - (id)init

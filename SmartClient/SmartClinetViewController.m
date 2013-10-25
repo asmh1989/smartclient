@@ -8,16 +8,39 @@
 
 #import "SmartClinetViewController.h"
 #import "SettingStore.h"
+#import "SettingForRuntime.h"
+#import "StringShowList.h"
+#import "Functions.h"
+#import "ShowListEventArgs.h"
 
 @interface SmartClinetViewController ()
 
-
+@property (nonatomic) SettingForRuntime *settings;
+@property (nonatomic) StringShowList *stringShowList;
 @end
 
 @implementation SmartClinetViewController
 
 
-@synthesize content, mView;
+@synthesize  mView, textView, settings, stringShowList;
+
+- (SettingForRuntime *)settings
+{
+    if (settings) {
+        return settings;
+    }
+    
+    return settings = [SettingForRuntime shareStore];
+}
+
+- (StringShowList *)stringShowList
+{
+    if (stringShowList) {
+        return stringShowList;
+    }
+    
+    return stringShowList = [StringShowList shareStore];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -75,7 +98,9 @@
     NSLog(@"didReadData data = %@, tag = %ld", msg, tag);
     [parser parserString:msg];
     [mView setNeedsDisplay];
+    [self showTextView];
     [sock readDataWithTimeout:-1 tag:tag];
+
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag
@@ -101,4 +126,47 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    NSLog(@"textFieldDidBeginEditing text = %@", [textField text]);
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSLog(@"textFieldDidBeginEditing text = %@", [textField text]);
+}
+
+- (void) showTextView
+{
+    CGFloat y = settings.caret.pos.y;
+    CGFloat x = settings.caret.pos.x;
+    if ([stringShowList.stringShowDics objectForKey:_TOSTRIING(y)]) {
+        NSArray *lines = [stringShowList.stringShowDics objectForKey:_TOSTRIING(y)];
+        for (ShowListEventArgs *line in lines) {
+            if (x >= line.curPoint.x && x < line.curCaretPos.x) {
+                UIFont *myFont = [UIFont boldSystemFontOfSize:[[[SettingStore shareStore] getSettings] fontSize]];
+                int leftMargin = [[[SettingStore shareStore] getSettings] leftMargin];
+                int topMargin = [[[SettingStore shareStore] getSettings] topMargin];
+                int columnSpan = [[[SettingStore shareStore] getSettings] columnSpan];
+                int rowSpan = [[[SettingStore shareStore] getSettings] rowSpam];
+                CGSize size = [settings getCharSizeEN:myFont];
+                
+                CGFloat X = leftMargin + (size.width+columnSpan) * line.curPoint.x;
+                CGFloat Y = topMargin + (size.height+rowSpan) * line.curPoint.y;
+                
+                //            NSLog(@"Y : %d, BGcolor=%@, \tfgColor=%@, string=%@", (int)line.curPoint.y, bgColor, fgColor, line.curString);
+                //            CGSize s = [line.curString sizeWithFont:myFont];
+                CGSize s = CGSizeMake(size.width * (line.curCaretPos.x - line.curPoint.x), size.height);
+                CGRect textRect = CGRectMake(X+mView.frame.origin.x, Y+mView.frame.origin.y, s.width, s.height);
+                
+                textView = [[UITextField alloc] initWithFrame:textRect];
+                [textView setText:@"kjsdhfkjsdhfkjdsf"];
+                [self.view addSubview:textView];
+                break;
+            }
+        }
+    }
+    
+}
 @end

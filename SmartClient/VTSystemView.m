@@ -24,12 +24,12 @@
 
 
 @implementation VTSystemView
+@synthesize  textView;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-
     }
     return self;
 }
@@ -101,13 +101,13 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    UIFont *myFont = [UIFont boldSystemFontOfSize:16.0];
+    UIFont *myFont = [UIFont boldSystemFontOfSize:[settingStore fontSize]];
     int leftMargin = [settingStore leftMargin];
     int topMargin = [settingStore topMargin];
     int columnSpan = [settingStore columnSpan];
     int rowSpan = [settingStore rowSpam];
     
-    
+    BOOL canInput = NO;
     // Get the width of a string ...
     CGSize size = [settings getCharSizeEN:myFont];
     
@@ -124,20 +124,36 @@
             CGFloat X = leftMargin + (size.width+columnSpan) * line.curPoint.x;
             CGFloat Y = topMargin + (size.height+rowSpan) * line.curPoint.y;
             
-            NSLog(@"Y : %d, BGcolor=%@, \tfgColor=%@, string=%@", (int)line.curPoint.y, bgColor, fgColor, line.curString);
+//            NSLog(@"Y : %d, BGcolor=%@, \tfgColor=%@, string=%@", (int)line.curPoint.y, bgColor, fgColor, line.curString);
 //            CGSize s = [line.curString sizeWithFont:myFont];
             CGSize s = CGSizeMake(size.width * (line.curCaretPos.x - line.curPoint.x), size.height);
             CGRect textRect = CGRectMake(X, Y, s.width, s.height);
             CGContextFillRect(context, CGRectMake(X, Y, s.width, s.height));
             CGContextStrokePath(context);
+            
+//            if ([line.curString rangeOfString:@"___"].location != NSNotFound) {
+//                textView = [[UITextField alloc] initWithFrame:textRect];
+//                textView.borderStyle = UITextBorderStyleNone;
+//                canInput = YES;
+//            }
 
             [fgColor setFill];
 //            NSString * tmp = [line.curString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             
-//            if (line.curString ) {
-//                <#statements#>
-//            }
-            [line.curString drawInRect:textRect withFont:myFont];
+            if (line.curString ) {
+                
+            }
+            
+            //处理输出字符 带有换行符
+            NSArray *array = [line.curString componentsSeparatedByString:@"\n"];
+            int i = 0;
+            for (NSString *str in array) {
+                textRect.origin.y += i * s.height;
+                i = 1;
+                [str drawInRect:textRect withFont:myFont];
+                
+            }
+            
 
         }
     }
@@ -152,6 +168,16 @@
     }
     
     
+    
+//    //加入UItextView
+//    if (canInput) {
+//        [textView removeFromSuperview];
+//        [self addSubview:textView];
+//    } else {
+//        if (textView) {
+//            textView.hidden = YES;
+//        }
+//    }
 }
 
 

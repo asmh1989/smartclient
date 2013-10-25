@@ -148,7 +148,7 @@
         CharSet *charSet = tmp;
         if (charSet.Location == curChar)
         {
-            NSData *data = [NSData dataWithBytes: &i length: sizeof(charSet.UnicodeNo)];
+//            NSData *data = [NSData dataWithBytes: &i length: sizeof(charSet.UnicodeNo)];
 
             
             return charSet.UnicodeNo;
