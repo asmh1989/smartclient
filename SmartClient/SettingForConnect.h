@@ -29,6 +29,8 @@
 @property (nonatomic) NSString *fontStyle;      //字体样式
 @property (nonatomic) int fontSize;             //字体大小
 
+@property (nonatomic) BOOL  isShowCaret;        //是否显示关标
+
 @property (nonatomic) UIColor *blinkColor;
 @property (nonatomic) UIColor *boldColor;
 @property (nonatomic) UIColor *fgColor;

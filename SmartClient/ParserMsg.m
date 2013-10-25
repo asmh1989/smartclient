@@ -550,6 +550,7 @@ typedef struct nextAS{
 - (void) sethMode:(Params *)curParams;
 - (void) SetlMode:(Params *)curParams;
 - (void) setScrollRegion:(Params *)curParams;
+- (void) showString;
 @end
 
 @implementation ParserMsg
@@ -599,7 +600,7 @@ typedef struct nextAS{
 //            NSLog(@"stop... becase curChar = %@", curNSString);
 //        }
 
-        NSLog(@"s=%@, len=%lu, %@  un= %d", curNSString,(unsigned long)[n length], n, curChar);
+//        NSLog(@"s=%@, len=%lu, %@  un= %d", curNSString,(unsigned long)[n length], n, curChar);
         states = [charEvents getStateEventAction:state curChar:curChar];
         
         nextState = states.ns;
@@ -630,6 +631,7 @@ typedef struct nextAS{
         }
     }
     
+    [self showString];
 }
 
 - (void)doAction:(enum Actions)nextAction
@@ -706,6 +708,20 @@ typedef struct nextAS{
     
 }
 
+- (void) showString
+{
+    if ([printParseString length] > 0) {
+        
+        //当前更换CurSequence,并且printParseString存在字符并且Y坐标位置改变时.打印字符
+        ShowListEventArgs * show = [[ShowListEventArgs alloc] initShowListEventArgs:curPrintParsePoint String:printParseString CharAttribs:printCharAttribs Point:settings.caret.pos];
+        [show AddShowList];
+        printParseString = @"";
+        curPrintParsePoint.x = 0;
+        curPrintParsePoint.y = 0;
+    }
+
+}
+
 - (void)commandRouter:(enum Actions)nextAction
 {
     switch(nextAction)
@@ -725,12 +741,13 @@ typedef struct nextAS{
     
     if ([self.curSequence length] > 0 && [printParseString length] > 0)
     {
-        //当前更换CurSequence,并且printParseString存在字符并且Y坐标位置改变时.打印字符
-        ShowListEventArgs * show = [[ShowListEventArgs alloc] initShowListEventArgs:curPrintParsePoint String:printParseString CharAttribs:printCharAttribs Point:settings.caret.pos];
-        [show AddShowList];
-        printParseString = @"";
-        curPrintParsePoint.x = 0;
-        curPrintParsePoint.y = 0;
+        [self showString];
+//        //当前更换CurSequence,并且printParseString存在字符并且Y坐标位置改变时.打印字符
+//        ShowListEventArgs * show = [[ShowListEventArgs alloc] initShowListEventArgs:curPrintParsePoint String:printParseString CharAttribs:printCharAttribs Point:settings.caret.pos];
+//        [show AddShowList];
+//        printParseString = @"";
+//        curPrintParsePoint.x = 0;
+//        curPrintParsePoint.y = 0;
     }
     
     int Param = 0;
@@ -1338,12 +1355,12 @@ typedef struct nextAS{
                 {
                     settings.charAttribs.UseAltColor = YES;
 
-                    settings.charAttribs.AltColor = [UIColor colorWithRed:colorRed green:colorGreen blue:colorBlue alpha:1];
+                    settings.charAttribs.AltColor = [UIColor colorWithRed:colorRed green:colorGreen blue:colorBlue alpha:1.0f];
                 }
                 else if ([[tmp substringToIndex:3] isEqualToString:@"048"])
                 {
                     settings.charAttribs.UseAltBGColor = YES;
-                    settings.charAttribs.AltBGColor =  [UIColor colorWithRed:colorRed green:colorGreen blue:colorBlue alpha:1];
+                    settings.charAttribs.AltBGColor =  [UIColor colorWithRed:colorRed green:colorGreen blue:colorBlue alpha:1.0f];
                 }
                 continue;
                 //settings.charAttribs.UseAltColor = YES;

@@ -12,6 +12,7 @@
 #import "SettingStore.h"
 #import "ShowListEventArgs.h"
 
+#define CARET_LEN 2.0
 @interface VTSystemView()
 {
     StringShowList *stringShowList;
@@ -113,33 +114,43 @@
     for (id key in [[stringShowList stringShowDics] allKeys]) {
         NSArray *showList = [[stringShowList stringShowDics] objectForKey:key];
         
-        int i = 0; //行上的第几个
-        CGFloat width = 0; //当前的已占据的宽度
         for (ShowListEventArgs *line in showList) {
             UIColor *bgColor = settingStore.bgColor;
             UIColor *fgColor = settingStore.fgColor;
             
             [self AssignColors:line.curCharAttribute BGColor:&bgColor FGColor:&fgColor];
-            
-            if(bgColor)
-                [bgColor setStroke];
+//            [bgColor setStroke];
+            [bgColor setFill];
             CGFloat X = leftMargin + (size.width+columnSpan) * line.curPoint.x;
             CGFloat Y = topMargin + (size.height+rowSpan) * line.curPoint.y;
+            
+            NSLog(@"Y : %d, BGcolor=%@, \tfgColor=%@, string=%@", (int)line.curPoint.y, bgColor, fgColor, line.curString);
 //            CGSize s = [line.curString sizeWithFont:myFont];
-            CGSize s = CGSizeMake(size.width * [line.curString length], size.height);
+            CGSize s = CGSizeMake(size.width * (line.curCaretPos.x - line.curPoint.x), size.height);
             CGRect textRect = CGRectMake(X, Y, s.width, s.height);
             CGContextFillRect(context, CGRectMake(X, Y, s.width, s.height));
             CGContextStrokePath(context);
-        
-//            if (fgColor) {
-//                [fgColor setFill];
+
+            [fgColor setFill];
+//            NSString * tmp = [line.curString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            
+//            if (line.curString ) {
+//                <#statements#>
 //            }
-//
-//            
-//            [line.curString drawInRect:textRect withFont:myFont];
+            [line.curString drawInRect:textRect withFont:myFont];
+
         }
-        
     }
+    
+    //画光标
+    if ([settingStore isShowCaret]) {
+        CGFloat X = leftMargin + (size.width+columnSpan) * settings.caret.pos.x;
+        CGFloat Y = topMargin + (size.height+rowSpan) * (settings.caret.pos.y+1)-3 * CARET_LEN;
+        [[UIColor redColor] setFill];
+        CGContextFillRect(context, CGRectMake(X, Y, size.width, CARET_LEN));
+        CGContextStrokePath(context);
+    }
+    
     
 }
 

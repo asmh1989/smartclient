@@ -15,7 +15,7 @@
 
 @synthesize hostIp, hostPort,deviceID, enc, columnSpan, rowSpam, topMargin,
     leftMargin, isFullScreen, isBeep, cursorHeight, fontName, fontSize,
-    fontStyle;
+    fontStyle, isShowCaret;
 
 @synthesize  bgColor, fgColor, blinkColor, boldColor;
 
@@ -34,7 +34,7 @@
         return fgColor;
     }
     
-    return [UIColor whiteColor];
+    return [UIColor blackColor];
 }
 
 - (UIColor *)blinkColor
@@ -52,7 +52,7 @@
         return boldColor;
     }
     
-    return [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+    return [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0f];
 }
 
 - (id)init
@@ -69,6 +69,7 @@
     [self setFontName:_FONTNAME];
     [self setFontStyle:_FONTSTYLE];
     [self setFontSize:_FONTSIZE];
+    [self setIsShowCaret:_SHOW_CARET];
     [self setDeviceID:[self uuid]];
     [self setEnc:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000)]; // use GB2312
     
@@ -102,6 +103,7 @@
         [self setFontName:[aDecoder decodeObjectForKey:STRING_FONTNAME]];
         [self setFontStyle:[aDecoder decodeObjectForKey:STRING_FONTSTYLE]];
         [self setFontSize:[aDecoder decodeIntForKey:STRING_FONTSIZE]];
+        [self setIsShowCaret:[aDecoder decodeBoolForKey:STRING_SHOWCARET]];
     }
     
     NSLog(@"initWithCoder, hostIp = %@", hostIp);
@@ -124,6 +126,7 @@
     [aCoder encodeObject:fontName forKey:STRING_FONTNAME];
     [aCoder encodeObject:fontStyle forKey:STRING_FONTSTYLE];
     [aCoder encodeInt:fontSize forKey:STRING_FONTSIZE];
+    [aCoder encodeBool:isShowCaret forKey:STRING_SHOWCARET];
     
     NSLog(@"encodeWithCoder, hostIp = %@", hostIp);
 }

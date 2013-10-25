@@ -24,6 +24,7 @@
 #define _FONTNAME                @""                     //字体名
 #define _FONTSTYLE               @""                     //字体样式
 #define _FONTSIZE                20                      //字体大小
+#define _SHOW_CARET              YES                     //是否显示光标
 
 #define STRING_HOSTIP            @"hostIp"
 #define STRING_HOSTPORT          @"hostPort"
@@ -39,6 +40,7 @@
 #define STRING_FONTNAME          @"fontName"
 #define STRING_FONTSTYLE         @"fontStyle"
 #define STRING_FONTSIZE          @"fontSize"
+#define STRING_SHOWCARET         @"showCaret"
 
 
 @interface DefaultSettings : NSObject

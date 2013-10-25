@@ -15,7 +15,7 @@
 {
     self = [super init];
     if (self) {
-        self.color = [UIColor colorWithRed:255/255.0F green:181/255.0F blue:106/255.0F alpha:1];
+        self.color = [UIColor colorWithRed:255/255.0F green:181/255.0F blue:106/255.0F alpha:1.0f];
         self.IsOff = NO;
         self.EOL = NO;
         self.pos = CGPointMake(0, 0);
