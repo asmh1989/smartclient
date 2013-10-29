@@ -491,12 +491,12 @@ typedef struct nextAS{
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
-                            [[CharEventInfo alloc] initWithData:Message CharFrom:(unsigned short int)0x20 CharTo:(unsigned short int)0x3D NextActions:ActionMessage NextState:None],
-                            [[CharEventInfo alloc] initWithData:Message CharFrom:(unsigned short int)0x3F CharTo:(unsigned short int)0xFFFF NextActions:ActionMessage NextState:None],
-                            //> 62 当自定义的结束时,就转到原来的AnyWhere状态,并执行SpecialExcute
-                            [[CharEventInfo alloc] initWithData:Message CharFrom:(unsigned short int)0x3E CharTo:(unsigned short int)0x3E NextActions:SpecialExecute NextState:Ground],
-                            nil]
-                    forKey: [NSString stringWithFormat:@"%d",Message]
+        [[CharEventInfo alloc] initWithData:Message CharFrom:(unsigned short int)0x20 CharTo:(unsigned short int)0x3D NextActions:ActionMessage NextState:None],
+        [[CharEventInfo alloc] initWithData:Message CharFrom:(unsigned short int)0x3F CharTo:(unsigned short int)0xFFFF NextActions:ActionMessage NextState:None],
+        //> 62 当自定义的结束时,就转到原来的AnyWhere状态,并执行SpecialExcute
+        [[CharEventInfo alloc] initWithData:Message CharFrom:(unsigned short int)0x3E CharTo:(unsigned short int)0x3E NextActions:SpecialExecute NextState:Ground],
+        nil]
+        forKey: [NSString stringWithFormat:@"%d",Message]
      ];
     
 }
@@ -570,13 +570,14 @@ typedef struct nextAS{
         self.XOFF = NO;
         printParseString = @"";
         curSequence = @"";
+        curMessage = @"";
         curPrintParsePoint = CGPointMake(0, 0);
     }
     
     return self;
 }
 
-@synthesize curDefineSequence, curMessage, curSequence, XOFF;
+@synthesize curDefineSequence, curMessage, curSequence, XOFF, delegate;
 - (void)parserString:(NSString *)msg
 {
     enum States nextState = None;
@@ -654,7 +655,7 @@ typedef struct nextAS{
         case DefineSequence:
             self.curDefineSequence =[NSString stringWithFormat:@"%@%@", self.curDefineSequence, curNSString];
             break;
-        case Message:
+        case ActionMessage:
             self.curMessage =[NSString stringWithFormat:@"%@%@", self.curMessage, curNSString];
             break;
         default:
@@ -1008,18 +1009,18 @@ typedef struct nextAS{
 
 - (void) defineCommandRouter:(enum Actions)nextAction
 {
-//    String vtProtocol=e.CurDefineSequence.toUpperCase();
-//    if (vtProtocol.equals(settings.cusActive_Msg)){
+    NSString *vtProtocol=[self.curDefineSequence uppercaseString];
+    if ([vtProtocol isEqualToString:CUSACTIVE_MSG]){
 //        if (ShowMessageEvent!=null) ShowMessageEvent.OnShowMessage(e.CurMessage);
-//    }
-//    else if(vtProtocol.equals(settings.cusActive_Img) || vtProtocol.equals(settings.cusActive_Wav)){
+    }
+    else if([vtProtocol isEqualToString:CUSACTIVE_IMG] || [vtProtocol isEqualToString:CUSACTIVE_WAV]){
 //        streamArgs = new IOStreamEventArgs(e.Action, e.CurDefineSequence, e.CurMessage);
-//        Comms.isReceiveBytes = YES;
-//    }else if(vtProtocol.equals(settings.cusActive_MSGBOX) || vtProtocol.equals(settings.cusActive_CAM) ||
-//             vtProtocol.equals(settings.cusActive_GPS) || vtProtocol.equals(settings.cusActive_WEB)||
-//             vtProtocol.equals(settings.cusActive_OptionDialog) || vtProtocol.equals(settings.cusActive_VOICE)){
-//        if (VTProtocolExtendEvent!=null) VTProtocolExtendEvent.VTProtocolExtend(e);
-//    }
+        isReceiveBytes = YES;
+    }else if([vtProtocol isEqualToString:CUSACTIVE_MSGBOX] || [vtProtocol isEqualToString:CUSACTIVE_CAM] ||
+             [vtProtocol isEqualToString:CUSACTIVE_GPS] || [vtProtocol isEqualToString:CUSACTIVE_WEB]||
+             [vtProtocol isEqualToString:CUSACTIVE_OPTIONDIALOG] || [vtProtocol isEqualToString:CUSACTIVE_VOICE]){
+        [delegate VTProtocolExtend:vtProtocol Message:curMessage];
+    }
 }
 
 - (void) printChar
@@ -1588,7 +1589,7 @@ typedef struct nextAS{
 //                stringShowList.pictureShowLists.clear();
 //                
 //                stringShowList.inputStringLists.clear();
-                [stringShowList.stringShowDics removeAllObjects];
+                [stringShowList clear];
                 curPrintParsePoint.x = 0;
                 curPrintParsePoint.y = 0;
                 settings.caret.Pos = curPrintParsePoint;

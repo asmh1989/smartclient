@@ -10,6 +10,9 @@
 
 @interface StringShowList : NSObject
 @property (nonatomic, strong) NSMutableDictionary *stringShowDics;
+@property (nonatomic, strong) NSMutableArray *inputStrings;
 
 + (StringShowList *)shareStore;
+- (void)clear;
+
 @end

@@ -41,13 +41,26 @@
     }
 }
 
+
 - (void) setCurStatus:(CharAttribs *)ca
 {
-    self.curCharAttribute = [[CharAttribs alloc] initWithCharAttribs:ca.IsBold IsDim:ca.IsDim IsUnderscored:ca.IsUnderscored IsBlinking:ca.IsBlinking IsInverse:ca.IsInverse IsPrimaryFont:ca.IsPrimaryFont IsAlternateFont:ca.IsAlternateFont UseAltColor:ca.UseAltColor AltColor:ca.AltColor UseAltBGColor:ca.UseAltBGColor AltBGColor:ca.AltBGColor GL:ca.GL GR:ca.GR GS:ca.GS ISDECSG:ca.IsDECSG];
+//    self.curCharAttribute = [[CharAttribs alloc] initWithCharAttribs:ca.IsBold IsDim:ca.IsDim IsUnderscored:ca.IsUnderscored IsBlinking:ca.IsBlinking IsInverse:ca.IsInverse IsPrimaryFont:ca.IsPrimaryFont IsAlternateFont:ca.IsAlternateFont UseAltColor:ca.UseAltColor AltColor:ca.AltColor UseAltBGColor:ca.UseAltBGColor AltBGColor:ca.AltBGColor GL:ca.GL GR:ca.GR GS:ca.GS ISDECSG:ca.IsDECSG];
 
     NSString *itemStr = @"";
     
-    for (NSString * key in [curChars allKeys])
+    NSArray *sortKey = [[curChars allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
+    {
+        int v1 = [obj1 intValue];
+        int v2 = [obj2 intValue];
+        if (v1 < v2)
+            return NSOrderedAscending;
+        else if (v1 > v2)
+            return NSOrderedDescending;
+        else
+            return NSOrderedSame;
+    }];
+    
+    for (NSString * key in sortKey)
     {
         NSString *tmp = [curChars objectForKey:key];
         if (![tmp isEqualToString:@""]) {
@@ -56,28 +69,6 @@
     }
     curString = itemStr;
 }
-
-//- (CGSize)curPointSize
-//{
-//    int xx=curPoint.x * (Settings.getCharSizeEN().width) + Settings.getLeftMargin(); //当前字体的宽度X位置+左边距
-//    int yy=curPoint.y * (Settings.getCharSizeEN().height + Settings.getRowSpan())+ Settings.getTopMargin(); //（当前高度+行距）X位置+上边距
-//    return new Size(xx,yy);
-//}
-
-//public Size curStringSize(){
-//    if (curString.length() <= 0)
-//        return new Size(0, 0);
-//    else
-//        //return Settings.MeasureGraphics.MeasureString(this.curString, Settings.getVTFont()).ToSize();
-//        return new Size(0,0);
-//}
-
-//public Size curStringSizeByCharSize(){
-//    if (curString.length() <= 0)
-//        return new Size(0, 0);
-//    else
-//        return new Size((this.curCaretPos.x - this.curPoint.x) * (Settings.getCharSizeEN().width), Settings.getCharSizeEN().height);
-//}
 
 - (id) initShowListEventArgs:(CGPoint) _curPoint  String:(NSString *) _curString CharAttribs: (CharAttribs *) ca Point:(CGPoint) _curCaretPos
 {
@@ -128,12 +119,13 @@
         [showList addObject:self];
         [stringShowList.stringShowDics setObject:showList forKey:_TOSTRIING(curPoint.y)];
     }
-//
-//    if(curString != null && curString.contains("___")){
-//        Log.d("SUN-INPUT", "add input : curPoint = "+curPoint+"  length = "+stringShowList.inputStringLists.size());
-//        Rect r = new Rect(curPoint.x, curPoint.y, curCaretPos.x, curCaretPos.y);
-//        stringShowList.inputStringLists.add(r);
-//    }
+
+    if ([self.curString rangeOfString:@"___"].location != NSNotFound) {
+        CGRect r = CGRectMake(curPoint.x, curPoint.y, curCaretPos.x, curCaretPos.y);
+        NSValue *value = [NSValue valueWithCGRect:r];
+        [stringShowList.inputStrings addObject:value];
+    }
+
     return self;
 }
 @end

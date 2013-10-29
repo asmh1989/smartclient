@@ -11,7 +11,8 @@
 #import "ParserMsg.h"
 #import "VTSystemView.h"
 
-@interface SmartClinetViewController : UIViewController <GCDAsyncSocketDelegate, UITextFieldDelegate>
+@interface SmartClinetViewController : UIViewController <GCDAsyncSocketDelegate, UITextFieldDelegate,
+                                    ParserDelegate, UIAlertViewDelegate>
 {
     GCDAsyncSocket *socket;
     NSStringEncoding enc;
@@ -20,5 +21,7 @@
 @property (weak, nonatomic) IBOutlet VTSystemView *mView;
 
 @property (strong, nonatomic) UITextField *textView;
+
+- (void) dispatchMessage:(NSString *)output tag:(long)tag;
 
 @end

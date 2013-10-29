@@ -38,6 +38,7 @@
 		A47552AE181640D30033D224 /* CharAttribs.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552AD181640D30033D224 /* CharAttribs.m */; };
 		A47552B2181646C30033D224 /* Caret.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552B1181646C30033D224 /* Caret.m */; };
 		A47552B5181657E20033D224 /* CaretAttribs.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552B4181657E20033D224 /* CaretAttribs.m */; };
+		A4B6E406181E51D300F0A400 /* MessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B6E405181E51D300F0A400 /* MessageBox.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,8 @@
 		A47552B1181646C30033D224 /* Caret.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Caret.m; sourceTree = "<group>"; };
 		A47552B3181657E20033D224 /* CaretAttribs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaretAttribs.h; sourceTree = "<group>"; };
 		A47552B4181657E20033D224 /* CaretAttribs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaretAttribs.m; sourceTree = "<group>"; };
+		A4B6E404181E51D300F0A400 /* MessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageBox.h; sourceTree = "<group>"; };
+		A4B6E405181E51D300F0A400 /* MessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageBox.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +259,8 @@
 				A429C75F181773CD0037666D /* ShowListEventArgs.m */,
 				A429C761181775FB0037666D /* StringShowList.h */,
 				A429C762181775FB0037666D /* StringShowList.m */,
+				A4B6E404181E51D300F0A400 /* MessageBox.h */,
+				A4B6E405181E51D300F0A400 /* MessageBox.m */,
 			);
 			name = SmartClientCore;
 			path = ..;
@@ -375,6 +380,7 @@
 				A4632081180FDEBB000F9C69 /* SettingStore.m in Sources */,
 				A4632040180F80E3000F9C69 /* main.m in Sources */,
 				A463207A180FB7AD000F9C69 /* GCDAsyncUdpSocket.m in Sources */,
+				A4B6E406181E51D300F0A400 /* MessageBox.m in Sources */,
 				A44CB6C11818E4FE006B5946 /* VTSystemView.m in Sources */,
 				A4632044180F80E3000F9C69 /* SmartClinetAppDelegate.m in Sources */,
 			);

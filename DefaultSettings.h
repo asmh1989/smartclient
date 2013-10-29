@@ -16,14 +16,14 @@
 #define _HOSTPORT                23                      //当前服务器端口
 #define _COLUMNSPAN              0                       //列间距
 #define _ROWSPAN                 0                       //行间距
-#define _TOPMARGIN               2                       //上边距
-#define _LEFTMARGIN              2                       //左边距
+#define _TOPMARGIN               0                       //上边距
+#define _LEFTMARGIN              0                       //左边距
 #define _ISFULLSCREEN            NO                      //是否全屏显示
 #define _ISBEEP                  YES                     //是否有声音
 #define _CURSORHEIGHT            2                       //关标的高度
 #define _FONTNAME                @""                     //字体名
 #define _FONTSTYLE               @""                     //字体样式
-#define _FONTSIZE                20                      //字体大小
+#define _FONTSIZE                18                      //字体大小
 #define _SHOW_CARET              YES                     //是否显示光标
 
 #define STRING_HOSTIP            @"hostIp"

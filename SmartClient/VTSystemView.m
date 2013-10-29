@@ -24,7 +24,7 @@
 
 
 @implementation VTSystemView
-@synthesize  textView;
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -107,7 +107,6 @@
     int columnSpan = [settingStore columnSpan];
     int rowSpan = [settingStore rowSpam];
     
-    BOOL canInput = NO;
     // Get the width of a string ...
     CGSize size = [settings getCharSizeEN:myFont];
     
@@ -119,31 +118,26 @@
             UIColor *fgColor = settingStore.fgColor;
             
             [self AssignColors:line.curCharAttribute BGColor:&bgColor FGColor:&fgColor];
-//            [bgColor setStroke];
-            [bgColor setFill];
             CGFloat X = leftMargin + (size.width+columnSpan) * line.curPoint.x;
             CGFloat Y = topMargin + (size.height+rowSpan) * line.curPoint.y;
             
-//            NSLog(@"Y : %d, BGcolor=%@, \tfgColor=%@, string=%@", (int)line.curPoint.y, bgColor, fgColor, line.curString);
-//            CGSize s = [line.curString sizeWithFont:myFont];
             CGSize s = CGSizeMake(size.width * (line.curCaretPos.x - line.curPoint.x), size.height);
             CGRect textRect = CGRectMake(X, Y, s.width, s.height);
+            
+            
+            [bgColor setFill];
             CGContextFillRect(context, CGRectMake(X, Y, s.width, s.height));
             CGContextStrokePath(context);
             
-//            if ([line.curString rangeOfString:@"___"].location != NSNotFound) {
-//                textView = [[UITextField alloc] initWithFrame:textRect];
-//                textView.borderStyle = UITextBorderStyleNone;
-//                canInput = YES;
-//            }
-
-            [fgColor setFill];
-//            NSString * tmp = [line.curString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSString * tmp = [line.curString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             
-            if (line.curString ) {
-                
+//            NSLog(@"string = %@, tmp = %@, len = %d", line.curString, tmp, [tmp length]);
+            if ([tmp length] < 1) {
+                continue;
             }
             
+            [fgColor setFill];
+
             //处理输出字符 带有换行符
             NSArray *array = [line.curString componentsSeparatedByString:@"\n"];
             int i = 0;
@@ -152,6 +146,13 @@
                 i = 1;
                 [str drawInRect:textRect withFont:myFont];
                 
+//                if (__IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_7_0) {
+//                    [str drawInRect:textRect withFont:myFont];
+//                } else {
+//                    NSMutableDictionary *attrs = [[NSMutableDictionary alloc] init];
+//                    [attrs setObject:myFont forKey:NSFontAttributeName];
+//                    [str drawInRect:textRect withAttributes:attrs];
+//                }
             }
             
 
@@ -166,18 +167,6 @@
         CGContextFillRect(context, CGRectMake(X, Y, size.width, CARET_LEN));
         CGContextStrokePath(context);
     }
-    
-    
-    
-//    //加入UItextView
-//    if (canInput) {
-//        [textView removeFromSuperview];
-//        [self addSubview:textView];
-//    } else {
-//        if (textView) {
-//            textView.hidden = YES;
-//        }
-//    }
 }
 
 

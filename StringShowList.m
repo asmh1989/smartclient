@@ -32,7 +32,14 @@
     self = [super init];
     if (self) {
         self.stringShowDics = [[NSMutableDictionary alloc] init];
+        self.inputStrings = [[NSMutableArray alloc] init];
     }
     return self;
+}
+
+- (void)clear
+{
+    [self.stringShowDics removeAllObjects];
+    [self.inputStrings removeAllObjects];
 }
 @end
