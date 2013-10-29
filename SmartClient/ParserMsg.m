@@ -217,6 +217,8 @@ typedef struct nextAS{
         curChar =(unsigned short int)((int) curChar - 0x80);
     }
     
+    NSNumber *b = [NSNumber numberWithInt:curState];
+    
     for (CharEventInfo *cei in [elmentsDict objectForKey:[NSString stringWithFormat:@"%d", curState]]) {
         if ((int)curChar >= [cei charFrom] && (int) curChar <= [cei charTo]) {
             as.ns =  [cei nextState];
@@ -506,6 +508,7 @@ typedef struct nextAS{
     self = [super init];
     if (self) {
         elmentsDict = [[ NSMutableDictionary alloc] init];
+        NSLog(@"setElemrntsDicts ..... ");
         [self setElemrntsDicts];
     }
     return self;
@@ -529,6 +532,7 @@ typedef struct nextAS{
     CGPoint curPrintParsePoint;
     CharAttribs *printCharAttribs;
     StringShowList *stringShowList;
+    Chars *chars;
 }
 
 
@@ -572,6 +576,7 @@ typedef struct nextAS{
         curSequence = @"";
         curMessage = @"";
         curPrintParsePoint = CGPointMake(0, 0);
+        chars = [[Chars alloc] init];
     }
     
     return self;
@@ -586,7 +591,7 @@ typedef struct nextAS{
     enum Actions stateEntryAction = ActionNone;
     
     nextAS states;
-    
+    NSData *n;
     unsigned long len = [msg length];
     for (int i=0; i<len; i++) {
         if (isReceiveBytes) {
@@ -594,7 +599,7 @@ typedef struct nextAS{
         }
         curChar = 0;
         curNSString = [msg substringWithRange:NSMakeRange(i, 1)];
-        NSData *n = [curNSString dataUsingEncoding:[[[SettingStore shareStore] getSettings] enc]];
+        n = [curNSString dataUsingEncoding:[[[SettingStore shareStore] getSettings] enc]];
         [n getBytes:&curChar];
         
 //        if (curChar == 0x1b) {
@@ -633,6 +638,7 @@ typedef struct nextAS{
     }
     
     [self showString];
+    n = nil;
 }
 
 - (void)doAction:(enum Actions)nextAction
@@ -760,7 +766,7 @@ typedef struct nextAS{
         //当为空的时候应当输出
         if (nextAction == Print)
         {
-            printParseString = [NSString stringWithFormat:@"%@%@", printParseString, curNSString];
+            printParseString = [printParseString stringByAppendingString:curNSString];
             if([printParseString rangeOfString:@("__")].location != NSNotFound){
 //                settings.CurBGColor = settings.charAttribs.AltBGColor;
             }
@@ -1051,7 +1057,7 @@ typedef struct nextAS{
     
     // uc_Chars.Get......对于中文的结果分析:
     if (settings.charAttribs.GS) {
-        curChar = [[[Chars alloc] init] Get:curChar GL:settings.charAttribs.GS.set GR:settings.charAttribs.GR.set];
+        curChar = [chars Get:curChar GL:settings.charAttribs.GS.set GR:settings.charAttribs.GR.set];
         
         if (settings.charAttribs.GS.set == CharsSet_DECSG)
             settings.charAttribs.IsDECSG = YES;
@@ -1059,7 +1065,7 @@ typedef struct nextAS{
         settings.charAttribs.GS = nil;
     } else {
         // 对收到的字符,进行属性解析
-        curChar = [[[Chars alloc] init] Get:curChar GL:settings.charAttribs.GL.set GR:settings.charAttribs.GR.set];
+        curChar = [chars Get:curChar GL:settings.charAttribs.GL.set GR:settings.charAttribs.GR.set];
         if (settings.charAttribs.GL.set == CharsSet_DECSG)
             settings.charAttribs.IsDECSG = YES;
     }
@@ -1589,6 +1595,7 @@ typedef struct nextAS{
 //                stringShowList.pictureShowLists.clear();
 //                
 //                stringShowList.inputStringLists.clear();
+//            NSLog(@"clear all.....");
                 [stringShowList clear];
                 curPrintParsePoint.x = 0;
                 curPrintParsePoint.y = 0;

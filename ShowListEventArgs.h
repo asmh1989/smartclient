@@ -21,7 +21,7 @@
 //当前字段的显示属性
 @property (nonatomic) CharAttribs *curCharAttribute;
 
-@property (nonatomic) NSMutableDictionary *curChars;
+//@property (nonatomic) NSMutableDictionary *curChars;
 
 - (id) initShowListEventArgs:(CGPoint) _curPoint  String:(NSString *) _curString CharAttribs: (CharAttribs *) ca Point:(CGPoint) _curCaretPos;
 

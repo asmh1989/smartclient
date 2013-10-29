@@ -27,22 +27,22 @@
 @property (nonatomic) BOOL UseAltColor;
 
 //前景颜色
-@property (nonatomic, strong) UIColor *AltColor;
+@property (nonatomic) UIColor *AltColor;
 
 //是否用背景颜色
 @property (nonatomic) BOOL UseAltBGColor;
 
 //背景颜色
-@property (nonatomic, strong) UIColor *AltBGColor;
+@property (nonatomic) UIColor *AltBGColor;
 
 //uc_Chars GL
-@property (nonatomic, strong) Chars *GL;
+@property (nonatomic) Chars *GL;
 
 //uc_Chars GR
-@property (nonatomic, strong) Chars *GR;
+@property (nonatomic) Chars *GR;
 
 //uc_Chars GS
-@property (nonatomic, strong) Chars *GS;
+@property (nonatomic) Chars *GS;
 
 //Decompose Constructive Solid Geometry into minimal regions???
 @property (nonatomic) BOOL IsDECSG;

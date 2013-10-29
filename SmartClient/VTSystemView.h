@@ -8,5 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol VTSystemViewDelegate <NSObject>
+
+- (void) handleTouchMessage:(NSString *)msg;
+
+@end
+
 @interface VTSystemView : UIView
+@property(assign,nonatomic)id<VTSystemViewDelegate> delegate;
 @end

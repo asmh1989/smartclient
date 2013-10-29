@@ -13,6 +13,8 @@
 #import "ShowListEventArgs.h"
 
 #define CARET_LEN 2.0
+#define MYABS(a,b,N) (((a) - (b)) > 0? ((a)-(b)) : ((b) - (a))) < (N)
+
 @interface VTSystemView()
 {
     StringShowList *stringShowList;
@@ -20,11 +22,14 @@
     SettingForRuntime *settings;
 }
 
+@property (nonatomic) CGPoint point;
+
 @end
 
 
 @implementation VTSystemView
 
+@synthesize point, delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -34,6 +39,45 @@
     return self;
 }
 
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch* touch = [touches anyObject];
+    point = [touch locationInView:self];
+    NSLog(@"touchesBegan : X = %lf, Y=%lf", point.x, point.y);
+}
+
+- (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+//    UITouch* touch = [touches anyObject];
+//    CGPoint pt = [touch locationInView:self];
+//    NSLog(@"touchesMoved : X = %lf, Y=%lf", pt.x, pt.y);
+}
+
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch* touch = [touches anyObject];
+    CGPoint pt = [touch locationInView:self];
+    
+    UIFont * font = [UIFont boldSystemFontOfSize:[settingStore fontSize]];
+    int ix = (int)((pt.x - [settingStore leftMargin]) / ([settings getCharSizeEN:font].width + [settingStore columnSpan]));
+    int iy = (int)((pt.y - [settingStore topMargin]) / ([settings getCharSizeEN:font].height + [settingStore columnSpan]));
+    if (MYABS(pt.x, point.x, 5) && MYABS(pt.y, point.y, 5)) {
+        //click
+        NSLog(@"click!! ix = %d, iy = %d", ix, iy);
+        NSString *str = [NSString stringWithFormat:@"%@%@%d%@%d%@", CUSACTIVE_CLICK_SEND, @" X=\"", ix, @"\" Y=\"", iy, @"\" />"];
+        [delegate handleTouchMessage:str];
+    }
+    
+    NSLog(@"touchesEnded : X = %lf, Y=%lf", pt.x, pt.y);
+}
+
+- (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+//    UITouch* touch = [touches anyObject];
+//    CGPoint pt = [touch locationInView:self];
+//    NSLog(@"touchesCancelled : X = %lf, Y=%lf", pt.x, pt.y);
+}
 
 // / <summary>
 // / 指派颜色

@@ -30,24 +30,6 @@ enum CharsSets
 };
 
 @interface Chars : NSObject
-{
-    NSArray *DECSG;
-    NSArray *DECS;
-    NSArray *ASCII;
-    NSArray *NRCUK;
-    NSArray *NRCFinnish;
-    NSArray *NRCFrench;
-    NSArray *NRCFrenchCanadian;
-    NSArray *NRCGerman;
-    NSArray *NRCItalian;
-    NSArray *NRCNorDanish;
-    NSArray *NRCPortuguese;
-    NSArray *NRCSpanish;
-    NSArray *NRCSwedish;
-    NSArray *NRCSwiss;
-    NSArray *ISOLAtin1S;
-}
-
 @property (nonatomic) enum CharsSets set;
 - (id) initWithChars:(enum CharsSets)p;
 - (unsigned short int) Get:(unsigned short int)curChar GL:(enum CharsSets)GL GR:(enum CharsSets)GR;

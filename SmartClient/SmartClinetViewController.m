@@ -44,7 +44,7 @@
         outBuff = @"";
         [textView setHidden:YES];
         [parser setDelegate:self];
-        box  = [[MessageBox alloc] init];
+        box = [[MessageBox alloc] init];
     }
     return self;
 }
@@ -71,6 +71,7 @@
     NSLog(@"first send : %@", setStr);
     
     [self sendDataToSocket:setStr tag:1];
+    [mView setDelegate:self];
 }
 
 
@@ -91,11 +92,11 @@
     NSString *msg = [[NSString alloc] initWithData:data encoding:enc];
     NSLog(@"didReadData data = %@, tag = %ld", msg, tag);
     [parser parserString:msg];
-    if (tag == 1 || [msg length] > 25) {
-        [textView setText:@""];
+    if (tag == 1 || tag == 3 || [msg length] > 25) {
         [mView setNeedsDisplay];
     }
-
+    [textView setText:@""];
+    msg = nil;
     [self showTextView];
     [sock readDataWithTimeout:-1 tag:tag];
 
@@ -108,7 +109,7 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
-    NSLog(@"didWriteDataWithTag...tag = %ld", tag);
+//    NSLog(@"didWriteDataWithTag...tag = %ld", tag);
     [sock readDataWithTimeout:-1 tag:tag];
 }
 
@@ -225,13 +226,19 @@
     [textView setHidden: YES];
 }
 
-
+- (void)handleTouchMessage:(NSString *)msg
+{
+    NSLog(@"handleTouchMessage");
+    [self dispatchMessage:msg tag:3];
+}
 
 - (void)sendDataToSocket:(NSString *)output tag:(long)tag
 {
     NSData *data = [output dataUsingEncoding:enc];
     
     [socket writeData:data withTimeout:-1 tag:tag];
+    
+    data = nil;
 }
 
 - (NSString *)getMessageBoxString:(NSString *)str param:(NSString *)param
