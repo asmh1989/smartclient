@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define _TOSTRIING(N)           [NSString stringWithFormat:@"%d", (int)(N)]
+#define _TOSTRIING(N)           [NSNumber numberWithInt:(int)(N)]//[NSString stringWithFormat:@"%d", (int)(N)]
 #define COMBINE(N, M)           [NSString stringWithFormat:@"%c%@",(N), (M)]
 
 #define MYKEY_SHIFT               COMBINE(0x1b, @"[Z")

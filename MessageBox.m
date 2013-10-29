@@ -8,6 +8,7 @@
 
 #import "MessageBox.h"
 
+#define _TONSNUMBER(N)           [NSNumber numberWithInt:(int)(N)]
 /**
  * 该消息框包含“中止”、“重试”和“忽略”按钮
  */
@@ -41,35 +42,35 @@
 /**
  * 返回值是 Abort（通常由标签为“中止”的按钮发送）
  */
-#define  MessageBoxShowResult_Abort                 @"0"
+#define  MessageBoxShowResult_Abort                 _TONSNUMBER(0)
 /**
  * 返回值是 Cancel（通常由标签为“取消”的按钮发送）
  */
-#define  MessageBoxShowResult_Cancel                @"1"
+#define  MessageBoxShowResult_Cancel                _TONSNUMBER(1)
 /**
  * 返回值是 Ignore（通常由标签为“忽略”的按钮发送）
  */
-#define  MessageBoxShowResult_Ignore                @"2"
+#define  MessageBoxShowResult_Ignore                _TONSNUMBER(2)
 /**
  * 返回值是 No（通常由标签为“否”的按钮发送）
  */
-#define  MessageBoxShowResult_No                    @"3"
+#define  MessageBoxShowResult_No                    _TONSNUMBER(3)
 /**
  * 返回了 Nothing
  */
-#define  MessageBoxShowResult_None                  @"4"
+#define  MessageBoxShowResult_None                  _TONSNUMBER(4)
 /**
  * 返回值是 OK（通常由标签为“确定”的按钮发送）
  */
-#define  MessageBoxShowResult_OK                    @"5"
+#define  MessageBoxShowResult_OK                    _TONSNUMBER(5)
 /**
  * 返回值是 Retry（通常由标签为“重试”的按钮发送）
  */
-#define  MessageBoxShowResult_Retry                 @"6"
+#define  MessageBoxShowResult_Retry                 _TONSNUMBER(6)
 /**
  * 返回值是 Yes（通常由标签为“是”的按钮发送）
  */
-#define  MessageBoxShowResult_Yes                   @"7"
+#define  MessageBoxShowResult_Yes                   _TONSNUMBER(7)
 
 @implementation MessageBox
 
@@ -88,44 +89,44 @@
     NSMutableDictionary *titleBtn = [[NSMutableDictionary alloc] init];
     switch(buttonType){
 		case MessageBoxButtons_OK:
-            [titleBtn setObject:@"确定" forKey:@"0"];
-            [map setObject:MessageBoxShowResult_OK forKey:@"0"];
+            [titleBtn setObject:@"确定" forKey:_TONSNUMBER(0)];
+            [map setObject:MessageBoxShowResult_OK forKey:_TONSNUMBER(0)];
             break;
 		case MessageBoxButtons_AbortRetryIgnore:
-            [titleBtn setObject:@"中止" forKey:@"0"];
-            [titleBtn setObject:@"重试" forKey:@"1"];
-            [titleBtn setObject:@"忽略" forKey:@"2"];
+            [titleBtn setObject:@"中止" forKey:_TONSNUMBER(0)];
+            [titleBtn setObject:@"重试" forKey:_TONSNUMBER(1)];
+            [titleBtn setObject:@"忽略" forKey:_TONSNUMBER(2)];
             
-            [map setObject:MessageBoxShowResult_Abort forKey:@"0"];
-            [map setObject:MessageBoxShowResult_Retry forKey:@"1"];
-            [map setObject:MessageBoxShowResult_Ignore forKey:@"2"];
+            [map setObject:MessageBoxShowResult_Abort forKey:_TONSNUMBER(0)];
+            [map setObject:MessageBoxShowResult_Retry forKey:_TONSNUMBER(1)];
+            [map setObject:MessageBoxShowResult_Ignore forKey:_TONSNUMBER(2)];
 			break;
 		case MessageBoxButtons_OKCancel:
-            [titleBtn setObject:@"确定" forKey:@"0"];
-            [titleBtn setObject:@"取消" forKey:@"1"];
+            [titleBtn setObject:@"确定" forKey:_TONSNUMBER(0)];
+            [titleBtn setObject:@"取消" forKey:_TONSNUMBER(1)];
             
-            [map setObject:MessageBoxShowResult_OK forKey:@"0"];
-            [map setObject:MessageBoxShowResult_Cancel forKey:@"1"];
+            [map setObject:MessageBoxShowResult_OK forKey:_TONSNUMBER(0)];
+            [map setObject:MessageBoxShowResult_Cancel forKey:_TONSNUMBER(1)];
 			break;
 		case MessageBoxButtons_RetryCancel:
-            [titleBtn setObject:@"重试" forKey:@"0"];
-            [titleBtn setObject:@"取消" forKey:@"1"];
-            [map setObject:MessageBoxShowResult_Retry forKey:@"0"];
-            [map setObject:MessageBoxShowResult_Cancel forKey:@"1"];
+            [titleBtn setObject:@"重试" forKey:_TONSNUMBER(0)];
+            [titleBtn setObject:@"取消" forKey:_TONSNUMBER(1)];
+            [map setObject:MessageBoxShowResult_Retry forKey:_TONSNUMBER(0)];
+            [map setObject:MessageBoxShowResult_Cancel forKey:_TONSNUMBER(1)];
 			break;
 		case MessageBoxButtons_YesNo:
-            [titleBtn setObject:@"是" forKey:@"0"];
-            [titleBtn setObject:@"否" forKey:@"1"];
-            [map setObject:MessageBoxShowResult_Yes forKey:@"0"];
-            [map setObject:MessageBoxShowResult_No forKey:@"1"];
+            [titleBtn setObject:@"是" forKey:_TONSNUMBER(0)];
+            [titleBtn setObject:@"否" forKey:_TONSNUMBER(1)];
+            [map setObject:MessageBoxShowResult_Yes forKey:_TONSNUMBER(0)];
+            [map setObject:MessageBoxShowResult_No forKey:_TONSNUMBER(1)];
 			break;
 		case MessageBoxButtons_YesNoCancel:
-            [titleBtn setObject:@"是" forKey:@"0"];
-            [titleBtn setObject:@"否" forKey:@"1"];
-            [titleBtn setObject:@"取消" forKey:@"2"];
-            [map setObject:MessageBoxShowResult_Yes forKey:@"0"];
-            [map setObject:MessageBoxShowResult_No forKey:@"1"];
-            [map setObject:MessageBoxShowResult_Cancel forKey:@"2"];
+            [titleBtn setObject:@"是" forKey:_TONSNUMBER(0)];
+            [titleBtn setObject:@"否" forKey:_TONSNUMBER(1)];
+            [titleBtn setObject:@"取消" forKey:_TONSNUMBER(2)];
+            [map setObject:MessageBoxShowResult_Yes forKey:_TONSNUMBER(0)];
+            [map setObject:MessageBoxShowResult_No forKey:_TONSNUMBER(1)];
+            [map setObject:MessageBoxShowResult_Cancel forKey:_TONSNUMBER(2)];
 			break;
     }
     

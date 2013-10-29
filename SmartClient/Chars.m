@@ -242,7 +242,9 @@
 @end
 
 @interface Chars ()
-
+{
+    NSMutableArray *curSet;
+}
 @property (nonatomic) CharsData *charsData;
 @end
 
@@ -255,6 +257,7 @@
     self = [super init];
     if (self) {
         charsData = [CharsData shareStore];
+        curSet = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -268,7 +271,7 @@
 
 - (unsigned short)Get:(unsigned short)curChar GL:(enum CharsSets)GL GR:(enum CharsSets)GR
 {
-    NSMutableArray *curSet = [[NSMutableArray alloc] init];
+    [curSet removeAllObjects];
     
     // I'm assuming the left hand in use table will always have a 00-7F char set in it
     //假定当前处理的是0到128之间的字符

@@ -217,9 +217,7 @@ typedef struct nextAS{
         curChar =(unsigned short int)((int) curChar - 0x80);
     }
     
-    NSNumber *b = [NSNumber numberWithInt:curState];
-    
-    for (CharEventInfo *cei in [elmentsDict objectForKey:[NSString stringWithFormat:@"%d", curState]]) {
+    for (CharEventInfo *cei in [elmentsDict objectForKey:[NSNumber numberWithInt:curState]]) {
         if ((int)curChar >= [cei charFrom] && (int) curChar <= [cei charTo]) {
             as.ns =  [cei nextState];
             as.na = [cei nextAction];
@@ -227,7 +225,7 @@ typedef struct nextAS{
         }
     }
     
-    for (CharEventInfo *cei in [elmentsDict objectForKey:[NSString stringWithFormat:@"%d", Anywhere]] ) {
+    for (CharEventInfo *cei in [elmentsDict objectForKey:[NSNumber numberWithInt: Anywhere]] ) {
         if ((int)curChar >= [cei charFrom] && (int) curChar <= [cei charTo]) {
             as.ns =  [cei nextState];
             as.na = [cei nextAction];
@@ -269,7 +267,7 @@ typedef struct nextAS{
                             //155
                             [[CharEventInfo alloc] initWithData:Anywhere CharFrom:(unsigned short int)0x9B CharTo:(unsigned short int)0x9B NextActions:NewCollect NextState:CsiEntry],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",Anywhere]
+                    forKey: [NSNumber numberWithInt:Anywhere]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
@@ -292,7 +290,7 @@ typedef struct nextAS{
                             //156
                             [[CharEventInfo alloc] initWithData:Ground CharFrom:(unsigned short int)0x9C CharTo:(unsigned short int)0x9C NextActions:Execute NextState:None],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",Ground]
+                    forKey: [NSNumber numberWithInt:Ground]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
@@ -307,7 +305,7 @@ typedef struct nextAS{
                             //48 0到126 ~
                             [[CharEventInfo alloc] initWithData:EscapeIntrmdt CharFrom:(unsigned short int)0x30 CharTo:(unsigned short int)0x7E NextActions:Dispatch NextState:Ground],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",EscapeIntrmdt]
+                    forKey: [NSNumber numberWithInt:EscapeIntrmdt]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
@@ -344,7 +342,7 @@ typedef struct nextAS{
                             //32空格到47/
                             [[CharEventInfo alloc] initWithData:Escape CharFrom:(unsigned short int)0x20 CharTo:(unsigned short int)0x27 NextActions:Collect NextState:EscapeIntrmdt],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",Escape]
+                    forKey: [NSNumber numberWithInt:Escape]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
@@ -371,7 +369,7 @@ typedef struct nextAS{
                             //64@ 到 126 ~
                             [[CharEventInfo alloc] initWithData:CsiEntry CharFrom:(unsigned short int)0x40 CharTo:(unsigned short int)0x7E NextActions:Dispatch NextState:Ground],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",CsiEntry]
+                    forKey: [NSNumber numberWithInt:CsiEntry]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
@@ -392,7 +390,7 @@ typedef struct nextAS{
                             //64@ 到 126 ~
                             [[CharEventInfo alloc] initWithData:CsiParam CharFrom:(unsigned short int)0x40 CharTo:(unsigned short int)0x7E NextActions:Dispatch NextState:Ground],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",CsiParam]
+                    forKey: [NSNumber numberWithInt:CsiParam]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
@@ -401,7 +399,7 @@ typedef struct nextAS{
                             [[CharEventInfo alloc] initWithData:CsiIgnore CharFrom:(unsigned short int)0x1C CharTo:(unsigned short int)0x1F NextActions:Execute NextState:None],
                             [[CharEventInfo alloc] initWithData:CsiIgnore CharFrom:(unsigned short int)0x40 CharTo:(unsigned short int)0x7E NextActions:ActionNone NextState:Ground],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",CsiIgnore]
+                    forKey: [NSNumber numberWithInt:CsiIgnore]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
@@ -412,14 +410,14 @@ typedef struct nextAS{
                             [[CharEventInfo alloc] initWithData:CsiIntrmdt CharFrom:(unsigned short int)0x30 CharTo:(unsigned short int)0x3F NextActions:ActionNone NextState:CsiIgnore],
                             [[CharEventInfo alloc] initWithData:CsiIntrmdt CharFrom:(unsigned short int)0x40 CharTo:(unsigned short int)0x75 NextActions:Dispatch NextState:Ground],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",CsiIntrmdt]
+                    forKey: [NSNumber numberWithInt:CsiIntrmdt]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
                             //156
                             [[CharEventInfo alloc] initWithData:SosPmApcString CharFrom:(unsigned short int)0x9C CharTo:(unsigned short int)0x9C NextActions:ActionNone NextState:Ground],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",SosPmApcString]
+                    forKey: [NSNumber numberWithInt:SosPmApcString]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
@@ -430,20 +428,20 @@ typedef struct nextAS{
                             [[CharEventInfo alloc] initWithData:DcsEntry CharFrom:(unsigned short int)0x3C CharTo:(unsigned short int)0x3F NextActions:Collect NextState:DcsParam],
                             [[CharEventInfo alloc] initWithData:DcsEntry CharFrom:(unsigned short int)0x40 CharTo:(unsigned short int)0x7E NextActions:ActionNone NextState:DcsPassthrough],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",DcsEntry]
+                    forKey: [NSNumber numberWithInt:DcsEntry]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
                             [[CharEventInfo alloc] initWithData:DcsIntrmdt CharFrom:(unsigned short int)0x30 CharTo:(unsigned short int)0x3F NextActions:ActionNone NextState:DcsIgnore],
                             [[CharEventInfo alloc] initWithData:DcsIntrmdt CharFrom:(unsigned short int)0x40 CharTo:(unsigned short int)0x7E NextActions:ActionNone NextState:DcsPassthrough],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",DcsIntrmdt]
+                    forKey: [NSNumber numberWithInt:DcsIntrmdt]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
                             [[CharEventInfo alloc] initWithData:DcsIgnore CharFrom:(unsigned short int)0x9C CharTo:(unsigned short int)0x9C NextActions:ActionNone NextState:Ground],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",DcsIgnore]
+                    forKey: [NSNumber numberWithInt:DcsIgnore]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
@@ -453,13 +451,13 @@ typedef struct nextAS{
                             [[CharEventInfo alloc] initWithData:DcsParam CharFrom:(unsigned short int)0x3A CharTo:(unsigned short int)0x3A NextActions:ActionNone NextState:DcsIgnore],
                             [[CharEventInfo alloc] initWithData:DcsParam CharFrom:(unsigned short int)0x3C CharTo:(unsigned short int)0x3F NextActions:ActionNone NextState:DcsIgnore],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",DcsParam]
+                    forKey: [NSNumber numberWithInt:DcsParam]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
                             [[CharEventInfo alloc] initWithData:SosPmApcString CharFrom:(unsigned short int)0x9C CharTo:(unsigned short int)0x9C NextActions:ActionNone NextState:Ground],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",SosPmApcString]
+                    forKey: [NSNumber numberWithInt:SosPmApcString]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
@@ -469,14 +467,14 @@ typedef struct nextAS{
                             [[CharEventInfo alloc] initWithData:DcsPassthrough CharFrom:(unsigned short int)0x20 CharTo:(unsigned short int)0x7E NextActions:Put NextState:None],
                             [[CharEventInfo alloc] initWithData:DcsPassthrough CharFrom:(unsigned short int)0x9C CharTo:(unsigned short int)0x9C NextActions:ActionNone NextState:Ground],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",DcsPassthrough]
+                    forKey: [NSNumber numberWithInt:DcsPassthrough]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
                             [[CharEventInfo alloc] initWithData:OscString CharFrom:(unsigned short int)0x20 CharTo:(unsigned short int)0x7F NextActions:OscPut NextState:None],
                             [[CharEventInfo alloc] initWithData:OscString CharFrom:(unsigned short int)0x9C CharTo:(unsigned short int)0x9C NextActions:ActionNone NextState:Ground],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",OscString]
+                    forKey: [NSNumber numberWithInt:OscString]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
@@ -489,7 +487,7 @@ typedef struct nextAS{
                             //_95
                             [[CharEventInfo alloc] initWithData:SpecialDefine CharFrom:(unsigned short int)0x5F CharTo:(unsigned short int)0x5F NextActions:DefineSequence NextState:Message],
                             nil]
-                    forKey: [NSString stringWithFormat:@"%d",SpecialDefine]
+                    forKey: [NSNumber numberWithInt:SpecialDefine]
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
@@ -498,7 +496,7 @@ typedef struct nextAS{
         //> 62 当自定义的结束时,就转到原来的AnyWhere状态,并执行SpecialExcute
         [[CharEventInfo alloc] initWithData:Message CharFrom:(unsigned short int)0x3E CharTo:(unsigned short int)0x3E NextActions:SpecialExecute NextState:Ground],
         nil]
-        forKey: [NSString stringWithFormat:@"%d",Message]
+        forKey: [NSNumber numberWithInt:Message]
      ];
     
 }
@@ -516,6 +514,7 @@ typedef struct nextAS{
 
 @end
 
+#define GENSTRING(N) [NSString stringWithFormat:@"%c%@", (char)0x1b, (N)]
 
 @interface ParserMsg ()
 {
@@ -533,6 +532,42 @@ typedef struct nextAS{
     CharAttribs *printCharAttribs;
     StringShowList *stringShowList;
     Chars *chars;
+    
+    NSString *my_string_7;
+    NSString *my_string_8;
+    NSString *my_string_a1;
+    NSString *my_string_n;
+    NSString *my_string_a2;
+    NSString *my_string_o;
+    NSString *my_string_a3;
+    NSString *my_string_b8;
+    NSString *my_string_a4;
+    NSString *my_string_a5;
+    NSString *my_string_bB;
+    NSString *my_string_bA;
+    NSString *my_string_bC;
+    NSString *my_string_bD;
+    NSString *my_string_bH;
+    NSString *my_string_bf;
+    NSString *my_string_bJ;
+    NSString *my_string_bK;
+    NSString *my_string_bL;
+    NSString *my_string_bM;
+    NSString *my_string_O;
+    NSString *my_string_N;
+    NSString *my_string_bm;
+    NSString *my_string_abh;
+    NSString *my_string_abl;
+    NSString *my_string_bc;
+    NSString *my_string_bg;
+    NSString *my_string_bh;
+    NSString *my_string_bl;
+    NSString *my_string_br;
+    NSString *my_string_bt;
+    NSString *my_string_D;
+    NSString *my_string_E;
+    NSString *my_string_H;
+    NSString *my_string_M;
 }
 
 
@@ -555,6 +590,7 @@ typedef struct nextAS{
 - (void) SetlMode:(Params *)curParams;
 - (void) setScrollRegion:(Params *)curParams;
 - (void) showString;
+- (void) initString;
 @end
 
 @implementation ParserMsg
@@ -577,6 +613,8 @@ typedef struct nextAS{
         curMessage = @"";
         curPrintParsePoint = CGPointMake(0, 0);
         chars = [[Chars alloc] init];
+        
+        [self initString];
     }
     
     return self;
@@ -599,7 +637,7 @@ typedef struct nextAS{
         }
         curChar = 0;
         curNSString = [msg substringWithRange:NSMakeRange(i, 1)];
-        n = [curNSString dataUsingEncoding:[[[SettingStore shareStore] getSettings] enc]];
+        n = [curNSString dataUsingEncoding:[settingStore enc]];
         [n getBytes:&curChar];
         
 //        if (curChar == 0x1b) {
@@ -647,22 +685,22 @@ typedef struct nextAS{
     {
         case Dispatch:
         case Collect:
-            self.curSequence = [NSString stringWithFormat:@"%@%@", self.curSequence, curNSString];
+            self.curSequence = [curSequence stringByAppendingString:curNSString];//[NSString stringWithFormat:@"%@%@", self.curSequence, curNSString];
             break;
         case NewCollect:
-            self.curDefineSequence = [NSString stringWithFormat:@"%@", curNSString];
+            self.curDefineSequence = curNSString;//[NSString stringWithFormat:@"%@", curNSString];
             self.curMessage = @"";
-            self.curSequence = [NSString stringWithFormat:@"%@", curNSString];
+            self.curSequence = curNSString;//[NSString stringWithFormat:@"%@", curNSString];
             [params Clear];
             break;
         case Param:
             [params add:curChar];
             break;
         case DefineSequence:
-            self.curDefineSequence =[NSString stringWithFormat:@"%@%@", self.curDefineSequence, curNSString];
+            self.curDefineSequence =[curDefineSequence stringByAppendingString:curNSString];//[NSString stringWithFormat:@"%@%@", self.curDefineSequence, curNSString];
             break;
         case ActionMessage:
-            self.curMessage =[NSString stringWithFormat:@"%@%@", self.curMessage, curNSString];
+            self.curMessage =[curMessage stringByAppendingString:curNSString];//[NSString stringWithFormat:@"%@%@", self.curMessage, curNSString];
             break;
         default:
             break;
@@ -684,7 +722,7 @@ typedef struct nextAS{
             [self commandRouter:nextAction];
             break;
         case SpecialExecute :
-            self.curDefineSequence =[NSString stringWithFormat:@"%@%@", self.curDefineSequence, curNSString];
+            self.curDefineSequence =[curDefineSequence stringByAppendingString:curNSString];//[NSString stringWithFormat:@"%@%@", self.curDefineSequence, curNSString];
             //去处理当前的特殊的定义的操作
             [self defineCommandRouter:nextAction];
             //因为CurSequence在当遇到27时,会有值,直接影响到正常的解析,所以要在显示完自定义的字符后,清空当前的正常TELNET的序列
@@ -767,12 +805,12 @@ typedef struct nextAS{
         if (nextAction == Print)
         {
             printParseString = [printParseString stringByAppendingString:curNSString];
-            if([printParseString rangeOfString:@("__")].location != NSNotFound){
+//            if([printParseString rangeOfString:@("__")].location != NSNotFound){
 //                settings.CurBGColor = settings.charAttribs.AltBGColor;
-            }
+//            }
         }
     }
-    else if ([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"7"]])
+    else if ([self.curSequence isEqualToString:my_string_7])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"7"]])
     {
         //DECSC Save Cursor position and attributes保存当前光标位置和属性
         CaretAttribs *attr = [[CaretAttribs alloc] initWithPos:settings.caret.pos G0Set:settings.G0.set G1Set:settings.G1.set G2Set:settings.G2.set G3Set:settings.G3.set CharAttribs:settings.charAttribs];
@@ -780,7 +818,7 @@ typedef struct nextAS{
         [settings.saveCarets addObject:attr];
         
     }
-    else if ([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"8"]])
+    else if ([self.curSequence isEqualToString:my_string_8])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"8"]])
     {
         //DECRC Restore Cursor position and attributes重新载入光标位置和属性
         int len = [ settings.saveCarets count];
@@ -796,39 +834,43 @@ typedef struct nextAS{
         [settings.saveCarets removeObject:tmp];
         
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"~"]])
+    else if([self.curSequence isEqualToString:my_string_a1])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"~"]])
     {
         //LS1R Locking Shift G1 -> GR
         settings.charAttribs.GR = settings.G1;
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"n"]])
+    else if([self.curSequence isEqualToString:my_string_n])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"n"]])
     { //LS2 Locking Shift G2 -> GL
         settings.charAttribs.GL = settings.G2;
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"}"]])
+    else if([self.curSequence isEqualToString:my_string_a2])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"}"]])
     {//LS2R Locking Shift G2 -> GR
         settings.charAttribs.GR = settings.G2;
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"o"]])
+    else if([self.curSequence isEqualToString:my_string_o])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"o"]])
     { //LS3 Locking Shift G3 -> GL
         settings.charAttribs.GL = settings.G3;
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"|"]])
+    else if([self.curSequence isEqualToString:my_string_a3])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"|"]])
     { //LS3R Locking Shift G3 -> GR
         settings.charAttribs.GR = settings.G3;
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"#8"]]){
+    else if([self.curSequence isEqualToString:my_string_b8])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"#8"]])
+    {
         //DECALN
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"="]]){
+    else if([self.curSequence isEqualToString:my_string_a4])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"="]])
+    {
         //case "(char)0x1b=": // Keypad to Application mode
         settings.mode.flags = settings.mode.flags | MODE_KeypadAppln;
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @">"]]){
+    else if([self.curSequence isEqualToString:my_string_a5])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @">"]])
+    {
         //case "(char)0x1b>": // Keypad to Numeric mode
         settings.mode.flags = settings.mode.flags ^ MODE_KeypadAppln;
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[B"]]){
+    else if([self.curSequence isEqualToString:my_string_bB])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[B"]])
+    {
         //case "(char)0x1b[B": // CUD
         
         if ([params Count] > 0)
@@ -842,7 +884,8 @@ typedef struct nextAS{
         [self caretToAbs:(settings.caret.pos.y + Inc) CaretX:settings.caret.pos.x];
         
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[A"]]){
+    else if([self.curSequence isEqualToString:my_string_bA])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[A"]])
+    {
         //case "(char)0x1b[A": // CUU
         
         if ([params Count] > 0)
@@ -855,7 +898,8 @@ typedef struct nextAS{
         
         [self caretToAbs:(settings.caret.pos.y - Inc) CaretX:settings.caret.pos.x];
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[C"]]){
+    else if([self.curSequence isEqualToString:my_string_bC])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[C"]])
+    {
         //case "(char)0x1b[C": // CUF
         
         if ([params Count] > 0)
@@ -867,7 +911,8 @@ typedef struct nextAS{
         if (Inc == 0) Inc = 1;
         [self caretToAbs:settings.caret.pos.y CaretX:(settings.caret.pos.x + Inc)];
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[D"]]){
+    else if([self.curSequence isEqualToString:my_string_bD])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[D"]])
+    {
         //case "(char)0x1b[D": // CUB
         
         if ([params Count] > 0)
@@ -879,7 +924,9 @@ typedef struct nextAS{
         if (Inc == 0) Inc = 1;
         [self caretToAbs:settings.caret.pos.y CaretX:(settings.caret.pos.x - Inc)];
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[H"]] || [self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[f"]]){
+    else if([self.curSequence isEqualToString:my_string_bH]//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[H"]]
+            || [self.curSequence isEqualToString:my_string_bf])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[f"]])
+    {
         //case "(char)0x1b[H": // CUP?无操作?
         //case "(char)0x1b[f": // HVP
         
@@ -900,7 +947,7 @@ typedef struct nextAS{
         
         [self CaretToRel:Y CaretX:X];
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[J"]])
+    else if([self.curSequence isEqualToString:my_string_bJ])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[J"]])
     {   //case "(char)0x1b[J":
         
         if ([params Count] > 0)
@@ -910,7 +957,7 @@ typedef struct nextAS{
         }
         [self clearDown:Param];
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[K"]])
+    else if([self.curSequence isEqualToString:my_string_bK])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[K"]])
     {    //case "(char)0x1b[K":
         
         if ([params Count] > 0)
@@ -920,56 +967,56 @@ typedef struct nextAS{
         }
         [self clearRight:Param];
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[L"]])
+    else if([self.curSequence isEqualToString:my_string_bL])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[L"]])
     {    //case "(char)0x1b[L": // INSERT LINE
         //InsertLine(e.CurParams);
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[M"]])
+    else if([self.curSequence isEqualToString:my_string_bM])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[M"]])
     {    //case "(char)0x1b[M": // DELETE LINE
         //DeleteLine(e.CurParams);
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"N"]])
+    else if([self.curSequence isEqualToString:my_string_N])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"N"]])
     {    //case "(char)0x1bN": // SS2 Single Shift (G2 -> GL)
         settings.charAttribs.GS = settings.G2;
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"O"]])
+    else if([self.curSequence isEqualToString:my_string_O])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"O"]])
     {    //case "(char)0x1bO": // SS3 Single Shift (G3 -> GL)
         settings.charAttribs.GS = settings.G3;
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[m"]])
+    else if([self.curSequence isEqualToString:my_string_bm])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[m"]])
     {    //case "(char)0x1b[m"://颜色设置
         [self setCharAttribs:params];
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[?h"]])
+    else if([self.curSequence isEqualToString:my_string_abh])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[?h"]])
     {    //case "(char)0x1b[?h"://ESC加?加h命令
         [self setqmhMode:params];
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[?l"]])
+    else if([self.curSequence isEqualToString:my_string_abl])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[?l"]])
     {    //case "(char)0x1b[?l"://ESC加?加l命令
         [self setqmlMode:params];
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[c"]])
+    else if([self.curSequence isEqualToString:my_string_bc])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[c"]])
     {    //case "(char)0x1b[c": // DA Device Attributes
         //                    this.DispatchMessage (this, "(char)0x1b[?64;1;2;6;7;8;9c");
 //        dispatchMessage(this, (char)0x1b+"[?6c");
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[g"]])
+    else if([self.curSequence isEqualToString:my_string_bg])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[g"]])
     {    //case "(char)0x1b[g":
         //this.ClearTabs(e.CurParams);
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[h"]])
+    else if([self.curSequence isEqualToString:my_string_bh])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[h"]])
     {    //case "(char)0x1b[h":
         [self sethMode:params];
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[l"]])
+    else if([self.curSequence isEqualToString:my_string_bl])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[l"]])
     {    //case "(char)0x1b[l":
         [self SetlMode:params];
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[r"]])
+    else if([self.curSequence isEqualToString:my_string_br])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[r"]])
     {    //case "(char)0x1b[r": // DECSTBM Set Top and Bottom Margins
         [self setScrollRegion:params];
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[t"]])
+    else if([self.curSequence isEqualToString:my_string_bt])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"[t"]])
     {    //case "(char)0x1b[t": // DECSLPP Set Lines Per Page
         
         if ([params Count] > 0)
@@ -981,7 +1028,7 @@ typedef struct nextAS{
         //if (Param > 0) this.SetSizeEvent(Param, CharAndAttribGrid.Columns);
         
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"D"]])
+    else if([self.curSequence isEqualToString:my_string_D])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"D"]])
     {    //case "(char)0x1b" + "D": // IND
         
         if ([params Count] > 0)
@@ -992,16 +1039,16 @@ typedef struct nextAS{
         
         //this.Index(Param);
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"E"]])
+    else if([self.curSequence isEqualToString:my_string_E])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"E"]])
     {    //case "(char)0x1b" + "E": // NEL
         //this.LineFeed();
         //this.CarriageReturn();
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"H"]])
+    else if([self.curSequence isEqualToString:my_string_H])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"H"]])
     {    //case "(char)0x1bH": // HTS
         //this.TabSet();
     }
-    else if([self.curSequence isEqualToString:[NSString stringWithFormat:@"%c%@", (char)0x1b, @"M"]])
+    else if([self.curSequence isEqualToString:my_string_M])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"M"]])
     {    //case "(char)0x1bM": // RI
         if ([params Count] > 0)
         {
@@ -1610,6 +1657,45 @@ typedef struct nextAS{
 - (void)clearRight:(int)param
 {
     
+}
+
+- (void) initString
+{
+    my_string_7     = GENSTRING(@"7");
+    my_string_8     = GENSTRING(@"8");
+    my_string_a1    = GENSTRING(@"~");
+    my_string_n     = GENSTRING(@"n");
+    my_string_a2    = GENSTRING(@"}");
+    my_string_o     = GENSTRING(@"o");
+    my_string_a3    = GENSTRING(@"|");
+    my_string_b8    = GENSTRING(@"#8");
+    my_string_a4    = GENSTRING(@"=");
+    my_string_a5    = GENSTRING(@">");
+    my_string_bB    = GENSTRING(@"[B");
+    my_string_bA    = GENSTRING(@"[A");
+    my_string_bC    = GENSTRING(@"[C");
+    my_string_bD    = GENSTRING(@"[D");
+    my_string_bH    = GENSTRING(@"[H");
+    my_string_bf    = GENSTRING(@"[f");
+    my_string_bJ    = GENSTRING(@"[J");
+    my_string_bK    = GENSTRING(@"[K");
+    my_string_bL    = GENSTRING(@"[L");
+    my_string_bM    = GENSTRING(@"[M");
+    my_string_O    = GENSTRING(@"O");
+    my_string_N    = GENSTRING(@"[N");
+    my_string_bm    = GENSTRING(@"[m");
+    my_string_abh   = GENSTRING(@"[?h");
+    my_string_abl   = GENSTRING(@"[?l");
+    my_string_bc    = GENSTRING(@"[c");
+    my_string_bg    = GENSTRING(@"[g");
+    my_string_bh    = GENSTRING(@"[h");
+    my_string_bl    = GENSTRING(@"[l");
+    my_string_br    = GENSTRING(@"[r");
+    my_string_bt    = GENSTRING(@"[t");
+    my_string_D     = GENSTRING(@"D");
+    my_string_E     = GENSTRING(@"E");
+    my_string_H     = GENSTRING(@"H");
+    my_string_M     = GENSTRING(@"M");
 }
 @end
 
