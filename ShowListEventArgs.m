@@ -116,6 +116,7 @@
                 } else {
                     item.curString = curString;
                 }
+                item.curCharAttribute = curCharAttribute;
             }
         }
         if (!isadd)

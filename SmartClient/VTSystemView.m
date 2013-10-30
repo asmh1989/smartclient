@@ -11,9 +11,14 @@
 #import "SettingForRuntime.h"
 #import "SettingStore.h"
 #import "ShowListEventArgs.h"
+#import "Functions.h"
 
 #define CARET_LEN 2.0
+
+#define MABS(a,b) ((a) - (b)) > 0 ? ((a)-(b)) : ((b) - (a))
 #define MYABS(a,b,N) (((a) - (b)) > 0? ((a)-(b)) : ((b) - (a))) < (N)
+
+#define CLICK_LEN 8
 
 @interface VTSystemView()
 {
@@ -58,18 +63,40 @@
 {
     UITouch* touch = [touches anyObject];
     CGPoint pt = [touch locationInView:self];
+    CGFloat slide_len = 30.0;
     
     UIFont * font = [UIFont boldSystemFontOfSize:[settingStore fontSize]];
     int ix = (int)((pt.x - [settingStore leftMargin]) / ([settings getCharSizeEN:font].width + [settingStore columnSpan]));
     int iy = (int)((pt.y - [settingStore topMargin]) / ([settings getCharSizeEN:font].height + [settingStore columnSpan]));
-    if (MYABS(pt.x, point.x, 5) && MYABS(pt.y, point.y, 5)) {
+    NSString *str;
+    if (MYABS(pt.x, point.x, CLICK_LEN) && MYABS(pt.y, point.y, CLICK_LEN)) {
         //click
         NSLog(@"click!! ix = %d, iy = %d", ix, iy);
-        NSString *str = [NSString stringWithFormat:@"%@%@%d%@%d%@", CUSACTIVE_CLICK_SEND, @" X=\"", ix, @"\" Y=\"", iy, @"\" />"];
-        [delegate handleTouchMessage:str];
+        str = [NSString stringWithFormat:@"%@%@%d%@%d%@", CUSACTIVE_CLICK_SEND, @" X=\"", ix, @"\" Y=\"", iy, @"\" />"];
+    } else {
+        int X = MABS(pt.x, point.x);
+        int Y = MABS(pt.y, point.y);
+        if (X > Y) {
+            if((pt.x - point.x) > slide_len){
+                //left
+                str = MYKEY_LEFT;
+            } else if(point.x - pt.x > slide_len){
+                //right
+                str = MYKEY_RIGHT;
+            }
+        } else {
+            if(pt.y - point.y > slide_len){
+                //down
+                str = MYKEY_DOWN;
+            } else if(point.y - pt.y > slide_len){
+                //up
+                str = MYKEY_UP;
+            }
+        }
+            NSLog(@"touchesEnded : X = %lf, Y=%lf", pt.x-point.x, pt.y-point.y);
     }
     
-    NSLog(@"touchesEnded : X = %lf, Y=%lf", pt.x, pt.y);
+    [delegate handleTouchMessage:str];
 }
 
 - (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event

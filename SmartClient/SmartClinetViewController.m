@@ -29,7 +29,7 @@
 @implementation SmartClinetViewController
 
 
-@synthesize  mView, textView, settings, stringShowList, settingStore, outBuff;
+@synthesize  mView, textView, settings, stringShowList, settingStore, outBuff, toolBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,6 +52,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIBarButtonItem *one = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+    UIBarButtonItem *two = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:nil action:nil];
+    UIBarButtonItem *three = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:nil action:nil];
+    UIBarButtonItem *four = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
+    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [ self.toolBar setItems:[NSArray arrayWithObjects:flexItem, one, flexItem, two, flexItem, three, flexItem, four, flexItem, nil]];
+    
+    
     // Do any additional setup after loading the view from its nib.
     socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     NSError *err = nil;
@@ -92,7 +101,7 @@
     NSString *msg = [[NSString alloc] initWithData:data encoding:enc];
     NSLog(@"didReadData data = %@, tag = %ld", msg, tag);
     [parser parserString:msg];
-    if (tag == 1 || tag == 3 || [msg length] > 25) {
+    if ([msg length] != 7  && [msg length] != 6) {           //去除单独设置光标
         [mView setNeedsDisplay];
     }
     [textView setText:@""];
@@ -177,7 +186,7 @@
     }
     
     if ([socket isConnected]) {
-        NSLog(@"dispatchMessage str=%@", output);
+        NSLog(@"dispatchMessage str=%@, tag=%ld", output, tag);
         NSString *str = @"";
         if (![self.outBuff  isEqual: @""]) {
             str = [outBuff stringByAppendingString:output];
@@ -228,7 +237,6 @@
 
 - (void)handleTouchMessage:(NSString *)msg
 {
-    NSLog(@"handleTouchMessage");
     [self dispatchMessage:msg tag:3];
 }
 
@@ -280,7 +288,6 @@
     
         if([param rangeOfString:@"Buttons"].location != NSNotFound)
         {
-            
             buttonType = [[self getMessageBoxString:param param:@"Buttons"] intValue];
         }
         else
@@ -307,34 +314,47 @@
     }
 }
 
-- (void)HandlerCAMHandler:(NSString *)msg
+- (void)HandlerCAMHandler:(NSString *)param
+{
+    if (param) {
+        int readMode = -1;
+        if([param rangeOfString:@"ReadMode"].location != NSNotFound)
+        {
+            readMode = [[self getMessageBoxString:param param:@"ReadMode"] intValue];
+            if (readMode == 1) {
+                //open camera
+            }
+        } else if([param rangeOfString:@"GetData"].location != NSNotFound)
+        {
+            NSString *getDataIndex = [self getMessageBoxString:param param:@"GetData"];
+            // start send image
+        }
+    }
+}
+
+- (void)HandlerGpsLocationHandler:(NSString *)param
 {
     
 }
 
-- (void)HandlerGpsLocationHandler:(NSString *)msg
+- (void)HandlerWEBHandler:(NSString *)param
 {
     
 }
 
-- (void)HandlerWEBHandler:(NSString *)msg
+- (void)HandlerOptionDialogHandler:(NSString *)param
 {
     
 }
 
-- (void)HandlerOptionDialogHandler:(NSString *)msg
-{
-    
-}
-
-- (void)HandlerVoiceHandler:(NSString *)msg
+- (void)HandlerVoiceHandler:(NSString *)param
 {
     
 }
 
 - (void)VTProtocolExtend:(NSString *)vtProtocol Message:(NSString *)msg
 {
-    NSLog(@"VTProtocolExtend vtvtProtocol = %@, Message = %@", vtProtocol, msg);
+//    NSLog(@"VTProtocolExtend vtvtProtocol = %@, Message = %@", vtProtocol, msg);
     if ([vtProtocol isEqualToString:CUSACTIVE_MSGBOX])
     {
         [self HandlerMessageBoxHandler:msg];

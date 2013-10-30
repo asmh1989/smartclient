@@ -19,6 +19,7 @@
     ParserMsg *parser;
 }
 @property (weak, nonatomic) IBOutlet VTSystemView *mView;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
 
 @property (strong, nonatomic) UITextField *textView;
 

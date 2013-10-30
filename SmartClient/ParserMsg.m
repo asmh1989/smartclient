@@ -821,7 +821,7 @@ typedef struct nextAS{
     else if ([self.curSequence isEqualToString:my_string_8])//[NSString stringWithFormat:@"%c%@", (char)0x1b, @"8"]])
     {
         //DECRC Restore Cursor position and attributes重新载入光标位置和属性
-        int len = [ settings.saveCarets count];
+        int len = (int)[ settings.saveCarets count];
         id tmp = [settings.saveCarets objectAtIndex:(len - 1)];
         CaretAttribs *attr = tmp;
         settings.caret.Pos = attr.pos;
@@ -1589,12 +1589,12 @@ typedef struct nextAS{
 {
     if (curChar==0x05)
     {
-//        dispatchMessage(this, "vt100");
+        [delegate dispatchMessage:@"vt100" tag:1];//dispatchMessage(this, "vt100");
     }
     else if(curChar==0x07)
     {
-//        if (settingStore.isBeep==YES && settings.mediaPlayer != null)
-//            settings.mediaPlayer.start();
+        if ([settingStore isBeep]) //YES && settings.mediaPlayer != null)
+            NSLog(@"start play WARNING sound...");
     }
     else if(curChar==0x08)
         [self caretLeft];
@@ -1608,7 +1608,7 @@ typedef struct nextAS{
         settings.charAttribs.GL = settings.G0;
     else if(curChar==0x11){
         XOFF = NO;
-//        dispatchMessage(this, "");
+        [delegate dispatchMessage:@"" tag:1];//        dispatchMessage(this, "");
     }
     else if(curChar==0x13){
         XOFF = YES;
@@ -1634,15 +1634,6 @@ typedef struct nextAS{
                 break;
                 
             case 2: // entire screen
-                
-//                this.WipeScreen(Settings.getVTGraphics());
-                //this.wipeScreen=true;
-//                stringShowList.stringShowDics.clear();
-//                //stringShowList.stringShowLists.clear();
-//                stringShowList.pictureShowLists.clear();
-//                
-//                stringShowList.inputStringLists.clear();
-//            NSLog(@"clear all.....");
                 [stringShowList clear];
                 curPrintParsePoint.x = 0;
                 curPrintParsePoint.y = 0;
@@ -1681,8 +1672,8 @@ typedef struct nextAS{
     my_string_bK    = GENSTRING(@"[K");
     my_string_bL    = GENSTRING(@"[L");
     my_string_bM    = GENSTRING(@"[M");
-    my_string_O    = GENSTRING(@"O");
-    my_string_N    = GENSTRING(@"[N");
+    my_string_O     = GENSTRING(@"O");
+    my_string_N     = GENSTRING(@"[N");
     my_string_bm    = GENSTRING(@"[m");
     my_string_abh   = GENSTRING(@"[?h");
     my_string_abl   = GENSTRING(@"[?l");

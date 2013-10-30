@@ -11,6 +11,7 @@
 @protocol ParserDelegate <NSObject>
 
 - (void) VTProtocolExtend:(NSString *)vtProtocol Message:(NSString *)msg;
+- (void) dispatchMessage:(NSString *)output tag:(long)tag;
 
 @end
 

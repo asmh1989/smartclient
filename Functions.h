@@ -26,7 +26,7 @@
 #define MYKEY_UP                  COMBINE(0x1b, @"[A")
 #define MYKEY_LEFT                COMBINE(0x1b, @"[D")
 #define MYKEY_RIGHT               COMBINE(0x1b, @"[C")
-#define MYKEY_DWON                COMBINE(0x1b, @"[B")
+#define MYKEY_DOWN                COMBINE(0x1b, @"[B")
 
 
 
