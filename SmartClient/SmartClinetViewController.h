@@ -18,12 +18,14 @@
     NSStringEncoding enc;
     ParserMsg *parser;
 }
-- (IBAction)backgroudTapped:(id)sender;
+
 @property (weak, nonatomic) IBOutlet VTSystemView *mView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
 
 @property (strong, nonatomic) UITextField *textView;
 
 - (void) dispatchMessage:(NSString *)output tag:(long)tag;
+- (void) sendExMessage:(NSString *)errorCode Reason:(NSString *)message;
+- (void) checkCurrentSocketStatus;
 
 @end

@@ -14,6 +14,7 @@
 #import "MMDrawerController.h"
 #import "MMDrawerVisualState.h"
 #import "SmartClinetLeftMenuViewController.h"
+#import "MMExampleDrawerVisualStateManager.h"
 
 @interface SmartClinetAppDelegate ()
 @property (nonatomic,strong) MMDrawerController * drawerController;
@@ -27,15 +28,14 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    UIViewController * leftMenuController = [[SmartClinetLeftMenuViewController alloc] init];
+    SmartClinetViewController * centerViewController = [[SmartClinetViewController alloc] init];
     
-    UIViewController * centerViewController = [[SmartClinetViewController alloc] init];
-    
+    UIViewController * leftMenuController = [[SmartClinetLeftMenuViewController alloc] initWithCenterController:centerViewController];
     
 //    UINavigationController * navigationController = [[MMNavigationController alloc] initWithRootViewController:centerViewController];
 //    [navigationController setRestorationIdentifier:@"MMExampleCenterNavigationControllerRestorationKey"];
     if(OSVersionIsAtLeastiOS7()){
-//        UINavigationController * leftSideNavController = [[MMNavigationController alloc] initWithRootViewController:leftSideDrawerViewController];
+//        UINavigationController * leftSideNavController = [[MMNavigationController alloc] initWithRootViewController:leftMenuController];
 		[leftMenuController setRestorationIdentifier:@"leftSideDrawerViewControllerRestorationKey"];
         self.drawerController = [[MMDrawerController alloc]
                                  initWithCenterViewController:centerViewController
@@ -54,15 +54,16 @@
     [self.drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeBezelPanningCenterView];
     [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
-//    [self.drawerController
-//     setDrawerVisualStateBlock:^(MMDrawerController *drawerController, MMDrawerSide drawerSide, CGFloat percentVisible) {
-//         MMDrawerControllerDrawerVisualStateBlock block;
-//         block = [[MMExampleDrawerVisualStateManager sharedManager]
-//                  drawerVisualStateBlockForDrawerSide:drawerSide];
-//         if(block){
-//             block(drawerController, drawerSide, percentVisible);
-//         }
-//     }];
+    [self.drawerController
+     setDrawerVisualStateBlock:^(MMDrawerController *drawerController, MMDrawerSide drawerSide, CGFloat percentVisible) {
+         MMDrawerControllerDrawerVisualStateBlock block;
+         block = [[MMExampleDrawerVisualStateManager sharedManager]
+                  drawerVisualStateBlockForDrawerSide:drawerSide];
+         if(block){
+             block(drawerController, drawerSide, percentVisible);
+         }
+     }];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     if(OSVersionIsAtLeastiOS7()){
         UIColor * tintColor = [UIColor colorWithRed:29.0/255.0
@@ -71,7 +72,12 @@
                                               alpha:1.0];
         [self.window setTintColor:tintColor];
     }
-    [self.window setRootViewController:self.drawerController];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.drawerController];
+    [[self window] setRootViewController:navController];
+    [[self.drawerController navigationController] setNavigationBarHidden:YES];
+    
+//    [self.window setRootViewController:self.drawerController];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -98,6 +104,10 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    id tmp = [self.drawerController centerViewController];
+    SmartClinetViewController *controller = tmp;
+    [controller checkCurrentSocketStatus];
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

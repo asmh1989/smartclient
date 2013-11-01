@@ -7,7 +7,19 @@
 //
 
 #import "SmartClinetLeftMenuViewController.h"
+#import "UIViewController+MMDrawerController.h"
+#import "ConnectSettingViewController.h"
 
+enum SettingType{
+    SETTING_CONNECT = 0,
+    SETTING_FONT,
+    SETTING_SCREEN,
+    SETTING_SOUND,
+    SETTING_SCAN,
+    SETTING_OTHER,
+    SETTING_RECONNECT,
+    SETTING_ABOUT
+};
 @interface TableCellData : NSObject
 @property (nonatomic) NSString *cellName;
 @property (nonatomic) UIImage *cellImage;
@@ -39,13 +51,14 @@
 @end
 
 @implementation SmartClinetLeftMenuViewController
+@synthesize centerController;
 
-
-- (id)init
+- (id)initWithCenterController:(SmartClinetViewController *)controller
 {
     self = [super init];
     if (self) {
         [self setRestorationIdentifier:@"leftSideDrawerViewControllerRestorationKey"];
+        self.centerController = controller;
     }
     return self;
 }
@@ -57,6 +70,13 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad
@@ -92,7 +112,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"number = %d", [cells count]);
     return [cells count];
 }
 
@@ -109,4 +128,42 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    enum SettingType type = (enum SettingType)[indexPath row];
+    if (type == SETTING_RECONNECT) {
+        [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+            [centerController sendExMessage:@"Menu" Reason:@"reconnected"];
+        }];
+        return;
+    }
+    
+    ConnectSettingViewController *connectViewController = [[ConnectSettingViewController alloc]init];
+//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:connectViewController];
+    NSLog(@"navigationController : %@", [self navigationController]);
+    switch (type) {
+        case SETTING_CONNECT:
+//            [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+            [[self navigationController] pushViewController:connectViewController animated:YES];
+//            [self presentViewController:navController animated:YES completion:nil];
+            break;
+        case SETTING_FONT:
+            break;
+        case SETTING_SCREEN:
+            break;
+        case SETTING_SOUND:
+            break;
+        case SETTING_SCAN:
+            break;
+        case SETTING_OTHER:
+            break;
+
+        case SETTING_ABOUT:
+            break;
+        default:
+            break;
+    }
+    [self.mm_drawerController closeDrawerAnimated:NO completion:nil];
+}
 @end

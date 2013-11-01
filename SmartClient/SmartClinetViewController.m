@@ -13,17 +13,22 @@
 #import "Functions.h"
 #import "ShowListEventArgs.h"
 #import "MessageBox.h"
+#import "UIViewController+MMDrawerController.h"
 
 @interface SmartClinetViewController ()
 {
     MessageBox *box;
+    NSString *hostip;
+    int hostPort;
 }
+
 @property (nonatomic) SettingForRuntime *settings;
 @property (nonatomic) SettingForConnect *settingStore;
 @property (nonatomic) StringShowList *stringShowList;
 @property (nonatomic, copy) NSString *outBuff;
 
 - (void) sendDataToSocket:(NSString *)output tag:(long)tag;
+- (void) sendFirstConnectInfo;
 @end
 
 @implementation SmartClinetViewController
@@ -49,16 +54,37 @@
     return self;
 }
 
-- (void)backgroudTapped:(id)sender
+- (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"backgroudTapped..");
-    [[self mView] endEditing:YES];
+    [super viewWillAppear:animated];
+    
+    NSLog(@" SmartClinetViewController  viewWillAppear....");
+    [self.navigationController setNavigationBarHidden:YES];
+
+    [mView setNeedsDisplay];
+    if (hostPort != [settingStore hostPort] || ![hostip isEqualToString:[settingStore hostIp]]) {
+//        [parser reset];
+        [socket disconnect];
+        [self sendFirstConnectInfo];
+    }
+}
+
+- (void)checkCurrentSocketStatus
+{
+    if (![socket isConnected]) {
+        NSError *err = nil;
+        if (![socket connectToHost:[settingStore hostIp] onPort:[settingStore hostPort] error:&err]) {
+            NSLog(@"Error : %@", err);
+        }
+//        [socket readDataWithTimeout:-1 tag:1];
+        NSLog(@"checkCurrentSocketStatus, and will restart connect socket server");
+    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     UIBarButtonItem *setting = [[UIBarButtonItem alloc] initWithImage:
                                  [UIImage imageNamed:@"Setting_Image.png"] style:UIBarButtonItemStyleBordered
                                                                 target:nil action:nil];
@@ -82,16 +108,27 @@
     
     // Do any additional setup after loading the view from its nib.
     socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    
+    [self sendFirstConnectInfo];
+    [mView setDelegate:self];
+}
+
+- (void)sendFirstConnectInfo
+{
     NSError *err = nil;
-    NSString *ip = [settingStore hostIp];
-    int port = [settingStore hostPort];
+    hostip = [NSString stringWithString:[settingStore hostIp]];
+    hostPort = [settingStore hostPort];
+    
+    [parser parserString:[NSString stringWithFormat:@"[47m[30m[2JH[?25l[1;1H正在连接%@...[1;25H", hostip]];
+    [mView setNeedsDisplay];
+    
     NSString *deviceId =[settingStore deviceID];
     NSString *os = [[UIDevice currentDevice] systemName];
     NSString *version = [[UIDevice currentDevice] systemVersion];
     
-    NSLog(@"connect ip = %@, port = %d, deviceID = %@", ip, port, deviceId);
+//    NSLog(@"connect ip = %@, port = %d, deviceID = %@", hostip, hostPort, deviceId);
     
-    if (![socket connectToHost:ip onPort:port error:&err]) {
+    if (![socket connectToHost:hostip onPort:hostPort error:&err]) {
         NSLog(@"Error : %@", err);
     }
     
@@ -99,10 +136,8 @@
     NSLog(@"first send : %@", setStr);
     
     [self sendDataToSocket:setStr tag:1];
-    [mView setDelegate:self];
+
 }
-
-
 
 - (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket
 {
@@ -187,10 +222,16 @@
     NSLog(@"textFieldShouldReturn...");
     NSString *str = [textView text];
     [self dispatchMessage:str tag:2];
-//    [textField resignFirstResponder];
+    [textField resignFirstResponder];
     [self dispatchMessage:MYKEY_ENTER tag:1];
     
     return YES;
+}
+
+-(void)sendExMessage:(NSString *)errorCode Reason:(NSString *)message
+{
+    [socket disconnect];
+    [self sendFirstConnectInfo];
 }
 
 - (void)dispatchMessage:(NSString *)output tag:(long)tag

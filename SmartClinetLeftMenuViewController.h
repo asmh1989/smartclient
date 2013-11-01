@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SmartClinetViewController.h"
 
 @interface SmartClinetLeftMenuViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) SmartClinetViewController *centerController;
 
+-(id) initWithCenterController:(SmartClinetViewController *)controller;
 @end

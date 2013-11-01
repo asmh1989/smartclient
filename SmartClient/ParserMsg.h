@@ -25,7 +25,7 @@
 
 - (void) clearDown:(int)param;
 - (void) clearRight:(int)param;
-
+- (void) reset;
 @end
 
 

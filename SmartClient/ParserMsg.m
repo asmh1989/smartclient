@@ -1650,6 +1650,15 @@ typedef struct nextAS{
     
 }
 
+- (void)reset
+{
+    settings.caret.pos = CGPointMake(0, 0);
+    curPrintParsePoint.x = 0;
+    curPrintParsePoint.y = 0;
+    isReceiveBytes = NO;
+    [stringShowList clear];
+}
+
 - (void) initString
 {
     my_string_7     = GENSTRING(@"7");

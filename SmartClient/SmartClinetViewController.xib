@@ -33,9 +33,6 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <action selector="backgroudTapped:" destination="-1" eventType="touchUpInside" id="MDB-Ty-wzv"/>
-            </connections>
         </view>
     </objects>
 </document>
