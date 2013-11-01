@@ -30,7 +30,7 @@
 
 
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000 // iOS 5.0 supported
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000 // iOS 5.0 supported
 
 //    #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000 // iOS 5.0 supported and required
 //
@@ -50,6 +50,8 @@
 //
 //    #endif
 
+    #define USE_IOS7_METHOD NO
+#else
     #define USE_IOS7_METHOD YES
 #endif
 

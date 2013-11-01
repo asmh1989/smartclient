@@ -49,16 +49,35 @@
     return self;
 }
 
+- (void)backgroudTapped:(id)sender
+{
+    NSLog(@"backgroudTapped..");
+    [[self mView] endEditing:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem *one = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
-    UIBarButtonItem *two = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:nil action:nil];
-    UIBarButtonItem *three = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:nil action:nil];
-    UIBarButtonItem *four = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
+    
+    UIBarButtonItem *setting = [[UIBarButtonItem alloc] initWithImage:
+                                 [UIImage imageNamed:@"Setting_Image.png"] style:UIBarButtonItemStyleBordered
+                                                                target:nil action:nil];
+    UIBarButtonItem *up = [[UIBarButtonItem alloc] initWithImage:
+                                 [UIImage imageNamed:@"Up_Image.png"] style:UIBarButtonItemStyleBordered
+                                                                target:nil action:nil];
+    UIBarButtonItem *down = [[UIBarButtonItem alloc] initWithImage:
+                                 [UIImage imageNamed:@"Down_Image.png"] style:UIBarButtonItemStyleBordered
+                                                                target:nil action:nil];
+    UIBarButtonItem *code = [[UIBarButtonItem alloc] initWithImage:
+                                 [UIImage imageNamed:@"Code_Image.png"] style:UIBarButtonItemStyleBordered
+                                                                target:nil action:nil];
+    UIBarButtonItem *enter = [[UIBarButtonItem alloc] initWithImage:
+                                 [UIImage imageNamed:@"Enter_Image.png"] style:UIBarButtonItemStyleBordered
+                                                                target:nil action:nil];
+    
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    [ self.toolBar setItems:[NSArray arrayWithObjects:flexItem, one, flexItem, two, flexItem, three, flexItem, four, flexItem, nil]];
+    [ self.toolBar setItems:[NSArray arrayWithObjects:flexItem, setting, flexItem, up, flexItem, down, flexItem, code, flexItem, enter, flexItem, nil]];
     
     
     // Do any additional setup after loading the view from its nib.

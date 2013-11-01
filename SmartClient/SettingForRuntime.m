@@ -15,25 +15,25 @@
 
 - (CGSize)getCharSizeCN:(UIFont *) font
 {
-    if (__IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_7_0) {
-        return [@"我" sizeWithFont:font];
-    }
-    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_7_0
+    return [@"我" sizeWithFont:font];
+#else
     NSMutableDictionary *attrs = [[NSMutableDictionary alloc] init];
     [attrs setObject:font forKey:NSFontAttributeName];
     return [@"我" sizeWithAttributes:attrs];
-
+#endif
 }
 
 -(CGSize)getCharSizeEN:(UIFont *) font
 {
-    if (__IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_7_0) {
+    int version = [[[UIDevice currentDevice] systemVersion] intValue];
+    if (version < 7) {
         return [@"S" sizeWithFont:font];
+    } else {
+        NSMutableDictionary *attrs = [[NSMutableDictionary alloc] init];
+        [attrs setObject:font forKey:NSFontAttributeName];
+        return [@"S" sizeWithAttributes:attrs];
     }
-    
-    NSMutableDictionary *attrs = [[NSMutableDictionary alloc] init];
-    [attrs setObject:font forKey:NSFontAttributeName];
-    return [@"S" sizeWithAttributes:attrs];
 }
 
 - (id)init

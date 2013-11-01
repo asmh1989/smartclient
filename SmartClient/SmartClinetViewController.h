@@ -18,6 +18,7 @@
     NSStringEncoding enc;
     ParserMsg *parser;
 }
+- (IBAction)backgroudTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet VTSystemView *mView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
 

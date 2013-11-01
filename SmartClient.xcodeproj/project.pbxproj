@@ -32,6 +32,13 @@
 		A463207A180FB7AD000F9C69 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632078180FB7AD000F9C69 /* GCDAsyncUdpSocket.m */; };
 		A463207E180FD152000F9C69 /* DefaultSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A463207D180FD152000F9C69 /* DefaultSettings.m */; };
 		A4632081180FDEBB000F9C69 /* SettingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632080180FDEBB000F9C69 /* SettingStore.m */; };
+		A46492CF18222B2E00B39E7E /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A46492C718222B2E00B39E7E /* MMDrawerBarButtonItem.m */; };
+		A46492D018222B2E00B39E7E /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A46492CA18222B2E00B39E7E /* MMDrawerController.m */; };
+		A46492D118222B2E00B39E7E /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = A46492CC18222B2E00B39E7E /* MMDrawerVisualState.m */; };
+		A46492D218222B2E00B39E7E /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A46492CE18222B2E00B39E7E /* UIViewController+MMDrawerController.m */; };
+		A46492DB18222D5300B39E7E /* MMNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A46492DA18222D5300B39E7E /* MMNavigationController.m */; };
+		A46492F218224D9700B39E7E /* SmartClinetLeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A46492F018224D9700B39E7E /* SmartClinetLeftMenuViewController.m */; };
+		A46492F318224D9700B39E7E /* SmartClinetLeftMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A46492F118224D9700B39E7E /* SmartClinetLeftMenuViewController.xib */; };
 		A47552A5181606420033D224 /* SettingForRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552A4181606420033D224 /* SettingForRuntime.m */; };
 		A47552A818160E460033D224 /* Mode.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552A718160E460033D224 /* Mode.m */; };
 		A47552AB181610E30033D224 /* Chars.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552AA181610E30033D224 /* Chars.m */; };
@@ -92,6 +99,20 @@
 		A463207D180FD152000F9C69 /* DefaultSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultSettings.m; sourceTree = "<group>"; };
 		A463207F180FDEBB000F9C69 /* SettingStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingStore.h; path = ../SettingStore.h; sourceTree = "<group>"; };
 		A4632080180FDEBB000F9C69 /* SettingStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingStore.m; path = ../SettingStore.m; sourceTree = "<group>"; };
+		A46492C618222B2E00B39E7E /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
+		A46492C718222B2E00B39E7E /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
+		A46492C818222B2E00B39E7E /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
+		A46492C918222B2E00B39E7E /* MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerController.h; sourceTree = "<group>"; };
+		A46492CA18222B2E00B39E7E /* MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerController.m; sourceTree = "<group>"; };
+		A46492CB18222B2E00B39E7E /* MMDrawerVisualState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerVisualState.h; sourceTree = "<group>"; };
+		A46492CC18222B2E00B39E7E /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
+		A46492CD18222B2E00B39E7E /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
+		A46492CE18222B2E00B39E7E /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
+		A46492D918222D5300B39E7E /* MMNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMNavigationController.h; sourceTree = "<group>"; };
+		A46492DA18222D5300B39E7E /* MMNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMNavigationController.m; sourceTree = "<group>"; };
+		A46492EF18224D9700B39E7E /* SmartClinetLeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartClinetLeftMenuViewController.h; sourceTree = "<group>"; };
+		A46492F018224D9700B39E7E /* SmartClinetLeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartClinetLeftMenuViewController.m; sourceTree = "<group>"; };
+		A46492F118224D9700B39E7E /* SmartClinetLeftMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartClinetLeftMenuViewController.xib; sourceTree = "<group>"; };
 		A47552A3181606420033D224 /* SettingForRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingForRuntime.h; sourceTree = "<group>"; };
 		A47552A4181606420033D224 /* SettingForRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingForRuntime.m; sourceTree = "<group>"; };
 		A47552A618160E460033D224 /* Mode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mode.h; path = SmartClient/Mode.h; sourceTree = "<group>"; };
@@ -145,6 +166,9 @@
 		A4632027180F80E3000F9C69 = {
 			isa = PBXGroup;
 			children = (
+				A46492EF18224D9700B39E7E /* SmartClinetLeftMenuViewController.h */,
+				A46492F018224D9700B39E7E /* SmartClinetLeftMenuViewController.m */,
+				A46492F118224D9700B39E7E /* SmartClinetLeftMenuViewController.xib */,
 				A44CB6BB1818C862006B5946 /* Functions.h */,
 				A44CB6BC1818C862006B5946 /* Functions.m */,
 				A463207C180FD152000F9C69 /* DefaultSettings.h */,
@@ -180,6 +204,9 @@
 		A4632039180F80E3000F9C69 /* SmartClient */ = {
 			isa = PBXGroup;
 			children = (
+				A46492D918222D5300B39E7E /* MMNavigationController.h */,
+				A46492DA18222D5300B39E7E /* MMNavigationController.m */,
+				A46492C518222B2E00B39E7E /* MMDrawerController */,
 				A44CB6BE1818E4D7006B5946 /* UI */,
 				A4632042180F80E3000F9C69 /* SmartClinetAppDelegate.h */,
 				A4632043180F80E3000F9C69 /* SmartClinetAppDelegate.m */,
@@ -240,6 +267,22 @@
 				A4632078180FB7AD000F9C69 /* GCDAsyncUdpSocket.m */,
 			);
 			name = GCDAsyncSocket;
+			sourceTree = "<group>";
+		};
+		A46492C518222B2E00B39E7E /* MMDrawerController */ = {
+			isa = PBXGroup;
+			children = (
+				A46492C618222B2E00B39E7E /* MMDrawerBarButtonItem.h */,
+				A46492C718222B2E00B39E7E /* MMDrawerBarButtonItem.m */,
+				A46492C818222B2E00B39E7E /* MMDrawerController+Subclass.h */,
+				A46492C918222B2E00B39E7E /* MMDrawerController.h */,
+				A46492CA18222B2E00B39E7E /* MMDrawerController.m */,
+				A46492CB18222B2E00B39E7E /* MMDrawerVisualState.h */,
+				A46492CC18222B2E00B39E7E /* MMDrawerVisualState.m */,
+				A46492CD18222B2E00B39E7E /* UIViewController+MMDrawerController.h */,
+				A46492CE18222B2E00B39E7E /* UIViewController+MMDrawerController.m */,
+			);
+			path = MMDrawerController;
 			sourceTree = "<group>";
 		};
 		A47552AF1816460E0033D224 /* SmartClientCore */ = {
@@ -343,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A463203E180F80E3000F9C69 /* InfoPlist.strings in Resources */,
+				A46492F318224D9700B39E7E /* SmartClinetLeftMenuViewController.xib in Resources */,
 				A4632046180F80E3000F9C69 /* Images.xcassets in Resources */,
 				A4632066180F8114000F9C69 /* SmartClinetViewController.xib in Resources */,
 			);
@@ -366,8 +410,11 @@
 				A4632065180F8114000F9C69 /* SmartClinetViewController.m in Sources */,
 				A47552A818160E460033D224 /* Mode.m in Sources */,
 				A47552A5181606420033D224 /* SettingForRuntime.m in Sources */,
+				A46492DB18222D5300B39E7E /* MMNavigationController.m in Sources */,
+				A46492D218222B2E00B39E7E /* UIViewController+MMDrawerController.m in Sources */,
 				A47552AB181610E30033D224 /* Chars.m in Sources */,
 				A47552B5181657E20033D224 /* CaretAttribs.m in Sources */,
+				A46492F218224D9700B39E7E /* SmartClinetLeftMenuViewController.m in Sources */,
 				A47552AE181640D30033D224 /* CharAttribs.m in Sources */,
 				A43D1FEF1810C5F90067FB2B /* ParserMsg.m in Sources */,
 				A4632079180FB7AD000F9C69 /* GCDAsyncSocket.m in Sources */,
@@ -376,6 +423,9 @@
 				A47552B2181646C30033D224 /* Caret.m in Sources */,
 				A463207E180FD152000F9C69 /* DefaultSettings.m in Sources */,
 				A429C760181773CD0037666D /* ShowListEventArgs.m in Sources */,
+				A46492D118222B2E00B39E7E /* MMDrawerVisualState.m in Sources */,
+				A46492CF18222B2E00B39E7E /* MMDrawerBarButtonItem.m in Sources */,
+				A46492D018222B2E00B39E7E /* MMDrawerController.m in Sources */,
 				A4632069180F853B000F9C69 /* SettingForConnect.m in Sources */,
 				A4632081180FDEBB000F9C69 /* SettingStore.m in Sources */,
 				A4632040180F80E3000F9C69 /* main.m in Sources */,
@@ -506,6 +556,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartClient/SmartClient-Prefix.pch";
 				INFOPLIST_FILE = "SmartClient/SmartClient-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -519,6 +570,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartClient/SmartClient-Prefix.pch";
 				INFOPLIST_FILE = "SmartClient/SmartClient-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

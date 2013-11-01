@@ -10,6 +10,16 @@
 #import "SmartClinetViewController.h"
 #import "SettingStore.h"
 
+#import "MMNavigationController.h"
+#import "MMDrawerController.h"
+#import "MMDrawerVisualState.h"
+#import "SmartClinetLeftMenuViewController.h"
+
+@interface SmartClinetAppDelegate ()
+@property (nonatomic,strong) MMDrawerController * drawerController;
+
+@end
+
 @implementation SmartClinetAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -17,10 +27,51 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    SmartClinetViewController *svc = [[SmartClinetViewController alloc] init];
+    UIViewController * leftMenuController = [[SmartClinetLeftMenuViewController alloc] init];
     
-    [self.window setRootViewController:svc];
+    UIViewController * centerViewController = [[SmartClinetViewController alloc] init];
     
+    
+//    UINavigationController * navigationController = [[MMNavigationController alloc] initWithRootViewController:centerViewController];
+//    [navigationController setRestorationIdentifier:@"MMExampleCenterNavigationControllerRestorationKey"];
+    if(OSVersionIsAtLeastiOS7()){
+//        UINavigationController * leftSideNavController = [[MMNavigationController alloc] initWithRootViewController:leftSideDrawerViewController];
+		[leftMenuController setRestorationIdentifier:@"leftSideDrawerViewControllerRestorationKey"];
+        self.drawerController = [[MMDrawerController alloc]
+                                 initWithCenterViewController:centerViewController
+                                 leftDrawerViewController:leftMenuController
+                                 rightDrawerViewController:nil];
+        [self.drawerController setShowsShadow:YES];
+    }
+    else{
+        self.drawerController = [[MMDrawerController alloc]
+                                 initWithCenterViewController:centerViewController
+                                 leftDrawerViewController:leftMenuController
+                                 rightDrawerViewController:nil];
+    }
+    [self.drawerController setRestorationIdentifier:@"MMDrawer"];
+    [self.drawerController setMaximumLeftDrawerWidth:160.0];
+    [self.drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeBezelPanningCenterView];
+    [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    
+//    [self.drawerController
+//     setDrawerVisualStateBlock:^(MMDrawerController *drawerController, MMDrawerSide drawerSide, CGFloat percentVisible) {
+//         MMDrawerControllerDrawerVisualStateBlock block;
+//         block = [[MMExampleDrawerVisualStateManager sharedManager]
+//                  drawerVisualStateBlockForDrawerSide:drawerSide];
+//         if(block){
+//             block(drawerController, drawerSide, percentVisible);
+//         }
+//     }];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    if(OSVersionIsAtLeastiOS7()){
+        UIColor * tintColor = [UIColor colorWithRed:29.0/255.0
+                                              green:173.0/255.0
+                                               blue:234.0/255.0
+                                              alpha:1.0];
+        [self.window setTintColor:tintColor];
+    }
+    [self.window setRootViewController:self.drawerController];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
