@@ -119,7 +119,7 @@ enum SettingType{
 {
     UITableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"UITableViewCell"];
     }
     
     TableCellData *d = [cells objectAtIndex:[indexPath row]];
@@ -140,13 +140,13 @@ enum SettingType{
     }
     
     ConnectSettingViewController *connectViewController = [[ConnectSettingViewController alloc]init];
-//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:connectViewController];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:connectViewController];
     NSLog(@"navigationController : %@", [self navigationController]);
     switch (type) {
         case SETTING_CONNECT:
-//            [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-            [[self navigationController] pushViewController:connectViewController animated:YES];
-//            [self presentViewController:navController animated:YES completion:nil];
+            [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+//            [[self.mm_drawerController navigationController] pushViewController:connectViewController animated:YES];
+            [self presentViewController:navController animated:YES completion:nil];
             break;
         case SETTING_FONT:
             break;
@@ -164,6 +164,6 @@ enum SettingType{
         default:
             break;
     }
-    [self.mm_drawerController closeDrawerAnimated:NO completion:nil];
+    [self.mm_drawerController closeDrawerAnimated:YES completion:nil];
 }
 @end

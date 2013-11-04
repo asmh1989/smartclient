@@ -1,23 +1,22 @@
 //
-//  ConnectSettingViewController.m
+//  FontSettingViewController.m
 //  SmartClient
 //
-//  Created by sun on 13-11-1.
+//  Created by sun on 13-11-4.
 //  Copyright (c) 2013年 searching. All rights reserved.
 //
 
-#import "ConnectSettingViewController.h"
+#import "FontSettingViewController.h"
 #import "SettingStore.h"
 #import "SettingForConnect.h"
-#import "EditViewController.h"
 
-@interface ConnectSettingViewController ()
-
+@interface FontSettingViewController ()
 @property (nonatomic, retain) SettingForConnect *settings;
 @property (nonatomic, retain) UISwitch *airplaneModeSwitch;
+
 @end
 
-@implementation ConnectSettingViewController
+@implementation FontSettingViewController
 
 - (id)init
 {
@@ -30,7 +29,7 @@
                                      action:@selector(save:)];
         [[self navigationItem] setLeftBarButtonItem:doneItem];
         
-        self.title = NSLocalizedString(@"Connect", @"Connect");
+        self.title = NSLocalizedString(@"Font", nil);
         
         self.settings = [[SettingStore shareStore] getSettings];
     }
@@ -57,7 +56,7 @@
     
     self.airplaneModeSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
     
-    __unsafe_unretained __block ConnectSettingViewController *safeSelf = self;
+    __unsafe_unretained __block FontSettingViewController *safeSelf = self;
     
 	[self addSection:^(JMStaticContentTableViewSection *section, NSUInteger sectionIndex) {
 		[section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
@@ -67,10 +66,6 @@
 			cell.textLabel.text = NSLocalizedString(@"ServerIp", nil);
             cell.detailTextLabel.text =[safeSelf.settings hostIp];
 		}whenSelected:^(NSIndexPath *indexPath) {
-            [safeSelf.navigationController pushViewController:[[EditViewController alloc] initWithTitleAndName:NSLocalizedString(@"ServerIp", nil) Name:[safeSelf.settings hostIp] Complete:^(NSString *value) {
-                safeSelf.settings.hostIp = value;
-                [safeSelf.tableView reloadData];
-            }] animated:YES];
 		}];
         
 		[section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
@@ -80,14 +75,7 @@
 			cell.textLabel.text = NSLocalizedString(@"ServerPort", nil);
 			cell.detailTextLabel.text =[NSString stringWithFormat:@"%d", [safeSelf.settings hostPort]];
 		} whenSelected:^(NSIndexPath *indexPath) {
-            [safeSelf.navigationController
-                                pushViewController:[[EditViewController alloc]
-                                initWithTitleAndName:NSLocalizedString(@"ServerPort", nil)
-                                Name:[NSString stringWithFormat:@"%d", [safeSelf.settings hostPort]]
-                                Complete:^(NSString *value) {
-                safeSelf.settings.hostPort = [value intValue];
-                [safeSelf.tableView reloadData];
-            }] animated:YES];
+
 		}];
         
 		[section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
@@ -97,28 +85,11 @@
 			cell.textLabel.text = NSLocalizedString(@"ReconnectTime", nil);
             cell.detailTextLabel.text =[NSString stringWithFormat:@"%d", [safeSelf.settings reConnectTime]];
 		} whenSelected:^(NSIndexPath *indexPath) {
-            [safeSelf.navigationController
-             pushViewController:[[EditViewController alloc]
-                                 initWithTitleAndName:NSLocalizedString(@"ReconnectTime", nil)
-                                 Name:[NSString stringWithFormat:@"%d", [safeSelf.settings reConnectTime]]
-                                 Complete:^(NSString *value) {
-                                     safeSelf.settings.reConnectTime = [value intValue];
-                                     [safeSelf.tableView reloadData];
-                                 }] animated:YES];
+
 		}];
         
     }];
     
-//    [self addSection:^(JMStaticContentTableViewSection *section, NSUInteger sectionIndex) {
-//		[section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
-//			staticContentCell.reuseIdentifier = @"ProxyCell";
-//			cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            
-//			cell.textLabel.text = NSLocalizedString(@"UseProxy", nil);
-//			cell.accessoryView = safeSelf.airplaneModeSwitch;
-//		}];
-//	}];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -126,6 +97,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end

@@ -25,6 +25,7 @@
 #define _FONTSTYLE               @""                     //字体样式
 #define _FONTSIZE                18                      //字体大小
 #define _SHOW_CARET              YES                     //是否显示光标
+#define _RECONNECT_TIME          5                       //重新连接时间
 
 #define STRING_HOSTIP            @"hostIp"
 #define STRING_HOSTPORT          @"hostPort"
@@ -41,7 +42,7 @@
 #define STRING_FONTSTYLE         @"fontStyle"
 #define STRING_FONTSIZE          @"fontSize"
 #define STRING_SHOWCARET         @"showCaret"
-
+#define STRING_RECONNECTTIME     @"reconnecttime"
 
 @interface DefaultSettings : NSObject
 

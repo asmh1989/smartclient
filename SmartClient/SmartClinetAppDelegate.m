@@ -76,6 +76,7 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.drawerController];
     [[self window] setRootViewController:navController];
     [[self.drawerController navigationController] setNavigationBarHidden:YES];
+    self.drawerController.title = NSLocalizedString(@"Settings", @"Settings");
     
 //    [self.window setRootViewController:self.drawerController];
     self.window.backgroundColor = [UIColor whiteColor];

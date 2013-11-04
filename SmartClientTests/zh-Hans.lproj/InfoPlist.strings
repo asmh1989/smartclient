@@ -1,0 +1,8 @@
+/* Localized versions of Info.plist keys */
+
+"Settings" = "设置";
+"Connect" = "连接";
+"SeverIp" = "服务器地址";
+"ServerPort" = "端口";
+"ReConnectTime" = "重新连接时间";
+"UseProxy" = "开启代理";

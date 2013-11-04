@@ -27,7 +27,6 @@
 		A4632057180F80E4000F9C69 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4632055180F80E4000F9C69 /* InfoPlist.strings */; };
 		A4632059180F80E4000F9C69 /* SmartClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632058180F80E4000F9C69 /* SmartClientTests.m */; };
 		A4632065180F8114000F9C69 /* SmartClinetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632063180F8114000F9C69 /* SmartClinetViewController.m */; };
-		A4632066180F8114000F9C69 /* SmartClinetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4632064180F8114000F9C69 /* SmartClinetViewController.xib */; };
 		A4632069180F853B000F9C69 /* SettingForConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632068180F853B000F9C69 /* SettingForConnect.m */; };
 		A463206E180FA4AB000F9C69 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A463206D180FA4AB000F9C69 /* CFNetwork.framework */; };
 		A4632079180FB7AD000F9C69 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632076180FB7AD000F9C69 /* GCDAsyncSocket.m */; };
@@ -47,7 +46,15 @@
 		A47552AE181640D30033D224 /* CharAttribs.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552AD181640D30033D224 /* CharAttribs.m */; };
 		A47552B2181646C30033D224 /* Caret.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552B1181646C30033D224 /* Caret.m */; };
 		A47552B5181657E20033D224 /* CaretAttribs.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552B4181657E20033D224 /* CaretAttribs.m */; };
+		A482E06C1823DB5A0056E0C2 /* JMStaticContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A482E0651823DB5A0056E0C2 /* JMStaticContentTableViewCell.m */; };
+		A482E06D1823DB5A0056E0C2 /* JMStaticContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A482E0671823DB5A0056E0C2 /* JMStaticContentTableViewController.m */; };
+		A482E06E1823DB5A0056E0C2 /* JMStaticContentTableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = A482E0691823DB5A0056E0C2 /* JMStaticContentTableViewSection.m */; };
+		A482E06F1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A482E06B1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m */; };
 		A4B6E406181E51D300F0A400 /* MessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B6E405181E51D300F0A400 /* MessageBox.m */; };
+		A4E5910B1827681500265F60 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E591091827681500265F60 /* EditViewController.m */; };
+		A4E5911118276B0A00265F60 /* StringInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E5911018276B0A00265F60 /* StringInputTableViewCell.m */; };
+		A4E5911518278DED00265F60 /* FontSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E5911318278DED00265F60 /* FontSettingViewController.m */; };
+		A4E591171827911B00265F60 /* SmartClinetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E591191827911B00265F60 /* SmartClinetViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +68,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A40F734718272E63003D36AF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		A40F734818272E63003D36AF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		A429C75E181773CD0037666D /* ShowListEventArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowListEventArgs.h; sourceTree = "<group>"; };
 		A429C75F181773CD0037666D /* ShowListEventArgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowListEventArgs.m; sourceTree = "<group>"; };
 		A429C761181775FB0037666D /* StringShowList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringShowList.h; sourceTree = "<group>"; };
@@ -93,7 +102,6 @@
 		A4632058180F80E4000F9C69 /* SmartClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartClientTests.m; sourceTree = "<group>"; };
 		A4632062180F8114000F9C69 /* SmartClinetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartClinetViewController.h; sourceTree = "<group>"; };
 		A4632063180F8114000F9C69 /* SmartClinetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartClinetViewController.m; sourceTree = "<group>"; };
-		A4632064180F8114000F9C69 /* SmartClinetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartClinetViewController.xib; sourceTree = "<group>"; };
 		A4632067180F853B000F9C69 /* SettingForConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingForConnect.h; sourceTree = "<group>"; };
 		A4632068180F853B000F9C69 /* SettingForConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingForConnect.m; sourceTree = "<group>"; };
 		A463206D180FA4AB000F9C69 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -131,8 +139,25 @@
 		A47552B1181646C30033D224 /* Caret.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Caret.m; sourceTree = "<group>"; };
 		A47552B3181657E20033D224 /* CaretAttribs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaretAttribs.h; sourceTree = "<group>"; };
 		A47552B4181657E20033D224 /* CaretAttribs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaretAttribs.m; sourceTree = "<group>"; };
+		A482E0631823DB5A0056E0C2 /* JMStaticContentTableViewBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStaticContentTableViewBlocks.h; sourceTree = "<group>"; };
+		A482E0641823DB5A0056E0C2 /* JMStaticContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStaticContentTableViewCell.h; sourceTree = "<group>"; };
+		A482E0651823DB5A0056E0C2 /* JMStaticContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStaticContentTableViewCell.m; sourceTree = "<group>"; };
+		A482E0661823DB5A0056E0C2 /* JMStaticContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStaticContentTableViewController.h; sourceTree = "<group>"; };
+		A482E0671823DB5A0056E0C2 /* JMStaticContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStaticContentTableViewController.m; sourceTree = "<group>"; };
+		A482E0681823DB5A0056E0C2 /* JMStaticContentTableViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStaticContentTableViewSection.h; sourceTree = "<group>"; };
+		A482E0691823DB5A0056E0C2 /* JMStaticContentTableViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStaticContentTableViewSection.m; sourceTree = "<group>"; };
+		A482E06A1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStaticContentTextFieldTableViewCell.h; sourceTree = "<group>"; };
+		A482E06B1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStaticContentTextFieldTableViewCell.m; sourceTree = "<group>"; };
 		A4B6E404181E51D300F0A400 /* MessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageBox.h; sourceTree = "<group>"; };
 		A4B6E405181E51D300F0A400 /* MessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageBox.m; sourceTree = "<group>"; };
+		A4E591081827681500265F60 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		A4E591091827681500265F60 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
+		A4E5910F18276B0A00265F60 /* StringInputTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringInputTableViewCell.h; sourceTree = "<group>"; };
+		A4E5911018276B0A00265F60 /* StringInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringInputTableViewCell.m; sourceTree = "<group>"; };
+		A4E5911218278DED00265F60 /* FontSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontSettingViewController.h; sourceTree = "<group>"; };
+		A4E5911318278DED00265F60 /* FontSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontSettingViewController.m; sourceTree = "<group>"; };
+		A4E5911A1827911D00265F60 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/SmartClinetViewController.xib"; sourceTree = "<group>"; };
+		A4E5911B1827912900265F60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/SmartClinetViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +193,8 @@
 				A46492F118224D9700B39E7E /* SmartClinetLeftMenuViewController.xib */,
 				A4455060182387C200BBDDB9 /* ConnectSettingViewController.h */,
 				A4455061182387C200BBDDB9 /* ConnectSettingViewController.m */,
+				A4E5911218278DED00265F60 /* FontSettingViewController.h */,
+				A4E5911318278DED00265F60 /* FontSettingViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -184,7 +211,11 @@
 		A4632027180F80E3000F9C69 = {
 			isa = PBXGroup;
 			children = (
+				A4E591081827681500265F60 /* EditViewController.h */,
+				A4E591091827681500265F60 /* EditViewController.m */,
 				A44CB6BB1818C862006B5946 /* Functions.h */,
+				A4E5910F18276B0A00265F60 /* StringInputTableViewCell.h */,
+				A4E5911018276B0A00265F60 /* StringInputTableViewCell.m */,
 				A44CB6BC1818C862006B5946 /* Functions.m */,
 				A463207C180FD152000F9C69 /* DefaultSettings.h */,
 				A463207D180FD152000F9C69 /* DefaultSettings.m */,
@@ -219,6 +250,7 @@
 		A4632039180F80E3000F9C69 /* SmartClient */ = {
 			isa = PBXGroup;
 			children = (
+				A482E0621823DB5A0056E0C2 /* JMStaticContentTableViewController */,
 				A445505F1823876100BBDDB9 /* ViewController */,
 				A445505C18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.h */,
 				A445505D18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m */,
@@ -238,7 +270,7 @@
 				A4632080180FDEBB000F9C69 /* SettingStore.m */,
 				A4632067180F853B000F9C69 /* SettingForConnect.h */,
 				A4632068180F853B000F9C69 /* SettingForConnect.m */,
-				A4632064180F8114000F9C69 /* SmartClinetViewController.xib */,
+				A4E591191827911B00265F60 /* SmartClinetViewController.xib */,
 				A4632045180F80E3000F9C69 /* Images.xcassets */,
 				A47552AF1816460E0033D224 /* SmartClientCore */,
 				A463207B180FD0DF000F9C69 /* GCDAsyncSocket */,
@@ -327,6 +359,22 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		A482E0621823DB5A0056E0C2 /* JMStaticContentTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A482E0631823DB5A0056E0C2 /* JMStaticContentTableViewBlocks.h */,
+				A482E0641823DB5A0056E0C2 /* JMStaticContentTableViewCell.h */,
+				A482E0651823DB5A0056E0C2 /* JMStaticContentTableViewCell.m */,
+				A482E0661823DB5A0056E0C2 /* JMStaticContentTableViewController.h */,
+				A482E0671823DB5A0056E0C2 /* JMStaticContentTableViewController.m */,
+				A482E0681823DB5A0056E0C2 /* JMStaticContentTableViewSection.h */,
+				A482E0691823DB5A0056E0C2 /* JMStaticContentTableViewSection.m */,
+				A482E06A1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.h */,
+				A482E06B1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m */,
+			);
+			path = JMStaticContentTableViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -386,6 +434,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
+				Base,
 			);
 			mainGroup = A4632027180F80E3000F9C69;
 			productRefGroup = A4632031180F80E3000F9C69 /* Products */;
@@ -406,7 +456,7 @@
 				A463203E180F80E3000F9C69 /* InfoPlist.strings in Resources */,
 				A46492F318224D9700B39E7E /* SmartClinetLeftMenuViewController.xib in Resources */,
 				A4632046180F80E3000F9C69 /* Images.xcassets in Resources */,
-				A4632066180F8114000F9C69 /* SmartClinetViewController.xib in Resources */,
+				A4E591171827911B00265F60 /* SmartClinetViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +475,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4E5911518278DED00265F60 /* FontSettingViewController.m in Sources */,
 				A4632065180F8114000F9C69 /* SmartClinetViewController.m in Sources */,
 				A47552A818160E460033D224 /* Mode.m in Sources */,
 				A47552A5181606420033D224 /* SettingForRuntime.m in Sources */,
@@ -433,8 +484,10 @@
 				A47552AB181610E30033D224 /* Chars.m in Sources */,
 				A47552B5181657E20033D224 /* CaretAttribs.m in Sources */,
 				A46492F218224D9700B39E7E /* SmartClinetLeftMenuViewController.m in Sources */,
+				A482E06F1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m in Sources */,
 				A47552AE181640D30033D224 /* CharAttribs.m in Sources */,
 				A43D1FEF1810C5F90067FB2B /* ParserMsg.m in Sources */,
+				A482E06D1823DB5A0056E0C2 /* JMStaticContentTableViewController.m in Sources */,
 				A4632079180FB7AD000F9C69 /* GCDAsyncSocket.m in Sources */,
 				A429C763181775FB0037666D /* StringShowList.m in Sources */,
 				A44CB6BD1818C862006B5946 /* Functions.m in Sources */,
@@ -442,15 +495,19 @@
 				A463207E180FD152000F9C69 /* DefaultSettings.m in Sources */,
 				A429C760181773CD0037666D /* ShowListEventArgs.m in Sources */,
 				A46492D118222B2E00B39E7E /* MMDrawerVisualState.m in Sources */,
+				A4E5910B1827681500265F60 /* EditViewController.m in Sources */,
 				A46492CF18222B2E00B39E7E /* MMDrawerBarButtonItem.m in Sources */,
 				A46492D018222B2E00B39E7E /* MMDrawerController.m in Sources */,
 				A445505E18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m in Sources */,
+				A4E5911118276B0A00265F60 /* StringInputTableViewCell.m in Sources */,
 				A4455062182387C200BBDDB9 /* ConnectSettingViewController.m in Sources */,
 				A4632069180F853B000F9C69 /* SettingForConnect.m in Sources */,
 				A4632081180FDEBB000F9C69 /* SettingStore.m in Sources */,
 				A4632040180F80E3000F9C69 /* main.m in Sources */,
+				A482E06C1823DB5A0056E0C2 /* JMStaticContentTableViewCell.m in Sources */,
 				A463207A180FB7AD000F9C69 /* GCDAsyncUdpSocket.m in Sources */,
 				A4B6E406181E51D300F0A400 /* MessageBox.m in Sources */,
+				A482E06E1823DB5A0056E0C2 /* JMStaticContentTableViewSection.m in Sources */,
 				A44CB6C11818E4FE006B5946 /* VTSystemView.m in Sources */,
 				A4632044180F80E3000F9C69 /* SmartClinetAppDelegate.m in Sources */,
 			);
@@ -479,6 +536,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A463203D180F80E3000F9C69 /* en */,
+				A40F734718272E63003D36AF /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -487,8 +545,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				A4632056180F80E4000F9C69 /* en */,
+				A40F734818272E63003D36AF /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A4E591191827911B00265F60 /* SmartClinetViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4E5911A1827911D00265F60 /* zh-Hans */,
+				A4E5911B1827912900265F60 /* Base */,
+			);
+			name = SmartClinetViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -59,7 +59,6 @@
     [super viewWillAppear:animated];
     
     NSLog(@" SmartClinetViewController  viewWillAppear....");
-    [self.navigationController setNavigationBarHidden:YES];
 
     [mView setNeedsDisplay];
     if (hostPort != [settingStore hostPort] || ![hostip isEqualToString:[settingStore hostIp]]) {
@@ -67,6 +66,12 @@
         [socket disconnect];
         [self sendFirstConnectInfo];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)checkCurrentSocketStatus

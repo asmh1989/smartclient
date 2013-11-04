@@ -49,7 +49,7 @@
 {
     UITouch* touch = [touches anyObject];
     point = [touch locationInView:self];
-    NSLog(@"touchesBegan : X = %lf, Y=%lf", point.x, point.y);
+//    NSLog(@"touchesBegan : X = %lf, Y=%lf", point.x, point.y);
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -93,7 +93,7 @@
                 str = MYKEY_UP;
             }
         }
-            NSLog(@"touchesEnded : X = %lf, Y=%lf", pt.x-point.x, pt.y-point.y);
+//            NSLog(@"touchesEnded : X = %lf, Y=%lf", pt.x-point.x, pt.y-point.y);
     }
     
     [delegate handleTouchMessage:str];

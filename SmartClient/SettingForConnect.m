@@ -15,7 +15,7 @@
 
 @synthesize hostIp, hostPort,deviceID, enc, columnSpan, rowSpam, topMargin,
     leftMargin, isFullScreen, isBeep, cursorHeight, fontName, fontSize,
-    fontStyle, isShowCaret;
+    fontStyle, isShowCaret, reConnectTime;
 
 @synthesize  bgColor, fgColor, blinkColor, boldColor;
 
@@ -71,6 +71,7 @@
     [self setFontSize:_FONTSIZE];
     [self setIsShowCaret:_SHOW_CARET];
     [self setDeviceID:[self uuid]];
+    [self setReConnectTime:_RECONNECT_TIME];
     [self setEnc:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000)]; // use GB2312
     
     return self;
@@ -104,6 +105,7 @@
         [self setFontStyle:[aDecoder decodeObjectForKey:STRING_FONTSTYLE]];
         [self setFontSize:[aDecoder decodeIntForKey:STRING_FONTSIZE]];
         [self setIsShowCaret:[aDecoder decodeBoolForKey:STRING_SHOWCARET]];
+        [self setReConnectTime:[aDecoder decodeIntForKey:STRING_RECONNECTTIME]];
     }
     
     NSLog(@"initWithCoder, hostIp = %@", hostIp);
@@ -127,7 +129,7 @@
     [aCoder encodeObject:fontStyle forKey:STRING_FONTSTYLE];
     [aCoder encodeInt:fontSize forKey:STRING_FONTSIZE];
     [aCoder encodeBool:isShowCaret forKey:STRING_SHOWCARET];
-    
+    [aCoder encodeInt:reConnectTime forKey:STRING_RECONNECTTIME];
     NSLog(@"encodeWithCoder, hostIp = %@", hostIp);
 }
 

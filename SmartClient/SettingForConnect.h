@@ -30,6 +30,7 @@
 @property (nonatomic) int fontSize;             //字体大小
 
 @property (nonatomic) BOOL  isShowCaret;        //是否显示关标
+@property (nonatomic) int   reConnectTime;      //重新连接时间
 
 @property (nonatomic) UIColor *blinkColor;
 @property (nonatomic) UIColor *boldColor;
