@@ -55,6 +55,12 @@
 		A4E5911118276B0A00265F60 /* StringInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E5911018276B0A00265F60 /* StringInputTableViewCell.m */; };
 		A4E5911518278DED00265F60 /* FontSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E5911318278DED00265F60 /* FontSettingViewController.m */; };
 		A4E591171827911B00265F60 /* SmartClinetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E591191827911B00265F60 /* SmartClinetViewController.xib */; };
+		A4E5911E1827986D00265F60 /* ScreenSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E5911D1827986D00265F60 /* ScreenSettingViewController.m */; };
+		A4E591211827988100265F60 /* SoundSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E591201827988100265F60 /* SoundSettingViewController.m */; };
+		A4E591241827989500265F60 /* ScanSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E591231827989500265F60 /* ScanSettingViewController.m */; };
+		A4E59127182798EC00265F60 /* OtherSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E59126182798EC00265F60 /* OtherSettingViewController.m */; };
+		A4E5912B1827990100265F60 /* AboutSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E591291827990100265F60 /* AboutSettingViewController.m */; };
+		A4E5912C1827990100265F60 /* AboutSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E5912A1827990100265F60 /* AboutSettingViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,12 +90,13 @@
 		A44CB6BC1818C862006B5946 /* Functions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Functions.m; sourceTree = "<group>"; };
 		A44CB6BF1818E4FE006B5946 /* VTSystemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTSystemView.h; sourceTree = "<group>"; };
 		A44CB6C01818E4FE006B5946 /* VTSystemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTSystemView.m; sourceTree = "<group>"; };
+		A45B8FF71827A02B0058E43F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A45B8FF81827A02D0058E43F /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A4632030180F80E3000F9C69 /* SmartClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4632033180F80E3000F9C69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4632035180F80E3000F9C69 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A4632037180F80E3000F9C69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A463203B180F80E3000F9C69 /* SmartClient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SmartClient-Info.plist"; sourceTree = "<group>"; };
-		A463203D180F80E3000F9C69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A463203F180F80E3000F9C69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A4632041180F80E3000F9C69 /* SmartClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SmartClient-Prefix.pch"; sourceTree = "<group>"; };
 		A4632042180F80E3000F9C69 /* SmartClinetAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmartClinetAppDelegate.h; sourceTree = "<group>"; };
@@ -150,14 +157,25 @@
 		A482E06B1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStaticContentTextFieldTableViewCell.m; sourceTree = "<group>"; };
 		A4B6E404181E51D300F0A400 /* MessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageBox.h; sourceTree = "<group>"; };
 		A4B6E405181E51D300F0A400 /* MessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageBox.m; sourceTree = "<group>"; };
-		A4E591081827681500265F60 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
-		A4E591091827681500265F60 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
-		A4E5910F18276B0A00265F60 /* StringInputTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringInputTableViewCell.h; sourceTree = "<group>"; };
-		A4E5911018276B0A00265F60 /* StringInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringInputTableViewCell.m; sourceTree = "<group>"; };
+		A4E591081827681500265F60 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewController.h; path = ../EditViewController.h; sourceTree = "<group>"; };
+		A4E591091827681500265F60 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewController.m; path = ../EditViewController.m; sourceTree = "<group>"; };
+		A4E5910F18276B0A00265F60 /* StringInputTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringInputTableViewCell.h; path = ../StringInputTableViewCell.h; sourceTree = "<group>"; };
+		A4E5911018276B0A00265F60 /* StringInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StringInputTableViewCell.m; path = ../StringInputTableViewCell.m; sourceTree = "<group>"; };
 		A4E5911218278DED00265F60 /* FontSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontSettingViewController.h; sourceTree = "<group>"; };
 		A4E5911318278DED00265F60 /* FontSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontSettingViewController.m; sourceTree = "<group>"; };
-		A4E5911A1827911D00265F60 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/SmartClinetViewController.xib"; sourceTree = "<group>"; };
-		A4E5911B1827912900265F60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/SmartClinetViewController.xib; sourceTree = "<group>"; };
+		A4E5911A1827911D00265F60 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/SmartClinetViewController.xib"; sourceTree = "<group>"; };
+		A4E5911B1827912900265F60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SmartClinetViewController.xib; sourceTree = "<group>"; };
+		A4E5911C1827986D00265F60 /* ScreenSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenSettingViewController.h; sourceTree = "<group>"; };
+		A4E5911D1827986D00265F60 /* ScreenSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenSettingViewController.m; sourceTree = "<group>"; };
+		A4E5911F1827988100265F60 /* SoundSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundSettingViewController.h; sourceTree = "<group>"; };
+		A4E591201827988100265F60 /* SoundSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundSettingViewController.m; sourceTree = "<group>"; };
+		A4E591221827989500265F60 /* ScanSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanSettingViewController.h; sourceTree = "<group>"; };
+		A4E591231827989500265F60 /* ScanSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanSettingViewController.m; sourceTree = "<group>"; };
+		A4E59125182798EC00265F60 /* OtherSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherSettingViewController.h; sourceTree = "<group>"; };
+		A4E59126182798EC00265F60 /* OtherSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherSettingViewController.m; sourceTree = "<group>"; };
+		A4E591281827990100265F60 /* AboutSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutSettingViewController.h; sourceTree = "<group>"; };
+		A4E591291827990100265F60 /* AboutSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutSettingViewController.m; sourceTree = "<group>"; };
+		A4E5912A1827990100265F60 /* AboutSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutSettingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +206,10 @@
 		A445505F1823876100BBDDB9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A4E591081827681500265F60 /* EditViewController.h */,
+				A4E591091827681500265F60 /* EditViewController.m */,
+				A4E5910F18276B0A00265F60 /* StringInputTableViewCell.h */,
+				A4E5911018276B0A00265F60 /* StringInputTableViewCell.m */,
 				A46492EF18224D9700B39E7E /* SmartClinetLeftMenuViewController.h */,
 				A46492F018224D9700B39E7E /* SmartClinetLeftMenuViewController.m */,
 				A46492F118224D9700B39E7E /* SmartClinetLeftMenuViewController.xib */,
@@ -195,6 +217,17 @@
 				A4455061182387C200BBDDB9 /* ConnectSettingViewController.m */,
 				A4E5911218278DED00265F60 /* FontSettingViewController.h */,
 				A4E5911318278DED00265F60 /* FontSettingViewController.m */,
+				A4E5911C1827986D00265F60 /* ScreenSettingViewController.h */,
+				A4E5911D1827986D00265F60 /* ScreenSettingViewController.m */,
+				A4E5911F1827988100265F60 /* SoundSettingViewController.h */,
+				A4E591201827988100265F60 /* SoundSettingViewController.m */,
+				A4E591221827989500265F60 /* ScanSettingViewController.h */,
+				A4E591231827989500265F60 /* ScanSettingViewController.m */,
+				A4E59125182798EC00265F60 /* OtherSettingViewController.h */,
+				A4E59126182798EC00265F60 /* OtherSettingViewController.m */,
+				A4E591281827990100265F60 /* AboutSettingViewController.h */,
+				A4E591291827990100265F60 /* AboutSettingViewController.m */,
+				A4E5912A1827990100265F60 /* AboutSettingViewController.xib */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -211,11 +244,7 @@
 		A4632027180F80E3000F9C69 = {
 			isa = PBXGroup;
 			children = (
-				A4E591081827681500265F60 /* EditViewController.h */,
-				A4E591091827681500265F60 /* EditViewController.m */,
 				A44CB6BB1818C862006B5946 /* Functions.h */,
-				A4E5910F18276B0A00265F60 /* StringInputTableViewCell.h */,
-				A4E5911018276B0A00265F60 /* StringInputTableViewCell.m */,
 				A44CB6BC1818C862006B5946 /* Functions.m */,
 				A463207C180FD152000F9C69 /* DefaultSettings.h */,
 				A463207D180FD152000F9C69 /* DefaultSettings.m */,
@@ -456,6 +485,7 @@
 				A463203E180F80E3000F9C69 /* InfoPlist.strings in Resources */,
 				A46492F318224D9700B39E7E /* SmartClinetLeftMenuViewController.xib in Resources */,
 				A4632046180F80E3000F9C69 /* Images.xcassets in Resources */,
+				A4E5912C1827990100265F60 /* AboutSettingViewController.xib in Resources */,
 				A4E591171827911B00265F60 /* SmartClinetViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,18 +505,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4E591211827988100265F60 /* SoundSettingViewController.m in Sources */,
 				A4E5911518278DED00265F60 /* FontSettingViewController.m in Sources */,
 				A4632065180F8114000F9C69 /* SmartClinetViewController.m in Sources */,
 				A47552A818160E460033D224 /* Mode.m in Sources */,
 				A47552A5181606420033D224 /* SettingForRuntime.m in Sources */,
 				A46492DB18222D5300B39E7E /* MMNavigationController.m in Sources */,
+				A4E5911E1827986D00265F60 /* ScreenSettingViewController.m in Sources */,
 				A46492D218222B2E00B39E7E /* UIViewController+MMDrawerController.m in Sources */,
 				A47552AB181610E30033D224 /* Chars.m in Sources */,
 				A47552B5181657E20033D224 /* CaretAttribs.m in Sources */,
 				A46492F218224D9700B39E7E /* SmartClinetLeftMenuViewController.m in Sources */,
 				A482E06F1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m in Sources */,
+				A4E591241827989500265F60 /* ScanSettingViewController.m in Sources */,
 				A47552AE181640D30033D224 /* CharAttribs.m in Sources */,
 				A43D1FEF1810C5F90067FB2B /* ParserMsg.m in Sources */,
+				A4E5912B1827990100265F60 /* AboutSettingViewController.m in Sources */,
 				A482E06D1823DB5A0056E0C2 /* JMStaticContentTableViewController.m in Sources */,
 				A4632079180FB7AD000F9C69 /* GCDAsyncSocket.m in Sources */,
 				A429C763181775FB0037666D /* StringShowList.m in Sources */,
@@ -498,6 +532,7 @@
 				A4E5910B1827681500265F60 /* EditViewController.m in Sources */,
 				A46492CF18222B2E00B39E7E /* MMDrawerBarButtonItem.m in Sources */,
 				A46492D018222B2E00B39E7E /* MMDrawerController.m in Sources */,
+				A4E59127182798EC00265F60 /* OtherSettingViewController.m in Sources */,
 				A445505E18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m in Sources */,
 				A4E5911118276B0A00265F60 /* StringInputTableViewCell.m in Sources */,
 				A4455062182387C200BBDDB9 /* ConnectSettingViewController.m in Sources */,
@@ -535,8 +570,9 @@
 		A463203C180F80E3000F9C69 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A463203D180F80E3000F9C69 /* en */,
 				A40F734718272E63003D36AF /* zh-Hans */,
+				A45B8FF71827A02B0058E43F /* en */,
+				A45B8FF81827A02D0058E43F /* Base */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

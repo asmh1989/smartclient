@@ -9,6 +9,12 @@
 #import "SmartClinetLeftMenuViewController.h"
 #import "UIViewController+MMDrawerController.h"
 #import "ConnectSettingViewController.h"
+#import "FontSettingViewController.h"
+#import "ScanSettingViewController.h"
+#import "ScreenSettingViewController.h"
+#import "OtherSettingViewController.h"
+#import "AboutSettingViewController.h"
+#import "SoundSettingViewController.h"
 
 enum SettingType{
     SETTING_CONNECT = 0,
@@ -132,38 +138,30 @@ enum SettingType{
 {
     
     enum SettingType type = (enum SettingType)[indexPath row];
+    UINavigationController *navController = [[UINavigationController alloc] init];
+    [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     if (type == SETTING_RECONNECT) {
         [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
             [centerController sendExMessage:@"Menu" Reason:@"reconnected"];
         }];
         return;
+    } else if(type == SETTING_CONNECT){
+        navController = [navController initWithRootViewController:[[ConnectSettingViewController alloc]init]];
+    } else if(type == SETTING_FONT){
+        navController = [navController initWithRootViewController:[[FontSettingViewController alloc]init]];
+    } else if(type == SETTING_SCREEN){
+        navController = [navController initWithRootViewController:[[ScreenSettingViewController alloc]init]];
+    } else if(type == SETTING_SOUND){
+        navController = [navController initWithRootViewController:[[SoundSettingViewController alloc]init]];
+    } else if(type == SETTING_SCAN){
+        navController = [navController initWithRootViewController:[[ScanSettingViewController alloc]init]];
+    } else if(type == SETTING_OTHER){
+        navController = [navController initWithRootViewController:[[OtherSettingViewController alloc]init]];
+    } else if(type == SETTING_ABOUT){
+        navController = [navController initWithRootViewController:[[AboutSettingViewController alloc]init]];
     }
     
-    ConnectSettingViewController *connectViewController = [[ConnectSettingViewController alloc]init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:connectViewController];
-    NSLog(@"navigationController : %@", [self navigationController]);
-    switch (type) {
-        case SETTING_CONNECT:
-            [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-//            [[self.mm_drawerController navigationController] pushViewController:connectViewController animated:YES];
-            [self presentViewController:navController animated:YES completion:nil];
-            break;
-        case SETTING_FONT:
-            break;
-        case SETTING_SCREEN:
-            break;
-        case SETTING_SOUND:
-            break;
-        case SETTING_SCAN:
-            break;
-        case SETTING_OTHER:
-            break;
-
-        case SETTING_ABOUT:
-            break;
-        default:
-            break;
-    }
+    [self presentViewController:navController animated:YES completion:nil];
     [self.mm_drawerController closeDrawerAnimated:YES completion:nil];
 }
 @end

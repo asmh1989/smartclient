@@ -1,4 +1,10 @@
 /* Localized versions of Info.plist keys */
 
-"Settings" = "设置";
-"Font"     = "字体";
+"Settings"          = "设置";
+"Font"              = "字体";
+"FontSize"          = "字体大小";
+"FontName"          = "字体名称";
+"FontStyle"         = "字体样式";
+"FontFgColor"       = "字体颜色";
+"FontEnc"           = "字体编码";
+"FontBgColor"       = "字体背景色";

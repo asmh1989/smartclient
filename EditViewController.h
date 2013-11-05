@@ -8,8 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+enum CellType{
+    EditCell,
+    RadioCell
+};
+
 typedef void(^Finish)(NSString *value);
+
 @interface EditViewController : UITableViewController <UITextFieldDelegate>
 
+@property(nonatomic) enum CellType type;
+
 - (id) initWithTitleAndName:(NSString *)title Name:(NSString *)name Complete:(Finish) f;
+- (id) initWithTitleAndName:(NSString *)title Name:(NSString *)name Complete:(Finish) f EnumType:(enum CellType) type;
+- (id) initWithTitleAndName:(NSString *)title Name:(NSString *)name Complete:(Finish) f EnumType:(enum CellType) type DataArray:(NSArray *)data;
+- (id) initWithTitleAndName:(NSString *)title Complete:(Finish) f EnumType:(enum CellType) type DataArray:(NSArray *)data FirstSelected:(int)select;
 @end

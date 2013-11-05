@@ -65,7 +65,8 @@
     CGPoint pt = [touch locationInView:self];
     CGFloat slide_len = 30.0;
     
-    UIFont * font = [UIFont boldSystemFontOfSize:[settingStore fontSize]];
+//    UIFont * font = [UIFont boldSystemFontOfSize:[settingStore fontSize]];
+    UIFont * font = [settingStore getCurrentFont];
     int ix = (int)((pt.x - [settingStore leftMargin]) / ([settings getCharSizeEN:font].width + [settingStore columnSpan]));
     int iy = (int)((pt.y - [settingStore topMargin]) / ([settings getCharSizeEN:font].height + [settingStore columnSpan]));
     NSString *str;
@@ -172,7 +173,7 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    UIFont *myFont = [UIFont boldSystemFontOfSize:[settingStore fontSize]];
+    UIFont *myFont = [settingStore getCurrentFont];//[UIFont boldSystemFontOfSize:[settingStore fontSize]];
     int leftMargin = [settingStore leftMargin];
     int topMargin = [settingStore topMargin];
     int columnSpan = [settingStore columnSpan];

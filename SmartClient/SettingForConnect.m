@@ -9,20 +9,46 @@
 #import "SettingForConnect.h"
 #import "DefaultSettings.h"
 
-
-
 @implementation SettingForConnect
 
 @synthesize hostIp, hostPort,deviceID, enc, columnSpan, rowSpam, topMargin,
     leftMargin, isFullScreen, isBeep, cursorHeight, fontName, fontSize,
     fontStyle, isShowCaret, reConnectTime;
 
-@synthesize  bgColor, fgColor, blinkColor, boldColor;
+@synthesize  bgColor, fgColor, blinkColor, boldColor, fontBgColor, fontFgColor;
+
+- (UIFont *)getCurrentFont
+{
+    return [UIFont fontWithName:fontStyle size:fontSize];
+}
+
+-(UIColor *)getUIColor:(int) n
+{
+    switch (n) {
+        case 0:
+            return [UIColor whiteColor];
+        case 1:
+            return [UIColor blackColor];
+        case 2:
+            return [UIColor redColor];
+        case 3:
+            return [UIColor blueColor];
+        case 4:
+            return [UIColor greenColor];
+        case 5:
+            return [UIColor yellowColor];
+        case 6:
+            return [UIColor purpleColor];
+        default:
+            return [UIColor whiteColor];
+    }
+}
+
 
 - (UIColor *)bgColor
 {
     if (!bgColor) {
-        return [UIColor whiteColor];
+        return bgColor = [self getUIColor:fontBgColor];
     }
     
     return bgColor;
@@ -34,7 +60,7 @@
         return fgColor;
     }
     
-    return [UIColor blackColor];
+    return fgColor = [self getUIColor:fontFgColor];
 }
 
 - (UIColor *)blinkColor
@@ -68,6 +94,8 @@
     [self setCursorHeight:_CURSORHEIGHT];
     [self setFontName:_FONTNAME];
     [self setFontStyle:_FONTSTYLE];
+    [self setFontFgColor:_FONTFGCOLOR];
+    [self setFontBgColor:_FONTBGCOLOR];
     [self setFontSize:_FONTSIZE];
     [self setIsShowCaret:_SHOW_CARET];
     [self setDeviceID:[self uuid]];
@@ -106,9 +134,11 @@
         [self setFontSize:[aDecoder decodeIntForKey:STRING_FONTSIZE]];
         [self setIsShowCaret:[aDecoder decodeBoolForKey:STRING_SHOWCARET]];
         [self setReConnectTime:[aDecoder decodeIntForKey:STRING_RECONNECTTIME]];
+        [self setFontBgColor:[aDecoder decodeIntForKey:STRING_FONTBGCOLOR]];
+        [self setFontFgColor:[aDecoder decodeIntForKey:STRING_FONTFGCOLOR]];
     }
     
-    NSLog(@"initWithCoder, hostIp = %@", hostIp);
+//    NSLog(@"initWithCoder, hostIp = %@", hostIp);
     return self;
 }
 
@@ -130,7 +160,9 @@
     [aCoder encodeInt:fontSize forKey:STRING_FONTSIZE];
     [aCoder encodeBool:isShowCaret forKey:STRING_SHOWCARET];
     [aCoder encodeInt:reConnectTime forKey:STRING_RECONNECTTIME];
-    NSLog(@"encodeWithCoder, hostIp = %@", hostIp);
+    [aCoder encodeInt:fontBgColor forKey:STRING_FONTBGCOLOR];
+    [aCoder encodeInt:fontFgColor forKey:STRING_FONTFGCOLOR];
+//    NSLog(@"encodeWithCoder, hostIp = %@", hostIp);
 }
 
 

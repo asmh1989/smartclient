@@ -12,6 +12,9 @@
 @interface EditViewController ()
 {
     Finish action;
+    NSArray *dataArray;
+    int currentIndex;
+    NSIndexPath *lastIndexPath;
 }
 @property (nonatomic) NSString *settingName;
 
@@ -20,16 +23,54 @@
 @implementation EditViewController
 
 @synthesize settingName;
-
-- (id)initWithTitleAndName:(NSString *)title Name:(NSString *)name Complete:(Finish)f
+- (id)initWithTitleAndName:(NSString *)title Name:(NSString *)name Complete:(Finish)f EnumType:(enum CellType)type DataArray:(NSArray *)data
 {
     self = [super init];
     if (self) {
         self.title = title;
         settingName = name;
         action = f;
+        self.type = type;
+        if (type == RadioCell) {
+            if (!data) {
+                dataArray = [UIFont familyNames];
+            } else {
+                dataArray = data;
+            }
+            int len = (int)[dataArray count];
+            for (int i = 0; i < len; i++) {
+                NSString *fontName = dataArray[i];
+                if ([fontName isEqualToString:name]) {
+                    currentIndex = i;
+                    break;
+                }
+            }
+        }
     }
     return self;
+}
+
+- (id)initWithTitleAndName:(NSString *)title Complete:(Finish)f EnumType:(enum CellType)type DataArray:(NSArray *)data FirstSelected:(int)select
+{
+    self = [super init];
+    if (self) {
+        self.title = title;
+        action = f;
+        self.type = type;
+        currentIndex = select;
+        settingName = nil;
+        dataArray = data;
+    }
+    return self;
+}
+
+- (id)initWithTitleAndName:(NSString *)title Name:(NSString *)name Complete:(Finish)f EnumType:(enum CellType)type
+{
+    return [self initWithTitleAndName:title Name:name Complete:f EnumType:type DataArray:nil];
+}
+- (id)initWithTitleAndName:(NSString *)title Name:(NSString *)name Complete:(Finish)f
+{
+   return [self initWithTitleAndName:title Name:name Complete:f EnumType:EditCell];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -50,6 +91,11 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSIndexPath*first = [NSIndexPath indexPathForRow:currentIndex inSection:0];
+    
+    [self.tableView selectRowAtIndexPath:first animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,6 +110,11 @@
 	return YES;
 }
 
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -75,21 +126,70 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    switch (self.type) {
+        case EditCell:
+            return 1;
+        case RadioCell:
+            return [dataArray count];
+    }
     return 1;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.type == RadioCell) {
+        int newRow = [indexPath row];
+        int oldRow = (lastIndexPath != nil) ? [lastIndexPath row] : -1;
+        if(newRow != oldRow)
+        {
+            UITableViewCell *newCell = [tableView cellForRowAtIndexPath:indexPath];
+            newCell.accessoryType = UITableViewCellAccessoryCheckmark;
+            
+            UITableViewCell *oldCell = [tableView cellForRowAtIndexPath:lastIndexPath];
+            oldCell.accessoryType = UITableViewCellAccessoryNone;
+            lastIndexPath = indexPath;
+        }
+        currentIndex = indexPath.row;
+        if (!self.settingName) {
+            action([NSString stringWithFormat:@"%d", currentIndex]);
+        }else {
+            action(dataArray[currentIndex]);
+        }
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [[self navigationController] popViewControllerAnimated:YES];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    StringInputTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[StringInputTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    
+    if(self.type == EditCell){
+        StringInputTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[StringInputTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        cell.textField.delegate = self;
+        cell.stringValue = settingName;
+        return cell;
+    } else if(self.type == RadioCell){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        cell.textLabel.text = [dataArray objectAtIndex:[indexPath row]];
+        if (indexPath.row == currentIndex) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            lastIndexPath = indexPath;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        return cell;
     }
-    cell.textField.delegate = self;
-    cell.stringValue = settingName;
     
-    
-    return cell;
+    return nil;
 }
 
 /*

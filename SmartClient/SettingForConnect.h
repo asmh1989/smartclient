@@ -28,6 +28,8 @@
 @property (nonatomic) NSString *fontName;       //字体名
 @property (nonatomic) NSString *fontStyle;      //字体样式
 @property (nonatomic) int fontSize;             //字体大小
+@property (nonatomic) int fontFgColor;
+@property (nonatomic) int fontBgColor;
 
 @property (nonatomic) BOOL  isShowCaret;        //是否显示关标
 @property (nonatomic) int   reConnectTime;      //重新连接时间
@@ -37,4 +39,8 @@
 @property (nonatomic) UIColor *fgColor;
 @property (nonatomic) UIColor *bgColor;
 
+
+@property (nonatomic) NSArray *colors;
+
+- (UIFont *)getCurrentFont;
 @end

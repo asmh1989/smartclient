@@ -21,11 +21,13 @@
 #define _ISFULLSCREEN            NO                      //是否全屏显示
 #define _ISBEEP                  YES                     //是否有声音
 #define _CURSORHEIGHT            2                       //关标的高度
-#define _FONTNAME                @""                     //字体名
-#define _FONTSTYLE               @""                     //字体样式
+#define _FONTNAME                @"Helvetica"            //字体名
+#define _FONTSTYLE               @"Helvetica"            //字体样式
 #define _FONTSIZE                18                      //字体大小
 #define _SHOW_CARET              YES                     //是否显示光标
 #define _RECONNECT_TIME          5                       //重新连接时间
+#define _FONTFGCOLOR             1
+#define _FONTBGCOLOR             0
 
 #define STRING_HOSTIP            @"hostIp"
 #define STRING_HOSTPORT          @"hostPort"
@@ -43,6 +45,8 @@
 #define STRING_FONTSIZE          @"fontSize"
 #define STRING_SHOWCARET         @"showCaret"
 #define STRING_RECONNECTTIME     @"reconnecttime"
+#define STRING_FONTFGCOLOR       @"fontfgcolor"
+#define STRING_FONTBGCOLOR       @"fontbgcolor"   
 
 @interface DefaultSettings : NSObject
 
