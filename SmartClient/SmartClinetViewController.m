@@ -59,7 +59,18 @@
     [super viewWillAppear:animated];
     
     NSLog(@" SmartClinetViewController  viewWillAppear....");
-
+    [self.navigationController setNavigationBarHidden:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:settingStore.isFullScreen];
+    if (settingStore.isFullScreen) {
+        mView.frame= self.view.frame;
+    } else {
+        CGRect frame = self.view.frame;
+        frame.origin.y = 20;
+        mView.frame = frame;
+    }
+    
+    toolBar.frame = CGRectMake(0.0, self.view.frame.size.height - toolBar.frame.size.height-mView.frame.origin.y, toolBar.frame.size.width, toolBar.frame.size.height);
+    
     [mView setNeedsDisplay];
     if (hostPort != [settingStore hostPort] || ![hostip isEqualToString:[settingStore hostIp]]) {
 //        [parser reset];
@@ -71,7 +82,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
+
 }
 
 - (void)checkCurrentSocketStatus
@@ -109,7 +120,6 @@
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     [ self.toolBar setItems:[NSArray arrayWithObjects:flexItem, setting, flexItem, up, flexItem, down, flexItem, code, flexItem, enter, flexItem, nil]];
-    
     
     // Do any additional setup after loading the view from its nib.
     socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
@@ -273,11 +283,11 @@
     for (id obj in stringShowList.inputStrings) {
         CGRect r = [obj CGRectValue];
         if (y == r.origin.y   && x >= r.origin.x && x < (r.origin.x + r.size.width)) {
-            UIFont *myFont = [UIFont boldSystemFontOfSize:[settingStore fontSize]];
+            UIFont *myFont = [settingStore getCurrentFont];
             int leftMargin = [settingStore leftMargin];
             int topMargin = [settingStore topMargin];
             int columnSpan = [settingStore columnSpan];
-            int rowSpan = [settingStore rowSpam];
+            int rowSpan = [settingStore rowSpan];
             CGSize size = [settings getCharSizeEN:myFont];
             
             CGFloat X = leftMargin + (size.width+columnSpan) * r.origin.x;

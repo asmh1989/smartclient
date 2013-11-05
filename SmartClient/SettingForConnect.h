@@ -16,7 +16,7 @@
 @property (nonatomic) NSStringEncoding enc;
 
 @property (nonatomic) int columnSpan;           //列间距
-@property (nonatomic) int rowSpam;              //行间距
+@property (nonatomic) int rowSpan;              //行间距
 @property (nonatomic) int topMargin;            //上边距
 @property (nonatomic) int leftMargin;           //左边距
 

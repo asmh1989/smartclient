@@ -30,7 +30,7 @@
                                      action:@selector(save:)];
         [[self navigationItem] setLeftBarButtonItem:doneItem];
         
-        self.title = NSLocalizedString(@"Font", nil);
+        self.title = NSLocalizedString(@"FontSettings", nil);
         
         self.settings = [[SettingStore shareStore] getSettings];
         

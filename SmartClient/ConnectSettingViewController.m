@@ -30,7 +30,7 @@
                                      action:@selector(save:)];
         [[self navigationItem] setLeftBarButtonItem:doneItem];
         
-        self.title = NSLocalizedString(@"Connect", @"Connect");
+        self.title = NSLocalizedString(@"ConnectSettings", @"Connect");
         
         self.settings = [[SettingStore shareStore] getSettings];
     }

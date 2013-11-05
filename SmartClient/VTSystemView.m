@@ -13,8 +13,6 @@
 #import "ShowListEventArgs.h"
 #import "Functions.h"
 
-#define CARET_LEN 2.0
-
 #define MABS(a,b) ((a) - (b)) > 0 ? ((a)-(b)) : ((b) - (a))
 #define MYABS(a,b,N) (((a) - (b)) > 0? ((a)-(b)) : ((b) - (a))) < (N)
 
@@ -177,7 +175,7 @@
     int leftMargin = [settingStore leftMargin];
     int topMargin = [settingStore topMargin];
     int columnSpan = [settingStore columnSpan];
-    int rowSpan = [settingStore rowSpam];
+    int rowSpan = [settingStore rowSpan];
     
     // Get the width of a string ...
     CGSize size = [settings getCharSizeEN:myFont];
@@ -234,9 +232,9 @@
     //画光标
     if ([settingStore isShowCaret]) {
         CGFloat X = leftMargin + (size.width+columnSpan) * settings.caret.pos.x;
-        CGFloat Y = topMargin + (size.height+rowSpan) * (settings.caret.pos.y+1)-3 * CARET_LEN;
+        CGFloat Y = topMargin + (size.height+rowSpan) * (settings.caret.pos.y+1)-6.0;
         [[UIColor redColor] setFill];
-        CGContextFillRect(context, CGRectMake(X, Y, size.width, CARET_LEN));
+        CGContextFillRect(context, CGRectMake(X, Y, size.width, settingStore.cursorHeight));
         CGContextStrokePath(context);
     }
 }

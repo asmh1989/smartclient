@@ -160,8 +160,10 @@ enum SettingType{
     } else if(type == SETTING_ABOUT){
         navController = [navController initWithRootViewController:[[AboutSettingViewController alloc]init]];
     }
-    
-    [self presentViewController:navController animated:YES completion:nil];
+
+    [self presentViewController:navController animated:YES completion:^{
+            [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    }];
     [self.mm_drawerController closeDrawerAnimated:YES completion:nil];
 }
 @end

@@ -11,7 +11,7 @@
 
 @implementation SettingForConnect
 
-@synthesize hostIp, hostPort,deviceID, enc, columnSpan, rowSpam, topMargin,
+@synthesize hostIp, hostPort,deviceID, enc, columnSpan, rowSpan, topMargin,
     leftMargin, isFullScreen, isBeep, cursorHeight, fontName, fontSize,
     fontStyle, isShowCaret, reConnectTime;
 
@@ -86,7 +86,7 @@
     [self setHostIp:_HOSTIP];
     [self setHostPort:_HOSTPORT];
     [self setColumnSpan:_COLUMNSPAN];
-    [self setRowSpam:_ROWSPAN];
+    [self setRowSpan:_ROWSPAN];
     [self setTopMargin:_TOPMARGIN];
     [self setLeftMargin:_LEFTMARGIN];
     [self setIsFullScreen:_ISFULLSCREEN];
@@ -100,6 +100,7 @@
     [self setIsShowCaret:_SHOW_CARET];
     [self setDeviceID:[self uuid]];
     [self setReConnectTime:_RECONNECT_TIME];
+    [self setCursorHeight:_CARET_HEIGHT];
     [self setEnc:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000)]; // use GB2312
     
     return self;
@@ -123,7 +124,7 @@
         [self setDeviceID:[aDecoder decodeObjectForKey:STRING_DEVICEID]];
         [self setEnc:[aDecoder decodeIntForKey:STRING_ENC]];
         [self setColumnSpan:[aDecoder decodeIntForKey:STRING_COLUMNSPAN]];
-        [self setRowSpam:[aDecoder decodeIntForKey:STRING_ROWSPAN]];
+        [self setRowSpan:[aDecoder decodeIntForKey:STRING_ROWSPAN]];
         [self setTopMargin:[aDecoder decodeIntForKey:STRING_TOPMARGIN]];
         [self setLeftMargin:[aDecoder decodeIntForKey:STRING_LEFTMARGIN]];
         [self setIsFullScreen:[aDecoder decodeBoolForKey:STRING_ISFULLSCREEN]];
@@ -136,6 +137,7 @@
         [self setReConnectTime:[aDecoder decodeIntForKey:STRING_RECONNECTTIME]];
         [self setFontBgColor:[aDecoder decodeIntForKey:STRING_FONTBGCOLOR]];
         [self setFontFgColor:[aDecoder decodeIntForKey:STRING_FONTFGCOLOR]];
+        [self setCursorHeight:[aDecoder decodeIntForKey:STRING_CURSORHEIGHT]];
     }
     
 //    NSLog(@"initWithCoder, hostIp = %@", hostIp);
@@ -149,7 +151,7 @@
     [aCoder encodeObject:deviceID forKey:STRING_DEVICEID];
     [aCoder encodeInt:(int)enc forKey:STRING_ENC];
     [aCoder encodeInt:columnSpan forKey:STRING_COLUMNSPAN];
-    [aCoder encodeInt:rowSpam forKey:STRING_ROWSPAN];
+    [aCoder encodeInt:rowSpan forKey:STRING_ROWSPAN];
     [aCoder encodeInt:topMargin forKey:STRING_TOPMARGIN];
     [aCoder encodeInt:leftMargin forKey:STRING_LEFTMARGIN];
     [aCoder encodeBool:isFullScreen forKey:STRING_ISFULLSCREEN];

@@ -28,6 +28,7 @@
 #define _RECONNECT_TIME          5                       //重新连接时间
 #define _FONTFGCOLOR             1
 #define _FONTBGCOLOR             0
+#define _CARET_HEIGHT            2                       //光标高度
 
 #define STRING_HOSTIP            @"hostIp"
 #define STRING_HOSTPORT          @"hostPort"
