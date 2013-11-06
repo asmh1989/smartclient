@@ -174,6 +174,7 @@
 		A4A7E1EC1829CFD1004CE70A /* color.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = color.wav; path = ../../../Desktop/color.wav; sourceTree = "<group>"; };
 		A4A7E1ED1829CFD1004CE70A /* ascend.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ascend.wav; path = ../../../Desktop/ascend.wav; sourceTree = "<group>"; };
 		A4A7E1EE1829CFD1004CE70A /* alpha.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = alpha.wav; path = ../../../Desktop/alpha.wav; sourceTree = "<group>"; };
+		A4A7E1F81829DC17004CE70A /* StringForNSUserDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StringForNSUserDefaults.h; path = ../StringForNSUserDefaults.h; sourceTree = "<group>"; };
 		A4B6E404181E51D300F0A400 /* MessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageBox.h; sourceTree = "<group>"; };
 		A4B6E405181E51D300F0A400 /* MessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageBox.m; sourceTree = "<group>"; };
 		A4C3F70B1828E75E00CBE658 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -227,6 +228,8 @@
 		A445505F1823876100BBDDB9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A4632062180F8114000F9C69 /* SmartClinetViewController.h */,
+				A4632063180F8114000F9C69 /* SmartClinetViewController.m */,
 				A4E591081827681500265F60 /* EditViewController.h */,
 				A4E591091827681500265F60 /* EditViewController.m */,
 				A4E5910F18276B0A00265F60 /* StringInputTableViewCell.h */,
@@ -236,6 +239,7 @@
 				A46492F118224D9700B39E7E /* SmartClinetLeftMenuViewController.xib */,
 				A4455060182387C200BBDDB9 /* ConnectSettingViewController.h */,
 				A4455061182387C200BBDDB9 /* ConnectSettingViewController.m */,
+				A4A7E1F81829DC17004CE70A /* StringForNSUserDefaults.h */,
 				A4E5911218278DED00265F60 /* FontSettingViewController.h */,
 				A4E5911318278DED00265F60 /* FontSettingViewController.m */,
 				A4E5911C1827986D00265F60 /* ScreenSettingViewController.h */,
@@ -311,8 +315,6 @@
 				A44CB6BE1818E4D7006B5946 /* UI */,
 				A4632042180F80E3000F9C69 /* SmartClinetAppDelegate.h */,
 				A4632043180F80E3000F9C69 /* SmartClinetAppDelegate.m */,
-				A4632062180F8114000F9C69 /* SmartClinetViewController.h */,
-				A4632063180F8114000F9C69 /* SmartClinetViewController.m */,
 				A43D1FED1810C5F90067FB2B /* ParserMsg.h */,
 				A43D1FEE1810C5F90067FB2B /* ParserMsg.m */,
 				A47552A3181606420033D224 /* SettingForRuntime.h */,

@@ -14,6 +14,26 @@
 
 @implementation AboutSettingViewController
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        UIBarButtonItem *doneItem = [[UIBarButtonItem alloc]
+                                     initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                     target:self
+                                     action:@selector(save:)];
+        [[self navigationItem] setLeftBarButtonItem:doneItem];
+        
+        self.title = NSLocalizedString(@"About", nil);
+    }
+    return self;
+}
+
+- (IBAction)save:(id)sender
+{
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

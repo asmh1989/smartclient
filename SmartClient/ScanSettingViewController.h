@@ -6,8 +6,8 @@
 //  Copyright (c) 2013年 searching. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "JMStaticContentTableViewController.h"
 
-@interface ScanSettingViewController : UIViewController
+@interface ScanSettingViewController : JMStaticContentTableViewController
 
 @end

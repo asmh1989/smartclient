@@ -162,8 +162,9 @@ enum SettingType{
     }
 
     [self presentViewController:navController animated:YES completion:^{
-            [[UIApplication sharedApplication] setStatusBarHidden:NO];
+
     }];
     [self.mm_drawerController closeDrawerAnimated:YES completion:nil];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 @end

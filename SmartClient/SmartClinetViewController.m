@@ -14,6 +14,7 @@
 #import "ShowListEventArgs.h"
 #import "MessageBox.h"
 #import "UIViewController+MMDrawerController.h"
+#import "StringForNSUserDefaults.h"
 
 @interface SmartClinetViewController ()
 {
@@ -64,9 +65,12 @@
     if (settingStore.isFullScreen) {
         mView.frame= self.view.frame;
     } else {
-        CGRect frame = self.view.frame;
-        frame.origin.y = 20;
-        mView.frame = frame;
+        if (OSVersionIsAtLeastiOS7()) {
+            CGRect frame = self.view.frame;
+            frame.origin.y = 20;
+            mView.frame = frame;
+        }
+
     }
     
     toolBar.frame = CGRectMake(0.0, self.view.frame.size.height - toolBar.frame.size.height-mView.frame.origin.y, toolBar.frame.size.width, toolBar.frame.size.height);
@@ -82,7 +86,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
 }
 
 - (void)checkCurrentSocketStatus
@@ -95,6 +98,16 @@
 //        [socket readDataWithTimeout:-1 tag:1];
         NSLog(@"checkCurrentSocketStatus, and will restart connect socket server");
     }
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.mView setNeedsDisplay];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [self.mView setNeedsDisplay];
 }
 
 - (void)viewDidLoad
@@ -456,4 +469,29 @@
     }
 }
 
++ (void)initialize
+{
+    NSArray *keys = [[NSArray alloc] initWithObjects:
+                     //decode
+                     STR_ONE_DECODE, STR_QR_DECODE, STR_RECT_DECODE, STR_SOUND, STR_VIBRATE,
+                     //othersetting
+                     STR_MAC, STR_LOG, STR_SERIAL,
+                     //gps
+                     STR_ENABLE_GPS, STR_STARTUP_GPS, STR_GPS_TIME, STR_GPS_DISTANCE,
+                     //notification
+                     STR_NF_ACTIVE, STR_NF_SOUND, STR_NF_VIBRATE, STR_NF_TIME, STR_NF_SERVER, STR_NF_PORT, STR_NF_USER, STR_NF_PASSWORD,
+                     nil];
+    
+    NSArray *objects = [[NSArray alloc] initWithObjects:
+                        [NSNumber numberWithBool:YES], [NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES],[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],
+                        [NSNumber numberWithBool:YES], [NSNumber numberWithBool:YES], @"",
+                        [NSNumber numberWithBool:YES], [NSNumber numberWithBool:NO], @"1", @"1",
+                        [NSNumber numberWithBool:YES], @"", [NSNumber numberWithBool:YES],
+                        @"5", @"searching-info.com", @"80", @"", @"",
+                        nil];
+    NSDictionary *defaults = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+    
+}
 @end
