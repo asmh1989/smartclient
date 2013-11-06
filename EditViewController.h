@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 enum CellType{
     EditCell,
-    RadioCell
+    RadioCell,
+    RadioSoundCell
 };
 
 typedef void(^Finish)(NSString *value);

@@ -115,6 +115,7 @@
 {
     [super viewDidAppear:animated];
 }
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -130,6 +131,7 @@
         case EditCell:
             return 1;
         case RadioCell:
+        case RadioSoundCell:
             return [dataArray count];
     }
     return 1;
@@ -138,7 +140,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.type == RadioCell) {
+    if (self.type == RadioCell || self.type == RadioSoundCell) {
         int newRow = [indexPath row];
         int oldRow = (lastIndexPath != nil) ? [lastIndexPath row] : -1;
         if(newRow != oldRow)
@@ -153,11 +155,20 @@
         currentIndex = indexPath.row;
         if (!self.settingName) {
             action([NSString stringWithFormat:@"%d", currentIndex]);
+            if (self.type == RadioSoundCell) {
+                SystemSoundID soundID;
+                NSString *soundFile = [[NSBundle mainBundle]pathForResource:dataArray[currentIndex] ofType:@"wav"];
+                AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:soundFile], &soundID);
+                AudioServicesPlaySystemSound(soundID);
+                
+            }
+
         }else {
             action(dataArray[currentIndex]);
         }
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
         [[self navigationController] popViewControllerAnimated:YES];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
     }
 }
 
@@ -173,7 +184,7 @@
         cell.textField.delegate = self;
         cell.stringValue = settingName;
         return cell;
-    } else if(self.type == RadioCell){
+    } else if(self.type == RadioCell || self.type == RadioSoundCell){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];

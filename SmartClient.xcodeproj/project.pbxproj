@@ -50,7 +50,17 @@
 		A482E06D1823DB5A0056E0C2 /* JMStaticContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A482E0671823DB5A0056E0C2 /* JMStaticContentTableViewController.m */; };
 		A482E06E1823DB5A0056E0C2 /* JMStaticContentTableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = A482E0691823DB5A0056E0C2 /* JMStaticContentTableViewSection.m */; };
 		A482E06F1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A482E06B1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m */; };
+		A4A7E1EF1829CFD1004CE70A /* zing.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1E61829CFD1004CE70A /* zing.wav */; };
+		A4A7E1F01829CFD1004CE70A /* zeta.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1E71829CFD1004CE70A /* zeta.wav */; };
+		A4A7E1F11829CFD1004CE70A /* vector.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1E81829CFD1004CE70A /* vector.wav */; };
+		A4A7E1F21829CFD1004CE70A /* modern.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1E91829CFD1004CE70A /* modern.wav */; };
+		A4A7E1F31829CFD1004CE70A /* major.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1EA1829CFD1004CE70A /* major.wav */; };
+		A4A7E1F41829CFD1004CE70A /* confirm.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1EB1829CFD1004CE70A /* confirm.wav */; };
+		A4A7E1F51829CFD1004CE70A /* color.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1EC1829CFD1004CE70A /* color.wav */; };
+		A4A7E1F61829CFD1004CE70A /* ascend.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1ED1829CFD1004CE70A /* ascend.wav */; };
+		A4A7E1F71829CFD1004CE70A /* alpha.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1EE1829CFD1004CE70A /* alpha.wav */; };
 		A4B6E406181E51D300F0A400 /* MessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B6E405181E51D300F0A400 /* MessageBox.m */; };
+		A4C3F70C1828E75E00CBE658 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C3F70B1828E75E00CBE658 /* AVFoundation.framework */; };
 		A4E5910B1827681500265F60 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E591091827681500265F60 /* EditViewController.m */; };
 		A4E5911118276B0A00265F60 /* StringInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E5911018276B0A00265F60 /* StringInputTableViewCell.m */; };
 		A4E5911518278DED00265F60 /* FontSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E5911318278DED00265F60 /* FontSettingViewController.m */; };
@@ -155,8 +165,18 @@
 		A482E0691823DB5A0056E0C2 /* JMStaticContentTableViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStaticContentTableViewSection.m; sourceTree = "<group>"; };
 		A482E06A1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStaticContentTextFieldTableViewCell.h; sourceTree = "<group>"; };
 		A482E06B1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStaticContentTextFieldTableViewCell.m; sourceTree = "<group>"; };
+		A4A7E1E61829CFD1004CE70A /* zing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = zing.wav; path = ../../../Desktop/zing.wav; sourceTree = "<group>"; };
+		A4A7E1E71829CFD1004CE70A /* zeta.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = zeta.wav; path = ../../../Desktop/zeta.wav; sourceTree = "<group>"; };
+		A4A7E1E81829CFD1004CE70A /* vector.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = vector.wav; path = ../../../Desktop/vector.wav; sourceTree = "<group>"; };
+		A4A7E1E91829CFD1004CE70A /* modern.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = modern.wav; path = ../../../Desktop/modern.wav; sourceTree = "<group>"; };
+		A4A7E1EA1829CFD1004CE70A /* major.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = major.wav; path = ../../../Desktop/major.wav; sourceTree = "<group>"; };
+		A4A7E1EB1829CFD1004CE70A /* confirm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = confirm.wav; path = ../../../Desktop/confirm.wav; sourceTree = "<group>"; };
+		A4A7E1EC1829CFD1004CE70A /* color.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = color.wav; path = ../../../Desktop/color.wav; sourceTree = "<group>"; };
+		A4A7E1ED1829CFD1004CE70A /* ascend.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ascend.wav; path = ../../../Desktop/ascend.wav; sourceTree = "<group>"; };
+		A4A7E1EE1829CFD1004CE70A /* alpha.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = alpha.wav; path = ../../../Desktop/alpha.wav; sourceTree = "<group>"; };
 		A4B6E404181E51D300F0A400 /* MessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageBox.h; sourceTree = "<group>"; };
 		A4B6E405181E51D300F0A400 /* MessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageBox.m; sourceTree = "<group>"; };
+		A4C3F70B1828E75E00CBE658 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A4E591081827681500265F60 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditViewController.h; path = ../EditViewController.h; sourceTree = "<group>"; };
 		A4E591091827681500265F60 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditViewController.m; path = ../EditViewController.m; sourceTree = "<group>"; };
 		A4E5910F18276B0A00265F60 /* StringInputTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringInputTableViewCell.h; path = ../StringInputTableViewCell.h; sourceTree = "<group>"; };
@@ -183,6 +203,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4C3F70C1828E75E00CBE658 /* AVFoundation.framework in Frameworks */,
 				A463206E180FA4AB000F9C69 /* CFNetwork.framework in Frameworks */,
 				A4632036180F80E3000F9C69 /* CoreGraphics.framework in Frameworks */,
 				A4632038180F80E3000F9C69 /* UIKit.framework in Frameworks */,
@@ -267,6 +288,7 @@
 		A4632032180F80E3000F9C69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4C3F70B1828E75E00CBE658 /* AVFoundation.framework */,
 				A463206D180FA4AB000F9C69 /* CFNetwork.framework */,
 				A4632033180F80E3000F9C69 /* Foundation.framework */,
 				A4632035180F80E3000F9C69 /* CoreGraphics.framework */,
@@ -311,6 +333,7 @@
 		A463203A180F80E3000F9C69 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A4C3F6AA1828DEFA00CBE658 /* sound */,
 				A463203B180F80E3000F9C69 /* SmartClient-Info.plist */,
 				A463203C180F80E3000F9C69 /* InfoPlist.strings */,
 				A463203F180F80E3000F9C69 /* main.m */,
@@ -404,6 +427,22 @@
 			path = JMStaticContentTableViewController;
 			sourceTree = "<group>";
 		};
+		A4C3F6AA1828DEFA00CBE658 /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				A4A7E1E61829CFD1004CE70A /* zing.wav */,
+				A4A7E1E71829CFD1004CE70A /* zeta.wav */,
+				A4A7E1E81829CFD1004CE70A /* vector.wav */,
+				A4A7E1E91829CFD1004CE70A /* modern.wav */,
+				A4A7E1EA1829CFD1004CE70A /* major.wav */,
+				A4A7E1EB1829CFD1004CE70A /* confirm.wav */,
+				A4A7E1EC1829CFD1004CE70A /* color.wav */,
+				A4A7E1ED1829CFD1004CE70A /* ascend.wav */,
+				A4A7E1EE1829CFD1004CE70A /* alpha.wav */,
+			);
+			name = sound;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -482,10 +521,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4A7E1F51829CFD1004CE70A /* color.wav in Resources */,
+				A4A7E1EF1829CFD1004CE70A /* zing.wav in Resources */,
+				A4A7E1F61829CFD1004CE70A /* ascend.wav in Resources */,
+				A4A7E1F11829CFD1004CE70A /* vector.wav in Resources */,
+				A4A7E1F31829CFD1004CE70A /* major.wav in Resources */,
+				A4A7E1F01829CFD1004CE70A /* zeta.wav in Resources */,
 				A463203E180F80E3000F9C69 /* InfoPlist.strings in Resources */,
 				A46492F318224D9700B39E7E /* SmartClinetLeftMenuViewController.xib in Resources */,
 				A4632046180F80E3000F9C69 /* Images.xcassets in Resources */,
+				A4A7E1F71829CFD1004CE70A /* alpha.wav in Resources */,
 				A4E5912C1827990100265F60 /* AboutSettingViewController.xib in Resources */,
+				A4A7E1F21829CFD1004CE70A /* modern.wav in Resources */,
+				A4A7E1F41829CFD1004CE70A /* confirm.wav in Resources */,
 				A4E591171827911B00265F60 /* SmartClinetViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

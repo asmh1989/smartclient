@@ -17,9 +17,16 @@
 
 @synthesize  bgColor, fgColor, blinkColor, boldColor, fontBgColor, fontFgColor;
 
+@synthesize soundUsed;
+
 - (UIFont *)getCurrentFont
 {
     return [UIFont fontWithName:fontStyle size:fontSize];
+}
+
+- (NSArray *)getSounds{
+//    return [[NSArray alloc] initWithObjects:@"alpha", @"ascend", @"color", @"confirm", @"epsilon", @"gamma", @"major", @"modern", @"ripple", @"soft", @"weight", @"vector", @"zing", @"zeta", nil];
+    return [[NSArray alloc] initWithObjects:@"alpha", @"ascend", @"color", @"confirm", @"major", @"modern", @"vector", @"zing", @"zeta", nil];
 }
 
 -(UIColor *)getUIColor:(int) n
@@ -101,6 +108,7 @@
     [self setDeviceID:[self uuid]];
     [self setReConnectTime:_RECONNECT_TIME];
     [self setCursorHeight:_CARET_HEIGHT];
+    [self setSoundUsed:_SOUNDUSED];
     [self setEnc:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000)]; // use GB2312
     
     return self;
@@ -138,6 +146,7 @@
         [self setFontBgColor:[aDecoder decodeIntForKey:STRING_FONTBGCOLOR]];
         [self setFontFgColor:[aDecoder decodeIntForKey:STRING_FONTFGCOLOR]];
         [self setCursorHeight:[aDecoder decodeIntForKey:STRING_CURSORHEIGHT]];
+        [self setSoundUsed:[aDecoder decodeIntForKey:STRING_SOUNDUSED]];
     }
     
 //    NSLog(@"initWithCoder, hostIp = %@", hostIp);
@@ -164,6 +173,7 @@
     [aCoder encodeInt:reConnectTime forKey:STRING_RECONNECTTIME];
     [aCoder encodeInt:fontBgColor forKey:STRING_FONTBGCOLOR];
     [aCoder encodeInt:fontFgColor forKey:STRING_FONTFGCOLOR];
+    [aCoder encodeInt:soundUsed forKey:STRING_SOUNDUSED];
 //    NSLog(@"encodeWithCoder, hostIp = %@", hostIp);
 }
 

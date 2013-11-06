@@ -41,6 +41,8 @@
 
 
 @property (nonatomic) NSArray *colors;
+@property (nonatomic) int soundUsed;
 
 - (UIFont *)getCurrentFont;
+- (NSArray *)getSounds;
 @end

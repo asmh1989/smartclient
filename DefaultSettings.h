@@ -20,6 +20,7 @@
 #define _LEFTMARGIN              0                       //左边距
 #define _ISFULLSCREEN            NO                      //是否全屏显示
 #define _ISBEEP                  YES                     //是否有声音
+#define _SOUNDUSED               0                       //默认警告声
 #define _CURSORHEIGHT            2                       //关标的高度
 #define _FONTNAME                @"Helvetica"            //字体名
 #define _FONTSTYLE               @"Helvetica"            //字体样式
@@ -47,7 +48,8 @@
 #define STRING_SHOWCARET         @"showCaret"
 #define STRING_RECONNECTTIME     @"reconnecttime"
 #define STRING_FONTFGCOLOR       @"fontfgcolor"
-#define STRING_FONTBGCOLOR       @"fontbgcolor"   
+#define STRING_FONTBGCOLOR       @"fontbgcolor"
+#define STRING_SOUNDUSED         @"soundused"
 
 @interface DefaultSettings : NSObject
 
