@@ -14,6 +14,8 @@
 		A4455062182387C200BBDDB9 /* ConnectSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4455061182387C200BBDDB9 /* ConnectSettingViewController.m */; };
 		A44CB6BD1818C862006B5946 /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = A44CB6BC1818C862006B5946 /* Functions.m */; };
 		A44CB6C11818E4FE006B5946 /* VTSystemView.m in Sources */ = {isa = PBXBuildFile; fileRef = A44CB6C01818E4FE006B5946 /* VTSystemView.m */; };
+		A45D2917182A1C7D00EE88AD /* AboutSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A45D2919182A1C7D00EE88AD /* AboutSettingViewController.xib */; };
+		A45D2927182A259300EE88AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A45D2925182A259300EE88AD /* Localizable.strings */; };
 		A4632034180F80E3000F9C69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4632033180F80E3000F9C69 /* Foundation.framework */; };
 		A4632036180F80E3000F9C69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4632035180F80E3000F9C69 /* CoreGraphics.framework */; };
 		A4632038180F80E3000F9C69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4632037180F80E3000F9C69 /* UIKit.framework */; };
@@ -70,7 +72,6 @@
 		A4E591241827989500265F60 /* ScanSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E591231827989500265F60 /* ScanSettingViewController.m */; };
 		A4E59127182798EC00265F60 /* OtherSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E59126182798EC00265F60 /* OtherSettingViewController.m */; };
 		A4E5912B1827990100265F60 /* AboutSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E591291827990100265F60 /* AboutSettingViewController.m */; };
-		A4E5912C1827990100265F60 /* AboutSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E5912A1827990100265F60 /* AboutSettingViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,7 +85,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A40F734718272E63003D36AF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		A40F734818272E63003D36AF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		A429C75E181773CD0037666D /* ShowListEventArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowListEventArgs.h; sourceTree = "<group>"; };
 		A429C75F181773CD0037666D /* ShowListEventArgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowListEventArgs.m; sourceTree = "<group>"; };
@@ -100,8 +100,12 @@
 		A44CB6BC1818C862006B5946 /* Functions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Functions.m; sourceTree = "<group>"; };
 		A44CB6BF1818E4FE006B5946 /* VTSystemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTSystemView.h; sourceTree = "<group>"; };
 		A44CB6C01818E4FE006B5946 /* VTSystemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTSystemView.m; sourceTree = "<group>"; };
-		A45B8FF71827A02B0058E43F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A45B8FF81827A02D0058E43F /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A45D2918182A1C7D00EE88AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/AboutSettingViewController.xib; sourceTree = "<group>"; };
+		A45D291B182A1C8200EE88AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AboutSettingViewController.strings"; sourceTree = "<group>"; };
+		A45D291D182A1C8200EE88AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AboutSettingViewController.strings; sourceTree = "<group>"; };
+		A45D2926182A259300EE88AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A45D2929182A25B100EE88AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A4632030180F80E3000F9C69 /* SmartClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4632033180F80E3000F9C69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4632035180F80E3000F9C69 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -196,7 +200,6 @@
 		A4E59126182798EC00265F60 /* OtherSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherSettingViewController.m; sourceTree = "<group>"; };
 		A4E591281827990100265F60 /* AboutSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutSettingViewController.h; sourceTree = "<group>"; };
 		A4E591291827990100265F60 /* AboutSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutSettingViewController.m; sourceTree = "<group>"; };
-		A4E5912A1827990100265F60 /* AboutSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutSettingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,7 +255,7 @@
 				A4E59126182798EC00265F60 /* OtherSettingViewController.m */,
 				A4E591281827990100265F60 /* AboutSettingViewController.h */,
 				A4E591291827990100265F60 /* AboutSettingViewController.m */,
-				A4E5912A1827990100265F60 /* AboutSettingViewController.xib */,
+				A45D2919182A1C7D00EE88AD /* AboutSettingViewController.xib */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 		A463203A180F80E3000F9C69 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A45D2925182A259300EE88AD /* Localizable.strings */,
 				A4C3F6AA1828DEFA00CBE658 /* sound */,
 				A463203B180F80E3000F9C69 /* SmartClient-Info.plist */,
 				A463203C180F80E3000F9C69 /* InfoPlist.strings */,
@@ -533,7 +537,8 @@
 				A46492F318224D9700B39E7E /* SmartClinetLeftMenuViewController.xib in Resources */,
 				A4632046180F80E3000F9C69 /* Images.xcassets in Resources */,
 				A4A7E1F71829CFD1004CE70A /* alpha.wav in Resources */,
-				A4E5912C1827990100265F60 /* AboutSettingViewController.xib in Resources */,
+				A45D2927182A259300EE88AD /* Localizable.strings in Resources */,
+				A45D2917182A1C7D00EE88AD /* AboutSettingViewController.xib in Resources */,
 				A4A7E1F21829CFD1004CE70A /* modern.wav in Resources */,
 				A4A7E1F41829CFD1004CE70A /* confirm.wav in Resources */,
 				A4E591171827911B00265F60 /* SmartClinetViewController.xib in Resources */,
@@ -617,11 +622,28 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		A45D2919182A1C7D00EE88AD /* AboutSettingViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A45D2918182A1C7D00EE88AD /* Base */,
+				A45D291B182A1C8200EE88AD /* zh-Hans */,
+				A45D291D182A1C8200EE88AD /* en */,
+			);
+			name = AboutSettingViewController.xib;
+			sourceTree = "<group>";
+		};
+		A45D2925182A259300EE88AD /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A45D2926182A259300EE88AD /* zh-Hans */,
+				A45D2929182A25B100EE88AD /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		A463203C180F80E3000F9C69 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A40F734718272E63003D36AF /* zh-Hans */,
-				A45B8FF71827A02B0058E43F /* en */,
 				A45B8FF81827A02D0058E43F /* Base */,
 			);
 			name = InfoPlist.strings;

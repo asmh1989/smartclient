@@ -59,7 +59,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@" SmartClinetViewController  viewWillAppear....");
+//    NSLog(@" SmartClinetViewController  viewWillAppear....");
     [self.navigationController setNavigationBarHidden:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:settingStore.isFullScreen];
     if (settingStore.isFullScreen) {
@@ -95,7 +95,6 @@
         if (![socket connectToHost:[settingStore hostIp] onPort:[settingStore hostPort] error:&err]) {
             NSLog(@"Error : %@", err);
         }
-//        [socket readDataWithTimeout:-1 tag:1];
         NSLog(@"checkCurrentSocketStatus, and will restart connect socket server");
     }
 }
@@ -110,25 +109,50 @@
     [self.mView setNeedsDisplay];
 }
 
+- (IBAction)clickToolBarSetting:(id)sender
+{
+    [self.mm_drawerController openDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+}
+
+- (IBAction)clickToolBarUp:(id)sender
+{
+    [self dispatchMessage:MYKEY_UP tag:1];
+}
+
+- (IBAction)clickToolBarDown:(id)sender
+{
+    [self dispatchMessage:MYKEY_DOWN tag:1];
+}
+
+- (IBAction)clickToolBarCode:(id)sender
+{
+
+}
+
+- (IBAction)clickToolBarEnter:(id)sender
+{
+    [self dispatchMessage:MYKEY_ENTER tag:1];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     UIBarButtonItem *setting = [[UIBarButtonItem alloc] initWithImage:
                                  [UIImage imageNamed:@"Setting_Image.png"] style:UIBarButtonItemStyleBordered
-                                                                target:nil action:nil];
+                                                               target:nil action:@selector(clickToolBarSetting:)];
     UIBarButtonItem *up = [[UIBarButtonItem alloc] initWithImage:
                                  [UIImage imageNamed:@"Up_Image.png"] style:UIBarButtonItemStyleBordered
-                                                                target:nil action:nil];
+                                                                target:nil action:@selector(clickToolBarUp:)];
     UIBarButtonItem *down = [[UIBarButtonItem alloc] initWithImage:
                                  [UIImage imageNamed:@"Down_Image.png"] style:UIBarButtonItemStyleBordered
-                                                                target:nil action:nil];
+                                                                target:nil action:@selector(clickToolBarDown:)];
     UIBarButtonItem *code = [[UIBarButtonItem alloc] initWithImage:
                                  [UIImage imageNamed:@"Code_Image.png"] style:UIBarButtonItemStyleBordered
-                                                                target:nil action:nil];
+                                                                target:nil action:@selector(clickToolBarCode:)];
     UIBarButtonItem *enter = [[UIBarButtonItem alloc] initWithImage:
                                  [UIImage imageNamed:@"Enter_Image.png"] style:UIBarButtonItemStyleBordered
-                                                                target:nil action:nil];
+                                                                target:nil action:@selector(clickToolBarEnter:)];
     
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
@@ -166,6 +190,16 @@
     [self sendDataToSocket:setStr tag:1];
 
 }
+
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - socket action
 
 - (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket
 {
@@ -210,40 +244,35 @@
 }
 
 
-- (void)didReceiveMemoryWarning
+#pragma mark - textField Action
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSLog(@"textFieldDidBeginEditing text = %@", [textField text]);
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSLog(@"textFieldDidBeginEditing text = %@", [textField text]);
+}
 
-//- (void)textFieldDidBeginEditing:(UITextField *)textField
-//{
-//    NSLog(@"textFieldDidBeginEditing text = %@", [textField text]);
-//}
-//
-//- (void)textFieldDidEndEditing:(UITextField *)textField
-//{
-//    NSLog(@"textFieldDidBeginEditing text = %@", [textField text]);
-//}
-//
-//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-//{
-//    NSLog(@"textFieldShouldBeginEditing text = %@", [textField text]);
-//    return YES;
-//}
-//
-//- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-//{
-//    NSLog(@"textFieldShouldEndEditing text = %@", [textField text]);
-//    return YES;
-//}
-//
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-//{
-//    NSLog(@"shouldChangeCharactersInRange text = %@, string = %@", [textField text], string);
-//    return YES;
-//}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    NSLog(@"textFieldShouldBeginEditing text = %@", [textField text]);
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    NSLog(@"textFieldShouldEndEditing text = %@", [textField text]);
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSLog(@"shouldChangeCharactersInRange text = %@, string = %@", [textField text], string);
+    return YES;
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -255,6 +284,9 @@
     
     return YES;
 }
+
+
+#pragma mark - DispatchMessage Action
 
 -(void)sendExMessage:(NSString *)errorCode Reason:(NSString *)message
 {
@@ -314,7 +346,7 @@
             [textView setDelegate:self];
             [self.view addSubview:textView];
             [textView setHidden:NO];
-//            [textView setTintColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0]]; //隐藏光标
+            [textView setTintColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0]]; //隐藏光标
 //            [textView setTextColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0]]; //隐藏textview的输入内容
             return;
         }
