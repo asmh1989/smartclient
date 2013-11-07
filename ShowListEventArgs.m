@@ -94,25 +94,17 @@
         for(id key in tmp)
         {
             ShowListEventArgs *item = key;
-//            NSString *key1 = _TOSTRIING(curPoint.x);
-//            NSString *key2 = _TOSTRIING(curCaretPos.x - 1);
-//            if ([item.curChars objectForKey:key1] && ([item.curChars objectForKey:key2] || curPoint.x == curCaretPos.x))
-//            {
-//                for (NSString * key in [curChars allKeys])
-//                {
-//                    NSString *tmp = [curChars objectForKey:key];
-//                    [item.curChars setObject:tmp forKey:key];
-//                }
-//    				
-//                isadd=YES;
-//                [item setCurStatus:curCharAttribute];
-//            }
             int start = curPoint.x;
             int end = curCaretPos.x - 1;
-            if ((start >= item.curPoint.x && end <= item.curCaretPos.x ) || curPoint.x == curCaretPos.x) {
+            if ((start >= item.curPoint.x && end <= item.curCaretPos.x && start <=item.curCaretPos.x)) {
                 isadd = YES;
                 if ([item.curString length] > [curString length]) {
-                    item.curString = [curString stringByAppendingString:[item.curString substringFromIndex:(int)[curString length]]];
+                    NSString *str1 = [item.curString substringToIndex:(curPoint.x - item.curPoint.x)];
+                    NSString *str2 = [item.curString substringFromIndex:(curPoint.x - item.curPoint.x)+curString.length];
+//                    int len1 = str2.length;
+//                    int len2 = item.curString.length;
+                    item.curString =[NSString stringWithFormat:@"%@%@%@", str1, curString, str2];
+//                    int len3 = item.curString.length;
                 } else {
                     item.curString = curString;
                 }

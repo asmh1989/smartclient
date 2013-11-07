@@ -22,8 +22,8 @@
 @property (weak, nonatomic) IBOutlet VTSystemView *mView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
 
-@property (strong, nonatomic) UITextField *textView;
-
+@property (weak, nonatomic) IBOutlet UITextField *textView;
+@property (weak, nonatomic) IBOutlet UIView *textUIView;
 - (void) dispatchMessage:(NSString *)output tag:(long)tag;
 - (void) sendExMessage:(NSString *)errorCode Reason:(NSString *)message;
 - (void) checkCurrentSocketStatus;

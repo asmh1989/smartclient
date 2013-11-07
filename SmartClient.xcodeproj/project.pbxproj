@@ -231,8 +231,6 @@
 		A445505F1823876100BBDDB9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A4632062180F8114000F9C69 /* SmartClinetViewController.h */,
-				A4632063180F8114000F9C69 /* SmartClinetViewController.m */,
 				A4E591081827681500265F60 /* EditViewController.h */,
 				A4E591091827681500265F60 /* EditViewController.m */,
 				A4E5910F18276B0A00265F60 /* StringInputTableViewCell.h */,
@@ -256,6 +254,9 @@
 				A4E591281827990100265F60 /* AboutSettingViewController.h */,
 				A4E591291827990100265F60 /* AboutSettingViewController.m */,
 				A45D2919182A1C7D00EE88AD /* AboutSettingViewController.xib */,
+				A4632062180F8114000F9C69 /* SmartClinetViewController.h */,
+				A4632063180F8114000F9C69 /* SmartClinetViewController.m */,
+				A4E591191827911B00265F60 /* SmartClinetViewController.xib */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -324,7 +325,6 @@
 				A4632080180FDEBB000F9C69 /* SettingStore.m */,
 				A4632067180F853B000F9C69 /* SettingForConnect.h */,
 				A4632068180F853B000F9C69 /* SettingForConnect.m */,
-				A4E591191827911B00265F60 /* SmartClinetViewController.xib */,
 				A4632045180F80E3000F9C69 /* Images.xcassets */,
 				A463203A180F80E3000F9C69 /* Supporting Files */,
 			);
@@ -497,6 +497,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = searching;
 				TargetAttributes = {
+					A463202F180F80E3000F9C69 = {
+						DevelopmentTeam = 7MPDWSB26Z;
+					};
 					A463204A180F80E3000F9C69 = {
 						TestTargetID = A463202F180F80E3000F9C69;
 					};
@@ -749,6 +752,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartClient/SmartClient-Prefix.pch";
 				INFOPLIST_FILE = "SmartClient/SmartClient-Info.plist";
@@ -763,6 +767,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartClient/SmartClient-Prefix.pch";
 				INFOPLIST_FILE = "SmartClient/SmartClient-Info.plist";

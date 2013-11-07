@@ -10,9 +10,9 @@
 
 
 // 公司内网
-//#define _HOSTIP                @"192.168.8.239"
+#define _HOSTIP                @"192.168.8.239"
 // 外网
-#define _HOSTIP                  @"searching-info.com"   //当前服务器ip
+//#define _HOSTIP                  @"searching-info.com"   //当前服务器ip
 #define _HOSTPORT                23                      //当前服务器端口
 #define _COLUMNSPAN              0                       //列间距
 #define _ROWSPAN                 0                       //行间距

@@ -37,6 +37,8 @@
 
 @synthesize  mView, textView, settings, stringShowList, settingStore, outBuff, toolBar;
 
+@synthesize textUIView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -217,10 +219,10 @@
     NSString *msg = [[NSString alloc] initWithData:data encoding:enc];
     NSLog(@"didReadData data = %@, tag = %ld", msg, tag);
     [parser parserString:msg];
-    if ([msg length] != 7  && [msg length] != 6) {           //去除单独设置光标
+//    if ([msg length] != 7  && [msg length] != 6) {           //去除单独设置光标
         [mView setNeedsDisplay];
-    }
-    [textView setText:@""];
+//    }
+//    [textView setText:@""];
     msg = nil;
     [self showTextView];
     [sock readDataWithTimeout:-1 tag:tag];
@@ -271,14 +273,19 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSLog(@"shouldChangeCharactersInRange text = %@, string = %@", [textField text], string);
+    if ([string isEqualToString:@""]) {
+        [self dispatchMessage:MYKEY_DEL tag:1];
+    } else {
+        [self dispatchMessage:string tag:1];
+    }
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSLog(@"textFieldShouldReturn...");
-    NSString *str = [textView text];
-    [self dispatchMessage:str tag:2];
+//    NSString *str = [textView text];
+//    [self dispatchMessage:str tag:2];
     [textField resignFirstResponder];
     [self dispatchMessage:MYKEY_ENTER tag:1];
     
@@ -339,15 +346,17 @@
             CGFloat Y = topMargin + (size.height+rowSpan) * r.origin.y;
             
             CGSize s = CGSizeMake(size.width * r.size.width, size.height);
-            CGRect textRect = CGRectMake(X+mView.frame.origin.x, Y+mView.frame.origin.y, s.width, s.height);
-            [textView removeFromSuperview];
-            textView = [[UITextField alloc] initWithFrame:textRect];
-            [textView setFont:myFont];
-            [textView setDelegate:self];
-            [self.view addSubview:textView];
-            [textView setHidden:NO];
+            CGRect textRect = CGRectMake(X+mView.frame.origin.x, Y, s.width, s.height);
+            
+//            [textView removeFromSuperview];
+            self.textView.frame = textRect;
+//            [textView setFont:myFont];
+//            [textView setDelegate:self];
+//            [textUIView addSubview:textView];
+            [self.textView setHidden:NO];
+//            [self.textView becomeFirstResponder];
             [textView setTintColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0]]; //隐藏光标
-//            [textView setTextColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0]]; //隐藏textview的输入内容
+            [textView setTextColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0]]; //隐藏textview的输入内容
             return;
         }
     }
