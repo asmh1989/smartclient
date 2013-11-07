@@ -92,8 +92,8 @@
 		A429C762181775FB0037666D /* StringShowList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringShowList.m; sourceTree = "<group>"; };
 		A43D1FED1810C5F90067FB2B /* ParserMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserMsg.h; sourceTree = "<group>"; };
 		A43D1FEE1810C5F90067FB2B /* ParserMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParserMsg.m; sourceTree = "<group>"; };
-		A445505C18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMExampleDrawerVisualStateManager.h; sourceTree = "<group>"; };
-		A445505D18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMExampleDrawerVisualStateManager.m; sourceTree = "<group>"; };
+		A445505C18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMExampleDrawerVisualStateManager.h; path = ../MMExampleDrawerVisualStateManager.h; sourceTree = "<group>"; };
+		A445505D18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMExampleDrawerVisualStateManager.m; path = ../MMExampleDrawerVisualStateManager.m; sourceTree = "<group>"; };
 		A4455060182387C200BBDDB9 /* ConnectSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectSettingViewController.h; sourceTree = "<group>"; };
 		A4455061182387C200BBDDB9 /* ConnectSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectSettingViewController.m; sourceTree = "<group>"; };
 		A44CB6BB1818C862006B5946 /* Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		A44CB6BF1818E4FE006B5946 /* VTSystemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTSystemView.h; sourceTree = "<group>"; };
 		A44CB6C01818E4FE006B5946 /* VTSystemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTSystemView.m; sourceTree = "<group>"; };
 		A45B8FF81827A02D0058E43F /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A45D2918182A1C7D00EE88AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/AboutSettingViewController.xib; sourceTree = "<group>"; };
+		A45D2918182A1C7D00EE88AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AboutSettingViewController.xib; sourceTree = "<group>"; };
 		A45D291B182A1C8200EE88AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AboutSettingViewController.strings"; sourceTree = "<group>"; };
 		A45D291D182A1C8200EE88AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AboutSettingViewController.strings; sourceTree = "<group>"; };
 		A45D2926182A259300EE88AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -143,8 +143,8 @@
 		A46492CC18222B2E00B39E7E /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
 		A46492CD18222B2E00B39E7E /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
 		A46492CE18222B2E00B39E7E /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
-		A46492D918222D5300B39E7E /* MMNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMNavigationController.h; sourceTree = "<group>"; };
-		A46492DA18222D5300B39E7E /* MMNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMNavigationController.m; sourceTree = "<group>"; };
+		A46492D918222D5300B39E7E /* MMNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMNavigationController.h; path = ../MMNavigationController.h; sourceTree = "<group>"; };
+		A46492DA18222D5300B39E7E /* MMNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMNavigationController.m; path = ../MMNavigationController.m; sourceTree = "<group>"; };
 		A46492EF18224D9700B39E7E /* SmartClinetLeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SmartClinetLeftMenuViewController.h; path = ../SmartClinetLeftMenuViewController.h; sourceTree = "<group>"; };
 		A46492F018224D9700B39E7E /* SmartClinetLeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SmartClinetLeftMenuViewController.m; path = ../SmartClinetLeftMenuViewController.m; sourceTree = "<group>"; };
 		A46492F118224D9700B39E7E /* SmartClinetLeftMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SmartClinetLeftMenuViewController.xib; path = ../SmartClinetLeftMenuViewController.xib; sourceTree = "<group>"; };
@@ -308,14 +308,12 @@
 		A4632039180F80E3000F9C69 /* SmartClient */ = {
 			isa = PBXGroup;
 			children = (
+				A463207B180FD0DF000F9C69 /* GCDAsyncSocket */,
 				A482E0621823DB5A0056E0C2 /* JMStaticContentTableViewController */,
-				A445505F1823876100BBDDB9 /* ViewController */,
-				A445505C18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.h */,
-				A445505D18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m */,
-				A46492D918222D5300B39E7E /* MMNavigationController.h */,
-				A46492DA18222D5300B39E7E /* MMNavigationController.m */,
 				A46492C518222B2E00B39E7E /* MMDrawerController */,
 				A44CB6BE1818E4D7006B5946 /* UI */,
+				A445505F1823876100BBDDB9 /* ViewController */,
+				A47552AF1816460E0033D224 /* SmartClientCore */,
 				A4632042180F80E3000F9C69 /* SmartClinetAppDelegate.h */,
 				A4632043180F80E3000F9C69 /* SmartClinetAppDelegate.m */,
 				A43D1FED1810C5F90067FB2B /* ParserMsg.h */,
@@ -328,8 +326,6 @@
 				A4632068180F853B000F9C69 /* SettingForConnect.m */,
 				A4E591191827911B00265F60 /* SmartClinetViewController.xib */,
 				A4632045180F80E3000F9C69 /* Images.xcassets */,
-				A47552AF1816460E0033D224 /* SmartClientCore */,
-				A463207B180FD0DF000F9C69 /* GCDAsyncSocket */,
 				A463203A180F80E3000F9C69 /* Supporting Files */,
 			);
 			path = SmartClient;
@@ -380,6 +376,10 @@
 		A46492C518222B2E00B39E7E /* MMDrawerController */ = {
 			isa = PBXGroup;
 			children = (
+				A445505C18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.h */,
+				A445505D18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m */,
+				A46492D918222D5300B39E7E /* MMNavigationController.h */,
+				A46492DA18222D5300B39E7E /* MMNavigationController.m */,
 				A46492C618222B2E00B39E7E /* MMDrawerBarButtonItem.h */,
 				A46492C718222B2E00B39E7E /* MMDrawerBarButtonItem.m */,
 				A46492C818222B2E00B39E7E /* MMDrawerController+Subclass.h */,
