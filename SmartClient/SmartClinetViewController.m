@@ -156,14 +156,18 @@
 #endif
         CGRect keyboardBounds;
         [keyboardBoundsValue getValue:&keyboardBounds];
-//        CGRect rect = textView.frame;
-//        CGRect rect2 = textUIView.frame;
-        int len =keyboardBounds.origin.y - textView.frame.origin.y + textView.frame.size.height;
-        if (len > 16) {
+        int len =keyboardBounds.origin.y - (textView.frame.origin.y + textView.frame.size.height+mView.frame.origin.y);
+
+        if (len > 20) {
             return;
         }
         
-        NSInteger offset =16 - len;
+        NSInteger offset =20 - len;
+        if (keyboardBounds.origin.y == 0 && 160 > (textView.frame.origin.y + textView.frame.size.height+mView.frame.origin.y)) {
+            return;
+        } else {
+            offset = (textView.frame.origin.y + textView.frame.size.height+mView.frame.origin.y) - 160;
+        }
         CGRect listFrame = CGRectMake(0, -offset, self.view.frame.size.width,self.view.frame.size.height);
         NSLog(@"offset is %d",offset);
         [UIView beginAnimations:@"anim" context:NULL];
@@ -215,9 +219,10 @@
     [self sendFirstConnectInfo];
     [mView setDelegate:self];
     
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
-    gesture.numberOfTapsRequired = 1;
-    [self.view addGestureRecognizer:gesture];
+//    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
+//    gesture.numberOfTapsRequired = 1;
+//    
+//    [self.mView addGestureRecognizer:gesture];
     
     if(IOS_VERSION<5.0)
     {
@@ -325,21 +330,21 @@
     [UIView commitAnimations];
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    NSLog(@"textFieldShouldBeginEditing text = %@", [textField text]);
-    return YES;
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    NSLog(@"textFieldShouldEndEditing text = %@", [textField text]);
-    return YES;
-}
+//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+//{
+//    NSLog(@"textFieldShouldBeginEditing text = %@", [textField text]);
+//    return YES;
+//}
+//
+//- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+//{
+//    NSLog(@"textFieldShouldEndEditing text = %@", [textField text]);
+//    return YES;
+//}
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    NSLog(@"shouldChangeCharactersInRange text = %@, string = %@", [textField text], string);
+//    NSLog(@"shouldChangeCharactersInRange text = %@, string = %@", [textField text], string);
     if ([string isEqualToString:@""]) {
         [self dispatchMessage:MYKEY_DEL tag:1];
     } else {
@@ -432,6 +437,7 @@
 
 - (void)handleTouchMessage:(NSString *)msg
 {
+    [self hidenKeyboard];
     [self dispatchMessage:msg tag:3];
 }
 
