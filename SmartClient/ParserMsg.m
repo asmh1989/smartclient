@@ -639,7 +639,7 @@ typedef struct nextAS{
         curNSString = [msg substringWithRange:NSMakeRange(i, 1)];
         n = [curNSString dataUsingEncoding:[settingStore enc]];
         [n getBytes:&curChar];
-        
+        n = nil;
 //        if (curChar == 0x1b) {
 //            NSLog(@"stop... becase curChar = %@", curNSString);
 //        }

@@ -314,10 +314,10 @@
 
 #pragma mark - textField Action
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    NSLog(@"textFieldDidBeginEditing text = %@", [textField text]);
-}
+//- (void)textFieldDidBeginEditing:(UITextField *)textField
+//{
+//    NSLog(@"textFieldDidBeginEditing text = %@", [textField text]);
+//}
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
@@ -355,7 +355,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSLog(@"textFieldShouldReturn...");
+//    NSLog(@"textFieldShouldReturn...");
 //    NSString *str = [textView text];
 //    [self dispatchMessage:str tag:2];
     [textField resignFirstResponder];
