@@ -27,6 +27,8 @@
 @property (nonatomic) SettingForConnect *settingStore;
 @property (nonatomic) StringShowList *stringShowList;
 @property (nonatomic, copy) NSString *outBuff;
+@property (strong, nonatomic) UITextField *textView;
+@property (strong, nonatomic) UIView *textUIView;
 
 - (void) sendDataToSocket:(NSString *)output tag:(long)tag;
 - (void) sendFirstConnectInfo;
@@ -136,6 +138,11 @@
     [self dispatchMessage:MYKEY_ENTER tag:1];
 }
 
+-(void)hidenKeyboard
+{
+    [self.textView resignFirstResponder];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -161,10 +168,20 @@
     [ self.toolBar setItems:[NSArray arrayWithObjects:flexItem, setting, flexItem, up, flexItem, down, flexItem, code, flexItem, enter, flexItem, nil]];
     
     // Do any additional setup after loading the view from its nib.
+    textUIView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320,416)];
+    textView = [[UITextField alloc] init];
+//    [textUIView setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.1]];
+    [textUIView addSubview:textView];
+    [self.mView addSubview:textUIView];
+    
     socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     
     [self sendFirstConnectInfo];
     [mView setDelegate:self];
+    
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
+    gesture.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:gesture];
 }
 
 - (void)sendFirstConnectInfo
@@ -346,13 +363,12 @@
             CGFloat Y = topMargin + (size.height+rowSpan) * r.origin.y;
             
             CGSize s = CGSizeMake(size.width * r.size.width, size.height);
-            CGRect textRect = CGRectMake(X+mView.frame.origin.x, Y, s.width, s.height);
+            CGRect textRect = CGRectMake(X, Y, s.width, s.height);
             
 //            [textView removeFromSuperview];
             self.textView.frame = textRect;
 //            [textView setFont:myFont];
-//            [textView setDelegate:self];
-//            [textUIView addSubview:textView];
+            [textView setDelegate:self];
             [self.textView setHidden:NO];
 //            [self.textView becomeFirstResponder];
             [textView setTintColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0]]; //隐藏光标

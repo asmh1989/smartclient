@@ -497,9 +497,6 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = searching;
 				TargetAttributes = {
-					A463202F180F80E3000F9C69 = {
-						DevelopmentTeam = 7MPDWSB26Z;
-					};
 					A463204A180F80E3000F9C69 = {
 						TestTargetID = A463202F180F80E3000F9C69;
 					};
