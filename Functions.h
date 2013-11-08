@@ -10,6 +10,7 @@
 
 #define _TOSTRIING(N)           [NSNumber numberWithInt:(int)(N)]//[NSString stringWithFormat:@"%d", (int)(N)]
 #define COMBINE(N, M)           [NSString stringWithFormat:@"%c%@",(N), (M)]
+#define IOS_VERSION             [[[UIDevice currentDevice] systemVersion] floatValue]
 
 #define MYKEY_SHIFT               COMBINE(0x1b, @"[Z")
 #define MYKEY_RETURN              COMBINE(0x0d, @"")

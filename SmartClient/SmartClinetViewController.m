@@ -143,6 +143,42 @@
     [self.textView resignFirstResponder];
 }
 
+-(void)keyboardWillShow:(NSNotification *)notification
+{
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_3_2
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+#endif
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_3_2
+        NSValue *keyboardBoundsValue = [[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey];
+#else
+        NSValue *keyboardBoundsValue = [[notification userInfo] objectForKey:UIKeyboardBoundsUserInfoKey];
+#endif
+        CGRect keyboardBounds;
+        [keyboardBoundsValue getValue:&keyboardBounds];
+//        CGRect rect = textView.frame;
+//        CGRect rect2 = textUIView.frame;
+        int len =keyboardBounds.origin.y - textView.frame.origin.y + textView.frame.size.height;
+        if (len > 16) {
+            return;
+        }
+        
+        NSInteger offset =16 - len;
+        CGRect listFrame = CGRectMake(0, -offset, self.view.frame.size.width,self.view.frame.size.height);
+        NSLog(@"offset is %d",offset);
+        [UIView beginAnimations:@"anim" context:NULL];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationDuration:0.3];
+        //处理移动事件，将各视图设置最终要达到的状态
+        
+        self.view.frame=listFrame;
+        
+        [UIView commitAnimations];
+        
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -182,6 +218,14 @@
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
     gesture.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:gesture];
+    
+    if(IOS_VERSION<5.0)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillHideNotification object:nil];
+    }else{
+         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    }
 }
 
 - (void)sendFirstConnectInfo
@@ -273,6 +317,12 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     NSLog(@"textFieldDidBeginEditing text = %@", [textField text]);
+    NSTimeInterval animationDuration = 0.30f;
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    CGRect rect = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
+    self.view.frame = rect;
+    [UIView commitAnimations];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
