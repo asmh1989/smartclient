@@ -491,6 +491,7 @@ typedef struct nextAS{
      ];
     
     [elmentsDict setObject:[[ NSArray alloc] initWithObjects:
+        [[CharEventInfo alloc] initWithData:Message CharFrom:(unsigned short int)0x00 CharTo:(unsigned short int)0x20 NextActions:ActionMessage NextState:None],
         [[CharEventInfo alloc] initWithData:Message CharFrom:(unsigned short int)0x20 CharTo:(unsigned short int)0x3D NextActions:ActionMessage NextState:None],
         [[CharEventInfo alloc] initWithData:Message CharFrom:(unsigned short int)0x3F CharTo:(unsigned short int)0xFFFF NextActions:ActionMessage NextState:None],
         //> 62 当自定义的结束时,就转到原来的AnyWhere状态,并执行SpecialExcute

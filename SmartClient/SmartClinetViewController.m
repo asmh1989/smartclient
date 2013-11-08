@@ -465,10 +465,17 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSLog(@"clickedButtonAtIndex %ld", (long)buttonIndex);
-    NSDictionary *dic = [box map];
-    NSString *msg = [dic objectForKey:_TOSTRIING(buttonIndex)];
-    msg = [NSString stringWithFormat:@"%@%@%@%@", CUSACTIVE_MSGBOX_SEND, @" Result=\"", msg, @"\" />"];
-    [self dispatchMessage:msg tag:1];
+
+    if (box.messageType == Message) {
+        NSDictionary *dic = [box map];
+        NSString *msg = [dic objectForKey:_TOSTRIING(buttonIndex)];
+        msg = [NSString stringWithFormat:@"%@%@%@%@", CUSACTIVE_MSGBOX_SEND, @" Result=\"", msg, @"\" />"];
+        [self dispatchMessage:msg tag:1];
+    } else if(box.messageType == MessageOption){
+        [self dispatchMessage:[NSString stringWithFormat:@"%d", buttonIndex] tag:1];
+    }
+
+    box = nil;
 }
 
 - (void)HandlerMessageBoxHandler:(NSString *)param
@@ -515,6 +522,49 @@
     }
 }
 
+- (void)HandlerOptionDialogHandler:(NSString *)param
+{
+    if(param){
+        NSString *msgStr=@"";
+        NSString *restparamStr = @"";
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        
+        if([param rangeOfString:@"Message"].location != NSNotFound)
+        {
+            NSString *msg = param;
+            int pos1=(int)[msg rangeOfString:@"Message"].location+1;
+            msg = [msg substringWithRange:NSMakeRange(pos1, [msg length] - pos1)];
+            int pos2=(int)[msg rangeOfString:@"\""].location+1;
+            msg = [msg substringWithRange:NSMakeRange(pos2, [msg length] - pos2)];
+            int pos3=(int)[msg rangeOfString:@"\""].location;
+            
+            msgStr =  [msg substringWithRange:NSMakeRange(0, pos3)];
+            restparamStr =[ msg substringFromIndex:pos3];
+
+        }
+        
+        while (([restparamStr rangeOfString:@"="].location != NSNotFound)) {
+            NSString *msg = restparamStr;
+            int key = 0;
+            int pos1=(int)[msg rangeOfString:@"="].location+1;
+            key = [[msg substringWithRange:NSMakeRange(1, pos1 - 2)] intValue];
+            msg = [msg substringWithRange:NSMakeRange(pos1, [msg length] - pos1)];
+            int pos2=(int)[msg rangeOfString:@"\""].location+1;
+            msg = [msg substringWithRange:NSMakeRange(pos2, [msg length] - pos2)];
+            int pos3=(int)[msg rangeOfString:@"\""].location;
+            
+            NSString *obj =  [msg substringWithRange:NSMakeRange(0, pos3)];
+            [dic setObject:obj forKey:_TOSTRIING(key)];
+            restparamStr =[ msg substringFromIndex:pos3];
+        }
+        
+        UIAlertView *alert = [box createDialog:msgStr Options:dic];
+        [alert setDelegate:self];
+        [alert setMessage:msgStr];
+        [alert show];
+    }
+}
+
 - (void)HandlerCAMHandler:(NSString *)param
 {
     if (param) {
@@ -539,11 +589,6 @@
 }
 
 - (void)HandlerWEBHandler:(NSString *)param
-{
-    
-}
-
-- (void)HandlerOptionDialogHandler:(NSString *)param
 {
     
 }

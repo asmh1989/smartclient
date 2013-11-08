@@ -16,7 +16,7 @@
 #endif
 
 //控制nslog
-#ifndef DEBUG
+#ifdef DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__)
 #define debugMethod() NSLog(@"%s", __func__)
 #else

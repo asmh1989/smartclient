@@ -74,19 +74,22 @@
 
 @implementation MessageBox
 
-@synthesize map;
+@synthesize map, messageType;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         self.map = [[NSMutableDictionary alloc]init];
+        messageType = Message;
     }
     return self;
 }
 - (UIAlertView *)createDialog:(int)buttonType DefButtonType:(int)defaultButtonType
 {
     NSMutableDictionary *titleBtn = [[NSMutableDictionary alloc] init];
+    messageType = Message;
+    [map removeAllObjects];
     switch(buttonType){
 		case MessageBoxButtons_OK:
             [titleBtn setObject:@"确定" forKey:_TONSNUMBER(0)];
@@ -157,19 +160,52 @@
     int len = [sortKey count];
     if (len == 1) {
         NSString * str = [titleBtn objectForKey:sortKey[0]];
+
             view = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:str otherButtonTitles: nil];
     } else if (len == 2) {
         NSString * str = [titleBtn objectForKey:sortKey[0]];
         NSString * str2 = [titleBtn objectForKey:sortKey[1]];
+
         view = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:str otherButtonTitles:str2, nil];
     } else if(len == 3) {
         NSString * str = [titleBtn objectForKey:sortKey[0]];
         NSString * str2 = [titleBtn objectForKey:sortKey[1]];
         NSString * str3 = [titleBtn objectForKey:sortKey[2]];
-
+        
         view = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:str otherButtonTitles:str2, str3, nil];
     }
 
+    return view;
+}
+
+- (UIAlertView *)createDialog:(NSString *)msg Options:(NSDictionary *)options
+{
+    messageType = MessageOption;
+    UIAlertView *view;
+    int len = [options count];
+    NSArray *sortKey = [options allKeys];
+    if (len == 1) {
+        NSString * str = [options objectForKey:sortKey[0]];
+        
+//        [map setObject:sortKey[0] forKey:_TONSNUMBER(0)];
+        view = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:str otherButtonTitles: nil];
+    } else if (len == 2) {
+        NSString * str = [options objectForKey:sortKey[0]];
+        NSString * str2 = [options objectForKey:sortKey[1]];
+        
+//        [map setObject:sortKey[0] forKey:_TONSNUMBER(0)];
+//        [map setObject:sortKey[1] forKey:_TONSNUMBER(1)];
+        view = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:str otherButtonTitles:str2, nil];
+    } else if(len == 3) {
+        NSString * str = [options objectForKey:sortKey[0]];
+        NSString * str2 = [options objectForKey:sortKey[1]];
+        NSString * str3 = [options objectForKey:sortKey[2]];
+        
+//        [map setObject:sortKey[0] forKey:_TONSNUMBER(0)];
+//        [map setObject:sortKey[1] forKey:_TONSNUMBER(1)];
+//        [map setObject:sortKey[2] forKey:_TONSNUMBER(2)];
+        view = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:str otherButtonTitles:str2, str3, nil];
+    }
     return view;
 }
 @end
