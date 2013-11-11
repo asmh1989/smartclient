@@ -19,6 +19,8 @@
 
 @synthesize soundUsed;
 
+@synthesize pictureQuality, pictureTimeSize, pictureType;
+
 - (UIFont *)getCurrentFont
 {
     return [UIFont fontWithName:fontStyle size:fontSize];
@@ -28,6 +30,22 @@
 //    return [[NSArray alloc] initWithObjects:@"alpha", @"ascend", @"color", @"confirm", @"epsilon", @"gamma", @"major", @"modern", @"ripple", @"soft", @"weight", @"vector", @"zing", @"zeta", nil];
     return [[NSArray alloc] initWithObjects:@"alpha", @"ascend", @"color", @"confirm", @"major", @"modern", @"vector", @"zing", @"zeta", nil];
 }
+
+- (NSArray *)getPictureQualityArray
+{
+    return [[NSArray alloc] initWithObjects:NSLocalizedString(@"quality_high", nil), NSLocalizedString(@"quality_middle", nil),NSLocalizedString(@"quality_low", nil),   nil];
+}
+
+- (NSArray *)getPictureTimeSizeArray
+{
+    return [[NSArray alloc] initWithObjects:NSLocalizedString(@"slow", nil), NSLocalizedString(@"general", nil), NSLocalizedString(@"fast", nil), NSLocalizedString(@"very fast", nil), nil];
+}
+
+-  (NSArray *)getPictureTypeArray
+{
+    return  [[NSArray alloc] initWithObjects:@"jpeg", @"png", nil];
+}
+
 
 -(UIColor *)getUIColor:(int) n
 {
@@ -109,6 +127,9 @@
     [self setReConnectTime:_RECONNECT_TIME];
     [self setCursorHeight:_CARET_HEIGHT];
     [self setSoundUsed:_SOUNDUSED];
+    [self setPictureQuality:_PICTURE_QUALITY];
+    [self setPictureTimeSize:_PICTURE_TIME_SIZE];
+    [self setPictureType:_PICTURE_TYPE];
     [self setEnc:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000)]; // use GB2312
     
     return self;
@@ -147,6 +168,9 @@
         [self setFontFgColor:[aDecoder decodeIntForKey:STRING_FONTFGCOLOR]];
         [self setCursorHeight:[aDecoder decodeIntForKey:STRING_CURSORHEIGHT]];
         [self setSoundUsed:[aDecoder decodeIntForKey:STRING_SOUNDUSED]];
+        [self setPictureType:[aDecoder decodeIntForKey:STRING_PICTURE_T]];
+        [self setPictureQuality:[aDecoder decodeIntForKey:STRING_PICTURE_Q]];
+        [self setPictureTimeSize:[aDecoder decodeIntForKey:STRING_PICTURE_S]];
     }
     
 //    NSLog(@"initWithCoder, hostIp = %@", hostIp);
@@ -174,6 +198,9 @@
     [aCoder encodeInt:fontBgColor forKey:STRING_FONTBGCOLOR];
     [aCoder encodeInt:fontFgColor forKey:STRING_FONTFGCOLOR];
     [aCoder encodeInt:soundUsed forKey:STRING_SOUNDUSED];
+    [aCoder encodeInt:pictureType forKey:STRING_PICTURE_T];
+    [aCoder encodeInt:pictureQuality forKey:STRING_PICTURE_Q];
+    [aCoder encodeInt:pictureTimeSize forKey:STRING_PICTURE_S];
 //    NSLog(@"encodeWithCoder, hostIp = %@", hostIp);
 }
 

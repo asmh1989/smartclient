@@ -43,6 +43,14 @@
 @property (nonatomic) NSArray *colors;
 @property (nonatomic) int soundUsed;
 
+@property (nonatomic) int pictureQuality;
+@property (nonatomic) int pictureTimeSize;
+@property (nonatomic) int pictureType;
+
 - (UIFont *)getCurrentFont;
 - (NSArray *)getSounds;
+
+- (NSArray *)getPictureQualityArray;
+- (NSArray *)getPictureTimeSizeArray;
+- (NSArray *)getPictureTypeArray;
 @end

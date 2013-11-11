@@ -237,6 +237,8 @@
         CGContextFillRect(context, CGRectMake(X, Y, size.width, settingStore.cursorHeight));
         CGContextStrokePath(context);
     }
+    
+    myFont = nil;
 }
 
 

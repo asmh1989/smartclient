@@ -19,8 +19,6 @@
 #import "CustomIOS7AlertView.h"
 
 
-#define  ONE_TIME_SEND_BYTES 8*1024
-
 @interface SmartClinetViewController ()
 {
     MessageBox *box;
@@ -671,26 +669,28 @@
     [alertView setOnButtonTouchUpInside:^(CustomIOS7AlertView *alertView, int buttonIndex) {
 //        NSLog(@"Block: Button at position %d is clicked on alertView %d.", buttonIndex, [alertView tag]);
         if (buttonIndex == 1) {
-//            CGSize size2 = image.size;
-//            BOOL hw = size2.height > size2.width ;
-//            int top = hw ? size2.height : size2.width;
-//            int scaled = 1;
-//            while (top > 800) {
-//                top /= 2;
-//                scaled *= 2;
-//            }
-//            UIImage *newImage = [self imageWithImage:image scaledToSize:CGSizeMake(size2.width/scaled, size2.height/scaled)];
-//            NSData *data = UIImagePNGRepresentation(newImage);
-            NSData *data = UIImageJPEGRepresentation(image, 0.5);
+            NSData *data;
+            int type = [settingStore pictureType];
+            int quality = [settingStore pictureQuality];
+            if (type == 0) { // jpeg
+                data = UIImageJPEGRepresentation(image, 1.0 / (quality + 2));
+            } else if(type == 1){ //png
+                int scaled = 1+quality+2;
+                UIImage *newImage = [self imageWithImage:image scaledToSize:CGSizeMake(image.size.width/scaled, image.size.height/scaled)];
+                data = UIImagePNGRepresentation(newImage);
+            }
+            
+                
             [cameraImage clearCameraImage];
             int len = [data length];
             int currentBufferPos = 0;
             int curretnBufferIndex = 1;
             while (currentBufferPos < len) {
                 NSData *d;
-                if (len - currentBufferPos > ONE_TIME_SEND_BYTES) {
-                    d = [data subdataWithRange:NSMakeRange(currentBufferPos, ONE_TIME_SEND_BYTES)];
-                    currentBufferPos += ONE_TIME_SEND_BYTES;
+                int oneTimeSize = ([settingStore pictureTimeSize] + 1) * 2048;
+                if (len - currentBufferPos > oneTimeSize) {
+                    d = [data subdataWithRange:NSMakeRange(currentBufferPos, oneTimeSize)];
+                    currentBufferPos += oneTimeSize;
                 } else {
                     d = [data subdataWithRange:NSMakeRange(currentBufferPos, len - currentBufferPos)];
                     currentBufferPos = len;

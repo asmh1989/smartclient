@@ -30,6 +30,9 @@
 #define _FONTFGCOLOR             1
 #define _FONTBGCOLOR             0
 #define _CARET_HEIGHT            2                       //光标高度
+#define _PICTURE_QUALITY         1                       //0： 低 1：中 2：高
+#define _PICTURE_TIME_SIZE       2                       //0：慢 1： 一般 2：快 3：特快  4096 8096 16192
+#define _PICTURE_TYPE            0                       //0 : JPEG 1:png
 
 #define STRING_HOSTIP            @"hostIp"
 #define STRING_HOSTPORT          @"hostPort"
@@ -50,6 +53,9 @@
 #define STRING_FONTFGCOLOR       @"fontfgcolor"
 #define STRING_FONTBGCOLOR       @"fontbgcolor"
 #define STRING_SOUNDUSED         @"soundused"
+#define STRING_PICTURE_Q         @"picturequality"
+#define STRING_PICTURE_S         @"picturetimesize"
+#define STRING_PICTURE_T         @"picturetype"
 
 @interface DefaultSettings : NSObject
 
