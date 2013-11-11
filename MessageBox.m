@@ -157,7 +157,7 @@
                                 return NSOrderedSame;
                         }];
     UIAlertView *view;
-    int len = [sortKey count];
+    int len = (int)[sortKey count];
     if (len == 1) {
         NSString * str = [titleBtn objectForKey:sortKey[0]];
 
@@ -182,7 +182,7 @@
 {
     messageType = MessageOption;
     UIAlertView *view;
-    int len = [options count];
+    int len = (int)[options count];
     NSArray *sortKey = [options allKeys];
     if (len == 1) {
         NSString * str = [options objectForKey:sortKey[0]];
@@ -206,6 +206,15 @@
 //        [map setObject:sortKey[2] forKey:_TONSNUMBER(2)];
         view = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:str otherButtonTitles:str2, str3, nil];
     }
+    return view;
+}
+
+- (UIAlertView *)createDialog:(NSString *)title
+{
+    messageType = MEssageSendImage;
+    UIAlertView *view;
+    view = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"Cancel", nil)  otherButtonTitles:NSLocalizedString(@"ImageFromLibrary", nil),NSLocalizedString(@"ImageFromCamera", nil) , nil];
+    
     return view;
 }
 @end

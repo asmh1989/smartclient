@@ -12,7 +12,7 @@
 #import "VTSystemView.h"
 
 @interface SmartClinetViewController : UIViewController <GCDAsyncSocketDelegate, UITextFieldDelegate,
-                                    ParserDelegate, UIAlertViewDelegate, VTSystemViewDelegate>
+                                    ParserDelegate, UIAlertViewDelegate, VTSystemViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     GCDAsyncSocket *socket;
     NSStringEncoding enc;

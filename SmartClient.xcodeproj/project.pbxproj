@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A41D4379183078AF00F52597 /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A41D4378183078AE00F52597 /* CustomIOS7AlertView.m */; };
 		A429C760181773CD0037666D /* ShowListEventArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = A429C75F181773CD0037666D /* ShowListEventArgs.m */; };
 		A429C763181775FB0037666D /* StringShowList.m in Sources */ = {isa = PBXBuildFile; fileRef = A429C762181775FB0037666D /* StringShowList.m */; };
 		A43D1FEF1810C5F90067FB2B /* ParserMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = A43D1FEE1810C5F90067FB2B /* ParserMsg.m */; };
@@ -52,15 +53,16 @@
 		A482E06D1823DB5A0056E0C2 /* JMStaticContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A482E0671823DB5A0056E0C2 /* JMStaticContentTableViewController.m */; };
 		A482E06E1823DB5A0056E0C2 /* JMStaticContentTableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = A482E0691823DB5A0056E0C2 /* JMStaticContentTableViewSection.m */; };
 		A482E06F1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A482E06B1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m */; };
-		A4A7E1EF1829CFD1004CE70A /* zing.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1E61829CFD1004CE70A /* zing.wav */; };
-		A4A7E1F01829CFD1004CE70A /* zeta.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1E71829CFD1004CE70A /* zeta.wav */; };
-		A4A7E1F11829CFD1004CE70A /* vector.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1E81829CFD1004CE70A /* vector.wav */; };
-		A4A7E1F21829CFD1004CE70A /* modern.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1E91829CFD1004CE70A /* modern.wav */; };
-		A4A7E1F31829CFD1004CE70A /* major.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1EA1829CFD1004CE70A /* major.wav */; };
-		A4A7E1F41829CFD1004CE70A /* confirm.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1EB1829CFD1004CE70A /* confirm.wav */; };
-		A4A7E1F51829CFD1004CE70A /* color.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1EC1829CFD1004CE70A /* color.wav */; };
-		A4A7E1F61829CFD1004CE70A /* ascend.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1ED1829CFD1004CE70A /* ascend.wav */; };
-		A4A7E1F71829CFD1004CE70A /* alpha.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4A7E1EE1829CFD1004CE70A /* alpha.wav */; };
+		A49214C3182CCA4600213154 /* alpha.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214BA182CCA4400213154 /* alpha.wav */; };
+		A49214C4182CCA4600213154 /* ascend.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214BB182CCA4400213154 /* ascend.wav */; };
+		A49214C5182CCA4600213154 /* color.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214BC182CCA4500213154 /* color.wav */; };
+		A49214C6182CCA4600213154 /* confirm.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214BD182CCA4500213154 /* confirm.wav */; };
+		A49214C7182CCA4600213154 /* major.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214BE182CCA4500213154 /* major.wav */; };
+		A49214C8182CCA4600213154 /* modern.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214BF182CCA4500213154 /* modern.wav */; };
+		A49214C9182CCA4600213154 /* vector.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214C0182CCA4500213154 /* vector.wav */; };
+		A49214CA182CCA4600213154 /* zeta.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214C1182CCA4600213154 /* zeta.wav */; };
+		A49214CB182CCA4600213154 /* zing.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214C2182CCA4600213154 /* zing.wav */; };
+		A49214CE182CD06500213154 /* CameraImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A49214CD182CD06500213154 /* CameraImage.m */; };
 		A4B6E406181E51D300F0A400 /* MessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B6E405181E51D300F0A400 /* MessageBox.m */; };
 		A4C3F70C1828E75E00CBE658 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C3F70B1828E75E00CBE658 /* AVFoundation.framework */; };
 		A4E5910B1827681500265F60 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E591091827681500265F60 /* EditViewController.m */; };
@@ -86,6 +88,8 @@
 
 /* Begin PBXFileReference section */
 		A40F734818272E63003D36AF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		A41D4377183078AE00F52597 /* CustomIOS7AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOS7AlertView.h; sourceTree = "<group>"; };
+		A41D4378183078AE00F52597 /* CustomIOS7AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOS7AlertView.m; sourceTree = "<group>"; };
 		A429C75E181773CD0037666D /* ShowListEventArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowListEventArgs.h; sourceTree = "<group>"; };
 		A429C75F181773CD0037666D /* ShowListEventArgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowListEventArgs.m; sourceTree = "<group>"; };
 		A429C761181775FB0037666D /* StringShowList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringShowList.h; sourceTree = "<group>"; };
@@ -169,15 +173,17 @@
 		A482E0691823DB5A0056E0C2 /* JMStaticContentTableViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStaticContentTableViewSection.m; sourceTree = "<group>"; };
 		A482E06A1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStaticContentTextFieldTableViewCell.h; sourceTree = "<group>"; };
 		A482E06B1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStaticContentTextFieldTableViewCell.m; sourceTree = "<group>"; };
-		A4A7E1E61829CFD1004CE70A /* zing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = zing.wav; path = ../../../Desktop/zing.wav; sourceTree = "<group>"; };
-		A4A7E1E71829CFD1004CE70A /* zeta.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = zeta.wav; path = ../../../Desktop/zeta.wav; sourceTree = "<group>"; };
-		A4A7E1E81829CFD1004CE70A /* vector.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = vector.wav; path = ../../../Desktop/vector.wav; sourceTree = "<group>"; };
-		A4A7E1E91829CFD1004CE70A /* modern.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = modern.wav; path = ../../../Desktop/modern.wav; sourceTree = "<group>"; };
-		A4A7E1EA1829CFD1004CE70A /* major.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = major.wav; path = ../../../Desktop/major.wav; sourceTree = "<group>"; };
-		A4A7E1EB1829CFD1004CE70A /* confirm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = confirm.wav; path = ../../../Desktop/confirm.wav; sourceTree = "<group>"; };
-		A4A7E1EC1829CFD1004CE70A /* color.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = color.wav; path = ../../../Desktop/color.wav; sourceTree = "<group>"; };
-		A4A7E1ED1829CFD1004CE70A /* ascend.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ascend.wav; path = ../../../Desktop/ascend.wav; sourceTree = "<group>"; };
-		A4A7E1EE1829CFD1004CE70A /* alpha.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = alpha.wav; path = ../../../Desktop/alpha.wav; sourceTree = "<group>"; };
+		A49214BA182CCA4400213154 /* alpha.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alpha.wav; sourceTree = "<group>"; };
+		A49214BB182CCA4400213154 /* ascend.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ascend.wav; sourceTree = "<group>"; };
+		A49214BC182CCA4500213154 /* color.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = color.wav; sourceTree = "<group>"; };
+		A49214BD182CCA4500213154 /* confirm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = confirm.wav; sourceTree = "<group>"; };
+		A49214BE182CCA4500213154 /* major.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = major.wav; sourceTree = "<group>"; };
+		A49214BF182CCA4500213154 /* modern.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = modern.wav; sourceTree = "<group>"; };
+		A49214C0182CCA4500213154 /* vector.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = vector.wav; sourceTree = "<group>"; };
+		A49214C1182CCA4600213154 /* zeta.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = zeta.wav; sourceTree = "<group>"; };
+		A49214C2182CCA4600213154 /* zing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = zing.wav; sourceTree = "<group>"; };
+		A49214CC182CD06500213154 /* CameraImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraImage.h; sourceTree = "<group>"; };
+		A49214CD182CD06500213154 /* CameraImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraImage.m; sourceTree = "<group>"; };
 		A4A7E1F81829DC17004CE70A /* StringForNSUserDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StringForNSUserDefaults.h; path = ../StringForNSUserDefaults.h; sourceTree = "<group>"; };
 		A4B6E404181E51D300F0A400 /* MessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageBox.h; sourceTree = "<group>"; };
 		A4B6E405181E51D300F0A400 /* MessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageBox.m; sourceTree = "<group>"; };
@@ -264,6 +270,8 @@
 		A44CB6BE1818E4D7006B5946 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A41D4377183078AE00F52597 /* CustomIOS7AlertView.h */,
+				A41D4378183078AE00F52597 /* CustomIOS7AlertView.m */,
 				A44CB6BF1818E4FE006B5946 /* VTSystemView.h */,
 				A44CB6C01818E4FE006B5946 /* VTSystemView.m */,
 			);
@@ -334,8 +342,8 @@
 		A463203A180F80E3000F9C69 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A49214B9182CCA4400213154 /* sound */,
 				A45D2925182A259300EE88AD /* Localizable.strings */,
-				A4C3F6AA1828DEFA00CBE658 /* sound */,
 				A463203B180F80E3000F9C69 /* SmartClient-Info.plist */,
 				A463203C180F80E3000F9C69 /* InfoPlist.strings */,
 				A463203F180F80E3000F9C69 /* main.m */,
@@ -412,6 +420,8 @@
 				A429C762181775FB0037666D /* StringShowList.m */,
 				A4B6E404181E51D300F0A400 /* MessageBox.h */,
 				A4B6E405181E51D300F0A400 /* MessageBox.m */,
+				A49214CC182CD06500213154 /* CameraImage.h */,
+				A49214CD182CD06500213154 /* CameraImage.m */,
 			);
 			name = SmartClientCore;
 			path = ..;
@@ -433,20 +443,20 @@
 			path = JMStaticContentTableViewController;
 			sourceTree = "<group>";
 		};
-		A4C3F6AA1828DEFA00CBE658 /* sound */ = {
+		A49214B9182CCA4400213154 /* sound */ = {
 			isa = PBXGroup;
 			children = (
-				A4A7E1E61829CFD1004CE70A /* zing.wav */,
-				A4A7E1E71829CFD1004CE70A /* zeta.wav */,
-				A4A7E1E81829CFD1004CE70A /* vector.wav */,
-				A4A7E1E91829CFD1004CE70A /* modern.wav */,
-				A4A7E1EA1829CFD1004CE70A /* major.wav */,
-				A4A7E1EB1829CFD1004CE70A /* confirm.wav */,
-				A4A7E1EC1829CFD1004CE70A /* color.wav */,
-				A4A7E1ED1829CFD1004CE70A /* ascend.wav */,
-				A4A7E1EE1829CFD1004CE70A /* alpha.wav */,
+				A49214BA182CCA4400213154 /* alpha.wav */,
+				A49214BB182CCA4400213154 /* ascend.wav */,
+				A49214BC182CCA4500213154 /* color.wav */,
+				A49214BD182CCA4500213154 /* confirm.wav */,
+				A49214BE182CCA4500213154 /* major.wav */,
+				A49214BF182CCA4500213154 /* modern.wav */,
+				A49214C0182CCA4500213154 /* vector.wav */,
+				A49214C1182CCA4600213154 /* zeta.wav */,
+				A49214C2182CCA4600213154 /* zing.wav */,
 			);
-			name = sound;
+			path = sound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -527,20 +537,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4A7E1F51829CFD1004CE70A /* color.wav in Resources */,
-				A4A7E1EF1829CFD1004CE70A /* zing.wav in Resources */,
-				A4A7E1F61829CFD1004CE70A /* ascend.wav in Resources */,
-				A4A7E1F11829CFD1004CE70A /* vector.wav in Resources */,
-				A4A7E1F31829CFD1004CE70A /* major.wav in Resources */,
-				A4A7E1F01829CFD1004CE70A /* zeta.wav in Resources */,
+				A49214CB182CCA4600213154 /* zing.wav in Resources */,
+				A49214C5182CCA4600213154 /* color.wav in Resources */,
+				A49214C9182CCA4600213154 /* vector.wav in Resources */,
+				A49214C6182CCA4600213154 /* confirm.wav in Resources */,
+				A49214C7182CCA4600213154 /* major.wav in Resources */,
 				A463203E180F80E3000F9C69 /* InfoPlist.strings in Resources */,
 				A46492F318224D9700B39E7E /* SmartClinetLeftMenuViewController.xib in Resources */,
+				A49214C3182CCA4600213154 /* alpha.wav in Resources */,
 				A4632046180F80E3000F9C69 /* Images.xcassets in Resources */,
-				A4A7E1F71829CFD1004CE70A /* alpha.wav in Resources */,
+				A49214CA182CCA4600213154 /* zeta.wav in Resources */,
+				A49214C8182CCA4600213154 /* modern.wav in Resources */,
+				A49214C4182CCA4600213154 /* ascend.wav in Resources */,
 				A45D2927182A259300EE88AD /* Localizable.strings in Resources */,
 				A45D2917182A1C7D00EE88AD /* AboutSettingViewController.xib in Resources */,
-				A4A7E1F21829CFD1004CE70A /* modern.wav in Resources */,
-				A4A7E1F41829CFD1004CE70A /* confirm.wav in Resources */,
 				A4E591171827911B00265F60 /* SmartClinetViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,6 +582,7 @@
 				A47552B5181657E20033D224 /* CaretAttribs.m in Sources */,
 				A46492F218224D9700B39E7E /* SmartClinetLeftMenuViewController.m in Sources */,
 				A482E06F1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m in Sources */,
+				A41D4379183078AF00F52597 /* CustomIOS7AlertView.m in Sources */,
 				A4E591241827989500265F60 /* ScanSettingViewController.m in Sources */,
 				A47552AE181640D30033D224 /* CharAttribs.m in Sources */,
 				A43D1FEF1810C5F90067FB2B /* ParserMsg.m in Sources */,
@@ -584,6 +595,7 @@
 				A463207E180FD152000F9C69 /* DefaultSettings.m in Sources */,
 				A429C760181773CD0037666D /* ShowListEventArgs.m in Sources */,
 				A46492D118222B2E00B39E7E /* MMDrawerVisualState.m in Sources */,
+				A49214CE182CD06500213154 /* CameraImage.m in Sources */,
 				A4E5910B1827681500265F60 /* EditViewController.m in Sources */,
 				A46492CF18222B2E00B39E7E /* MMDrawerBarButtonItem.m in Sources */,
 				A46492D018222B2E00B39E7E /* MMDrawerController.m in Sources */,

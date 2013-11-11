@@ -10,12 +10,12 @@
 
 enum MessageBox{
     Message,
-    MessageOption
+    MessageOption,
+    MEssageSendImage
 };
 
 @interface MessageBox : NSObject
 {
-    void (^sendResult)(void);
 }
 
 @property (nonatomic) NSMutableDictionary *map;
@@ -23,4 +23,5 @@ enum MessageBox{
 
 -(UIAlertView *) createDialog:(int) buttonType DefButtonType:(int)defaultButtonType;
 -(UIAlertView *) createDialog:(NSString *)msg Options:(NSDictionary *)options;
+-(UIAlertView *) createDialog:(NSString *)title;
 @end

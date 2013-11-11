@@ -15,12 +15,16 @@
 #import "MessageBox.h"
 #import "UIViewController+MMDrawerController.h"
 #import "StringForNSUserDefaults.h"
+#import "CameraImage.h"
+#import "CustomIOS7AlertView.h"
+
 
 @interface SmartClinetViewController ()
 {
     MessageBox *box;
     NSString *hostip;
     int hostPort;
+    CameraImage *cameraImage;
 }
 
 @property (nonatomic) SettingForRuntime *settings;
@@ -55,6 +59,11 @@
         [textView setHidden:YES];
         [parser setDelegate:self];
         box = [[MessageBox alloc] init];
+        __unsafe_unretained __block SmartClinetViewController *safeSelf = self;
+        cameraImage = [[CameraImage alloc] init];
+        [cameraImage setSendImageData:^(NSString *str) {
+            [safeSelf dispatchMessage:str tag:1];
+        }];
     }
     return self;
 }
@@ -462,21 +471,7 @@
     return [msg substringWithRange:NSMakeRange(0, pos3)];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSLog(@"clickedButtonAtIndex %ld", (long)buttonIndex);
 
-    if (box.messageType == Message) {
-        NSDictionary *dic = [box map];
-        NSString *msg = [dic objectForKey:_TOSTRIING(buttonIndex)];
-        msg = [NSString stringWithFormat:@"%@%@%@%@", CUSACTIVE_MSGBOX_SEND, @" Result=\"", msg, @"\" />"];
-        [self dispatchMessage:msg tag:1];
-    } else if(box.messageType == MessageOption){
-        [self dispatchMessage:[NSString stringWithFormat:@"%d", buttonIndex] tag:1];
-    }
-
-    box = nil;
-}
 
 - (void)HandlerMessageBoxHandler:(NSString *)param
 {
@@ -514,7 +509,6 @@
             return;
         }
         
-        [box.map removeAllObjects];
         UIAlertView *alert = [box createDialog:buttonType DefButtonType:defButtonType];
         [alert setDelegate:self];
         [alert setMessage:msgStr];
@@ -565,6 +559,156 @@
     }
 }
 
+- (void)takePictureFromCamera
+{
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+    } else {
+        [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    }
+    
+//    [imagePicker setAllowsEditing:YES];
+    [imagePicker setDelegate:self];
+    
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (void) takePictureFromLibrary
+{
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    
+    [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    
+    //    [imagePicker setAllowsEditing:YES];
+    [imagePicker setDelegate:self];
+    
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+-(UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    // Return the new image.
+    return newImage;
+}
+
+- (NSString*)URLencode:(NSString *)originalString
+        stringEncoding:(NSStringEncoding)stringEncoding {
+    //!  @  $  &  (  )  =  +  ~  `  ;  '  :  ,  /  ?
+    //%21%40%24%26%28%29%3D%2B%7E%60%3B%27%3A%2C%2F%3F
+    NSArray *escapeChars = [NSArray arrayWithObjects:@";" , @"/" , @"?" , @":" ,
+                            @"@" , @"&" , @"=" , @"+" ,    @"$" , @"," ,
+                            @"!", @"'", @"(", @")", @"*", nil];
+    
+    NSArray *replaceChars = [NSArray arrayWithObjects:@"%3B" , @"%2F", @"%3F" , @"%3A" ,
+                             @"%40" , @"%26" , @"%3D" , @"%2B" , @"%24" , @"%2C" ,
+                             @"%21", @"%27", @"%28", @"%29", @"%2A", nil];
+    
+    int len = [escapeChars count];
+    
+    NSMutableString *temp = [[originalString
+                              stringByAddingPercentEscapesUsingEncoding:stringEncoding]
+                             mutableCopy];
+    
+    int i;
+    for (i = 0; i < len; i++) {
+        
+        [temp replaceOccurrencesOfString:[escapeChars objectAtIndex:i]
+                              withString:[replaceChars objectAtIndex:i]
+                                 options:NSLiteralSearch
+                                   range:NSMakeRange(0, [temp length])];
+    }
+    
+    NSString *outStr = [NSString stringWithString: temp];
+    
+    return outStr;
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
+//    UIImageAlertView *alert = [[UIImageAlertView alloc] initWithImage:image title:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Send"];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 270, 180)];
+    
+    [imageView setImage:image];
+    
+    UIView *demoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 290, 200)];
+    
+    [demoView addSubview:imageView];
+    
+    CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] init];
+    [alertView setContainerView:demoView];
+    
+    alertView.buttonTitles = [NSMutableArray arrayWithObjects:NSLocalizedString(@"Cancel", nil), NSLocalizedString(@"Send", nil), nil];
+    
+    [alertView setOnButtonTouchUpInside:^(CustomIOS7AlertView *alertView, int buttonIndex) {
+//        NSLog(@"Block: Button at position %d is clicked on alertView %d.", buttonIndex, [alertView tag]);
+        if (buttonIndex == 1) {
+            CGSize size2 = image.size;
+            BOOL hw = size2.height > size2.width ;
+            int top = hw ? size2.height : size2.width;
+            int scaled = 1;
+            while (top > 800) {
+                top /= 2;
+                scaled *= 2;
+            }
+            
+            UIImage *newImage = [self imageWithImage:image scaledToSize:CGSizeMake(size2.width/scaled, size2.height/scaled)];
+            
+            NSData *data = UIImagePNGRepresentation(newImage);
+            [cameraImage clearCameraImage];
+            int len = [data length];
+            int currentBufferPos = 0;
+            int curretnBufferIndex = 1;
+            while (currentBufferPos < len) {
+                NSData *d;
+                if (len - currentBufferPos > 4*1024) {
+                    d = [data subdataWithRange:NSMakeRange(currentBufferPos, 4*1024)];
+                    currentBufferPos += 4*1024;
+                } else {
+                    d = [data subdataWithRange:NSMakeRange(currentBufferPos, len - currentBufferPos)];
+                    currentBufferPos = len;
+                }
+                NSString *str = [d base64Encoding];
+//                str = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                str = [self URLencode:str stringEncoding:NSUTF8StringEncoding];
+                [cameraImage addCameraImage:[NSNumber numberWithInt:curretnBufferIndex] Value:str];
+                curretnBufferIndex += 1;
+            }
+            [self dispatchMessage:[NSString stringWithFormat:@"%@%@%d%@", CUSACTIVE_CAM_SEND, @" Result=\"1\" Size=\"", [cameraImage getCmaeraImageSize], @"\" />"] tag:1];
+        }
+        [alertView close];
+    }];
+    
+    [alertView setUseMotionEffects:true];
+    [alertView show];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) takePicture
+{
+    UIAlertView *alertView = [box createDialog:@"Image"];
+    alertView.delegate = self;
+    [alertView show];
+
+}
+
 - (void)HandlerCAMHandler:(NSString *)param
 {
     if (param) {
@@ -574,11 +718,14 @@
             readMode = [[self getMessageBoxString:param param:@"ReadMode"] intValue];
             if (readMode == 1) {
                 //open camera
+                
+                [self takePicture];
             }
         } else if([param rangeOfString:@"GetData"].location != NSNotFound)
         {
             NSString *getDataIndex = [self getMessageBoxString:param param:@"GetData"];
-            // start send image
+            NSNumber *index = [NSNumber numberWithInt:[getDataIndex intValue]];
+            [cameraImage sendCameraImage:index];
         }
     }
 }
@@ -651,5 +798,27 @@
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"clickedButtonAtIndex %ld", (long)buttonIndex);
+    
+    if (box.messageType == Message) {
+        NSDictionary *dic = [box map];
+        NSString *msg = [dic objectForKey:_TOSTRIING(buttonIndex)];
+        msg = [NSString stringWithFormat:@"%@%@%@%@", CUSACTIVE_MSGBOX_SEND, @" Result=\"", msg, @"\" />"];
+        [self dispatchMessage:msg tag:1];
+    } else if(box.messageType == MessageOption){
+        [self dispatchMessage:[NSString stringWithFormat:@"%d", (int)buttonIndex] tag:1];
+    } else if(box.messageType == MEssageSendImage){
+        if (buttonIndex == 2) {
+            [self takePictureFromCamera];
+        } else if (buttonIndex == 1){
+            [self takePictureFromLibrary];
+        } else {
+            
+        }
+    }
 }
 @end
