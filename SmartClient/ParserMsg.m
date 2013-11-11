@@ -11,7 +11,7 @@
 #import "SettingForRuntime.h"
 #import "CaretAttribs.h"
 #import "ShowListEventArgs.h"
-
+#import <AudioToolbox/AudioToolbox.h>
 
 enum States
 {
@@ -1594,8 +1594,15 @@ typedef struct nextAS{
     }
     else if(curChar==0x07)
     {
-        if ([settingStore isBeep]) //YES && settings.mediaPlayer != null)
+        if ([settingStore isBeep]) {//YES && settings.mediaPlayer != null)
             NSLog(@"start play WARNING sound...");
+            SystemSoundID soundID;
+            NSArray *dataArray = [settingStore getSounds];
+            
+            NSString *soundFile = [[NSBundle mainBundle]pathForResource:dataArray[[settingStore soundUsed]] ofType:@"wav"];
+            AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:soundFile], &soundID);
+            AudioServicesPlaySystemSound(soundID);
+        }
     }
     else if(curChar==0x08)
         [self caretLeft];

@@ -19,6 +19,8 @@
 #import "CustomIOS7AlertView.h"
 
 
+#define  ONE_TIME_SEND_BYTES 8*1024
+
 @interface SmartClinetViewController ()
 {
     MessageBox *box;
@@ -475,6 +477,7 @@
 
 - (void)HandlerMessageBoxHandler:(NSString *)param
 {
+    [cameraImage clearCameraImage];
     if(param){
         NSString *msgStr=@"";
         int buttonType=0;
@@ -643,11 +646,20 @@
     UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
 //    UIImageAlertView *alert = [[UIImageAlertView alloc] initWithImage:image title:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Send"];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 270, 180)];
+    CGSize size;
+    if (image.size.width > image.size.height) {
+        size.width = 270;
+        size.height = 270*image.size.height / image.size.width;
+    } else {
+        size.height = 220;
+        size.width = 220*image.size.width / image.size.height;
+    }
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, size.width, size.height)];
     
     [imageView setImage:image];
     
-    UIView *demoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 290, 200)];
+    UIView *demoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width + 20, size.height + 20)];
     
     [demoView addSubview:imageView];
     
@@ -659,27 +671,26 @@
     [alertView setOnButtonTouchUpInside:^(CustomIOS7AlertView *alertView, int buttonIndex) {
 //        NSLog(@"Block: Button at position %d is clicked on alertView %d.", buttonIndex, [alertView tag]);
         if (buttonIndex == 1) {
-            CGSize size2 = image.size;
-            BOOL hw = size2.height > size2.width ;
-            int top = hw ? size2.height : size2.width;
-            int scaled = 1;
-            while (top > 800) {
-                top /= 2;
-                scaled *= 2;
-            }
-            
-            UIImage *newImage = [self imageWithImage:image scaledToSize:CGSizeMake(size2.width/scaled, size2.height/scaled)];
-            
-            NSData *data = UIImagePNGRepresentation(newImage);
+//            CGSize size2 = image.size;
+//            BOOL hw = size2.height > size2.width ;
+//            int top = hw ? size2.height : size2.width;
+//            int scaled = 1;
+//            while (top > 800) {
+//                top /= 2;
+//                scaled *= 2;
+//            }
+//            UIImage *newImage = [self imageWithImage:image scaledToSize:CGSizeMake(size2.width/scaled, size2.height/scaled)];
+//            NSData *data = UIImagePNGRepresentation(newImage);
+            NSData *data = UIImageJPEGRepresentation(image, 0.5);
             [cameraImage clearCameraImage];
             int len = [data length];
             int currentBufferPos = 0;
             int curretnBufferIndex = 1;
             while (currentBufferPos < len) {
                 NSData *d;
-                if (len - currentBufferPos > 4*1024) {
-                    d = [data subdataWithRange:NSMakeRange(currentBufferPos, 4*1024)];
-                    currentBufferPos += 4*1024;
+                if (len - currentBufferPos > ONE_TIME_SEND_BYTES) {
+                    d = [data subdataWithRange:NSMakeRange(currentBufferPos, ONE_TIME_SEND_BYTES)];
+                    currentBufferPos += ONE_TIME_SEND_BYTES;
                 } else {
                     d = [data subdataWithRange:NSMakeRange(currentBufferPos, len - currentBufferPos)];
                     currentBufferPos = len;

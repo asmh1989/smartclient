@@ -8,6 +8,7 @@
 
 #import "EditViewController.h"
 #import "StringInputTableViewCell.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface EditViewController ()
 {
