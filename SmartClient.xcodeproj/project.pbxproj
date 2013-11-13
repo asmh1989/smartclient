@@ -10,6 +10,7 @@
 		A41D4379183078AF00F52597 /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A41D4378183078AE00F52597 /* CustomIOS7AlertView.m */; };
 		A429C760181773CD0037666D /* ShowListEventArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = A429C75F181773CD0037666D /* ShowListEventArgs.m */; };
 		A429C763181775FB0037666D /* StringShowList.m in Sources */ = {isa = PBXBuildFile; fileRef = A429C762181775FB0037666D /* StringShowList.m */; };
+		A4353A1218331D43006D51FC /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4353A1018331D42006D51FC /* ScanViewController.m */; };
 		A43D1FEF1810C5F90067FB2B /* ParserMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = A43D1FEE1810C5F90067FB2B /* ParserMsg.m */; };
 		A445505E18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A445505D18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m */; };
 		A4455062182387C200BBDDB9 /* ConnectSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4455061182387C200BBDDB9 /* ConnectSettingViewController.m */; };
@@ -29,7 +30,7 @@
 		A463204F180F80E4000F9C69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4632037180F80E3000F9C69 /* UIKit.framework */; };
 		A4632057180F80E4000F9C69 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4632055180F80E4000F9C69 /* InfoPlist.strings */; };
 		A4632059180F80E4000F9C69 /* SmartClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632058180F80E4000F9C69 /* SmartClientTests.m */; };
-		A4632065180F8114000F9C69 /* SmartClinetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632063180F8114000F9C69 /* SmartClinetViewController.m */; };
+		A4632065180F8114000F9C69 /* SmartClinetViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4632063180F8114000F9C69 /* SmartClinetViewController.mm */; };
 		A4632069180F853B000F9C69 /* SettingForConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632068180F853B000F9C69 /* SettingForConnect.m */; };
 		A463206E180FA4AB000F9C69 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A463206D180FA4AB000F9C69 /* CFNetwork.framework */; };
 		A4632079180FB7AD000F9C69 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632076180FB7AD000F9C69 /* GCDAsyncSocket.m */; };
@@ -74,6 +75,7 @@
 		A4E591241827989500265F60 /* ScanSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E591231827989500265F60 /* ScanSettingViewController.m */; };
 		A4E59127182798EC00265F60 /* OtherSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E59126182798EC00265F60 /* OtherSettingViewController.m */; };
 		A4E5912B1827990100265F60 /* AboutSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E591291827990100265F60 /* AboutSettingViewController.m */; };
+		FD370CBDE0964212BFC0D4C4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A5470225DC4DB3834E1739 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,8 @@
 		A429C75F181773CD0037666D /* ShowListEventArgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowListEventArgs.m; sourceTree = "<group>"; };
 		A429C761181775FB0037666D /* StringShowList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringShowList.h; sourceTree = "<group>"; };
 		A429C762181775FB0037666D /* StringShowList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringShowList.m; sourceTree = "<group>"; };
+		A4353A0F18331D42006D51FC /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
+		A4353A1018331D42006D51FC /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
 		A43D1FED1810C5F90067FB2B /* ParserMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserMsg.h; sourceTree = "<group>"; };
 		A43D1FEE1810C5F90067FB2B /* ParserMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParserMsg.m; sourceTree = "<group>"; };
 		A445505C18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMExampleDrawerVisualStateManager.h; path = ../MMExampleDrawerVisualStateManager.h; sourceTree = "<group>"; };
@@ -126,7 +130,7 @@
 		A4632056180F80E4000F9C69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A4632058180F80E4000F9C69 /* SmartClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartClientTests.m; sourceTree = "<group>"; };
 		A4632062180F8114000F9C69 /* SmartClinetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartClinetViewController.h; sourceTree = "<group>"; };
-		A4632063180F8114000F9C69 /* SmartClinetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartClinetViewController.m; sourceTree = "<group>"; };
+		A4632063180F8114000F9C69 /* SmartClinetViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SmartClinetViewController.mm; sourceTree = "<group>"; };
 		A4632067180F853B000F9C69 /* SettingForConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingForConnect.h; sourceTree = "<group>"; };
 		A4632068180F853B000F9C69 /* SettingForConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingForConnect.m; sourceTree = "<group>"; };
 		A463206D180FA4AB000F9C69 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -206,6 +210,8 @@
 		A4E59126182798EC00265F60 /* OtherSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherSettingViewController.m; sourceTree = "<group>"; };
 		A4E591281827990100265F60 /* AboutSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutSettingViewController.h; sourceTree = "<group>"; };
 		A4E591291827990100265F60 /* AboutSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutSettingViewController.m; sourceTree = "<group>"; };
+		B8D46703E065446FA74101E9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C9A5470225DC4DB3834E1739 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +224,7 @@
 				A4632036180F80E3000F9C69 /* CoreGraphics.framework in Frameworks */,
 				A4632038180F80E3000F9C69 /* UIKit.framework in Frameworks */,
 				A4632034180F80E3000F9C69 /* Foundation.framework in Frameworks */,
+				FD370CBDE0964212BFC0D4C4 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,8 +268,10 @@
 				A4E591291827990100265F60 /* AboutSettingViewController.m */,
 				A45D2919182A1C7D00EE88AD /* AboutSettingViewController.xib */,
 				A4632062180F8114000F9C69 /* SmartClinetViewController.h */,
-				A4632063180F8114000F9C69 /* SmartClinetViewController.m */,
+				A4632063180F8114000F9C69 /* SmartClinetViewController.mm */,
 				A4E591191827911B00265F60 /* SmartClinetViewController.xib */,
+				A4353A0F18331D42006D51FC /* ScanViewController.h */,
+				A4353A1018331D42006D51FC /* ScanViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -289,6 +298,7 @@
 				A4632052180F80E4000F9C69 /* SmartClientTests */,
 				A4632032180F80E3000F9C69 /* Frameworks */,
 				A4632031180F80E3000F9C69 /* Products */,
+				B8D46703E065446FA74101E9 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -310,6 +320,7 @@
 				A4632035180F80E3000F9C69 /* CoreGraphics.framework */,
 				A4632037180F80E3000F9C69 /* UIKit.framework */,
 				A463204C180F80E3000F9C69 /* XCTest.framework */,
+				C9A5470225DC4DB3834E1739 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -466,9 +477,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A463205C180F80E4000F9C69 /* Build configuration list for PBXNativeTarget "SmartClient" */;
 			buildPhases = (
+				C59CF28F21C0451B92D7AA39 /* Check Pods Manifest.lock */,
 				A463202C180F80E3000F9C69 /* Sources */,
 				A463202D180F80E3000F9C69 /* Frameworks */,
 				A463202E180F80E3000F9C69 /* Resources */,
+				D4C74C91A3D8484EA6E020E8 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -565,14 +578,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C59CF28F21C0451B92D7AA39 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D4C74C91A3D8484EA6E020E8 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A463202C180F80E3000F9C69 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4353A1218331D43006D51FC /* ScanViewController.m in Sources */,
 				A4E591211827988100265F60 /* SoundSettingViewController.m in Sources */,
 				A4E5911518278DED00265F60 /* FontSettingViewController.m in Sources */,
-				A4632065180F8114000F9C69 /* SmartClinetViewController.m in Sources */,
+				A4632065180F8114000F9C69 /* SmartClinetViewController.mm in Sources */,
 				A47552A818160E460033D224 /* Mode.m in Sources */,
 				A47552A5181606420033D224 /* SettingForRuntime.m in Sources */,
 				A46492DB18222D5300B39E7E /* MMNavigationController.m in Sources */,
@@ -758,6 +805,7 @@
 		};
 		A463205D180F80E4000F9C69 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8D46703E065446FA74101E9 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -767,12 +815,14 @@
 				INFOPLIST_FILE = "SmartClient/SmartClient-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		A463205E180F80E4000F9C69 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8D46703E065446FA74101E9 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -782,6 +832,7 @@
 				INFOPLIST_FILE = "SmartClient/SmartClient-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

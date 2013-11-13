@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-enum MessageBox{
+enum MessageBoxType{
     Message,
     MessageOption,
     MEssageSendImage
@@ -19,7 +19,7 @@ enum MessageBox{
 }
 
 @property (nonatomic) NSMutableDictionary *map;
-@property (nonatomic) enum MessageBox messageType;
+@property (nonatomic) enum MessageBoxType messageType;
 
 -(UIAlertView *) createDialog:(int) buttonType DefButtonType:(int)defaultButtonType;
 -(UIAlertView *) createDialog:(NSString *)msg Options:(NSDictionary *)options;

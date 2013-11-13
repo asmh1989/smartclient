@@ -18,6 +18,12 @@
 #import "CameraImage.h"
 #import "CustomIOS7AlertView.h"
 
+#import <QRCodeReader.h>
+#import <DataMatrixReader.h>
+#import <MultiFormatOneDReader.h>
+#import "MultiFormatReader.h"
+#import <MultiFormatUPCEANReader.h>
+
 
 @interface SmartClinetViewController ()
 {
@@ -139,7 +145,28 @@
 
 - (IBAction)clickToolBarCode:(id)sender
 {
-
+    ScanViewController *widController = [[ScanViewController alloc] initWithDelegate:self showCancel:YES OneDMode:NO];
+    NSMutableSet *readers = [[NSMutableSet alloc] init];
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    if ([userDefaultes boolForKey:STR_QR_DECODE] ) {
+        QRCodeReader *qrcodeReader = [[QRCodeReader alloc] init];
+        [readers addObject:qrcodeReader];
+    }
+    if ([userDefaultes boolForKey:STR_RECT_DECODE]){
+        DataMatrixReader *dataMatrixReader = [[DataMatrixReader alloc] init];
+        [readers addObject:dataMatrixReader];
+    }
+    if ([userDefaultes boolForKey:STR_ONE_DECODE]) {
+        MultiFormatOneDReader *multiFormatOneDReader = [[MultiFormatOneDReader alloc] init];
+        [readers addObject:multiFormatOneDReader];
+    }
+    
+    if ([readers count] < 1) {
+        QRCodeReader *qrcodeReader = [[QRCodeReader alloc] init];
+        [readers addObject:qrcodeReader];
+    }
+    widController.readers = readers;
+    [self presentViewController:widController animated:NO completion:^{}];
 }
 
 - (IBAction)clickToolBarEnter:(id)sender
@@ -831,5 +858,19 @@
             
         }
     }
+}
+
+#pragma mark - ZXingDelegate
+
+- (void)zxingController:(ScanViewController *)controller didScanResult:(NSString *)result
+{
+    [self dispatchMessage:result tag:1];
+    [self dispatchMessage:MYKEY_ENTER tag:1];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)zxingControllerDidCancel:(ScanViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:^{NSLog(@"cancel!");}];
 }
 @end
