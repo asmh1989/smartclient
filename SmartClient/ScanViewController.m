@@ -17,6 +17,7 @@
 #include <sys/sysctl.h>
 
 #import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 #define CAMERA_SCALAR 1.12412 // scalar = (480 / (2048 / 480))
 #define FIRST_TAKE_DELAY 1.0
@@ -175,7 +176,7 @@
     
     labIntroudction.textColor=[UIColor whiteColor];
     
-    labIntroudction.text=@"将要扫描的对象放入矩形框内";
+    labIntroudction.text=NSLocalizedString(@"Place a red line over the bar code to be scanned", nil);//@"将要扫描的对象放入矩形框内";
     labIntroudction.textAlignment = NSTextAlignmentCenter;
     
     [upView addSubview:labIntroudction];
@@ -218,7 +219,7 @@
     
     [cancelButton setFrame:CGRectMake(left, bottom+20, width, 40)];
     
-    [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelButton setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
     
     [cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
     
@@ -359,7 +360,12 @@
 }
 
 - (void)notifyDelegate:(id)text {
-    if (!isStatusBarHidden) [[UIApplication sharedApplication] setStatusBarHidden:NO];
+//    if (!isStatusBarHidden) [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    if ([userDefaultes boolForKey:@"decode_vibrate"]) {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    }
+
     [delegate zxingController:self didScanResult:text];
 //    [text release];
 }

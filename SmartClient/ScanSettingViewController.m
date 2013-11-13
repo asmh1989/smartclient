@@ -124,13 +124,13 @@
     }];
     [self addSection:^(JMStaticContentTableViewSection *section, NSUInteger sectionIndex) {
         
-        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
-            staticContentCell.reuseIdentifier = @"decodeSoundCell";
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            cell.textLabel.text = NSLocalizedString(@"decodeSound", nil);
-            cell.accessoryView = safeSelf.soundSwitch;
-        }];
+//        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+//            staticContentCell.reuseIdentifier = @"decodeSoundCell";
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            
+//            cell.textLabel.text = NSLocalizedString(@"decodeSound", nil);
+//            cell.accessoryView = safeSelf.soundSwitch;
+//        }];
         
         [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
             staticContentCell.reuseIdentifier = @"decodeVibrateCell";
