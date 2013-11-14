@@ -75,7 +75,6 @@
 		A4E5910B1827681500265F60 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E591091827681500265F60 /* EditViewController.m */; };
 		A4E5911118276B0A00265F60 /* StringInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E5911018276B0A00265F60 /* StringInputTableViewCell.m */; };
 		A4E5911518278DED00265F60 /* FontSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E5911318278DED00265F60 /* FontSettingViewController.m */; };
-		A4E591171827911B00265F60 /* SmartClinetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E591191827911B00265F60 /* SmartClinetViewController.xib */; };
 		A4E5911E1827986D00265F60 /* ScreenSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E5911D1827986D00265F60 /* ScreenSettingViewController.m */; };
 		A4E591211827988100265F60 /* SoundSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E591201827988100265F60 /* SoundSettingViewController.m */; };
 		A4E591241827989500265F60 /* ScanSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E591231827989500265F60 /* ScanSettingViewController.m */; };
@@ -209,8 +208,6 @@
 		A4E5911018276B0A00265F60 /* StringInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StringInputTableViewCell.m; path = ../StringInputTableViewCell.m; sourceTree = "<group>"; };
 		A4E5911218278DED00265F60 /* FontSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontSettingViewController.h; sourceTree = "<group>"; };
 		A4E5911318278DED00265F60 /* FontSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontSettingViewController.m; sourceTree = "<group>"; };
-		A4E5911A1827911D00265F60 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/SmartClinetViewController.xib"; sourceTree = "<group>"; };
-		A4E5911B1827912900265F60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SmartClinetViewController.xib; sourceTree = "<group>"; };
 		A4E5911C1827986D00265F60 /* ScreenSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenSettingViewController.h; sourceTree = "<group>"; };
 		A4E5911D1827986D00265F60 /* ScreenSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenSettingViewController.m; sourceTree = "<group>"; };
 		A4E5911F1827988100265F60 /* SoundSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundSettingViewController.h; sourceTree = "<group>"; };
@@ -283,7 +280,6 @@
 				A45D2919182A1C7D00EE88AD /* AboutSettingViewController.xib */,
 				A4632062180F8114000F9C69 /* SmartClinetViewController.h */,
 				A4632063180F8114000F9C69 /* SmartClinetViewController.mm */,
-				A4E591191827911B00265F60 /* SmartClinetViewController.xib */,
 				A4353A0F18331D42006D51FC /* ScanViewController.h */,
 				A4353A1018331D42006D51FC /* ScanViewController.m */,
 			);
@@ -536,6 +532,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = searching;
 				TargetAttributes = {
+					A463202F180F80E3000F9C69 = {
+						DevelopmentTeam = 7MPDWSB26Z;
+					};
 					A463204A180F80E3000F9C69 = {
 						TestTargetID = A463202F180F80E3000F9C69;
 					};
@@ -580,7 +579,6 @@
 				A49214C4182CCA4600213154 /* ascend.wav in Resources */,
 				A45D2927182A259300EE88AD /* Localizable.strings in Resources */,
 				A45D2917182A1C7D00EE88AD /* AboutSettingViewController.xib in Resources */,
-				A4E591171827911B00265F60 /* SmartClinetViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,15 +698,6 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		A4E591191827911B00265F60 /* SmartClinetViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A4E5911A1827911D00265F60 /* zh-Hans */,
-				A4E5911B1827912900265F60 /* Base */,
-			);
-			name = SmartClinetViewController.xib;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -729,6 +718,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Carl Chen (7MPDWSB26Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -775,7 +765,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Carl Chen (7MPDWSB26Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Carl Chen (7MPDWSB26Z)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -801,6 +792,7 @@
 		A463205D180F80E4000F9C69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
@@ -823,6 +815,7 @@
 		A463205E180F80E4000F9C69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
