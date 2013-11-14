@@ -6,11 +6,11 @@
 //  Copyright (c) 2013年 searching. All rights reserved.
 //
 
-#include <UIKit/UIKit.h>
-#include <AudioToolbox/AudioToolbox.h>
+#import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
-#include "Decoder.h"
-#include "parsedResults/ParsedResult.h"
+#import "Decoder.h"
+#import "parsedResults/ParsedResult.h"
 
 @protocol ZXingDelegate;
 

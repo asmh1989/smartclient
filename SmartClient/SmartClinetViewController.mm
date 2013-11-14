@@ -21,7 +21,7 @@
 #import <QRCodeReader.h>
 #import <DataMatrixReader.h>
 #import <MultiFormatOneDReader.h>
-#import "MultiFormatReader.h"
+#import <MultiFormatReader.h>
 #import <MultiFormatUPCEANReader.h>
 
 

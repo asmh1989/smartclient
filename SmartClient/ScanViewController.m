@@ -10,7 +10,7 @@
 #import "Decoder.h"
 #import "NSString+HTML.h"
 #import "ResultParser.h"
-#import "ParsedResult.h"
+//#import "ParsedResult.h"
 #import "ResultAction.h"
 #import "TwoDDecoderResult.h"
 #include <sys/types.h>
