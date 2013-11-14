@@ -7,14 +7,11 @@
 //
 
 #import "ScanViewController.h"
-#import "Decoder.h"
 #import "NSString+HTML.h"
-#import "ResultParser.h"
-//#import "ParsedResult.h"
-#import "ResultAction.h"
-#import "TwoDDecoderResult.h"
-#include <sys/types.h>
-#include <sys/sysctl.h>
+#import <TwoDDecoderResult.h>
+#import <resultParsers/ResultParser.h>
+#import <sys/types.h>
+#import <sys/sysctl.h>
 
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>

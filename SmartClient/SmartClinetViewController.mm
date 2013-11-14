@@ -39,6 +39,9 @@
 @property (nonatomic, copy) NSString *outBuff;
 @property (strong, nonatomic) UITextField *textView;
 @property (strong, nonatomic) UIView *textUIView;
+@property (strong, nonatomic) UIToolbar *toolBar;
+@property (strong, nonatomic) VTSystemView *mView;
+
 
 - (void) sendDataToSocket:(NSString *)output tag:(long)tag;
 - (void) sendFirstConnectInfo;
@@ -87,14 +90,15 @@
         if (OSVersionIsAtLeastiOS7()) {
             CGRect frame = self.view.frame;
             frame.origin.y = 20;
+            frame.size.width -= 20;
             mView.frame = frame;
         }
 
     }
-    
-    toolBar.frame = CGRectMake(0.0, self.view.frame.size.height - toolBar.frame.size.height-mView.frame.origin.y, toolBar.frame.size.width, toolBar.frame.size.height);
-    
+
+    self.toolBar.frame = CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, 44);
     [mView setNeedsDisplay];
+    [toolBar setNeedsDisplay];
     if (hostPort != [settingStore hostPort] || ![hostip isEqualToString:[settingStore hostIp]]) {
 //        [parser reset];
         [socket disconnect];
@@ -241,14 +245,24 @@
     
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    [ self.toolBar setItems:[NSArray arrayWithObjects:flexItem, setting, flexItem, up, flexItem, down, flexItem, code, flexItem, enter, flexItem, nil]];
+    for (id view in self.view.subviews) {
+        [view setHidden:YES];
+    }
     
+    self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, 44)];
+    
+    self.mView = [[VTSystemView alloc] init];
+    [self.toolBar setItems:[NSArray arrayWithObjects:flexItem, setting, flexItem, up, flexItem, down, flexItem, code, flexItem, enter, flexItem, nil]];
     // Do any additional setup after loading the view from its nib.
     textUIView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320,416)];
     textView = [[UITextField alloc] init];
 //    [textUIView setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.1]];
     [textUIView addSubview:textView];
     [self.mView addSubview:textUIView];
+
+    [mView setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:mView];
+    [self.view addSubview:toolBar];
     
     socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     

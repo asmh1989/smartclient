@@ -21,8 +21,6 @@
     ParserMsg *parser;
 }
 
-@property (weak, nonatomic) IBOutlet VTSystemView *mView;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
 
 - (void) dispatchMessage:(NSString *)output tag:(long)tag;
 - (void) sendExMessage:(NSString *)errorCode Reason:(NSString *)message;

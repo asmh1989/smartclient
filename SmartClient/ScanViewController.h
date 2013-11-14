@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
-#import "Decoder.h"
-#import "parsedResults/ParsedResult.h"
+#import <Decoder.h>
+#import <parsedResults/ParsedResult.h>
 
 @protocol ZXingDelegate;
 
@@ -29,7 +29,6 @@ UINavigationControllerDelegate
     SystemSoundID beepSound;
     BOOL showCancel;
     NSURL *soundToPlay;
-//    id<ZXingDelegate> delegate;
     BOOL wasCancelled;
     BOOL oneDMode;
 #if HAS_AVFF
