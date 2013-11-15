@@ -123,7 +123,9 @@
     [self setFontBgColor:_FONTBGCOLOR];
     [self setFontSize:_FONTSIZE];
     [self setIsShowCaret:_SHOW_CARET];
-    [self setDeviceID:[self uuid]];
+    NSString *uid = [self uuid];
+    [self setDeviceID:uid];
+    uid = nil;
     [self setReConnectTime:_RECONNECT_TIME];
     [self setCursorHeight:_CARET_HEIGHT];
     [self setSoundUsed:_SOUNDUSED];
