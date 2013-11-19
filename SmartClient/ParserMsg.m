@@ -525,7 +525,7 @@ typedef struct nextAS{
     unsigned short int curChar;
     enum States state;
     NSString *curNSString;
-    NSString *printParseString;
+    NSMutableString *printParseString;
     SettingForRuntime *settings;
     SettingForConnect *settingStore;
     BOOL isReceiveBytes;
@@ -609,7 +609,7 @@ typedef struct nextAS{
         settingStore = [[SettingStore shareStore] getSettings];
         stringShowList = [StringShowList shareStore];
         self.XOFF = NO;
-        printParseString = @"";
+        printParseString = [NSMutableString stringWithString:@""];
         curSequence = @"";
         curMessage = @"";
         curPrintParsePoint = CGPointMake(0, 0);
@@ -761,7 +761,7 @@ typedef struct nextAS{
         //当前更换CurSequence,并且printParseString存在字符并且Y坐标位置改变时.打印字符
         ShowListEventArgs * show = [[ShowListEventArgs alloc] initShowListEventArgs:curPrintParsePoint String:printParseString CharAttribs:printCharAttribs Point:settings.caret.pos];
         [show AddShowList];
-        printParseString = @"";
+        [printParseString setString:@""];
         curPrintParsePoint.x = 0;
         curPrintParsePoint.y = 0;
     }
@@ -805,7 +805,7 @@ typedef struct nextAS{
         //当为空的时候应当输出
         if (nextAction == Print)
         {
-            printParseString = [printParseString stringByAppendingString:curNSString];
+            [printParseString appendString:curNSString];
 //            if([printParseString rangeOfString:@("__")].location != NSNotFound){
 //                settings.CurBGColor = settings.charAttribs.AltBGColor;
 //            }
@@ -1608,7 +1608,7 @@ typedef struct nextAS{
         [self caretLeft];
     else if(curChar==0x09){}
     else if(curChar==0x0A||curChar==0x0B||curChar==0x0C||curChar==0x84)
-        printParseString = [NSString stringWithFormat:@"%@%c",printParseString, curChar];
+        [printParseString appendFormat:@"%@%c",printParseString, curChar];
     else if(curChar==0x0D){}
     else if(curChar==0x0E)
         settings.charAttribs.GL = settings.G1;
@@ -1620,7 +1620,7 @@ typedef struct nextAS{
     }
     else if(curChar==0x13){
         XOFF = YES;
-        printParseString = [NSString stringWithFormat:@"%@%c",printParseString, curChar];
+        [printParseString appendFormat:@"%@%c",printParseString, curChar];
     }
     else if(curChar==0x85)
         [self caretToAbs:settings.caret.pos.y CaretX:0];
