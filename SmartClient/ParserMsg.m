@@ -631,6 +631,7 @@ typedef struct nextAS{
     
     nextAS states;
     NSData *n;
+    NSStringEncoding enc = [settingStore enc];
     unsigned long len = [msg length];
     for (int i=0; i<len; i++) {
         if (isReceiveBytes) {
@@ -638,7 +639,7 @@ typedef struct nextAS{
         }
         curChar = 0;
         curNSString = [msg substringWithRange:NSMakeRange(i, 1)];
-        n = [curNSString dataUsingEncoding:[settingStore enc]];
+        n = [curNSString dataUsingEncoding:enc];
         [n getBytes:&curChar];
         n = nil;
 //        if (curChar == 0x1b) {

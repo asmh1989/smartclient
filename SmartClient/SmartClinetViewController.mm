@@ -260,7 +260,8 @@
     [textUIView addSubview:textView];
     [self.mView addSubview:textUIView];
 
-    [mView setBackgroundColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.mView setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:mView];
     [self.view addSubview:toolBar];
     

@@ -1,9 +1,9 @@
 
 /* Class = "IBUILabel"; text = "电话:021-63046241"; ObjectID = "3e2-e3-OSZ"; */
-"3e2-e3-OSZ.text" = "电话:021-63046241";
+"3e2-e3-OSZ.text" = "TEL:021-63046241";
 
 /* Class = "IBUILabel"; text = "版权所有"; ObjectID = "3oC-pu-oJU"; */
-"3oC-pu-oJU.text" = "版权所有";
+"3oC-pu-oJU.text" = "Copyright";
 
 /* Class = "IBUILabel"; text = "SmartClient"; ObjectID = "8TZ-h0-zfD"; */
 "8TZ-h0-zfD.text" = "SmartClient";
@@ -15,7 +15,7 @@
 "KPI-Bd-4Ze.text" = "V1.0";
 
 /* Class = "IBUILabel"; text = "网址:www.searching-info.com"; ObjectID = "Olc-KK-ofY"; */
-"Olc-KK-ofY.text" = "网址:www.searching-info.com";
+"Olc-KK-ofY.text" = "URL:www.searching-info.com";
 
 /* Class = "IBUILabel"; text = "注册码:S0O4RONSEAIOS"; ObjectID = "VIV-s3-lYa"; */
 "VIV-s3-lYa.text" = "注册码:S0O4RONSEAIOS";

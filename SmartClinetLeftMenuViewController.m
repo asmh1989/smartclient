@@ -90,14 +90,14 @@ enum SettingType{
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     cells = [[NSArray alloc] initWithObjects:
-             [[TableCellData alloc] initWithData:@"连接" Image:[UIImage imageNamed:@"Connect_Image.png"]],
-             [[TableCellData alloc] initWithData:@"字体" Image:[UIImage imageNamed:@"Font_Image.png"]],
-             [[TableCellData alloc] initWithData:@"屏幕" Image:[UIImage imageNamed:@"Screen_Image.png"]],
-             [[TableCellData alloc] initWithData:@"声音" Image:[UIImage imageNamed:@"Sound_Image.png"]],
-             [[TableCellData alloc] initWithData:@"扫描设置" Image:[UIImage imageNamed:@"Scan_Image.png"]],
-             [[TableCellData alloc] initWithData:@"其他" Image:[UIImage imageNamed:@"Other_Image.png"]],
-             [[TableCellData alloc] initWithData:@"重新连接" Image:[UIImage imageNamed:@"Reconnect_Image.png"]],
-             [[TableCellData alloc] initWithData:@"关于" Image:[UIImage imageNamed:@"About_Image.png"]],
+             [[TableCellData alloc] initWithData:NSLocalizedString(@"ConnectSettings", @"Connect") Image:[UIImage imageNamed:@"Connect_Image.png"]],
+             [[TableCellData alloc] initWithData:NSLocalizedString(@"FontSettings", nil) Image:[UIImage imageNamed:@"Font_Image.png"]],
+             [[TableCellData alloc] initWithData:NSLocalizedString(@"Screen", nil) Image:[UIImage imageNamed:@"Screen_Image.png"]],
+             [[TableCellData alloc] initWithData:NSLocalizedString(@"Sound", nil) Image:[UIImage imageNamed:@"Sound_Image.png"]],
+             [[TableCellData alloc] initWithData:NSLocalizedString(@"ScanSetting", nil) Image:[UIImage imageNamed:@"Scan_Image.png"]],
+             [[TableCellData alloc] initWithData:NSLocalizedString(@"OtherSetting", nil) Image:[UIImage imageNamed:@"Other_Image.png"]],
+             [[TableCellData alloc] initWithData:NSLocalizedString(@"Reconnected", nil) Image:[UIImage imageNamed:@"Reconnect_Image.png"]],
+             [[TableCellData alloc] initWithData:NSLocalizedString(@"About", nil) Image:[UIImage imageNamed:@"About_Image.png"]],
              nil];
     [self.tableView setDelegate:self];
     [self.tableView setDataSource:self];
