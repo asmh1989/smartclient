@@ -1,16 +1,17 @@
 //
-//  SmartClinetLeftMenuViewController.h
+//  LeftMenuViewController.h
 //  SmartClient
 //
-//  Created by sun on 13-10-31.
+//  Created by sun on 13-11-25.
 //  Copyright (c) 2013年 searching. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "SmartClinetViewController.h"
+#import "JMStaticContentTableViewController.h"
 
-@interface SmartClinetLeftMenuViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface LeftMenuViewController : JMStaticContentTableViewController
+
 @property (nonatomic, strong) SmartClinetViewController *centerController;
 
 -(id) initWithCenterController:(SmartClinetViewController *)controller;

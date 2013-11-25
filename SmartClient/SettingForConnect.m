@@ -12,7 +12,7 @@
 @implementation SettingForConnect
 
 @synthesize hostIp, hostPort,deviceID, enc, columnSpan, rowSpan, topMargin,
-    leftMargin, isFullScreen, isBeep, cursorHeight, fontName, fontSize,
+    leftMargin, isFullScreen, isBeep, cursorHeight, fontName, fontSize,fontSizeLand,
     fontStyle, isShowCaret, reConnectTime;
 
 @synthesize  bgColor, fgColor, blinkColor, boldColor, fontBgColor, fontFgColor;
@@ -21,9 +21,16 @@
 
 @synthesize pictureQuality, pictureTimeSize, pictureType;
 
+@synthesize screenOrientation;
+
 - (UIFont *)getCurrentFont
 {
-    return [UIFont fontWithName:fontStyle size:fontSize];
+    if([self screenOrientation] == 0){
+        return [UIFont fontWithName:fontStyle size:fontSize];
+    } else {
+        return [UIFont fontWithName:fontStyle size:fontSizeLand];
+    }
+
 }
 
 - (NSArray *)getSounds{
@@ -44,6 +51,11 @@
 -  (NSArray *)getPictureTypeArray
 {
     return  [[NSArray alloc] initWithObjects:@"jpeg", @"png", nil];
+}
+
+- (NSArray *) getScreenOri
+{
+    return [[NSArray alloc] initWithObjects:NSLocalizedString(@"Portrait", nil), NSLocalizedString(@"Landscape", nil),  nil];
 }
 
 
@@ -121,7 +133,16 @@
     [self setFontStyle:_FONTSTYLE];
     [self setFontFgColor:_FONTFGCOLOR];
     [self setFontBgColor:_FONTBGCOLOR];
-    [self setFontSize:_FONTSIZE];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self setFontSize:_FONTSIZE_PAD];
+        [self setFontSizeLand:_FONTSIZE_PAD_LAND];
+    } else {
+        [self setFontSize:_FONTSIZE];
+        [self setFontSizeLand:_FONTSIZE_LAND];
+    }
+    
+    [self setScreenOrientation:_SCREEN_ORI];
+    
     [self setIsShowCaret:_SHOW_CARET];
     NSString *uid = [self uuid];
     [self setDeviceID:uid];
@@ -164,6 +185,7 @@
         [self setFontName:[aDecoder decodeObjectForKey:STRING_FONTNAME]];
         [self setFontStyle:[aDecoder decodeObjectForKey:STRING_FONTSTYLE]];
         [self setFontSize:[aDecoder decodeIntForKey:STRING_FONTSIZE]];
+        [self setFontSizeLand:[aDecoder decodeIntForKey:STRING_FONTSIZE_LAND]];
         [self setIsShowCaret:[aDecoder decodeBoolForKey:STRING_SHOWCARET]];
         [self setReConnectTime:[aDecoder decodeIntForKey:STRING_RECONNECTTIME]];
         [self setFontBgColor:[aDecoder decodeIntForKey:STRING_FONTBGCOLOR]];
@@ -173,6 +195,7 @@
         [self setPictureType:[aDecoder decodeIntForKey:STRING_PICTURE_T]];
         [self setPictureQuality:[aDecoder decodeIntForKey:STRING_PICTURE_Q]];
         [self setPictureTimeSize:[aDecoder decodeIntForKey:STRING_PICTURE_S]];
+        [self setScreenOrientation:[aDecoder decodeIntForKey:STRING_SCREEN_ORI]];
     }
     
 //    NSLog(@"initWithCoder, hostIp = %@", hostIp);
@@ -195,6 +218,7 @@
     [aCoder encodeObject:fontName forKey:STRING_FONTNAME];
     [aCoder encodeObject:fontStyle forKey:STRING_FONTSTYLE];
     [aCoder encodeInt:fontSize forKey:STRING_FONTSIZE];
+    [aCoder encodeInt:fontSizeLand forKey:STRING_FONTSIZE_LAND];
     [aCoder encodeBool:isShowCaret forKey:STRING_SHOWCARET];
     [aCoder encodeInt:reConnectTime forKey:STRING_RECONNECTTIME];
     [aCoder encodeInt:fontBgColor forKey:STRING_FONTBGCOLOR];
@@ -203,6 +227,7 @@
     [aCoder encodeInt:pictureType forKey:STRING_PICTURE_T];
     [aCoder encodeInt:pictureQuality forKey:STRING_PICTURE_Q];
     [aCoder encodeInt:pictureTimeSize forKey:STRING_PICTURE_S];
+    [aCoder encodeInt:screenOrientation forKey:STRING_SCREEN_ORI];
 //    NSLog(@"encodeWithCoder, hostIp = %@", hostIp);
 }
 

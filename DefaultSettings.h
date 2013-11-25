@@ -25,6 +25,12 @@
 #define _FONTNAME                @"Helvetica"            //字体名
 #define _FONTSTYLE               @"Helvetica"            //字体样式
 #define _FONTSIZE                18                      //字体大小
+#define _FONTSIZE_PAD            38                      //pad上字体大小
+
+#define _SCREEN_ORI              0
+#define _FONTSIZE_PAD_LAND       30                      //横屏字体默认大小
+#define _FONTSIZE_LAND           14
+
 #define _SHOW_CARET              YES                     //是否显示光标
 #define _RECONNECT_TIME          5                       //重新连接时间
 #define _FONTFGCOLOR             1
@@ -48,6 +54,7 @@
 #define STRING_FONTNAME          @"fontName"
 #define STRING_FONTSTYLE         @"fontStyle"
 #define STRING_FONTSIZE          @"fontSize"
+#define STRING_FONTSIZE_LAND     @"fontsize_land"
 #define STRING_SHOWCARET         @"showCaret"
 #define STRING_RECONNECTTIME     @"reconnecttime"
 #define STRING_FONTFGCOLOR       @"fontfgcolor"
@@ -56,6 +63,7 @@
 #define STRING_PICTURE_Q         @"picturequality"
 #define STRING_PICTURE_S         @"picturetimesize"
 #define STRING_PICTURE_T         @"picturetype"
+#define STRING_SCREEN_ORI        @"screenorientation"
 
 @interface DefaultSettings : NSObject
 

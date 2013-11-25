@@ -11,6 +11,7 @@
 #import "SettingForConnect.h"
 #import "EditViewController.h"
 
+
 @interface FontSettingViewController ()
 @property (nonatomic, retain) SettingForConnect *settings;
 @property (nonatomic, retain) UISwitch *airplaneModeSwitch;
@@ -52,6 +53,17 @@
     return [self init];
 }
 
+- (int) getFontSize
+{
+    int fontsize;
+    if ([self.settings screenOrientation] == 0) {
+        fontsize = [self.settings fontSize];
+    } else {
+        fontsize = [self.settings fontSizeLand];
+    }
+    
+    return fontsize;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -102,14 +114,19 @@
             staticContentCell.reuseIdentifier = @"FontSizeCell";
             
 			cell.textLabel.text = NSLocalizedString(@"FontSize", nil);
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", [safeSelf.settings fontSize]];
-            [cell.detailTextLabel setFont:[UIFont fontWithName:[safeSelf.settings fontStyle] size:[safeSelf.settings fontSize]]];
+
+
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", [safeSelf getFontSize]];
+            [cell.detailTextLabel setFont:[UIFont fontWithName:[safeSelf.settings fontStyle] size:[safeSelf getFontSize]]];
 		} whenSelected:^(NSIndexPath *indexPath) {
             [safeSelf.navigationController pushViewController:[[EditViewController alloc] initWithTitleAndName:NSLocalizedString(@"FontSize", nil)
-                Name:[NSString stringWithFormat:@"%d", [safeSelf.settings fontSize]]
+                Name:[NSString stringWithFormat:@"%d", [safeSelf getFontSize]]
                 Complete:^(NSString *value) {
-                    
-                safeSelf.settings.fontSize = [value intValue];
+                if ([safeSelf.settings screenOrientation] == 0) {
+                    safeSelf.settings.fontSize = [value intValue];
+                } else {
+                    safeSelf.settings.fontSizeLand = [value intValue];
+                }
                 [safeSelf.tableView reloadData];
             }] animated:YES];
 		}];

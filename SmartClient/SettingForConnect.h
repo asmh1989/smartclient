@@ -28,6 +28,7 @@
 @property (nonatomic) NSString *fontName;       //字体名
 @property (nonatomic) NSString *fontStyle;      //字体样式
 @property (nonatomic) int fontSize;             //字体大小
+@property (nonatomic) int fontSizeLand;
 @property (nonatomic) int fontFgColor;
 @property (nonatomic) int fontBgColor;
 
@@ -47,10 +48,13 @@
 @property (nonatomic) int pictureTimeSize;
 @property (nonatomic) int pictureType;
 
+@property (nonatomic) int screenOrientation;
+
 - (UIFont *)getCurrentFont;
 - (NSArray *)getSounds;
 
 - (NSArray *)getPictureQualityArray;
 - (NSArray *)getPictureTimeSizeArray;
 - (NSArray *)getPictureTypeArray;
+- (NSArray *)getScreenOri;
 @end

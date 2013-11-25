@@ -80,8 +80,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+        [self.settingStore setScreenOrientation:1];
+    } else if(UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])){
+        [self.settingStore setScreenOrientation:0];
+    }
     
-//    NSLog(@" SmartClinetViewController  viewWillAppear....");
+//        NSLog(@"viewWillAppear ... current orientation is = %d", [[UIApplication sharedApplication] statusBarOrientation]);
+    
     [self.navigationController setNavigationBarHidden:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:settingStore.isFullScreen];
     if (settingStore.isFullScreen) {
@@ -95,8 +101,14 @@
         }
 
     }
+    
+    int toolbar_len = 44;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        toolbar_len = 60;
+    }
 
-    self.toolBar.frame = CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, 44);
+    self.toolBar.frame = CGRectMake(0, self.view.frame.size.height-toolbar_len, self.view.frame.size.width, toolbar_len);
     [mView setNeedsDisplay];
     [toolBar setNeedsDisplay];
     if (hostPort != [settingStore hostPort] || ![hostip isEqualToString:[settingStore hostIp]]) {
@@ -108,7 +120,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
 }
 
 - (void)checkCurrentSocketStatus
@@ -124,13 +136,16 @@
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    [self.mView setNeedsDisplay];
+    [self.toolBar setHidden:YES];
+//    [self.mView setNeedsDisplay];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    [self.mView setNeedsDisplay];
+    [self viewWillAppear:NO];
+    [self.toolBar setHidden:NO];
 }
+
 
 - (IBAction)clickToolBarSetting:(id)sender
 {

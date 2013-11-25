@@ -42,8 +42,6 @@
 		A46492D118222B2E00B39E7E /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = A46492CC18222B2E00B39E7E /* MMDrawerVisualState.m */; };
 		A46492D218222B2E00B39E7E /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A46492CE18222B2E00B39E7E /* UIViewController+MMDrawerController.m */; };
 		A46492DB18222D5300B39E7E /* MMNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A46492DA18222D5300B39E7E /* MMNavigationController.m */; };
-		A46492F218224D9700B39E7E /* SmartClinetLeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A46492F018224D9700B39E7E /* SmartClinetLeftMenuViewController.m */; };
-		A46492F318224D9700B39E7E /* SmartClinetLeftMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A46492F118224D9700B39E7E /* SmartClinetLeftMenuViewController.xib */; };
 		A46B626B183459200080AAA4 /* libZXingWidget.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46B626A183459200080AAA4 /* libZXingWidget.a */; };
 		A470DB9F1834654700C7DB1A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A470DB9E1834654700C7DB1A /* AudioToolbox.framework */; };
 		A470DBA11834655200C7DB1A /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A470DBA01834655100C7DB1A /* CoreVideo.framework */; };
@@ -70,6 +68,7 @@
 		A49214CA182CCA4600213154 /* zeta.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214C1182CCA4600213154 /* zeta.wav */; };
 		A49214CB182CCA4600213154 /* zing.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214C2182CCA4600213154 /* zing.wav */; };
 		A49214CE182CD06500213154 /* CameraImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A49214CD182CD06500213154 /* CameraImage.m */; };
+		A4B2A8F51843032C00D3F748 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B2A8F41843032C00D3F748 /* LeftMenuViewController.m */; };
 		A4B6E406181E51D300F0A400 /* MessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B6E405181E51D300F0A400 /* MessageBox.m */; };
 		A4C3F70C1828E75E00CBE658 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C3F70B1828E75E00CBE658 /* AVFoundation.framework */; };
 		A4E5910B1827681500265F60 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E591091827681500265F60 /* EditViewController.m */; };
@@ -157,9 +156,6 @@
 		A46492CE18222B2E00B39E7E /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
 		A46492D918222D5300B39E7E /* MMNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMNavigationController.h; path = ../MMNavigationController.h; sourceTree = "<group>"; };
 		A46492DA18222D5300B39E7E /* MMNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMNavigationController.m; path = ../MMNavigationController.m; sourceTree = "<group>"; };
-		A46492EF18224D9700B39E7E /* SmartClinetLeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SmartClinetLeftMenuViewController.h; path = ../SmartClinetLeftMenuViewController.h; sourceTree = "<group>"; };
-		A46492F018224D9700B39E7E /* SmartClinetLeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SmartClinetLeftMenuViewController.m; path = ../SmartClinetLeftMenuViewController.m; sourceTree = "<group>"; };
-		A46492F118224D9700B39E7E /* SmartClinetLeftMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SmartClinetLeftMenuViewController.xib; path = ../SmartClinetLeftMenuViewController.xib; sourceTree = "<group>"; };
 		A46B626A183459200080AAA4 /* libZXingWidget.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libZXingWidget.a; sourceTree = "<group>"; };
 		A470DB9E1834654700C7DB1A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A470DBA01834655100C7DB1A /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -199,6 +195,8 @@
 		A49214CC182CD06500213154 /* CameraImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraImage.h; sourceTree = "<group>"; };
 		A49214CD182CD06500213154 /* CameraImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraImage.m; sourceTree = "<group>"; };
 		A4A7E1F81829DC17004CE70A /* StringForNSUserDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StringForNSUserDefaults.h; path = ../StringForNSUserDefaults.h; sourceTree = "<group>"; };
+		A4B2A8F31843032C00D3F748 /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeftMenuViewController.h; path = ../LeftMenuViewController.h; sourceTree = "<group>"; };
+		A4B2A8F41843032C00D3F748 /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeftMenuViewController.m; path = ../LeftMenuViewController.m; sourceTree = "<group>"; };
 		A4B6E404181E51D300F0A400 /* MessageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageBox.h; sourceTree = "<group>"; };
 		A4B6E405181E51D300F0A400 /* MessageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageBox.m; sourceTree = "<group>"; };
 		A4C3F70B1828E75E00CBE658 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -255,13 +253,12 @@
 		A445505F1823876100BBDDB9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A4B2A8F31843032C00D3F748 /* LeftMenuViewController.h */,
+				A4B2A8F41843032C00D3F748 /* LeftMenuViewController.m */,
 				A4E591081827681500265F60 /* EditViewController.h */,
 				A4E591091827681500265F60 /* EditViewController.m */,
 				A4E5910F18276B0A00265F60 /* StringInputTableViewCell.h */,
 				A4E5911018276B0A00265F60 /* StringInputTableViewCell.m */,
-				A46492EF18224D9700B39E7E /* SmartClinetLeftMenuViewController.h */,
-				A46492F018224D9700B39E7E /* SmartClinetLeftMenuViewController.m */,
-				A46492F118224D9700B39E7E /* SmartClinetLeftMenuViewController.xib */,
 				A4455060182387C200BBDDB9 /* ConnectSettingViewController.h */,
 				A4455061182387C200BBDDB9 /* ConnectSettingViewController.m */,
 				A4A7E1F81829DC17004CE70A /* StringForNSUserDefaults.h */,
@@ -571,7 +568,6 @@
 				A49214C6182CCA4600213154 /* confirm.wav in Resources */,
 				A49214C7182CCA4600213154 /* major.wav in Resources */,
 				A463203E180F80E3000F9C69 /* InfoPlist.strings in Resources */,
-				A46492F318224D9700B39E7E /* SmartClinetLeftMenuViewController.xib in Resources */,
 				A49214C3182CCA4600213154 /* alpha.wav in Resources */,
 				A4632046180F80E3000F9C69 /* Images.xcassets in Resources */,
 				A49214CA182CCA4600213154 /* zeta.wav in Resources */,
@@ -607,8 +603,8 @@
 				A4E5911E1827986D00265F60 /* ScreenSettingViewController.m in Sources */,
 				A46492D218222B2E00B39E7E /* UIViewController+MMDrawerController.m in Sources */,
 				A47552AB181610E30033D224 /* Chars.m in Sources */,
+				A4B2A8F51843032C00D3F748 /* LeftMenuViewController.m in Sources */,
 				A47552B5181657E20033D224 /* CaretAttribs.m in Sources */,
-				A46492F218224D9700B39E7E /* SmartClinetLeftMenuViewController.m in Sources */,
 				A482E06F1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m in Sources */,
 				A41D4379183078AF00F52597 /* CustomIOS7AlertView.m in Sources */,
 				A4E591241827989500265F60 /* ScanSettingViewController.m in Sources */,

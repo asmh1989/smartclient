@@ -13,7 +13,7 @@
 #import "MMNavigationController.h"
 #import "MMDrawerController.h"
 #import "MMDrawerVisualState.h"
-#import "SmartClinetLeftMenuViewController.h"
+#import "LeftMenuViewController.h"
 #import "MMExampleDrawerVisualStateManager.h"
 
 @interface SmartClinetAppDelegate ()
@@ -30,13 +30,10 @@
     
     SmartClinetViewController * centerViewController = [[SmartClinetViewController alloc] init];
     
-    UIViewController * leftMenuController = [[SmartClinetLeftMenuViewController alloc] initWithCenterController:centerViewController];
+    LeftMenuViewController * leftMenuController = [[LeftMenuViewController alloc] initWithCenterController:centerViewController];
     
-//    UINavigationController * navigationController = [[MMNavigationController alloc] initWithRootViewController:centerViewController];
-//    [navigationController setRestorationIdentifier:@"MMExampleCenterNavigationControllerRestorationKey"];
     if(OSVersionIsAtLeastiOS7()){
-//        UINavigationController * leftSideNavController = [[MMNavigationController alloc] initWithRootViewController:leftMenuController];
-		[leftMenuController setRestorationIdentifier:@"leftSideDrawerViewControllerRestorationKey"];
+//		[leftMenuController setRestorationIdentifier:@"leftSideDrawerViewControllerRestorationKey"];
         self.drawerController = [[MMDrawerController alloc]
                                  initWithCenterViewController:centerViewController
                                  leftDrawerViewController:leftMenuController
@@ -50,7 +47,13 @@
                                  rightDrawerViewController:nil];
     }
     [self.drawerController setRestorationIdentifier:@"MMDrawer"];
-    [self.drawerController setMaximumLeftDrawerWidth:160.0];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom ]== UIUserInterfaceIdiomPad) {
+            [self.drawerController setMaximumLeftDrawerWidth:220.0];
+    } else {
+        [self.drawerController setMaximumLeftDrawerWidth:160.0];
+    }
+    
     [self.drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeBezelPanningCenterView];
     [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
@@ -75,7 +78,7 @@
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.drawerController];
     [[self window] setRootViewController:navController];
-    [[self.drawerController navigationController] setNavigationBarHidden:YES];
+//    [[self.drawerController navigationController] setNavigationBarHidden:YES];
     self.drawerController.title = NSLocalizedString(@"Settings", @"Settings");
     
 //    [self.window setRootViewController:self.drawerController];

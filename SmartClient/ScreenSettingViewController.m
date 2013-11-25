@@ -64,7 +64,7 @@
     [self.navigationController setNavigationBarHidden:NO];
     
     self.fullScreenSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
-    
+
     self.fullScreenSwitch.on = [self.settings isFullScreen];
     
     [self.fullScreenSwitch addTarget:self action:@selector(_switchChanged:) forControlEvents:UIControlEventValueChanged];
@@ -157,6 +157,19 @@
 			cell.textLabel.text = NSLocalizedString(@"FullScreen", nil);
 			cell.accessoryView = safeSelf.fullScreenSwitch;
 		}];
+        
+//        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+//			staticContentCell.reuseIdentifier = @"LandScreenCell";
+//			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            
+//			cell.textLabel.text = NSLocalizedString(@"Screen Orientation", nil);
+//            cell.detailTextLabel.text = [safeSelf.settings getScreenOri][[safeSelf.settings screenOrientation]];
+//		}whenSelected:^(NSIndexPath *indexPath) {
+//            [safeSelf.navigationController pushViewController:[[EditViewController alloc] initWithTitleAndName:NSLocalizedString(@"Screen Orientation", nil)  Complete:^(NSString *value) {
+//                safeSelf.settings.screenOrientation = [value intValue];
+//                [safeSelf.tableView reloadData];
+//            } EnumType:RadioCell DataArray:[safeSelf.settings getScreenOri] FirstSelected:[safeSelf.settings screenOrientation]] animated:YES];
+//		}];
     }];
     
 }
