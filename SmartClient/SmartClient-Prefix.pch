@@ -35,7 +35,7 @@
 
 
 //控制nslog
-#ifdef DEBUG
+#ifndef DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__)
 #define debugMethod() NSLog(@"%s", __func__)
 #else

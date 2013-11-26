@@ -224,8 +224,6 @@
 //                    [str drawInRect:textRect withAttributes:attrs];
 //                }
             }
-            
-
         }
     }
     

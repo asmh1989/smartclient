@@ -115,9 +115,9 @@
             
 			cell.textLabel.text = NSLocalizedString(@"FontSize", nil);
 
-
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", [safeSelf getFontSize]];
             [cell.detailTextLabel setFont:[UIFont fontWithName:[safeSelf.settings fontStyle] size:[safeSelf getFontSize]]];
+            [cell.textLabel setFont:[UIFont fontWithName:[safeSelf.settings fontStyle] size:[safeSelf.settings fontSize]]];
 		} whenSelected:^(NSIndexPath *indexPath) {
             [safeSelf.navigationController pushViewController:[[EditViewController alloc] initWithTitleAndName:NSLocalizedString(@"FontSize", nil)
                 Name:[NSString stringWithFormat:@"%d", [safeSelf getFontSize]]
@@ -137,7 +137,9 @@
             
 			cell.textLabel.text = NSLocalizedString(@"FontEnc", nil);
             cell.detailTextLabel.text =@"GB2312";
+            cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.detailTextLabel setFont:[UIFont fontWithName:[safeSelf.settings fontStyle] size:[safeSelf.settings fontSize]]];
+            [cell.textLabel setFont:[UIFont fontWithName:[safeSelf.settings fontStyle] size:[safeSelf.settings fontSize]]];
 		} whenSelected:^(NSIndexPath *indexPath) {
 
 		}];
