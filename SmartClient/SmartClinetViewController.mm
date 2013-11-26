@@ -193,9 +193,50 @@
     [self dispatchMessage:MYKEY_ENTER tag:1];
 }
 
--(void)hidenKeyboard
+-(void)tap:(UITapGestureRecognizer *)gr
 {
-    [self.textView resignFirstResponder];
+//    [self.textView resignFirstResponder];
+    NSLog(@"tap...");
+    
+}
+
+int lastScale;
+-(void)pinch:(UIPinchGestureRecognizer *)sender
+{
+    switch ([sender state]) {
+        case UIGestureRecognizerStateBegan:
+            lastScale = [[settingStore getCurrentFont] pointSize];
+            lastScale = (int)(sender.scale*10);
+            break;
+        case UIGestureRecognizerStateChanged:
+            if ((int)(sender.scale*10) - lastScale == 2) {
+                if ([settingStore screenOrientation] == 0) {
+                    settingStore.fontSize += 1;
+                } else {
+                    settingStore.fontSizeLand += 1;
+                }
+                
+                lastScale = (int)(sender.scale*10);
+            }  else if(lastScale - (int)(sender.scale*10) == 2){
+                if ([settingStore screenOrientation] == 0) {
+                    settingStore.fontSize -= 1;
+                } else {
+                    settingStore.fontSizeLand -= 1;
+                }
+                
+                lastScale = (int)(sender.scale*10);
+            }
+            [mView setNeedsDisplay];
+            break;
+        case UIGestureRecognizerStateRecognized:
+            break;
+        case UIGestureRecognizerStateCancelled:
+            break;
+        default:
+            break;
+    }
+//    NSLog(@"lastScale = %d, sclae = %d,   velocity=%d",lastScale, (int)(sender.scale*10), (int)(sender.velocity*10));
+    
 }
 
 -(void)keyboardWillShow:(NSNotification *)notification
@@ -285,10 +326,13 @@
     [self sendFirstConnectInfo];
     [mView setDelegate:self];
     
-//    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
+//    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
 //    gesture.numberOfTapsRequired = 1;
 //    
 //    [self.mView addGestureRecognizer:gesture];
+    
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)];
+    [self.mView addGestureRecognizer:pinch];
     
     if(IOS_VERSION<5.0)
     {
@@ -503,7 +547,8 @@
 
 - (void)handleTouchMessage:(NSString *)msg
 {
-    [self hidenKeyboard];
+//    [self hidenKeyboard];
+    [self.textView resignFirstResponder];
     [self dispatchMessage:msg tag:3];
 }
 
@@ -703,11 +748,11 @@
     
     CGSize size;
     if (image.size.width > image.size.height) {
-        size.width = 270;
-        size.height = 270*image.size.height / image.size.width;
+        size.width = self.view.frame.size.width*2/3;
+        size.height = size.width*image.size.height / image.size.width;
     } else {
-        size.height = 220;
-        size.width = 220*image.size.width / image.size.height;
+        size.height = self.view.frame.size.height/2;
+        size.width = size.height*image.size.width / image.size.height;
     }
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, size.width, size.height)];
@@ -765,6 +810,7 @@
     
     [alertView setUseMotionEffects:true];
     [alertView show];
+    [alertView deviceOrientationDidChange:nil];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
