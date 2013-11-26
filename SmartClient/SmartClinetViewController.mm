@@ -96,7 +96,7 @@
         if (OSVersionIsAtLeastiOS7()) {
             CGRect frame = self.view.frame;
             frame.origin.y = 20;
-            frame.size.width -= 20;
+            frame.size.height -= 20;
             mView.frame = frame;
         }
 
