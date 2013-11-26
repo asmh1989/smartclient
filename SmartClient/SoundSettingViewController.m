@@ -85,22 +85,22 @@
 			cell.accessoryView = safeSelf.IsBeepSwitch;
 		}];
         
-//        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
-//            staticContentCell.cellStyle = UITableViewCellStyleValue1;
-//			staticContentCell.reuseIdentifier = @"SoundCell";
-//            
-//			cell.textLabel.text = NSLocalizedString(@"SoundOptions", nil);
-//            cell.detailTextLabel.text = safeSelf.sounds[[safeSelf.settings soundUsed]];
-//            
-//		}whenSelected:^(NSIndexPath *indexPath) {
-//            
-//            [safeSelf.navigationController pushViewController:[[EditViewController alloc] initWithTitleAndName:NSLocalizedString(@"SoundOptions", nil) Complete:^(NSString *value){
-//                
-//                [safeSelf.settings setSoundUsed:[value intValue]];
-//                [safeSelf.tableView reloadData];
-//                
-//            } EnumType:RadioSoundCell DataArray:safeSelf.sounds FirstSelected:[safeSelf.settings soundUsed]] animated:YES];
-//		}];
+        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.cellStyle = UITableViewCellStyleValue1;
+			staticContentCell.reuseIdentifier = @"SoundCell";
+            
+			cell.textLabel.text = NSLocalizedString(@"SoundOptions", nil);
+            cell.detailTextLabel.text = safeSelf.sounds[[safeSelf.settings soundUsed]];
+            
+		}whenSelected:^(NSIndexPath *indexPath) {
+            
+            [safeSelf.navigationController pushViewController:[[EditViewController alloc] initWithTitleAndName:NSLocalizedString(@"SoundOptions", nil) Complete:^(NSString *value){
+                
+                [safeSelf.settings setSoundUsed:[value intValue]];
+                [safeSelf.tableView reloadData];
+                
+            } EnumType:RadioSoundCell DataArray:safeSelf.sounds FirstSelected:[safeSelf.settings soundUsed]] animated:YES];
+		}];
     }];
     
 }

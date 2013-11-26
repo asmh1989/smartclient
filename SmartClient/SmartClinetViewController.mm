@@ -185,7 +185,7 @@
         [readers addObject:qrcodeReader];
     }
     widController.readers = readers;
-    [self presentViewController:widController animated:NO completion:^{}];
+    [self presentViewController:widController animated:YES completion:^{}];
 }
 
 - (IBAction)clickToolBarEnter:(id)sender
@@ -947,6 +947,6 @@ int lastScale;
 
 - (void)zxingControllerDidCancel:(ScanViewController *)controller
 {
-    [self dismissViewControllerAnimated:YES completion:^{NSLog(@"cancel!");}];
+    [self dismissViewControllerAnimated:NO completion:^{NSLog(@"cancel!");}];
 }
 @end

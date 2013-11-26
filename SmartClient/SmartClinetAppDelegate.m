@@ -54,6 +54,8 @@
         [self.drawerController setMaximumLeftDrawerWidth:160.0];
     }
     
+    [self.drawerController setShouldStretchDrawer:NO];
+    
     [self.drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeBezelPanningCenterView];
     [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
