@@ -810,7 +810,6 @@ int lastScale;
     
     [alertView setUseMotionEffects:true];
     [alertView show];
-    [alertView deviceOrientationDidChange:nil];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

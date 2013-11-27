@@ -103,7 +103,7 @@ CGFloat buttonSpacerHeight = 0;
         }
 
         [self setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-        [[[[UIApplication sharedApplication] windows] lastObject] addSubview:self];
+        [[[UIApplication sharedApplication] keyWindow] addSubview:self];
     }
 
     [UIView animateWithDuration:0.2f delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
