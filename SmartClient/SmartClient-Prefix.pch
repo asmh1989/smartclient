@@ -35,7 +35,7 @@
 
 
 //控制nslog
-#ifndef DEBUG
+#ifdef DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__)
 #define debugMethod() NSLog(@"%s", __func__)
 #else
@@ -43,6 +43,6 @@
 #define debugMethod()
 #endif
 
-static BOOL OSVersionIsAtLeastiOS7() {
+BOOL OSVersionIsAtLeastiOS7() {
     return (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1);
 }
