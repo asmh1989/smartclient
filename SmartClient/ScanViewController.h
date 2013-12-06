@@ -14,9 +14,9 @@
 
 @protocol ZXingDelegate;
 
-#if !TARGET_IPHONE_SIMULATOR
+//#if !TARGET_IPHONE_SIMULATOR
 #define HAS_AVFF 1
-#endif
+//#endif
 
 @interface ScanViewController : UIViewController<DecoderDelegate,
 UINavigationControllerDelegate
