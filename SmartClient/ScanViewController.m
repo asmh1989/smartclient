@@ -27,6 +27,8 @@
 @property BOOL oneDMode;
 @property BOOL isStatusBarHidden;
 
+@property (strong, nonatomic) UIView *mainView;
+
 - (void)initCapture;
 - (void)stopCapture;
 
@@ -41,7 +43,7 @@
 @synthesize result, delegate, soundToPlay;
 @synthesize oneDMode, showCancel, showLicense, isStatusBarHidden;
 @synthesize readers;
-
+@synthesize mainView;
 
 - (id)initWithDelegate:(id<ZXingDelegate>)scanDelegate showCancel:(BOOL)shouldShowCancel OneDMode:(BOOL)shouldUseoOneDMode {
     
@@ -129,12 +131,60 @@
     wasCancelled = NO;
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+        [self.mainView removeFromSuperview];
+    [CATransaction begin];
+    if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+        self.prevLayer.connection.videoOrientation = AVCaptureVideoOrientationLandscapeRight;
+        
+    }else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft){
+        self.prevLayer.connection.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+        
+    }else if (toInterfaceOrientation == UIDeviceOrientationPortrait){
+        self.prevLayer.connection.videoOrientation = AVCaptureVideoOrientationPortrait;
+        
+    }else if (toInterfaceOrientation == UIDeviceOrientationPortraitUpsideDown){
+        self.prevLayer.connection.videoOrientation = AVCaptureVideoOrientationPortraitUpsideDown;
+    }
+    [CATransaction commit];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+    [self setOverViewer];
+}
+
+- (BOOL)shouldAutorotate{
+    return NO;
+}
+
+- (CGSize) changeTo:(CGSize)s{
+    CGFloat tmp = s.height;
+    s.height = s.width;
+    s.width = tmp;
+    return s;
+}
+
 
 - (void)setOverViewer
 {
     CGSize statusSize = [[UIApplication sharedApplication] statusBarFrame].size;
     CGSize screenSize = self.view.frame.size;
     //画中间的基准线
+    
+    if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+        if(screenSize.width < screenSize.height){
+            statusSize = [self changeTo:statusSize];
+            screenSize = [self changeTo:screenSize];
+        }
+    } else if(UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])){
+        if(screenSize.width > screenSize.height){
+            statusSize = [self changeTo:statusSize];
+            screenSize = [self changeTo:screenSize];
+        }
+    }
+    
+    mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenSize.width, screenSize.height)];
+    [self.view addSubview:mainView];
     
     CGFloat width = screenSize.width * 7 / 8;
     CGFloat height = (screenSize.height - statusSize.height) *3 / 5;
@@ -149,7 +199,7 @@
     
     line.backgroundColor = [UIColor redColor];
     
-    [self.view addSubview:line];
+    [mainView addSubview:line];
     
     //最上部view
     
@@ -159,7 +209,7 @@
     
     upView.backgroundColor = [UIColor blackColor];
     
-    [self.view addSubview:upView];
+    [mainView addSubview:upView];
     
     //用于说明的label
     
@@ -186,7 +236,7 @@
     
     leftView.backgroundColor = [UIColor blackColor];
     
-    [self.view addSubview:leftView];
+    [mainView addSubview:leftView];
     
     //右侧的view
     
@@ -196,7 +246,7 @@
     
     rightView.backgroundColor = [UIColor blackColor];
     
-    [self.view addSubview:rightView];
+    [mainView addSubview:rightView];
     
     //底部view
     
@@ -206,7 +256,7 @@
     
     downView.backgroundColor = [UIColor blackColor];
     
-    [self.view addSubview:downView];
+    [mainView addSubview:downView];
     
     //用于取消操作的button
     
@@ -222,7 +272,7 @@
     
     [cancelButton addTarget:self action:@selector(back:)forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:cancelButton];
+    [mainView addSubview:cancelButton];
     
 }
 
@@ -438,6 +488,7 @@ static bool isIPad() {
     if (!preset) {
         preset = AVCaptureSessionPresetMedium;
     }
+    
     self.captureSession.sessionPreset = preset;
     
     [self.captureSession addInput:captureInput];
@@ -451,6 +502,27 @@ static bool isIPad() {
     // NSLog(@"prev %p %@", self.prevLayer, self.prevLayer);
     self.prevLayer.frame = self.view.bounds;
     self.prevLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    
+    
+    //support landscreen
+    UIInterfaceOrientation barOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    switch (barOrientation) {
+        case UIInterfaceOrientationPortrait:
+            prevLayer.connection.videoOrientation = AVCaptureVideoOrientationPortrait;
+            break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+            prevLayer.connection.videoOrientation = AVCaptureVideoOrientationPortraitUpsideDown;
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+            prevLayer.connection.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            prevLayer.connection.videoOrientation = AVCaptureVideoOrientationLandscapeRight;
+            break;
+        default:
+            break;
+    }
+    
     [self.view.layer addSublayer: self.prevLayer];
     
     [self.captureSession startRunning];

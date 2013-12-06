@@ -9,10 +9,13 @@
 #import "AboutSettingViewController.h"
 
 @interface AboutSettingViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *version;
 
 @end
 
 @implementation AboutSettingViewController
+
+@synthesize version;
 
 - (id)init
 {
@@ -47,6 +50,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    version.text = [@"V" stringByAppendingString: [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
 }
 
 - (void)didReceiveMemoryWarning
