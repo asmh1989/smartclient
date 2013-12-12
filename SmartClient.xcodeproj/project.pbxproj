@@ -21,7 +21,6 @@
 		A4632034180F80E3000F9C69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4632033180F80E3000F9C69 /* Foundation.framework */; };
 		A4632036180F80E3000F9C69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4632035180F80E3000F9C69 /* CoreGraphics.framework */; };
 		A4632038180F80E3000F9C69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4632037180F80E3000F9C69 /* UIKit.framework */; };
-		A463203E180F80E3000F9C69 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A463203C180F80E3000F9C69 /* InfoPlist.strings */; };
 		A4632040180F80E3000F9C69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A463203F180F80E3000F9C69 /* main.m */; };
 		A4632044180F80E3000F9C69 /* SmartClinetAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4632043180F80E3000F9C69 /* SmartClinetAppDelegate.m */; };
 		A4632046180F80E3000F9C69 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4632045180F80E3000F9C69 /* Images.xcassets */; };
@@ -58,6 +57,7 @@
 		A482E06D1823DB5A0056E0C2 /* JMStaticContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A482E0671823DB5A0056E0C2 /* JMStaticContentTableViewController.m */; };
 		A482E06E1823DB5A0056E0C2 /* JMStaticContentTableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = A482E0691823DB5A0056E0C2 /* JMStaticContentTableViewSection.m */; };
 		A482E06F1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A482E06B1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m */; };
+		A488D2131859A68E00CB6B39 /* Kaiti.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A488D2121859A5A300CB6B39 /* Kaiti.ttf */; };
 		A49214C3182CCA4600213154 /* alpha.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214BA182CCA4400213154 /* alpha.wav */; };
 		A49214C4182CCA4600213154 /* ascend.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214BB182CCA4400213154 /* ascend.wav */; };
 		A49214C5182CCA4600213154 /* color.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214BC182CCA4500213154 /* color.wav */; };
@@ -183,6 +183,7 @@
 		A482E0691823DB5A0056E0C2 /* JMStaticContentTableViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStaticContentTableViewSection.m; sourceTree = "<group>"; };
 		A482E06A1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStaticContentTextFieldTableViewCell.h; sourceTree = "<group>"; };
 		A482E06B1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStaticContentTextFieldTableViewCell.m; sourceTree = "<group>"; };
+		A488D2121859A5A300CB6B39 /* Kaiti.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Kaiti.ttf; sourceTree = "<group>"; };
 		A49214BA182CCA4400213154 /* alpha.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alpha.wav; sourceTree = "<group>"; };
 		A49214BB182CCA4400213154 /* ascend.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ascend.wav; sourceTree = "<group>"; };
 		A49214BC182CCA4500213154 /* color.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = color.wav; sourceTree = "<group>"; };
@@ -364,6 +365,7 @@
 		A463203A180F80E3000F9C69 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A488D20418599B7700CB6B39 /* font */,
 				A49214B9182CCA4400213154 /* sound */,
 				A45D2925182A259300EE88AD /* Localizable.strings */,
 				A463203B180F80E3000F9C69 /* SmartClient-Info.plist */,
@@ -463,6 +465,14 @@
 				A482E06B1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m */,
 			);
 			path = JMStaticContentTableViewController;
+			sourceTree = "<group>";
+		};
+		A488D20418599B7700CB6B39 /* font */ = {
+			isa = PBXGroup;
+			children = (
+				A488D2121859A5A300CB6B39 /* Kaiti.ttf */,
+			);
+			name = font;
 			sourceTree = "<group>";
 		};
 		A49214B9182CCA4400213154 /* sound */ = {
@@ -567,10 +577,10 @@
 				A49214C9182CCA4600213154 /* vector.wav in Resources */,
 				A49214C6182CCA4600213154 /* confirm.wav in Resources */,
 				A49214C7182CCA4600213154 /* major.wav in Resources */,
-				A463203E180F80E3000F9C69 /* InfoPlist.strings in Resources */,
 				A49214C3182CCA4600213154 /* alpha.wav in Resources */,
 				A4632046180F80E3000F9C69 /* Images.xcassets in Resources */,
 				A49214CA182CCA4600213154 /* zeta.wav in Resources */,
+				A488D2131859A68E00CB6B39 /* Kaiti.ttf in Resources */,
 				A49214C8182CCA4600213154 /* modern.wav in Resources */,
 				A49214C4182CCA4600213154 /* ascend.wav in Resources */,
 				A45D2927182A259300EE88AD /* Localizable.strings in Resources */,
@@ -796,6 +806,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartClient/SmartClient-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/sun/git/zxing/cpp/core/src,
+					"/Users/sun/git/zxing/iphone/ZXingWidget/Classes/**",
+				);
 				INFOPLIST_FILE = "SmartClient/SmartClient-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -819,6 +835,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartClient/SmartClient-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/sun/git/zxing/cpp/core/src,
+					"/Users/sun/git/zxing/iphone/ZXingWidget/Classes/**",
+				);
 				INFOPLIST_FILE = "SmartClient/SmartClient-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (

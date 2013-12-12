@@ -22,14 +22,14 @@
 #define _ISBEEP                  YES                     //是否有声音
 #define _SOUNDUSED               0                       //默认警告声
 #define _CURSORHEIGHT            2                       //关标的高度
-#define _FONTNAME                @"Helvetica"            //字体名
-#define _FONTSTYLE               @"Helvetica"            //字体样式
-#define _FONTSIZE                18                      //字体大小
-#define _FONTSIZE_PAD            38                      //pad上字体大小
+#define _FONTNAME                @"KaiTi"                //字体名
+#define _FONTSTYLE               @"KaiTi"                //字体样式
+#define _FONTSIZE                21                      //字体大小
+#define _FONTSIZE_PAD            46                      //pad上字体大小
 
 #define _SCREEN_ORI              0
-#define _FONTSIZE_PAD_LAND       30                      //横屏字体默认大小
-#define _FONTSIZE_LAND           14
+#define _FONTSIZE_PAD_LAND       35                      //横屏字体默认大小
+#define _FONTSIZE_LAND           18
 
 #define _SHOW_CARET              YES                     //是否显示光标
 #define _RECONNECT_TIME          5                       //重新连接时间
