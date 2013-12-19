@@ -7,15 +7,22 @@
 //
 
 #import "AboutSettingViewController.h"
+#import "SettingForConnect.h"
+#import "SettingStore.h"
+
 
 @interface AboutSettingViewController ()
+{
+    SettingForConnect *settings;
+}
 @property (weak, nonatomic) IBOutlet UILabel *version;
+@property (weak, nonatomic) IBOutlet HTCopyableLabel *deviceID;
 
 @end
 
 @implementation AboutSettingViewController
 
-@synthesize version;
+@synthesize version, deviceID;
 
 - (id)init
 {
@@ -28,6 +35,7 @@
         [[self navigationItem] setLeftBarButtonItem:doneItem];
         
         self.title = NSLocalizedString(@"About", nil);
+        settings = [[SettingStore shareStore] getSettings];
     }
     return self;
 }
@@ -52,6 +60,13 @@
     // Do any additional setup after loading the view from its nib.
     
     version.text = [@"V" stringByAppendingString: [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    deviceID.text = [NSLocalizedString(@"DeviceID", nil) stringByAppendingString:settings.deviceID];
+    deviceID.copyableLabelDelegate = self;
+}
+
+- (NSString *)stringToCopyForCopyableLabel:(HTCopyableLabel *)copyableLabel
+{
+    return settings.deviceID;
 }
 
 - (void)didReceiveMemoryWarning

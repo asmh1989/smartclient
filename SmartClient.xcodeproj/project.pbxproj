@@ -14,6 +14,7 @@
 		A43D1FEF1810C5F90067FB2B /* ParserMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = A43D1FEE1810C5F90067FB2B /* ParserMsg.m */; };
 		A445505E18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A445505D18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m */; };
 		A4455062182387C200BBDDB9 /* ConnectSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4455061182387C200BBDDB9 /* ConnectSettingViewController.m */; };
+		A446918C186293A100E9CFC0 /* HTCopyableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A446918B186293A000E9CFC0 /* HTCopyableLabel.m */; };
 		A44CB6BD1818C862006B5946 /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = A44CB6BC1818C862006B5946 /* Functions.m */; };
 		A44CB6C11818E4FE006B5946 /* VTSystemView.m in Sources */ = {isa = PBXBuildFile; fileRef = A44CB6C01818E4FE006B5946 /* VTSystemView.m */; };
 		A45D2917182A1C7D00EE88AD /* AboutSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A45D2919182A1C7D00EE88AD /* AboutSettingViewController.xib */; };
@@ -107,6 +108,8 @@
 		A445505D18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMExampleDrawerVisualStateManager.m; path = ../MMExampleDrawerVisualStateManager.m; sourceTree = "<group>"; };
 		A4455060182387C200BBDDB9 /* ConnectSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectSettingViewController.h; sourceTree = "<group>"; };
 		A4455061182387C200BBDDB9 /* ConnectSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectSettingViewController.m; sourceTree = "<group>"; };
+		A446918A186293A000E9CFC0 /* HTCopyableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCopyableLabel.h; sourceTree = "<group>"; };
+		A446918B186293A000E9CFC0 /* HTCopyableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCopyableLabel.m; sourceTree = "<group>"; };
 		A44CB6BB1818C862006B5946 /* Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
 		A44CB6BC1818C862006B5946 /* Functions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Functions.m; sourceTree = "<group>"; };
 		A44CB6BF1818E4FE006B5946 /* VTSystemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTSystemView.h; sourceTree = "<group>"; };
@@ -287,6 +290,8 @@
 		A44CB6BE1818E4D7006B5946 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A446918A186293A000E9CFC0 /* HTCopyableLabel.h */,
+				A446918B186293A000E9CFC0 /* HTCopyableLabel.m */,
 				A41D4377183078AE00F52597 /* CustomIOS7AlertView.h */,
 				A41D4378183078AE00F52597 /* CustomIOS7AlertView.m */,
 				A44CB6BF1818E4FE006B5946 /* VTSystemView.h */,
@@ -634,6 +639,7 @@
 				A46492CF18222B2E00B39E7E /* MMDrawerBarButtonItem.m in Sources */,
 				A46492D018222B2E00B39E7E /* MMDrawerController.m in Sources */,
 				A4E59127182798EC00265F60 /* OtherSettingViewController.m in Sources */,
+				A446918C186293A100E9CFC0 /* HTCopyableLabel.m in Sources */,
 				A445505E18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m in Sources */,
 				A4E5911118276B0A00265F60 /* StringInputTableViewCell.m in Sources */,
 				A4455062182387C200BBDDB9 /* ConnectSettingViewController.m in Sources */,

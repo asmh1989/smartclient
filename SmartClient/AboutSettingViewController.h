@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HTCopyableLabel.h"
 
-@interface AboutSettingViewController : UIViewController
+@interface AboutSettingViewController : UIViewController<HTCopyableLabelDelegate>
 
 @end
