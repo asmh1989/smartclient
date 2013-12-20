@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "HTCopyableLabel.h"
+#import "TTTAttributedLabel.h"
 
-@interface AboutSettingViewController : UIViewController<HTCopyableLabelDelegate>
+@interface AboutSettingViewController : UIViewController<HTCopyableLabelDelegate, TTTAttributedLabelDelegate, UIActionSheetDelegate>
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A41842A0186428C100F43F13 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A418429F186428C100F43F13 /* TTTAttributedLabel.m */; };
 		A41D4379183078AF00F52597 /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A41D4378183078AE00F52597 /* CustomIOS7AlertView.m */; };
 		A429C760181773CD0037666D /* ShowListEventArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = A429C75F181773CD0037666D /* ShowListEventArgs.m */; };
 		A429C763181775FB0037666D /* StringShowList.m in Sources */ = {isa = PBXBuildFile; fileRef = A429C762181775FB0037666D /* StringShowList.m */; };
@@ -94,6 +95,8 @@
 
 /* Begin PBXFileReference section */
 		A40F734818272E63003D36AF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		A418429E186428C100F43F13 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		A418429F186428C100F43F13 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		A41D4377183078AE00F52597 /* CustomIOS7AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOS7AlertView.h; sourceTree = "<group>"; };
 		A41D4378183078AE00F52597 /* CustomIOS7AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOS7AlertView.m; sourceTree = "<group>"; };
 		A429C75E181773CD0037666D /* ShowListEventArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowListEventArgs.h; sourceTree = "<group>"; };
@@ -290,6 +293,8 @@
 		A44CB6BE1818E4D7006B5946 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A418429E186428C100F43F13 /* TTTAttributedLabel.h */,
+				A418429F186428C100F43F13 /* TTTAttributedLabel.m */,
 				A446918A186293A000E9CFC0 /* HTCopyableLabel.h */,
 				A446918B186293A000E9CFC0 /* HTCopyableLabel.m */,
 				A41D4377183078AE00F52597 /* CustomIOS7AlertView.h */,
@@ -652,6 +657,7 @@
 				A482E06E1823DB5A0056E0C2 /* JMStaticContentTableViewSection.m in Sources */,
 				A44CB6C11818E4FE006B5946 /* VTSystemView.m in Sources */,
 				A4632044180F80E3000F9C69 /* SmartClinetAppDelegate.m in Sources */,
+				A41842A0186428C100F43F13 /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
