@@ -157,6 +157,8 @@
 		self.staticContentSections = nil;
 		self.staticContentSections = [NSArray array];
 	}
+    
+    [self.tableView reloadData];
 }
 
 - (void) addSection:(JMStaticContentTableViewControllerAddSectionBlock)b {

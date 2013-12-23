@@ -9,7 +9,8 @@
 #import "OtherSettingViewController.h"
 #import "StringForNSUserDefaults.h"
 #import "EditViewController.h"
-
+#import "SettingStore.h"
+#import "SettingForConnect.h"
 #define INT_TO_STRONG(N)    [NSString stringWithFormat:@"%d", (N)]
 
 
@@ -21,6 +22,9 @@
 @property (nonatomic, retain) UISwitch *startenableGpsSwitch;
 @property (nonatomic, retain) UISwitch *notificationActiveSwithSwitch;
 @property (nonatomic, retain) UISwitch *notificationVibrateSwithSwitch;
+
+@property (nonatomic, retain) SettingForConnect *settings;
+
 @end
 
 @implementation OtherSettingViewController
@@ -36,7 +40,8 @@
         [[self navigationItem] setLeftBarButtonItem:doneItem];
         
         self.title = NSLocalizedString(@"OtherSetting", nil);
-        
+        self.settings = [[SettingStore shareStore] getSettings];
+
     }
     return self;
 }
@@ -100,6 +105,48 @@
     
     __unsafe_unretained __block OtherSettingViewController *safeSelf = self;
     
+    
+    [self addSection:^(JMStaticContentTableViewSection *section, NSUInteger sectionIndex) {
+        section.headerTitle = NSLocalizedString(@"Picture Settings:", nil);
+		[section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.cellStyle = UITableViewCellStyleValue1;
+			staticContentCell.reuseIdentifier = @"pictureQuailityCell";
+            
+			cell.textLabel.text = NSLocalizedString(@"PictureQuality", nil);
+            cell.detailTextLabel.text = [safeSelf.settings getPictureQualityArray][[safeSelf.settings pictureQuality]];
+		}whenSelected:^(NSIndexPath *indexPath) {
+            [safeSelf.navigationController pushViewController:[[EditViewController alloc] initWithTitleAndName:NSLocalizedString(@"PictureQuality", nil)  Complete:^(NSString *value) {
+                safeSelf.settings.pictureQuality = [value intValue];
+                [safeSelf.tableView reloadData];
+            } EnumType:RadioCell DataArray:[safeSelf.settings getPictureQualityArray] FirstSelected:[safeSelf.settings pictureQuality]] animated:YES];
+		}];
+        
+		[section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.cellStyle = UITableViewCellStyleValue1;
+			staticContentCell.reuseIdentifier = @"pictureTimeSizeCell";
+            
+			cell.textLabel.text = NSLocalizedString(@"PictureTimeSize", nil);
+            cell.detailTextLabel.text = [safeSelf.settings getPictureTimeSizeArray][[safeSelf.settings pictureTimeSize]];
+		}whenSelected:^(NSIndexPath *indexPath) {
+            [safeSelf.navigationController pushViewController:[[EditViewController alloc] initWithTitleAndName:NSLocalizedString(@"PictureTimeSize", nil)  Complete:^(NSString *value) {
+                safeSelf.settings.pictureTimeSize = [value intValue];
+                [safeSelf.tableView reloadData];
+            } EnumType:RadioCell DataArray:[safeSelf.settings getPictureTimeSizeArray] FirstSelected:[safeSelf.settings pictureTimeSize]] animated:YES];
+		}];
+        
+        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.cellStyle = UITableViewCellStyleValue1;
+			staticContentCell.reuseIdentifier = @"pictureTypeCell";
+            
+			cell.textLabel.text = NSLocalizedString(@"PictureType", nil);
+            cell.detailTextLabel.text = [safeSelf.settings getPictureTypeArray][[safeSelf.settings pictureType]];
+		}whenSelected:^(NSIndexPath *indexPath) {
+            [safeSelf.navigationController pushViewController:[[EditViewController alloc] initWithTitleAndName:NSLocalizedString(@"PictureType", nil)  Complete:^(NSString *value) {
+                safeSelf.settings.pictureType = [value intValue];
+                [safeSelf.tableView reloadData];
+            } EnumType:RadioCell DataArray:[safeSelf.settings getPictureTypeArray] FirstSelected:[safeSelf.settings pictureType]] animated:YES];
+		}];
+    }];
     
     [self addSection:^(JMStaticContentTableViewSection *section, NSUInteger sectionIndex) {
         section.headerTitle = NSLocalizedString(@"Additional Settings:", nil);
