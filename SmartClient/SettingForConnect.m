@@ -25,6 +25,7 @@
 
 - (UIFont *)getCurrentFont
 {
+    [self setFontStyle:_FONTSTYLE];
     if([self screenOrientation] == 0){
         return [UIFont fontWithName:fontStyle size:fontSize];
     } else {

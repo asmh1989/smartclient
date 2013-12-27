@@ -470,7 +470,7 @@ int lastScale;
 //    [self dispatchMessage:str tag:2];
     [textField resignFirstResponder];
     [self dispatchMessage:MYKEY_ENTER tag:1];
-    
+    [textView setText:@""];
     return YES;
 }
 
@@ -538,6 +538,8 @@ int lastScale;
 //            [self.textView becomeFirstResponder];
             [textView setTintColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0]]; //隐藏光标
             [textView setTextColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0]]; //隐藏textview的输入内容
+            [textView setText:@"1234567890"];
+            textView.keyboardType = UIKeyboardTypeAlphabet;
             return;
         }
     }

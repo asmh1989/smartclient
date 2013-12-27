@@ -82,16 +82,17 @@
 			cell.textLabel.text = NSLocalizedString(@"FontFamily", nil);
             NSString *fontName = [safeSelf.settings fontName];
             cell.detailTextLabel.text = fontName;
+            cell.accessoryType = UITableViewCellAccessoryNone;
 		}whenSelected:^(NSIndexPath *indexPath) {
-            [safeSelf.navigationController pushViewController:[[EditViewController alloc] initWithTitleAndName:NSLocalizedString(@"FontFamily", nil) Name:[safeSelf.settings fontName] Complete:^(NSString *value){
-                if (![safeSelf.settings.fontName isEqualToString:value]) {
-                    safeSelf.settings.fontName = value;
-                    NSArray * fontname = [UIFont fontNamesForFamilyName:value];
-                    safeSelf.settings.fontStyle = fontname[0];
-                    [safeSelf.tableView reloadData];
-                }
-
-              } EnumType:RadioCell] animated:YES];
+//            [safeSelf.navigationController pushViewController:[[EditViewController alloc] initWithTitleAndName:NSLocalizedString(@"FontFamily", nil) Name:[safeSelf.settings fontName] Complete:^(NSString *value){
+//                if (![safeSelf.settings.fontName isEqualToString:value]) {
+//                    safeSelf.settings.fontName = value;
+//                    NSArray * fontname = [UIFont fontNamesForFamilyName:value];
+//                    safeSelf.settings.fontStyle = fontname[0];
+//                    [safeSelf.tableView reloadData];
+//                }
+//
+//              } EnumType:RadioCell] animated:YES];
 		}];
         
 		[section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
@@ -101,12 +102,13 @@
 			cell.textLabel.text = NSLocalizedString(@"FontName", nil);
             NSString *fontStyle = [safeSelf.settings fontStyle];
 			cell.detailTextLabel.text = fontStyle;
+            cell.accessoryType = UITableViewCellAccessoryNone;
 		} whenSelected:^(NSIndexPath *indexPath) {
-            [safeSelf.navigationController pushViewController:[[EditViewController alloc] initWithTitleAndName:NSLocalizedString(@"FontName", nil) Name:[safeSelf.settings fontStyle] Complete:^(NSString *value){
-                    safeSelf.settings.fontStyle = value;
-                    [safeSelf.tableView reloadData];
-                
-                } EnumType:RadioCell DataArray:[UIFont fontNamesForFamilyName:safeSelf.settings.fontName]] animated:YES];
+//            [safeSelf.navigationController pushViewController:[[EditViewController alloc] initWithTitleAndName:NSLocalizedString(@"FontName", nil) Name:[safeSelf.settings fontStyle] Complete:^(NSString *value){
+//                    safeSelf.settings.fontStyle = value;
+//                    [safeSelf.tableView reloadData];
+//                
+//                } EnumType:RadioCell DataArray:[UIFont fontNamesForFamilyName:safeSelf.settings.fontName]] animated:YES];
 		}];
         
 		[section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
