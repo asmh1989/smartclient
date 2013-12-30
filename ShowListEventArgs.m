@@ -95,16 +95,20 @@
         {
             ShowListEventArgs *item = key;
             int start = curPoint.x;
-            int end = curCaretPos.x - 1;
-            if ((start >= item.curPoint.x && end <= item.curCaretPos.x && start <=item.curCaretPos.x)) {
+            int end = curCaretPos.x;
+            if ((start >= item.curPoint.x && end <= item.curCaretPos.x && start <=item.curCaretPos.x - 1)) {
                 isadd = YES;
                 if ([item.curString length] > [curString length]) {
-                    NSString *str1 = [item.curString substringToIndex:(curPoint.x - item.curPoint.x)];
-                    NSString *str2 = [item.curString substringFromIndex:(curPoint.x - item.curPoint.x)+curString.length];
-//                    int len1 = str2.length;
-//                    int len2 = item.curString.length;
-                    item.curString =[NSString stringWithFormat:@"%@%@%@", str1, curString, str2];
-//                    int len3 = item.curString.length;
+                    @try
+                    {
+                        NSString *str1 = [item.curString substringToIndex:(curPoint.x - item.curPoint.x)];
+                        NSString *str2 = [item.curString substringFromIndex:(curPoint.x - item.curPoint.x)+curString.length];
+                        item.curString =[NSString stringWithFormat:@"%@%@%@", str1, curString, str2];
+                    }  
+                    @catch (NSException *ex) {
+//                        NSLog(@"ERROR!!!");
+                        continue;
+                    }
                 } else {
                     item.curString = curString;
                 }
@@ -123,7 +127,7 @@
         [stringShowList.stringShowDics setObject:showList forKey:_TOSTRIING(curPoint.y)];
     }
 
-    if ([self.curString rangeOfString:@"___"].location != NSNotFound) {
+    if (([self.curString rangeOfString:@"_"].location != NSNotFound) || ([self.curString rangeOfString:@"<"].location != NSNotFound)) {
         CGRect r = CGRectMake(curPoint.x, curPoint.y, curCaretPos.x, curCaretPos.y);
         NSValue *value = [NSValue valueWithCGRect:r];
         [stringShowList.inputStrings addObject:value];

@@ -118,6 +118,47 @@
     }
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    if(!OSVersionIsAtLeastiOS7()){
+        return;
+    }
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)];
+    [self.view addGestureRecognizer:pinch];
+}
+
+int lastScale;
+CGFloat cameraScale = 1.5;
+-(void)pinch:(UIPinchGestureRecognizer *)sender
+{
+    switch ([sender state]) {
+        case UIGestureRecognizerStateBegan:
+            lastScale = (int)(sender.scale*100);
+            break;
+        case UIGestureRecognizerStateChanged:
+            if (((int)(sender.scale*100) - lastScale > 5) && (cameraScale < 5.0)) {
+                cameraScale += 0.1;
+                [self setZoom:cameraScale];
+                lastScale = (int)(sender.scale*100);
+            }  else if((lastScale - (int)(sender.scale*100) > 5) && (cameraScale > 1.1)){
+                cameraScale -= 0.1;
+                [self setZoom:cameraScale];
+                lastScale = (int)(sender.scale*100);
+            }
+
+            break;
+        case UIGestureRecognizerStateRecognized:
+            break;
+        case UIGestureRecognizerStateCancelled:
+            break;
+        default:
+            break;
+    }
+    //    NSLog(@"lastScale = %d, sclae = %d,   velocity=%d",lastScale, (int)(sender.scale*10), (int)(sender.velocity*10));
+    
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 //    self.isStatusBarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
@@ -129,6 +170,7 @@
     [self initCapture];
     [self setOverViewer];
     wasCancelled = NO;
+    [self setZoom:1.5];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
@@ -456,6 +498,7 @@ static bool isIPad() {
 #if HAS_AVFF
     AVCaptureDevice* inputDevice =
     [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+//    [inputDevice setVideoZoomFactor:1.4];
     AVCaptureDeviceInput *captureInput =
     [AVCaptureDeviceInput deviceInputWithDevice:inputDevice error:nil];
     AVCaptureVideoDataOutput *captureOutput = [[AVCaptureVideoDataOutput alloc] init];
@@ -616,6 +659,22 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     
     self.prevLayer = nil;
     self.captureSession = nil;
+#endif
+}
+
+- (void) setZoom:(CGFloat)st
+{
+#if HAS_AVFF
+    Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
+    if (captureDeviceClass != nil) {
+        
+        AVCaptureDevice *device = [captureDeviceClass defaultDeviceWithMediaType:AVMediaTypeVideo];
+        
+        [device lockForConfiguration:nil];
+        [device setVideoZoomFactor:st];
+        [device unlockForConfiguration];
+        
+    }
 #endif
 }
 
