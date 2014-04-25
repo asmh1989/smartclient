@@ -10,11 +10,12 @@
 #import "GCDAsyncSocket.h"
 #import "ParserMsg.h"
 #import "VTSystemView.h"
+#import "RKTabView/RKTabView.h"
 
 #import "ScanViewController.h"
 
 @interface SmartClinetViewController : UIViewController <GCDAsyncSocketDelegate, UITextFieldDelegate,
-                                    ParserDelegate, UIAlertViewDelegate, VTSystemViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ZXingDelegate>
+                                    ParserDelegate, UIAlertViewDelegate, VTSystemViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ZXingDelegate, RKTabViewDelegate>
 {
     GCDAsyncSocket *socket;
     NSStringEncoding enc;

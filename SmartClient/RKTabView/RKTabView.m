@@ -6,8 +6,6 @@
 
 #define DARKER_BACKGROUND_VIEW_TAG 33
 const int RIGHT_ITEM_LENGTH =  60;
-#define noDisableVerticalScrollTag 836913
-#define noDisableHorizontalScrollTag 836914
 
 @interface RKTabView ()
 
@@ -56,6 +54,14 @@ const int RIGHT_ITEM_LENGTH =  60;
     self.scroll.showsHorizontalScrollIndicator = YES;//水平方向的滚动指示
     [self.scroll setDelegate:self];
     [self addSubview:self.scroll];
+}
+
+- (void) addTabItem:(RKTabItem *)item
+{
+    NSMutableArray * items = [[NSMutableArray alloc] initWithArray:self.tabItems];
+    [items addObject:item];
+    self.tabItems = items;
+    [self buildUI];
 }
 
 - (void)setTabItems:(NSArray *)tabItems {
@@ -107,9 +113,7 @@ const int RIGHT_ITEM_LENGTH =  60;
     CGSize newSize = CGSizeMake((int)(RIGHT_ITEM_LENGTH*self.tabItems.count / self.scroll.frame.size.width + 1)*self.scroll.frame.size.width, self.frame.size.height);
     [self.scroll setContentSize:newSize];
     
-    //    self.scroll.tag = noDisableHorizontalScrollTag;
-    //    [self.scroll flashScrollIndicators];
-    NSLog(@"setContentSize new size = %d, scroll.height = %f", (int)newSize.width, self.scroll.frame.size.height);
+//    NSLog(@"setContentSize new size = %d, scroll.height = %f", (int)newSize.width, self.scroll.frame.size.height);
     
     self.scroll.frame = CGRectMake(0, 0, self.frame.size.width - RIGHT_ITEM_LENGTH, self.frame.size.height);
     
@@ -125,6 +129,15 @@ const int RIGHT_ITEM_LENGTH =  60;
         
         [pageControl addTarget:self action:@selector(pageTurn:) forControlEvents:UIControlEventValueChanged];
         [self addSubview:pageControl];
+    }
+    
+    if(self.tabItems.count == 0)
+    {
+        RKTabItem *backItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_back.png"]];
+        backItem.titleString = @"返回";
+        UIControl *tab = [self tabForItem:backItem];
+        [self.scroll addSubview: tab];
+        [self.tabViews addObject: tab];
     }
     
     //build UI
@@ -309,7 +322,7 @@ const int RIGHT_ITEM_LENGTH =  60;
     if (_rightItem.tabType == TabTypeButton) {
         interfaceElement = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _rightItem.imageForCurrentState.size.width, _rightItem.imageForCurrentState.size.height)];
         [((UIButton *)interfaceElement) setImage:_rightItem.imageForCurrentState forState:UIControlStateNormal];
-        [((UIButton *)interfaceElement) addTarget:_rightItem.target action:_rightItem.selector forControlEvents:UIControlEventTouchUpInside];
+//        [((UIButton *)interfaceElement) addTarget:_rightItem.target action:_rightItem.selector forControlEvents:UIControlEventTouchUpInside];
     } else {
         interfaceElement = [[UIImageView alloc] initWithImage:_rightItem.imageForCurrentState];
     }
@@ -326,6 +339,9 @@ const int RIGHT_ITEM_LENGTH =  60;
     }
     
     [rightView addSubview:((UIView *)interfaceElement)];
+    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:_rightItem.target action:_rightItem.selector];
+    [rightView addGestureRecognizer:tapGesture];
+
     [self addSubview:rightView];
     
 }

@@ -18,7 +18,6 @@
 #import "CameraImage.h"
 #import "CustomIOS7AlertView.h"
 #import "MMDrawerBarButtonItem.h"
-#import "RKTabView.h"
 
 #import "IconArgs.h"
 #import "ListFormArgs.h"
@@ -106,36 +105,15 @@
 {
     [super viewDidLoad];
     
-    RKTabItem *backItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_back.png"]];
-    backItem.titleString = @"返回";
-    
-    RKTabItem *enterItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_enter.png"]];
+    RKTabItem * enterItem = [RKTabItem createButtonItemWithImage:[UIImage imageNamed:@"vt_enter.png"] target:self selector:@selector(clickToolBarEnter:)];
     enterItem.titleString = @"回车";
     
-    RKTabItem *upItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_up.png"]];
-    upItem.titleString = @"向上";
-    
-    RKTabItem *downItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_down.png"]];
-    downItem.titleString = @"向下";
-    
-    RKTabItem *listItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_list.png"]];
-    listItem.titleString = @"列表";
-    
-    RKTabItem *playItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_play.png"]];
-    playItem.titleString = @"播放";
-    
-    RKTabItem *saveItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_save.png"]];
-    saveItem.titleString = @"保存";
-    
     self.toolBar = [[RKTabView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, 44)];
-    self.toolBar.tabItems = @[backItem, enterItem, upItem, downItem, listItem, playItem, saveItem];
     self.toolBar.rightItem = enterItem;
-    
     self.toolBar.drawSeparators = YES;
     self.toolBar.horizontalInsets = HorizontalEdgeInsetsMake(0, 0);
-    
+    [self.toolBar setDelegate:self];
     [self.toolBar setBackgroundColor:[UIColor whiteColor]];
-    
 
     self.mView = [[VTSystemView alloc] init];
     textUIView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320,416)];
@@ -282,64 +260,6 @@
 }
 
 
-- (IBAction)clickToolBarSetting:(id)sender
-{
-    [self.mm_drawerController openDrawerSide:MMDrawerSideRight animated:YES completion:nil];
-}
-
-- (IBAction)clickToolBarUp:(id)sender
-{
-    [mView setNeedsDisplay];
-    [self dispatchMessage:MYKEY_UP tag:1];
-}
-
-- (IBAction)clickToolBarDown:(id)sender
-{
-    [self dispatchMessage:MYKEY_DOWN tag:1];
-}
-
-- (IBAction)clickToolBarback:(id)sender
-{
-    int alpha = (int)(infobar.alpha * 10);
-    if(alpha < 1){
-        [self showInfoBar];
-    } else
-    {
-        [self hideInfoBar];
-    }
-    [self dispatchMessage:MYKEY_DEL tag:1];
-}
-
-- (IBAction)clickToolBarCode:(id)sender
-{
-    ScanViewController *widController = [[ScanViewController alloc] initWithDelegate:self showCancel:YES OneDMode:NO];
-    NSMutableSet *readers = [[NSMutableSet alloc] init];
-    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
-    if ([userDefaultes boolForKey:STR_QR_DECODE] ) {
-        QRCodeReader *qrcodeReader = [[QRCodeReader alloc] init];
-        [readers addObject:qrcodeReader];
-    }
-    if ([userDefaultes boolForKey:STR_RECT_DECODE]){
-        DataMatrixReader *dataMatrixReader = [[DataMatrixReader alloc] init];
-        [readers addObject:dataMatrixReader];
-    }
-    if ([userDefaultes boolForKey:STR_ONE_DECODE]) {
-        MultiFormatOneDReader *multiFormatOneDReader = [[MultiFormatOneDReader alloc] init];
-        [readers addObject:multiFormatOneDReader];
-    }
-    
-    if ([readers count] < 1) {
-        QRCodeReader *qrcodeReader = [[QRCodeReader alloc] init];
-        [readers addObject:qrcodeReader];
-    }
-    widController.readers = readers;
-    [self presentViewController:widController animated:YES completion:^{}];
-}
-
-- (IBAction)clickToolBarEnter:(id)sender
-{
-    [self dispatchMessage:MYKEY_ENTER tag:1];
-}
 
 -(void)tap:(UITapGestureRecognizer *)gr
 {
@@ -1080,12 +1000,20 @@ int lastScale;
             
             if([args.action isEqualToString:@"Clear"])
             {
+                self.toolBar.tabItems = @[];
                 [myToolbars removeAllObjects];
             }
             else
             {
+                RKTabItem *item = [RKTabItem createUnexcludableItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:[NSString stringWithFormat:@"vt_%@.png", args.icon]]];
+                item.titleString = args.text;
+                
                 [myToolbars addObject:args];
+                [self.toolBar addTabItem:item];
+                [self.toolBar setNeedsDisplay];
             }
+            
+            
         }
         
     }
@@ -1178,4 +1106,65 @@ int lastScale;
     [UIView commitAnimations];
 }
 
+#pragma toolbar mark Actions
+
+- (void) clickTookBar:(int) index
+{
+    if(myToolbars.count == 0)
+    {
+        [self dispatchMessage:MYKEY_DEL tag:1];
+    }
+    else
+    {
+        ToolbarArgs *args = [myToolbars objectAtIndex:index];
+        [self dispatchMessage:[NSString stringWithFormat:@"%@ ID=\"%@\" Action=\"%@\"/>", TOOLBAR_SEND, args.ID, @"Click"] tag:1];
+    }
+}
+- (void)tabView:(RKTabView *)tabView tabBecameEnabledAtIndex:(int)index tab:(RKTabItem *)tabItem
+{
+    [self clickTookBar:index];
+}
+
+- (void)tabView:(RKTabView *)tabView tabBecameDisabledAtIndex:(int)index tab:(RKTabItem *)tabItem
+{
+//    NSLog(@"tabBecameDisabledAtIndex ... index=%d", index);
+    [self clickTookBar:index];
+}
+
+
+- (IBAction)clickToolBarSetting:(id)sender
+{
+    [self.mm_drawerController openDrawerSide:MMDrawerSideRight animated:YES completion:nil];
+}
+
+- (IBAction)clickToolBarCode:(id)sender
+{
+    ScanViewController *widController = [[ScanViewController alloc] initWithDelegate:self showCancel:YES OneDMode:NO];
+    NSMutableSet *readers = [[NSMutableSet alloc] init];
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    if ([userDefaultes boolForKey:STR_QR_DECODE] ) {
+        QRCodeReader *qrcodeReader = [[QRCodeReader alloc] init];
+        [readers addObject:qrcodeReader];
+    }
+    if ([userDefaultes boolForKey:STR_RECT_DECODE]){
+        DataMatrixReader *dataMatrixReader = [[DataMatrixReader alloc] init];
+        [readers addObject:dataMatrixReader];
+    }
+    if ([userDefaultes boolForKey:STR_ONE_DECODE]) {
+        MultiFormatOneDReader *multiFormatOneDReader = [[MultiFormatOneDReader alloc] init];
+        [readers addObject:multiFormatOneDReader];
+    }
+    
+    if ([readers count] < 1) {
+        QRCodeReader *qrcodeReader = [[QRCodeReader alloc] init];
+        [readers addObject:qrcodeReader];
+    }
+    widController.readers = readers;
+    [self presentViewController:widController animated:YES completion:^{}];
+}
+
+- (IBAction)clickToolBarEnter:(id)sender
+{
+    [self dispatchMessage:MYKEY_ENTER tag:1];
+}
 @end

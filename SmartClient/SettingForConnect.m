@@ -42,8 +42,8 @@
 - (UIFont *)getCurrentFont
 {
 //    [self getFontFamily];
-//    [self setFontStyle:@"WenQuanYi Zen Hei Mono"];
-    [self setFontStyle:_FONTSTYLE];
+    [self setFontStyle:@"WenQuanYi Zen Hei Mono"];
+//    [self setFontStyle:_FONTSTYLE];
     if([self screenOrientation] == 0){
         return [UIFont fontWithName:fontStyle size:fontSize];
     } else {
