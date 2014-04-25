@@ -25,7 +25,7 @@ static inline HorizontalEdgeInsets HorizontalEdgeInsetsMake (CGFloat left, CGFlo
 
 @end
 
-@interface RKTabView : UIView
+@interface RKTabView : UIView<UIScrollViewDelegate>
 
 @property (nonatomic, assign) IBOutlet id<RKTabViewDelegate> delegate;
 @property (readwrite) BOOL darkensBackgroundForEnabledTabs;

@@ -14,10 +14,11 @@ const int RIGHT_ITEM_LENGTH =  60;
 @property (nonatomic, strong) NSMutableArray *tabViews;
 @property (nonatomic, strong) UIScrollView *scroll;
 @property (nonatomic, strong) UIView * rightView;
+@property (nonatomic, strong) UIPageControl *pageControl;
 @end
 
 @implementation RKTabView
-@synthesize rightView;
+@synthesize rightView, pageControl;
 
 - (id)initWithFrame:(CGRect)frame andTabItems:(NSArray *)tabItems rightItem:(RKTabItem *)item{
     self = [super initWithFrame:frame];
@@ -53,6 +54,7 @@ const int RIGHT_ITEM_LENGTH =  60;
     self.scroll.showsVerticalScrollIndicator =NO; //垂直方向的滚动指示
     self.scroll.indicatorStyle = UIScrollViewIndicatorStyleDefault;//滚动指示的风格
     self.scroll.showsHorizontalScrollIndicator = YES;//水平方向的滚动指示
+    [self.scroll setDelegate:self];
     [self addSubview:self.scroll];
 }
 
@@ -101,17 +103,37 @@ const int RIGHT_ITEM_LENGTH =  60;
     [self showRightItem];
     //clean before layout items
     [self cleanTabView];
+    
+    CGSize newSize = CGSizeMake((int)(RIGHT_ITEM_LENGTH*self.tabItems.count / self.scroll.frame.size.width + 1)*self.scroll.frame.size.width, self.frame.size.height);
+    [self.scroll setContentSize:newSize];
+    
+    //    self.scroll.tag = noDisableHorizontalScrollTag;
+    //    [self.scroll flashScrollIndicators];
+    NSLog(@"setContentSize new size = %d, scroll.height = %f", (int)newSize.width, self.scroll.frame.size.height);
+    
+    self.scroll.frame = CGRectMake(0, 0, self.frame.size.width - RIGHT_ITEM_LENGTH, self.frame.size.height);
+    
+    if(newSize.width / self.scroll.frame.size.width > 1){
+        self.scroll.backgroundColor = [UIColor colorWithWhite:0.0F alpha:0.2F];
+
+        if(pageControl){
+            [pageControl removeFromSuperview];
+        }
+        pageControl=[[UIPageControl alloc]initWithFrame:CGRectMake(0, self.frame.size.height - 8, self.scroll.frame.size.width, 8)];
+        pageControl.numberOfPages=newSize.width / self.scroll.frame.size.width;
+        pageControl.currentPage=0;
+        
+        [pageControl addTarget:self action:@selector(pageTurn:) forControlEvents:UIControlEventValueChanged];
+        [self addSubview:pageControl];
+    }
+    
     //build UI
     for (RKTabItem *item in self.tabItems) {
         UIControl *tab = [self tabForItem:item];
         [self.scroll addSubview: tab];
         [self.tabViews addObject: tab];
     }
-    CGSize newSize = CGSizeMake((int)(RIGHT_ITEM_LENGTH*self.tabItems.count / self.scroll.frame.size.width + 1)*self.scroll.frame.size.width, self.frame.size.height);
-    [self.scroll setContentSize:newSize];
-    self.scroll.tag = noDisableHorizontalScrollTag;
-    [self.scroll flashScrollIndicators];
-    NSLog(@"setContentSize new size = %d", (int)newSize.width);
+
 }
 
 - (void)swtichTab:(RKTabItem *)tabItem {
@@ -174,6 +196,20 @@ const int RIGHT_ITEM_LENGTH =  60;
     [self swtichTab:tabItem];
 }
 
+- (IBAction)pageTurn:(UIPageControl *)sender {
+    CGSize viewsize=self.scroll.frame.size;
+    CGRect rect=CGRectMake(sender.currentPage*viewsize.width, 0, viewsize.width, viewsize.height);
+    [self.scroll scrollRectToVisible:rect animated:YES];
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    if(pageControl){
+        CGPoint offset=scrollView.contentOffset;
+        CGRect bounds=scrollView.frame;
+        [pageControl setCurrentPage:offset.x/bounds.size.width];
+    }
+}
+
 #pragma mark - Helper methods
 
 - (UIControl *)existingTabForTabItem:(RKTabItem *)tabItem {
@@ -188,7 +224,6 @@ const int RIGHT_ITEM_LENGTH =  60;
 - (CGFloat)tabItemWidth {
     int itemLen = RIGHT_ITEM_LENGTH;
     CGFloat restrictedWidth = self.scroll.frame.size.width - self.horizontalInsets.left - self.horizontalInsets.right;
-
 
     @try {
         int pages = self.tabItems.count * RIGHT_ITEM_LENGTH / self.scroll.frame.size.width+1;
@@ -220,8 +255,41 @@ const int RIGHT_ITEM_LENGTH =  60;
     CGFloat width  = [self tabItemWidth];
     CGFloat height = [self tabItemHeight];
     CGFloat x = self.horizontalInsets.left + [self indexOfTab:tabItem] * width;
-    NSLog(@"frameForTab X = %f, width = %f", x, width);
+//    NSLog(@"frameForTab X = %f, width = %f", x, width);
     return CGRectMake(x, 0, width, height);
+}
+
+-(UILabel *) getTitleLabel:(CGRect) rect item:(RKTabItem *)tabItem
+{
+    UILabel *titleLabel = nil;
+    if (tabItem.titleString.length != 0) {
+        titleLabel = [[UILabel alloc] init];
+        titleLabel.numberOfLines = 2;
+        titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.adjustsLetterSpacingToFitWidth = YES;
+        titleLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
+        
+        UIFont *font = nil;
+        if (tabItem.titleFont) {
+            font = tabItem.titleFont;
+        } else if (!tabItem.titleFont && self.titlesFont) {
+            font = self.titlesFont;
+        }
+        titleLabel.font = font;
+        
+        UIColor *textColor = nil;
+        if (tabItem.titleFontColor) {
+            textColor = tabItem.titleFontColor;
+        } else if (!tabItem.titleFontColor && self.titlesFontColor) {
+            textColor = self.titlesFontColor;
+        }
+        titleLabel.textColor = [UIColor blackColor];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        
+        titleLabel.text = tabItem.titleString;
+    }
+    return titleLabel;
 }
 
 -(void) showRightItem
@@ -232,37 +300,9 @@ const int RIGHT_ITEM_LENGTH =  60;
     rightView = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - RIGHT_ITEM_LENGTH
                                                              , 0, RIGHT_ITEM_LENGTH, self.frame.size.height)];
     //Title
-    UILabel *titleLabel = nil;
-    CGSize titleSize;
-    if (_rightItem.titleString.length != 0) {
-        titleLabel = [[UILabel alloc] init];
-        titleLabel.numberOfLines = 1;
-        titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.adjustsLetterSpacingToFitWidth = YES;
-        titleLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
-        
-        UIFont *font = nil;
-        if (_rightItem.titleFont) {
-            font = _rightItem.titleFont;
-        } else if (!_rightItem.titleFont && self.titlesFont) {
-            font = self.titlesFont;
-        }
-        titleLabel.font = font;
-        
-        UIColor *textColor = nil;
-        if (_rightItem.titleFontColor) {
-            textColor = _rightItem.titleFontColor;
-        } else if (!_rightItem.titleFontColor && self.titlesFontColor) {
-            textColor = self.titlesFontColor;
-        }
-        titleLabel.textColor = textColor;
-        titleLabel.backgroundColor = [UIColor clearColor];
-        
-        titleSize = [_rightItem.titleString sizeWithFont:titleLabel.font constrainedToSize:CGSizeMake(RIGHT_ITEM_LENGTH, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
-        titleLabel.text = _rightItem.titleString;
-    }
+    UILabel *titleLabel = [self getTitleLabel:rightView.bounds item:self.rightItem];
     
+    CGSize  titleSize = [self.rightItem.titleString sizeWithFont:titleLabel.font constrainedToSize:CGSizeMake(rightView.bounds.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
     //Image/button
     id interfaceElement = nil;
     
@@ -299,37 +339,8 @@ const int RIGHT_ITEM_LENGTH =  60;
     }
     
     //Title
-    UILabel *titleLabel = nil;
-    CGSize titleSize;
-    if (tabItem.titleString.length != 0) {
-        titleLabel = [[UILabel alloc] init];
-        titleLabel.numberOfLines = 2;
-        titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.adjustsLetterSpacingToFitWidth = YES;
-        titleLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
-        
-        UIFont *font = nil;
-        if (tabItem.titleFont) {
-            font = tabItem.titleFont;
-        } else if (!tabItem.titleFont && self.titlesFont) {
-            font = self.titlesFont;
-        }
-        titleLabel.font = font;
-        
-        UIColor *textColor = nil;
-        if (tabItem.titleFontColor) {
-            textColor = tabItem.titleFontColor;
-        } else if (!tabItem.titleFontColor && self.titlesFontColor) {
-            textColor = self.titlesFontColor;
-        }
-        titleLabel.textColor = textColor;
-        titleLabel.backgroundColor = [UIColor clearColor];
-        
-        titleSize = [tabItem.titleString sizeWithFont:titleLabel.font constrainedToSize:CGSizeMake(tab.bounds.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
-        titleLabel.text = tabItem.titleString;
-    }
-    
+    UILabel *titleLabel = [self getTitleLabel:tab.bounds item:tabItem];
+    CGSize  titleSize = [tabItem.titleString sizeWithFont:titleLabel.font constrainedToSize:CGSizeMake(tab.bounds.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
     //Image/button
     id interfaceElement = nil;
     
@@ -453,35 +464,23 @@ const int RIGHT_ITEM_LENGTH =  60;
                       withColor:lightLineColor
                           width:lightLineWidth];
         
-        [self draWLineFromPoint:CGPointMake(0, self.bounds.size.height - darkLineWidth/2 - lightLineWidth)
-                        toPoint:CGPointMake(self.bounds.size.width, self.bounds.size.height - darkLineWidth/2 - lightLineWidth)
-                      withColor:darkLineColor
-                          width:darkLineWidth];
-        
-        [self draWLineFromPoint:CGPointMake(0, self.bounds.size.height - lightLineWidth/2)
-                        toPoint:CGPointMake(self.bounds.size.width, self.bounds.size.height - lightLineWidth/2)
-                      withColor:lightLineColor
-                          width:lightLineWidth];
-        
-        [self draWLineFromPoint:CGPointMake(self.scroll.frame.size.width, self.frame.size.height / 10)
-                        toPoint:CGPointMake(self.scroll.frame.size.width, self.frame.size.height *9 / 10)
-                      withColor:darkLineColor
-                          width:lightLineWidth];
+//        [self draWLineFromPoint:CGPointMake(0, self.bounds.size.height - darkLineWidth/2 - lightLineWidth)
+//                        toPoint:CGPointMake(self.bounds.size.width, self.bounds.size.height - darkLineWidth/2 - lightLineWidth)
+//                      withColor:darkLineColor
+//                          width:darkLineWidth];
+//        
+//        [self draWLineFromPoint:CGPointMake(0, self.bounds.size.height - lightLineWidth/2)
+//                        toPoint:CGPointMake(self.bounds.size.width, self.bounds.size.height - lightLineWidth/2)
+//                      withColor:lightLineColor
+//                          width:lightLineWidth];
+        if (self.scroll.contentSize.width < self.frame.size.width) {
+            [self draWLineFromPoint:CGPointMake(self.scroll.frame.size.width, self.frame.size.height / 10)
+                            toPoint:CGPointMake(self.scroll.frame.size.width, self.frame.size.height *9 / 10)
+                          withColor:darkLineColor
+                              width:lightLineWidth];
+        }
+
     }
-    
-//    if(self.scroll.frame.size.width > 0)
-//    {
-//        int pages = self.tabItems.count * RIGHT_ITEM_LENGTH / self.scroll.frame.size.width+1;
-//        if(pages > 1){
-//            CGFloat x = [self.scroll contentOffset].x;
-//            CGFloat w = self.scroll.frame.size.width / pages;
-//            int d = x / w + 1;
-//            [self draWLineFromPoint:CGPointMake((d-1)*w, self.frame.size.height-2)
-//                            toPoint:CGPointMake(d*w, self.frame.size.height-2)
-//                          withColor:[UIColor blueColor]
-//                              width:1.0F];
-//        }
-//    }
 }
 
 - (void)draWLineFromPoint:(CGPoint)pointFrom toPoint:(CGPoint)pointTo withColor:(UIColor *)color width:(CGFloat)width {
