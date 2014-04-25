@@ -30,8 +30,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Fangsong.ttf</string>
-		<string>SimHei.ttf</string>
+		<string>Wenquanyi.ttf</string>
 		<string>Kaiti.ttf</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>

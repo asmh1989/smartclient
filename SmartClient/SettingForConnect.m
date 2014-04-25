@@ -23,8 +23,26 @@
 
 @synthesize screenOrientation;
 
+- (void) getFontFamily
+{
+    NSArray *familyNames = [[NSArray alloc] initWithArray:[UIFont familyNames]];
+    NSArray *fontNames;
+    NSInteger indFamily, indFont;
+    for(indFamily=0;indFamily<[familyNames count];++indFamily)
+    {
+        NSLog(@"%d Family name: %@", indFamily,[familyNames objectAtIndex:indFamily]);
+        fontNames =[[NSArray alloc]initWithArray:[UIFont fontNamesForFamilyName:[familyNames objectAtIndex:indFamily]]];
+        for(indFont=0; indFont<[fontNames count]; ++indFont)
+        {
+//            NSLog(@" Font name: %@",[fontNames objectAtIndex:indFont]);
+        }
+    }
+}
+
 - (UIFont *)getCurrentFont
 {
+//    [self getFontFamily];
+//    [self setFontStyle:@"WenQuanYi Zen Hei Mono"];
     [self setFontStyle:_FONTSTYLE];
     if([self screenOrientation] == 0){
         return [UIFont fontWithName:fontStyle size:fontSize];

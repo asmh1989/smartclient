@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
-
-@interface MMNavigationController : UINavigationController
+//#import <UIKit/UIKit.h>
+#import "CRNavigationController.h"
+@interface MMNavigationController : CRNavigationController
 
 @end

@@ -18,40 +18,46 @@
 
 @interface SmartClinetAppDelegate ()
 @property (nonatomic,strong) MMDrawerController * drawerController;
-
+@property (nonatomic,strong) SmartClinetViewController * centerViewController;
 @end
 
 @implementation SmartClinetAppDelegate
+@synthesize centerViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    SmartClinetViewController * centerViewController = [[SmartClinetViewController alloc] init];
+    centerViewController = [[SmartClinetViewController alloc] init];
     
     LeftMenuViewController * leftMenuController = [[LeftMenuViewController alloc] initWithCenterController:centerViewController];
     
+    UINavigationController * navigationController = [[MMNavigationController alloc] initWithRootViewController:centerViewController];
+    [navigationController setRestorationIdentifier:@"MMSmartCenterNavigationControllerRestorationKey"];
+
     if(OSVersionIsAtLeastiOS7()){
-//		[leftMenuController setRestorationIdentifier:@"leftSideDrawerViewControllerRestorationKey"];
+        UINavigationController * leftSideNavController = [[MMNavigationController alloc] initWithRootViewController:leftMenuController];
+		[leftSideNavController setRestorationIdentifier:@"MMSmartLeftNavigationControllerRestorationKey"];
+
         self.drawerController = [[MMDrawerController alloc]
-                                 initWithCenterViewController:centerViewController
-                                 leftDrawerViewController:leftMenuController
-                                 rightDrawerViewController:nil];
+                                 initWithCenterViewController:navigationController
+                                 leftDrawerViewController:nil
+                                 rightDrawerViewController:leftSideNavController];
         [self.drawerController setShowsShadow:YES];
     }
     else{
         self.drawerController = [[MMDrawerController alloc]
-                                 initWithCenterViewController:centerViewController
-                                 leftDrawerViewController:leftMenuController
-                                 rightDrawerViewController:nil];
+                                 initWithCenterViewController:navigationController
+                                 leftDrawerViewController:nil
+                                 rightDrawerViewController:leftMenuController];
     }
     [self.drawerController setRestorationIdentifier:@"MMDrawer"];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom ]== UIUserInterfaceIdiomPad) {
-            [self.drawerController setMaximumLeftDrawerWidth:220.0];
+            [self.drawerController setMaximumRightDrawerWidth:220.0];
     } else {
-        [self.drawerController setMaximumLeftDrawerWidth:160.0];
+        [self.drawerController setMaximumRightDrawerWidth:160.0];
     }
     
     [self.drawerController setShouldStretchDrawer:NO];
@@ -69,24 +75,63 @@
          }
      }];
     
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     if(OSVersionIsAtLeastiOS7()){
         UIColor * tintColor = [UIColor colorWithRed:29.0/255.0
                                               green:173.0/255.0
                                                blue:234.0/255.0
                                               alpha:1.0];
         [self.window setTintColor:tintColor];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     }
     
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.drawerController];
-    [[self window] setRootViewController:navController];
-//    [[self.drawerController navigationController] setNavigationBarHidden:YES];
-    self.drawerController.title = NSLocalizedString(@"Settings", @"Settings");
+    [self.window setRootViewController:self.drawerController];
+
+    [UINavigationBar appearance].barTintColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:5*16/255.0F];
     
-//    [self.window setRootViewController:self.drawerController];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           NSForegroundColorAttributeName : [UIColor whiteColor]
+                                                           }];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+
     return YES;
+}
+
+- (UIViewController *)application:(UIApplication *)application viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
+{
+    NSString * key = [identifierComponents lastObject];
+    if([key isEqualToString:@"MMDrawer"]){
+        return self.window.rootViewController;
+    }
+    else if ([key isEqualToString:@"MMSmartCenterNavigationControllerRestorationKey"]) {
+        return ((MMDrawerController *)self.window.rootViewController).centerViewController;
+    }
+    else if ([key isEqualToString:@"MMSmartRightNavigationControllerRestorationKey"]) {
+        return ((MMDrawerController *)self.window.rootViewController).rightDrawerViewController;
+    }
+    else if ([key isEqualToString:@"MMSmartLeftNavigationControllerRestorationKey"]) {
+        return ((MMDrawerController *)self.window.rootViewController).leftDrawerViewController;
+    }
+    else if ([key isEqualToString:@"MMSmartLeftSideDrawerController"]){
+        UIViewController * leftVC = ((MMDrawerController *)self.window.rootViewController).leftDrawerViewController;
+        if([leftVC isKindOfClass:[UINavigationController class]]){
+            return [(UINavigationController*)leftVC topViewController];
+        }
+        else {
+            return leftVC;
+        }
+        
+    }
+    else if ([key isEqualToString:@"MMSmartRightSideDrawerController"]){
+        UIViewController * rightVC = ((MMDrawerController *)self.window.rootViewController).rightDrawerViewController;
+        if([rightVC isKindOfClass:[UINavigationController class]]){
+            return [(UINavigationController*)rightVC topViewController];
+        }
+        else {
+            return rightVC;
+        }
+    }
+    return nil;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -110,9 +155,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    id tmp = [self.drawerController centerViewController];
-    SmartClinetViewController *controller = tmp;
-    [controller checkCurrentSocketStatus];
+    [centerViewController checkCurrentSocketStatus];
     
 }
 

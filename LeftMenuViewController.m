@@ -52,6 +52,15 @@ enum SettingType{
 //    return self;
 //}
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self setRestorationIdentifier:@"MMSmartLeftControllerRestorationKey"];
+    }
+    return self;
+}
+
 - (id)initWithCenterController:(SmartClinetViewController *)controller
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
@@ -60,7 +69,7 @@ enum SettingType{
         self.centerController = controller;
         
         self.title = NSLocalizedString(@"Settings", nil);
-
+        self.navigationItem.titleView.tintColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -161,6 +170,7 @@ enum SettingType{
 		}];
     }];
     
+    self.navigationController.navigationBar.barTintColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:5*16/255.0F];
 }
 
 - (void)didReceiveMemoryWarning

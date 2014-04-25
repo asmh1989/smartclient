@@ -33,6 +33,9 @@
     if (self) {
         self.stringShowDics = [[NSMutableDictionary alloc] init];
         self.inputStrings = [[NSMutableArray alloc] init];
+        self.iconDict = [[NSMutableDictionary alloc] init];
+        self.lineDict = [[NSMutableDictionary alloc] init];
+        self.inputDict = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -41,5 +44,8 @@
 {
     [self.stringShowDics removeAllObjects];
     [self.inputStrings removeAllObjects];
+    [self.iconDict removeAllObjects];
+    [self.lineDict removeAllObjects];
+    [self.inputDict removeAllObjects];
 }
 @end

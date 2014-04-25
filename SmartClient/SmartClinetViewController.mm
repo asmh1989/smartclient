@@ -17,6 +17,15 @@
 #import "StringForNSUserDefaults.h"
 #import "CameraImage.h"
 #import "CustomIOS7AlertView.h"
+#import "MMDrawerBarButtonItem.h"
+#import "RKTabView.h"
+
+#import "IconArgs.h"
+#import "ListFormArgs.h"
+#import "LineArgs.h"
+#import "InfobarArgs.h"
+#import "InputArgs.h"
+#import "ToolbarArgs.h"
 
 #import <QRCodeReader.h>
 #import <DataMatrixReader.h>
@@ -31,6 +40,10 @@
     NSString *hostip;
     int hostPort;
     CameraImage *cameraImage;
+    UIView *infobar;
+    UILabel *infobarText;
+    UILabel *navTitle;
+    NSMutableArray *myToolbars;
 }
 
 @property (nonatomic) SettingForRuntime *settings;
@@ -39,12 +52,14 @@
 @property (nonatomic, copy) NSString *outBuff;
 @property (strong, nonatomic) UITextField *textView;
 @property (strong, nonatomic) UIView *textUIView;
-@property (strong, nonatomic) UIToolbar *toolBar;
+@property (strong, nonatomic) RKTabView *toolBar;
 @property (strong, nonatomic) VTSystemView *mView;
 
 
 - (void) sendDataToSocket:(NSString *)output tag:(long)tag;
 - (void) sendFirstConnectInfo;
+- (void) showInfoBar;
+- (void) hideInfoBar;
 @end
 
 @implementation SmartClinetViewController
@@ -73,8 +88,128 @@
         [cameraImage setSendImageData:^(NSString *str) {
             [safeSelf dispatchMessage:str tag:1];
         }];
+        myToolbars = [[NSMutableArray alloc] init];
     }
     return self;
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self setRestorationIdentifier:@"MMSmartCenterControllerRestorationKey"];
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    RKTabItem *backItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_back.png"]];
+    backItem.titleString = @"返回";
+    
+    RKTabItem *enterItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_enter.png"]];
+    enterItem.titleString = @"回车";
+    
+    RKTabItem *upItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_up.png"]];
+    upItem.titleString = @"向上";
+    
+    RKTabItem *downItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_down.png"]];
+    downItem.titleString = @"向下";
+    
+    RKTabItem *listItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_list.png"]];
+    listItem.titleString = @"列表";
+    
+    RKTabItem *playItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_play.png"]];
+    playItem.titleString = @"播放";
+    
+    RKTabItem *saveItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_save.png"]];
+    saveItem.titleString = @"保存";
+    
+    self.toolBar = [[RKTabView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, 44)];
+    self.toolBar.tabItems = @[backItem, enterItem, upItem, downItem, listItem, playItem, saveItem];
+    self.toolBar.rightItem = enterItem;
+    
+    self.toolBar.drawSeparators = YES;
+    self.toolBar.horizontalInsets = HorizontalEdgeInsetsMake(0, 0);
+    
+    [self.toolBar setBackgroundColor:[UIColor whiteColor]];
+    
+
+    self.mView = [[VTSystemView alloc] init];
+    textUIView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320,416)];
+    textView = [[UITextField alloc] init];
+    [textUIView addSubview:textView];
+    [self.mView addSubview:textUIView];
+    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.mView setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:mView];
+    [self.view addSubview:toolBar];
+
+    
+    socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    
+    [self sendFirstConnectInfo];
+    [mView setDelegate:self];
+    
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)];
+    [self.mView addGestureRecognizer:pinch];
+    
+    if(IOS_VERSION<5.0)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillHideNotification object:nil];
+    }else{
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    }
+    
+    [self setupLeftMenuButton];
+    [self setupRightMenuButton];
+    
+    
+    infobar = [[UIView alloc] init];
+    infobar.frame = CGRectMake(0, self.view.frame.origin.y+self.view.frame.size.height-44-20, self.view.frame.size.width, 20);
+    infobar.backgroundColor = [UIColor grayColor];
+    infobarText = [[UILabel alloc] init];
+    infobarText.frame = CGRectMake(6, 0, infobar.frame.size.width, infobar.frame.size.height);
+    
+    [infobarText setText:@"this is infobar...."];
+    infobarText.textColor = [UIColor blackColor];
+    [infobar addSubview:infobarText];
+    [self.view addSubview:infobar];
+    infobar.alpha = 0;
+    
+    self.navigationController.navigationBar.barTintColor = [[UIColor alloc] initWithRed:0 green:0 blue:0 alpha:5*16/255.0F];
+}
+
+-(void)setupLeftMenuButton{
+    UIImage *img = [UIImage imageNamed:@"logo.png"];
+    //    img = [Functions scaleImage:img maxWidth:36 maxHeight:36];
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+    imgView.frame = CGRectMake(0, 2, 36, 36);
+    imgView.tintColor = [UIColor whiteColor];
+    UIView *left = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+    navTitle = [[UILabel alloc] initWithFrame:CGRectMake(40, 2, 160, 36)];
+    navTitle.text = @"SmartCilent";
+    navTitle.textColor = [UIColor whiteColor];
+    
+    [left addSubview:imgView];
+    [left addSubview:navTitle];
+    UIBarButtonItem *logo = [[UIBarButtonItem alloc] initWithCustomView:left];
+    [self.navigationItem setLeftBarButtonItem:logo animated:YES];
+}
+
+-(void)setupRightMenuButton{
+    UIBarButtonItem *code = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Code_Image.png"] style:UIBarButtonItemStylePlain target:self action:@selector(clickToolBarCode:)];
+    MMDrawerBarButtonItem * leftDrawerButton = [[MMDrawerBarButtonItem alloc] initWithTarget:self action:@selector(clickToolBarSetting:)];
+    
+    [code  setTintColor:[UIColor  whiteColor]];
+    [leftDrawerButton  setTintColor:[UIColor  whiteColor]];
+    NSArray * item = @[leftDrawerButton, code];
+    [self.navigationItem setRightBarButtonItems:item animated:YES];
+    //    [self.navigationItem setRightBarButtonItem:code animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -86,33 +221,33 @@
         [self.settingStore setScreenOrientation:0];
     }
     
-//        NSLog(@"viewWillAppear ... current orientation is = %d", [[UIApplication sharedApplication] statusBarOrientation]);
+    //        NSLog(@"viewWillAppear ... current orientation is = %d", [[UIApplication sharedApplication] statusBarOrientation]);
     
-    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarHidden:settingStore.isFullScreen];
-    if (settingStore.isFullScreen) {
-        mView.frame= self.view.frame;
+    CGRect frame = self.view.frame;
+    if (settingStore.isFullScreen || !OSVersionIsAtLeastiOS7()) {
+        frame.origin.y = 44;
+        frame.size.height -= 44;
     } else {
         if (OSVersionIsAtLeastiOS7()) {
-            CGRect frame = self.view.frame;
-            frame.origin.y = 20;
-            frame.size.height -= 20;
-            mView.frame = frame;
+            frame.origin.y = 20+44;
+            frame.size.height -= 20+44;
         }
-
     }
+    mView.frame = frame;
     
     int toolbar_len = 44;
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         toolbar_len = 60;
     }
-
+    
     self.toolBar.frame = CGRectMake(0, self.view.frame.size.height-toolbar_len, self.view.frame.size.width, toolbar_len);
     [mView setNeedsDisplay];
     [toolBar setNeedsDisplay];
     if (hostPort != [settingStore hostPort] || ![hostip isEqualToString:[settingStore hostIp]]) {
-//        [parser reset];
+        //        [parser reset];
         [socket disconnect];
         [self sendFirstConnectInfo];
     }
@@ -137,7 +272,7 @@
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [self.toolBar setHidden:YES];
-//    [self.mView setNeedsDisplay];
+    //    [self.mView setNeedsDisplay];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -149,17 +284,30 @@
 
 - (IBAction)clickToolBarSetting:(id)sender
 {
-    [self.mm_drawerController openDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+    [self.mm_drawerController openDrawerSide:MMDrawerSideRight animated:YES completion:nil];
 }
 
 - (IBAction)clickToolBarUp:(id)sender
 {
+    [mView setNeedsDisplay];
     [self dispatchMessage:MYKEY_UP tag:1];
 }
 
 - (IBAction)clickToolBarDown:(id)sender
 {
     [self dispatchMessage:MYKEY_DOWN tag:1];
+}
+
+- (IBAction)clickToolBarback:(id)sender
+{
+    int alpha = (int)(infobar.alpha * 10);
+    if(alpha < 1){
+        [self showInfoBar];
+    } else
+    {
+        [self hideInfoBar];
+    }
+    [self dispatchMessage:MYKEY_DEL tag:1];
 }
 
 - (IBAction)clickToolBarCode:(id)sender
@@ -195,7 +343,7 @@
 
 -(void)tap:(UITapGestureRecognizer *)gr
 {
-//    [self.textView resignFirstResponder];
+    //    [self.textView resignFirstResponder];
     NSLog(@"tap...");
     
 }
@@ -235,7 +383,7 @@ int lastScale;
         default:
             break;
     }
-//    NSLog(@"lastScale = %d, sclae = %d,   velocity=%d",lastScale, (int)(sender.scale*10), (int)(sender.velocity*10));
+    //    NSLog(@"lastScale = %d, sclae = %d,   velocity=%d",lastScale, (int)(sender.scale*10), (int)(sender.velocity*10));
     
 }
 
@@ -253,7 +401,7 @@ int lastScale;
         CGRect keyboardBounds;
         [keyboardBoundsValue getValue:&keyboardBounds];
         int len =keyboardBounds.origin.y - (textView.frame.origin.y + textView.frame.size.height+mView.frame.origin.y);
-
+        
         if (len > 20) {
             return;
         }
@@ -279,70 +427,6 @@ int lastScale;
     }
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    UIBarButtonItem *setting = [[UIBarButtonItem alloc] initWithImage:
-                                 [UIImage imageNamed:@"Setting_Image.png"] style:UIBarButtonItemStyleBordered
-                                                               target:nil action:@selector(clickToolBarSetting:)];
-    UIBarButtonItem *up = [[UIBarButtonItem alloc] initWithImage:
-                                 [UIImage imageNamed:@"Up_Image.png"] style:UIBarButtonItemStyleBordered
-                                                                target:nil action:@selector(clickToolBarUp:)];
-    UIBarButtonItem *down = [[UIBarButtonItem alloc] initWithImage:
-                                 [UIImage imageNamed:@"Down_Image.png"] style:UIBarButtonItemStyleBordered
-                                                                target:nil action:@selector(clickToolBarDown:)];
-    UIBarButtonItem *code = [[UIBarButtonItem alloc] initWithImage:
-                                 [UIImage imageNamed:@"Code_Image.png"] style:UIBarButtonItemStyleBordered
-                                                                target:nil action:@selector(clickToolBarCode:)];
-    UIBarButtonItem *enter = [[UIBarButtonItem alloc] initWithImage:
-                                 [UIImage imageNamed:@"Enter_Image.png"] style:UIBarButtonItemStyleBordered
-                                                                target:nil action:@selector(clickToolBarEnter:)];
-    
-    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
-    for (id view in self.view.subviews) {
-        [view setHidden:YES];
-    }
-    
-    self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, 44)];
-    
-    self.mView = [[VTSystemView alloc] init];
-    [self.toolBar setItems:[NSArray arrayWithObjects:flexItem, setting, flexItem, up, flexItem, down, flexItem, code, flexItem, enter, flexItem, nil]];
-    // Do any additional setup after loading the view from its nib.
-    textUIView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320,416)];
-    textView = [[UITextField alloc] init];
-//    [textUIView setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.1]];
-    [textUIView addSubview:textView];
-    [self.mView addSubview:textUIView];
-
-    [self.view setBackgroundColor:[UIColor whiteColor]];
-    [self.mView setBackgroundColor:[UIColor whiteColor]];
-    [self.view addSubview:mView];
-    [self.view addSubview:toolBar];
-    
-    socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
-    
-    [self sendFirstConnectInfo];
-    [mView setDelegate:self];
-    
-//    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-//    gesture.numberOfTapsRequired = 1;
-//    
-//    [self.mView addGestureRecognizer:gesture];
-    
-    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)];
-    [self.mView addGestureRecognizer:pinch];
-    
-    if(IOS_VERSION<5.0)
-    {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillHideNotification object:nil];
-    }else{
-         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    }
-}
-
 - (void)sendFirstConnectInfo
 {
     NSError *err = nil;
@@ -356,7 +440,7 @@ int lastScale;
     NSString *os = [[UIDevice currentDevice] systemName];
     NSString *version = [[UIDevice currentDevice] systemVersion];
     
-//    NSLog(@"connect ip = %@, port = %d, deviceID = %@", hostip, hostPort, deviceId);
+    //    NSLog(@"connect ip = %@, port = %d, deviceID = %@", hostip, hostPort, deviceId);
     
     if (![socket connectToHost:hostip onPort:hostPort error:&err]) {
         NSLog(@"Error : %@", err);
@@ -366,7 +450,7 @@ int lastScale;
     NSLog(@"first send : %@", setStr);
     
     [self sendDataToSocket:setStr tag:1];
-
+    
 }
 
 
@@ -395,14 +479,14 @@ int lastScale;
     NSString *msg = [[NSString alloc] initWithData:data encoding:enc];
     NSLog(@"didReadData data = %@, tag = %ld", msg, tag);
     [parser parserString:msg];
-//    if ([msg length] != 7  && [msg length] != 6) {           //去除单独设置光标
-        [mView setNeedsDisplay];
-//    }
-//    [textView setText:@""];
+    //    if ([msg length] != 7  && [msg length] != 6) {           //去除单独设置光标
+    [mView setNeedsDisplay];
+    //    }
+    //    [textView setText:@""];
     msg = nil;
     [self showTextView];
     [sock readDataWithTimeout:-1 tag:tag];
-
+    
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag
@@ -412,7 +496,7 @@ int lastScale;
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
-//    NSLog(@"didWriteDataWithTag...tag = %ld", tag);
+    //    NSLog(@"didWriteDataWithTag...tag = %ld", tag);
     [sock readDataWithTimeout:-1 tag:tag];
 }
 
@@ -454,7 +538,7 @@ int lastScale;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-//    NSLog(@"shouldChangeCharactersInRange text = %@, string = %@", [textField text], string);
+    //    NSLog(@"shouldChangeCharactersInRange text = %@, string = %@", [textField text], string);
     if ([string isEqualToString:@""]) {
         [self dispatchMessage:MYKEY_DEL tag:1];
     } else {
@@ -465,9 +549,9 @@ int lastScale;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-//    NSLog(@"textFieldShouldReturn...");
-//    NSString *str = [textView text];
-//    [self dispatchMessage:str tag:2];
+    //    NSLog(@"textFieldShouldReturn...");
+    //    NSString *str = [textView text];
+    //    [self dispatchMessage:str tag:2];
     [textField resignFirstResponder];
     [self dispatchMessage:MYKEY_ENTER tag:1];
     [textView setText:@""];
@@ -530,12 +614,12 @@ int lastScale;
             CGSize s = CGSizeMake(size.width * r.size.width, size.height);
             CGRect textRect = CGRectMake(X, Y, s.width, s.height);
             
-//            [textView removeFromSuperview];
+            //            [textView removeFromSuperview];
             self.textView.frame = textRect;
-//            [textView setFont:myFont];
+            //            [textView setFont:myFont];
             [textView setDelegate:self];
             [self.textView setHidden:NO];
-//            [self.textView becomeFirstResponder];
+            //            [self.textView becomeFirstResponder];
             [textView setTintColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0]]; //隐藏光标
             [textView setTextColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0]]; //隐藏textview的输入内容
             [textView setText:@"1234567890"];
@@ -549,7 +633,7 @@ int lastScale;
 
 - (void)handleTouchMessage:(NSString *)msg
 {
-//    [self hidenKeyboard];
+    //    [self hidenKeyboard];
     [self.textView resignFirstResponder];
     [self dispatchMessage:msg tag:3];
 }
@@ -584,7 +668,7 @@ int lastScale;
         NSString *msgStr=@"";
         int buttonType=0;
         int defButtonType=0;
-    
+        
         if([param rangeOfString:@"Message"].location != NSNotFound)
         {
             msgStr = [self getMessageBoxString:param param:@"Message"];
@@ -593,7 +677,7 @@ int lastScale;
             [self dispatchMessage:[NSString stringWithFormat:@"%@%@",CUSACTIVE_MSGBOX_SEND, @" Result=\"-1\" />"] tag:1];
             return;
         }
-    
+        
         if([param rangeOfString:@"Buttons"].location != NSNotFound)
         {
             buttonType = [[self getMessageBoxString:param param:@"Buttons"] intValue];
@@ -603,7 +687,7 @@ int lastScale;
             [self dispatchMessage:[NSString stringWithFormat:@"%@%@",CUSACTIVE_MSGBOX_SEND, @" Result=\"-1\" />"] tag:1];
             return;
         }
-
+        
         if([param rangeOfString:@"DefaultButton"].location != NSNotFound)
         {
             defButtonType = [[self getMessageBoxString:param param:@"DefaultButton"] intValue];
@@ -639,7 +723,7 @@ int lastScale;
             
             msgStr =  [msg substringWithRange:NSMakeRange(0, pos3)];
             restparamStr =[ msg substringFromIndex:pos3];
-
+            
         }
         
         while (([restparamStr rangeOfString:@"="].location != NSNotFound)) {
@@ -674,7 +758,7 @@ int lastScale;
         [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     }
     
-//    [imagePicker setAllowsEditing:YES];
+    //    [imagePicker setAllowsEditing:YES];
     [imagePicker setDelegate:self];
     
     [self presentViewController:imagePicker animated:YES completion:nil];
@@ -746,7 +830,7 @@ int lastScale;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
-//    UIImageAlertView *alert = [[UIImageAlertView alloc] initWithImage:image title:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Send"];
+    //    UIImageAlertView *alert = [[UIImageAlertView alloc] initWithImage:image title:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Send"];
     
     CGSize size;
     if (image.size.width > image.size.height) {
@@ -771,7 +855,7 @@ int lastScale;
     alertView.buttonTitles = [NSMutableArray arrayWithObjects:NSLocalizedString(@"Cancel", nil), NSLocalizedString(@"Send", nil), nil];
     
     [alertView setOnButtonTouchUpInside:^(CustomIOS7AlertView *alertView, int buttonIndex) {
-//        NSLog(@"Block: Button at position %d is clicked on alertView %d.", buttonIndex, [alertView tag]);
+        //        NSLog(@"Block: Button at position %d is clicked on alertView %d.", buttonIndex, [alertView tag]);
         if (buttonIndex == 1) {
             NSData *data;
             int type = [settingStore pictureType];
@@ -784,7 +868,7 @@ int lastScale;
                 data = UIImagePNGRepresentation(newImage);
             }
             
-                
+            
             [cameraImage clearCameraImage];
             int len = [data length];
             int currentBufferPos = 0;
@@ -800,7 +884,7 @@ int lastScale;
                     currentBufferPos = len;
                 }
                 NSString *str = [d base64Encoding];
-//                str = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                //                str = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                 str = [self URLencode:str stringEncoding:NSUTF8StringEncoding];
                 [cameraImage addCameraImage:[NSNumber numberWithInt:curretnBufferIndex] Value:str];
                 curretnBufferIndex += 1;
@@ -821,7 +905,7 @@ int lastScale;
     UIAlertView *alertView = [box createDialog:@"Image"];
     alertView.delegate = self;
     [alertView show];
-
+    
 }
 
 - (void)HandlerCAMHandler:(NSString *)param
@@ -860,9 +944,11 @@ int lastScale;
     
 }
 
+
 - (void)VTProtocolExtend:(NSString *)vtProtocol Message:(NSString *)msg
 {
-//    NSLog(@"VTProtocolExtend vtvtProtocol = %@, Message = %@", vtProtocol, msg);
+    //    NSLog(@"VTProtocolExtend vtvtProtocol = %@, Message = %@", vtProtocol, msg);
+    
     if ([vtProtocol isEqualToString:CUSACTIVE_MSGBOX])
     {
         [self HandlerMessageBoxHandler:msg];
@@ -886,6 +972,122 @@ int lastScale;
     else if([vtProtocol isEqualToString:CUSACTIVE_VOICE])
     {
         [self HandlerVoiceHandler:msg];
+    }
+    else
+    {
+        NSString *xml = [NSString stringWithFormat:@"%@%@%@",@"<param><msg ", msg, @"></param>"];
+        NSDictionary *result = [Functions getXMLAttrs:xml xpath:@"msg"];
+        
+        if(result == nil && result.count == 0){
+            return;
+        }
+        if ([vtProtocol isEqualToString:CUSACTIVE_TITLE])
+        {
+            navTitle.text = [result objectForKey:@"Text"];
+        }
+        else if ([vtProtocol isEqualToString:CUSACTIVE_ICON])
+        {
+            IconArgs *args = [[IconArgs alloc] init];
+            args.Iconid = [Functions getRightValueFromDict:result key:@"ID" defValue:@""];//[result objectForKey:@"ID"];
+            NSString *col = [Functions getRightValueFromDict:result key:@"Color" defValue:@"255255255"];//[result objectForKey:@"Color"];
+            args.color = [Functions getColorFromRGB:col];
+            args.X = [[Functions getRightValueFromDict:result key:@"X" defValue:@"0"] intValue];
+            args.Y = [[Functions getRightValueFromDict:result key:@"Y" defValue:@"0"] intValue];
+            args.width = [[Functions getRightValueFromDict:result key:@"Width" defValue:@"0"] intValue];
+            args.height = [[Functions getRightValueFromDict:result key:@"Height" defValue:@"0"] intValue];
+            [[[self stringShowList] iconDict] setObject:args forKey:[NSString stringWithFormat:@"%@%d%d", args.Iconid, args.X, args.Y]];
+        }
+        else if([vtProtocol isEqualToString:CUSACTIVE_LINE])
+        {
+            LineArgs *args = [[LineArgs alloc] init];
+            args.X = [[Functions getRightValueFromDict:result key:@"X" defValue:@"0"] intValue];
+            args.Y = [[Functions getRightValueFromDict:result key:@"Y" defValue:@"0"] intValue];
+            args.length = [[Functions getRightValueFromDict:result key:@"Length" defValue:@"0"] intValue];
+            args.orientation = [Functions getRightValueFromDict:result key:@"Orientation" defValue:args.orientation];
+            NSString *col = [Functions getRightValueFromDict:result key:@"Color" defValue:@"255255255"];
+            args.lineColor = [Functions getColorFromRGB:col];
+            [[[self stringShowList] lineDict]setObject:args forKey:args.getKey];
+        }
+        else if([vtProtocol isEqualToString:CUSACTIVE_INPUT])
+        {
+            InputArgs *args = [[InputArgs alloc] init];
+            args.X = [[Functions getRightValueFromDict:result key:@"X" defValue:@"0"] intValue];
+            args.Y = [[Functions getRightValueFromDict:result key:@"Y" defValue:@"0"] intValue];
+            args.width = [[Functions getRightValueFromDict:result key:@"Width" defValue:@"0"] intValue];
+            args.height = [[Functions getRightValueFromDict:result key:@"Height" defValue:@"0"] intValue];
+            args.maxLength = [[Functions getRightValueFromDict:result key:@"MaxLength" defValue:@"0"] intValue];
+            args.maskChar = [Functions getRightValueFromDict:result key:@"MaskChar" defValue:args.maskChar];
+            args.text = [Functions getRightValueFromDict:result key:@"Text" defValue:args.text];
+            [[[self stringShowList] lineDict]setObject:args forKey:args.getKey];
+        }
+        else if([vtProtocol isEqualToString:CUSACTIVE_LIST])
+        {
+            ListFormArgs *args = [[ListFormArgs alloc] init];
+            args.title = [Functions getRightValueFromDict:result key:@"Title" defValue:args.title];
+            NSString *data = [Functions getRightValueFromDict:result key:@"Data" defValue:@""];
+            if (data.length == 0) {
+                NSLog(@"parse listform error");
+                return;
+            }
+            data=[data stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSLog(@"found listform data = %@", data);
+            NSArray *parseData = [Functions getXMLAttrsFromList:data];
+            if(!parseData && parseData.count != 2){
+                return;
+            }
+            args.sectionTitle = parseData[0];
+            args.listContents = parseData[1];
+        }
+        else if([vtProtocol isEqualToString:CUSACTIVE_HTML])
+        {
+            NSString *data = [Functions getRightValueFromDict:result key:@"Data" defValue:@""];
+            if(data.length == 0){
+                NSLog(@"parse Html error");
+                return;
+            }
+            data=[data stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSLog(@"found html data = %@", data);
+            
+        }
+        else if([vtProtocol isEqualToString:CUSACTIVE_INFORBAR])
+        {
+            InfobarArgs *args = [[InfobarArgs alloc] init];
+            args.text = [Functions getRightValueFromDict:result key:@"Text" defValue:args.text];
+            NSString *col = [Functions getRightValueFromDict:result key:@"ForeColor" defValue:@"255255255"];
+            args.fgColor = [Functions getColorFromRGB:col];
+            col = [Functions getRightValueFromDict:result key:@"ForeColor" defValue:@"255255255"];
+            args.bgColor = [Functions getColorFromRGB:col];
+            
+            if (args.text.length == 0) {
+                [self hideInfoBar];
+            }
+            else
+            {
+                infobarText.text = args.text;
+                infobar.backgroundColor = args.bgColor;
+                infobarText.textColor = args.fgColor;
+                [self showInfoBar];
+            }
+            
+        }
+        else if([vtProtocol isEqualToString:CUSACTIVE_TOOLBAR])
+        {
+            ToolbarArgs *args = [[ToolbarArgs alloc] init];
+            args.action = [Functions getRightValueFromDict:result key:@"Action" defValue:args.action];
+            args.icon = [Functions getRightValueFromDict:result key:@"Icon" defValue:args.icon];
+            args.text = [Functions getRightValueFromDict:result key:@"Text" defValue:args.text];
+            args.ID = [Functions getRightValueFromDict:result key:@"ID" defValue:args.ID];
+            
+            if([args.action isEqualToString:@"Clear"])
+            {
+                [myToolbars removeAllObjects];
+            }
+            else
+            {
+                [myToolbars addObject:args];
+            }
+        }
+        
     }
 }
 
@@ -950,4 +1152,30 @@ int lastScale;
 {
     [self dismissViewControllerAnimated:NO completion:^{NSLog(@"cancel!");}];
 }
+
+#pragma mark - Button Handlers
+-(void)leftDrawerButtonPress:(id)sender{
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+}
+
+- (void)hideInfoBar
+{
+    CGContextRef context = UIGraphicsGetCurrentContext(); //返回当前视图堆栈顶部的图形上下文
+    [UIView beginAnimations:nil context:context];
+    [UIView setAnimationDuration:1.5];
+    // View changes go here
+    [infobar setAlpha:0.0f];     //设置属性的变换，可以对frame的位置进行变换来实现移动的效果
+    [UIView commitAnimations];
+}
+
+- (void)showInfoBar
+{
+    CGContextRef context = UIGraphicsGetCurrentContext(); //返回当前视图堆栈顶部的图形上下文
+    [UIView beginAnimations:nil context:context];
+    [UIView setAnimationDuration:1.5];
+    // View changes go here
+    [infobar setAlpha:0.8f];     //设置属性的变换，可以对frame的位置进行变换来实现移动的效果
+    [UIView commitAnimations];
+}
+
 @end

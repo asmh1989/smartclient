@@ -11,6 +11,9 @@
 @interface StringShowList : NSObject
 @property (nonatomic, strong) NSMutableDictionary *stringShowDics;
 @property (nonatomic, strong) NSMutableArray *inputStrings;
+@property (nonatomic, strong) NSMutableDictionary *lineDict;
+@property (nonatomic, strong) NSMutableDictionary *iconDict;
+@property (nonatomic, strong) NSMutableDictionary *inputDict;
 
 + (StringShowList *)shareStore;
 - (void)clear;

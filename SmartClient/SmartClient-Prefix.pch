@@ -27,6 +27,14 @@
 #define CUSACTIVE_CLICK_SEND        CUSACTIVE(@"<CLICK ")
 #define CUSACTIVE_OPTIONDIALOG      CUSACTIVE(@"<OPTDLG >")
 #define CUSACTIVE_VOICE             CUSACTIVE(@"<VOICE >")
+#define CUSACTIVE_INFORBAR          CUSACTIVE(@"<INFOBAR >")
+#define CUSACTIVE_TITLE             CUSACTIVE(@"<TITLE >")
+#define CUSACTIVE_ICON              CUSACTIVE(@"<ICON >")
+#define CUSACTIVE_LINE              CUSACTIVE(@"<LINE >")
+#define CUSACTIVE_LIST              CUSACTIVE(@"<LISTFORM >")
+#define CUSACTIVE_TOOLBAR           CUSACTIVE(@"<TOOLBAR >")
+#define CUSACTIVE_INPUT             CUSACTIVE(@"<INPUT >")
+#define CUSACTIVE_HTML              CUSACTIVE(@"<HTML >")
 
 #define CUSACTIVE_IMG               @""
 #define CUSACTIVE_MSG               @""
@@ -42,6 +50,8 @@
 #define NSLog(...)
 #define debugMethod()
 #endif
+
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 static BOOL OSVersionIsAtLeastiOS7() {
     return (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1);

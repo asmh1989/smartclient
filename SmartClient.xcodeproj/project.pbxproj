@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4078D4B1908C41D00BBA5C7 /* RKTabItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A4078D481908C41D00BBA5C7 /* RKTabItem.m */; };
+		A4078D4C1908C41D00BBA5C7 /* RKTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4078D4A1908C41D00BBA5C7 /* RKTabView.m */; };
 		A41842A0186428C100F43F13 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A418429F186428C100F43F13 /* TTTAttributedLabel.m */; };
 		A41D4379183078AF00F52597 /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A41D4378183078AE00F52597 /* CustomIOS7AlertView.m */; };
 		A429C760181773CD0037666D /* ShowListEventArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = A429C75F181773CD0037666D /* ShowListEventArgs.m */; };
@@ -16,6 +18,11 @@
 		A445505E18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A445505D18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m */; };
 		A4455062182387C200BBDDB9 /* ConnectSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4455061182387C200BBDDB9 /* ConnectSettingViewController.m */; };
 		A446918C186293A100E9CFC0 /* HTCopyableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A446918B186293A000E9CFC0 /* HTCopyableLabel.m */; };
+		A449D9FC1905FD20008C5513 /* LineArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = A449D9FB1905FD20008C5513 /* LineArgs.m */; };
+		A449D9FF19060113008C5513 /* InputArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = A449D9FE19060113008C5513 /* InputArgs.m */; };
+		A449DA02190602C7008C5513 /* ToolbarArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = A449DA01190602C7008C5513 /* ToolbarArgs.m */; };
+		A449DA0519060453008C5513 /* InfobarArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = A449DA0419060453008C5513 /* InfobarArgs.m */; };
+		A449DA081906058D008C5513 /* ListFormArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = A449DA071906058D008C5513 /* ListFormArgs.m */; };
 		A44CB6BD1818C862006B5946 /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = A44CB6BC1818C862006B5946 /* Functions.m */; };
 		A44CB6C11818E4FE006B5946 /* VTSystemView.m in Sources */ = {isa = PBXBuildFile; fileRef = A44CB6C01818E4FE006B5946 /* VTSystemView.m */; };
 		A45D2917182A1C7D00EE88AD /* AboutSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A45D2919182A1C7D00EE88AD /* AboutSettingViewController.xib */; };
@@ -49,6 +56,9 @@
 		A470DBA31834656300C7DB1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A470DBA21834656300C7DB1A /* libiconv.dylib */; };
 		A470DBA51834657000C7DB1A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A470DBA41834657000C7DB1A /* AddressBook.framework */; };
 		A470DBA71834657900C7DB1A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A470DBA61834657900C7DB1A /* AddressBookUI.framework */; };
+		A472E66E1907A57500375F93 /* Wenquanyi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A472E66D1907A0B200375F93 /* Wenquanyi.ttf */; };
+		A472E6741907BAA100375F93 /* CRNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A472E6711907BAA100375F93 /* CRNavigationBar.m */; };
+		A472E6751907BAA100375F93 /* CRNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A472E6731907BAA100375F93 /* CRNavigationController.m */; };
 		A47552A5181606420033D224 /* SettingForRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552A4181606420033D224 /* SettingForRuntime.m */; };
 		A47552A818160E460033D224 /* Mode.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552A718160E460033D224 /* Mode.m */; };
 		A47552AB181610E30033D224 /* Chars.m in Sources */ = {isa = PBXBuildFile; fileRef = A47552AA181610E30033D224 /* Chars.m */; };
@@ -70,6 +80,8 @@
 		A49214CA182CCA4600213154 /* zeta.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214C1182CCA4600213154 /* zeta.wav */; };
 		A49214CB182CCA4600213154 /* zing.wav in Resources */ = {isa = PBXBuildFile; fileRef = A49214C2182CCA4600213154 /* zing.wav */; };
 		A49214CE182CD06500213154 /* CameraImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A49214CD182CD06500213154 /* CameraImage.m */; };
+		A497D95D1904CAF500E5FE93 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A497D95C1904CAF500E5FE93 /* GDataXMLNode.m */; };
+		A497D960190505A600E5FE93 /* IconArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = A497D95F190505A600E5FE93 /* IconArgs.m */; };
 		A4B2A8F51843032C00D3F748 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B2A8F41843032C00D3F748 /* LeftMenuViewController.m */; };
 		A4B6E406181E51D300F0A400 /* MessageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B6E405181E51D300F0A400 /* MessageBox.m */; };
 		A4C3F70C1828E75E00CBE658 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C3F70B1828E75E00CBE658 /* AVFoundation.framework */; };
@@ -94,6 +106,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A4078D471908C41D00BBA5C7 /* RKTabItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKTabItem.h; sourceTree = "<group>"; };
+		A4078D481908C41D00BBA5C7 /* RKTabItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKTabItem.m; sourceTree = "<group>"; };
+		A4078D491908C41D00BBA5C7 /* RKTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKTabView.h; sourceTree = "<group>"; };
+		A4078D4A1908C41D00BBA5C7 /* RKTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKTabView.m; sourceTree = "<group>"; };
 		A40F734818272E63003D36AF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		A418429E186428C100F43F13 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
 		A418429F186428C100F43F13 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
@@ -113,6 +129,16 @@
 		A4455061182387C200BBDDB9 /* ConnectSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectSettingViewController.m; sourceTree = "<group>"; };
 		A446918A186293A000E9CFC0 /* HTCopyableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCopyableLabel.h; sourceTree = "<group>"; };
 		A446918B186293A000E9CFC0 /* HTCopyableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCopyableLabel.m; sourceTree = "<group>"; };
+		A449D9FA1905FD20008C5513 /* LineArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineArgs.h; sourceTree = "<group>"; };
+		A449D9FB1905FD20008C5513 /* LineArgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineArgs.m; sourceTree = "<group>"; };
+		A449D9FD19060113008C5513 /* InputArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputArgs.h; sourceTree = "<group>"; };
+		A449D9FE19060113008C5513 /* InputArgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputArgs.m; sourceTree = "<group>"; };
+		A449DA00190602C7008C5513 /* ToolbarArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolbarArgs.h; sourceTree = "<group>"; };
+		A449DA01190602C7008C5513 /* ToolbarArgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolbarArgs.m; sourceTree = "<group>"; };
+		A449DA0319060453008C5513 /* InfobarArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfobarArgs.h; sourceTree = "<group>"; };
+		A449DA0419060453008C5513 /* InfobarArgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfobarArgs.m; sourceTree = "<group>"; };
+		A449DA061906058D008C5513 /* ListFormArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListFormArgs.h; sourceTree = "<group>"; };
+		A449DA071906058D008C5513 /* ListFormArgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListFormArgs.m; sourceTree = "<group>"; };
 		A44CB6BB1818C862006B5946 /* Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
 		A44CB6BC1818C862006B5946 /* Functions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Functions.m; sourceTree = "<group>"; };
 		A44CB6BF1818E4FE006B5946 /* VTSystemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTSystemView.h; sourceTree = "<group>"; };
@@ -168,6 +194,11 @@
 		A470DBA21834656300C7DB1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		A470DBA41834657000C7DB1A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		A470DBA61834657900C7DB1A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		A472E66D1907A0B200375F93 /* Wenquanyi.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Wenquanyi.ttf; sourceTree = "<group>"; };
+		A472E6701907BAA100375F93 /* CRNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRNavigationBar.h; sourceTree = "<group>"; };
+		A472E6711907BAA100375F93 /* CRNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRNavigationBar.m; sourceTree = "<group>"; };
+		A472E6721907BAA100375F93 /* CRNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRNavigationController.h; sourceTree = "<group>"; };
+		A472E6731907BAA100375F93 /* CRNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRNavigationController.m; sourceTree = "<group>"; };
 		A47552A3181606420033D224 /* SettingForRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingForRuntime.h; sourceTree = "<group>"; };
 		A47552A4181606420033D224 /* SettingForRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingForRuntime.m; sourceTree = "<group>"; };
 		A47552A618160E460033D224 /* Mode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mode.h; path = SmartClient/Mode.h; sourceTree = "<group>"; };
@@ -201,6 +232,10 @@
 		A49214C2182CCA4600213154 /* zing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = zing.wav; sourceTree = "<group>"; };
 		A49214CC182CD06500213154 /* CameraImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraImage.h; sourceTree = "<group>"; };
 		A49214CD182CD06500213154 /* CameraImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraImage.m; sourceTree = "<group>"; };
+		A497D95B1904CAF500E5FE93 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		A497D95C1904CAF500E5FE93 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		A497D95E190505A600E5FE93 /* IconArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconArgs.h; sourceTree = "<group>"; };
+		A497D95F190505A600E5FE93 /* IconArgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconArgs.m; sourceTree = "<group>"; };
 		A4A7E1F81829DC17004CE70A /* StringForNSUserDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StringForNSUserDefaults.h; path = ../StringForNSUserDefaults.h; sourceTree = "<group>"; };
 		A4B2A8F31843032C00D3F748 /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeftMenuViewController.h; path = ../LeftMenuViewController.h; sourceTree = "<group>"; };
 		A4B2A8F41843032C00D3F748 /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeftMenuViewController.m; path = ../LeftMenuViewController.m; sourceTree = "<group>"; };
@@ -257,6 +292,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A4078D461908C41D00BBA5C7 /* RKTabView */ = {
+			isa = PBXGroup;
+			children = (
+				A4078D471908C41D00BBA5C7 /* RKTabItem.h */,
+				A4078D481908C41D00BBA5C7 /* RKTabItem.m */,
+				A4078D491908C41D00BBA5C7 /* RKTabView.h */,
+				A4078D4A1908C41D00BBA5C7 /* RKTabView.m */,
+			);
+			path = RKTabView;
+			sourceTree = "<group>";
+		};
 		A445505F1823876100BBDDB9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,6 +396,9 @@
 		A4632039180F80E3000F9C69 /* SmartClient */ = {
 			isa = PBXGroup;
 			children = (
+				A4078D461908C41D00BBA5C7 /* RKTabView */,
+				A472E66F1907BAA100375F93 /* CRNavigationController */,
+				A497D95A1904CAF500E5FE93 /* XMLSupport */,
 				A463207B180FD0DF000F9C69 /* GCDAsyncSocket */,
 				A482E0621823DB5A0056E0C2 /* JMStaticContentTableViewController */,
 				A46492C518222B2E00B39E7E /* MMDrawerController */,
@@ -435,6 +484,17 @@
 			path = MMDrawerController;
 			sourceTree = "<group>";
 		};
+		A472E66F1907BAA100375F93 /* CRNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				A472E6701907BAA100375F93 /* CRNavigationBar.h */,
+				A472E6711907BAA100375F93 /* CRNavigationBar.m */,
+				A472E6721907BAA100375F93 /* CRNavigationController.h */,
+				A472E6731907BAA100375F93 /* CRNavigationController.m */,
+			);
+			path = CRNavigationController;
+			sourceTree = "<group>";
+		};
 		A47552AF1816460E0033D224 /* SmartClientCore */ = {
 			isa = PBXGroup;
 			children = (
@@ -456,6 +516,18 @@
 				A4B6E405181E51D300F0A400 /* MessageBox.m */,
 				A49214CC182CD06500213154 /* CameraImage.h */,
 				A49214CD182CD06500213154 /* CameraImage.m */,
+				A497D95E190505A600E5FE93 /* IconArgs.h */,
+				A497D95F190505A600E5FE93 /* IconArgs.m */,
+				A449D9FA1905FD20008C5513 /* LineArgs.h */,
+				A449D9FB1905FD20008C5513 /* LineArgs.m */,
+				A449D9FD19060113008C5513 /* InputArgs.h */,
+				A449D9FE19060113008C5513 /* InputArgs.m */,
+				A449DA00190602C7008C5513 /* ToolbarArgs.h */,
+				A449DA01190602C7008C5513 /* ToolbarArgs.m */,
+				A449DA0319060453008C5513 /* InfobarArgs.h */,
+				A449DA0419060453008C5513 /* InfobarArgs.m */,
+				A449DA061906058D008C5513 /* ListFormArgs.h */,
+				A449DA071906058D008C5513 /* ListFormArgs.m */,
 			);
 			name = SmartClientCore;
 			path = ..;
@@ -480,6 +552,7 @@
 		A488D20418599B7700CB6B39 /* font */ = {
 			isa = PBXGroup;
 			children = (
+				A472E66D1907A0B200375F93 /* Wenquanyi.ttf */,
 				A488D2121859A5A300CB6B39 /* Kaiti.ttf */,
 			);
 			name = font;
@@ -499,6 +572,15 @@
 				A49214C2182CCA4600213154 /* zing.wav */,
 			);
 			path = sound;
+			sourceTree = "<group>";
+		};
+		A497D95A1904CAF500E5FE93 /* XMLSupport */ = {
+			isa = PBXGroup;
+			children = (
+				A497D95B1904CAF500E5FE93 /* GDataXMLNode.h */,
+				A497D95C1904CAF500E5FE93 /* GDataXMLNode.m */,
+			);
+			path = XMLSupport;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -582,6 +664,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A472E66E1907A57500375F93 /* Wenquanyi.ttf in Resources */,
 				A49214CB182CCA4600213154 /* zing.wav in Resources */,
 				A49214C5182CCA4600213154 /* color.wav in Resources */,
 				A49214C9182CCA4600213154 /* vector.wav in Resources */,
@@ -616,10 +699,14 @@
 				A4353A1218331D43006D51FC /* ScanViewController.m in Sources */,
 				A4E591211827988100265F60 /* SoundSettingViewController.m in Sources */,
 				A4E5911518278DED00265F60 /* FontSettingViewController.m in Sources */,
+				A497D960190505A600E5FE93 /* IconArgs.m in Sources */,
 				A4632065180F8114000F9C69 /* SmartClinetViewController.mm in Sources */,
 				A47552A818160E460033D224 /* Mode.m in Sources */,
+				A449DA081906058D008C5513 /* ListFormArgs.m in Sources */,
 				A47552A5181606420033D224 /* SettingForRuntime.m in Sources */,
 				A46492DB18222D5300B39E7E /* MMNavigationController.m in Sources */,
+				A449DA02190602C7008C5513 /* ToolbarArgs.m in Sources */,
+				A497D95D1904CAF500E5FE93 /* GDataXMLNode.m in Sources */,
 				A4E5911E1827986D00265F60 /* ScreenSettingViewController.m in Sources */,
 				A46492D218222B2E00B39E7E /* UIViewController+MMDrawerController.m in Sources */,
 				A47552AB181610E30033D224 /* Chars.m in Sources */,
@@ -627,7 +714,9 @@
 				A47552B5181657E20033D224 /* CaretAttribs.m in Sources */,
 				A482E06F1823DB5A0056E0C2 /* JMStaticContentTextFieldTableViewCell.m in Sources */,
 				A41D4379183078AF00F52597 /* CustomIOS7AlertView.m in Sources */,
+				A449D9FF19060113008C5513 /* InputArgs.m in Sources */,
 				A4E591241827989500265F60 /* ScanSettingViewController.m in Sources */,
+				A472E6741907BAA100375F93 /* CRNavigationBar.m in Sources */,
 				A47552AE181640D30033D224 /* CharAttribs.m in Sources */,
 				A43D1FEF1810C5F90067FB2B /* ParserMsg.m in Sources */,
 				A4E5912B1827990100265F60 /* AboutSettingViewController.m in Sources */,
@@ -637,17 +726,22 @@
 				A44CB6BD1818C862006B5946 /* Functions.m in Sources */,
 				A47552B2181646C30033D224 /* Caret.m in Sources */,
 				A463207E180FD152000F9C69 /* DefaultSettings.m in Sources */,
+				A449DA0519060453008C5513 /* InfobarArgs.m in Sources */,
+				A449D9FC1905FD20008C5513 /* LineArgs.m in Sources */,
 				A429C760181773CD0037666D /* ShowListEventArgs.m in Sources */,
 				A46492D118222B2E00B39E7E /* MMDrawerVisualState.m in Sources */,
 				A49214CE182CD06500213154 /* CameraImage.m in Sources */,
+				A4078D4B1908C41D00BBA5C7 /* RKTabItem.m in Sources */,
 				A4E5910B1827681500265F60 /* EditViewController.m in Sources */,
 				A46492CF18222B2E00B39E7E /* MMDrawerBarButtonItem.m in Sources */,
 				A46492D018222B2E00B39E7E /* MMDrawerController.m in Sources */,
+				A472E6751907BAA100375F93 /* CRNavigationController.m in Sources */,
 				A4E59127182798EC00265F60 /* OtherSettingViewController.m in Sources */,
 				A446918C186293A100E9CFC0 /* HTCopyableLabel.m in Sources */,
 				A445505E18233F1B00BBDDB9 /* MMExampleDrawerVisualStateManager.m in Sources */,
 				A4E5911118276B0A00265F60 /* StringInputTableViewCell.m in Sources */,
 				A4455062182387C200BBDDB9 /* ConnectSettingViewController.m in Sources */,
+				A4078D4C1908C41D00BBA5C7 /* RKTabView.m in Sources */,
 				A4632069180F853B000F9C69 /* SettingForConnect.m in Sources */,
 				A4632081180FDEBB000F9C69 /* SettingStore.m in Sources */,
 				A4632040180F80E3000F9C69 /* main.m in Sources */,
@@ -823,6 +917,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/Users/sun/git/zxing/cpp/core/src,
 					"/Users/sun/git/zxing/iphone/ZXingWidget/Classes/**",
+					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "SmartClient/SmartClient-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -830,6 +925,7 @@
 					"$(inherited)",
 					/Users/sun/git/smartclient2,
 				);
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;
@@ -852,6 +948,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/Users/sun/git/zxing/cpp/core/src,
 					"/Users/sun/git/zxing/iphone/ZXingWidget/Classes/**",
+					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "SmartClient/SmartClient-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -859,6 +956,7 @@
 					"$(inherited)",
 					/Users/sun/git/smartclient2,
 				);
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;

@@ -1072,8 +1072,12 @@ typedef struct nextAS{
 //        streamArgs = new IOStreamEventArgs(e.Action, e.CurDefineSequence, e.CurMessage);
         isReceiveBytes = YES;
     }else if([vtProtocol isEqualToString:CUSACTIVE_MSGBOX] || [vtProtocol isEqualToString:CUSACTIVE_CAM] ||
-             [vtProtocol isEqualToString:CUSACTIVE_GPS] || [vtProtocol isEqualToString:CUSACTIVE_WEB]||
-             [vtProtocol isEqualToString:CUSACTIVE_OPTIONDIALOG] || [vtProtocol isEqualToString:CUSACTIVE_VOICE]){
+             [vtProtocol isEqualToString:CUSACTIVE_GPS] || [vtProtocol isEqualToString:CUSACTIVE_WEB] ||
+             [vtProtocol isEqualToString:CUSACTIVE_OPTIONDIALOG] || [vtProtocol isEqualToString:CUSACTIVE_VOICE] ||
+             [vtProtocol isEqualToString:CUSACTIVE_ICON] || [vtProtocol isEqualToString:CUSACTIVE_HTML] ||
+             [vtProtocol isEqualToString:CUSACTIVE_INFORBAR] || [vtProtocol isEqualToString:CUSACTIVE_INPUT] ||
+             [vtProtocol isEqualToString:CUSACTIVE_LIST] || [vtProtocol isEqualToString:CUSACTIVE_LINE] ||
+             [vtProtocol isEqualToString:CUSACTIVE_TITLE] || [vtProtocol isEqualToString:CUSACTIVE_TOOLBAR]){
         [delegate VTProtocolExtend:vtProtocol Message:curMessage];
     }
 }

@@ -12,6 +12,8 @@
 #import "SettingStore.h"
 #import "ShowListEventArgs.h"
 #import "Functions.h"
+#import "../LineArgs.h"
+#import "../IconArgs.h"
 
 #define MABS(a,b) ((a) - (b)) > 0 ? ((a)-(b)) : ((b) - (a))
 #define MYABS(a,b,N) (((a) - (b)) > 0? ((a)-(b)) : ((b) - (a))) < (N)
@@ -65,11 +67,15 @@
     
 //    UIFont * font = [UIFont boldSystemFontOfSize:[settingStore fontSize]];
     UIFont * font = [settingStore getCurrentFont];
-    int ix = (int)((pt.x - [settingStore leftMargin]) / ([settings getCharSizeEN:font].width + [settingStore columnSpan]));
-    int iy = (int)((pt.y - [settingStore topMargin]) / ([settings getCharSizeEN:font].height + [settingStore columnSpan]));
+    CGSize size = [settings getCharSizeEN:font];
+
     NSString *str;
     if (MYABS(pt.x, point.x, CLICK_LEN) && MYABS(pt.y, point.y, CLICK_LEN)) {
+        
+        int ix = (int)((pt.x - [settingStore leftMargin]) / (size.width + [settingStore columnSpan]));
+        int iy = (int)((pt.y - [settingStore topMargin]) / (size.height + [settingStore rowSpan]));
         //click
+        
         NSLog(@"click!! ix = %d, iy = %d", ix, iy);
         str = [NSString stringWithFormat:@"%@%@%d%@%d%@", CUSACTIVE_CLICK_SEND, @" X=\"", ix, @"\" Y=\"", iy, @"\" />"];
     } else {
@@ -227,13 +233,63 @@
         }
     }
     
+    
+    //画线
+    for (id key in [[stringShowList lineDict] allKeys]) {
+        LineArgs *line = [[stringShowList lineDict] objectForKey:key];
+        CGFloat X = leftMargin + (size.width+columnSpan) *line.X;
+        CGFloat Y = topMargin + (size.height+rowSpan) * line.Y;
+        CGFloat len = line.length;
+        CGPoint aPoints[2];//坐标点
+        
+        if ([@"H" isEqualToString:line.orientation]) {
+            len = leftMargin + (size.width+columnSpan) *len;
+            aPoints[0] =CGPointMake(X, Y);//坐标1
+            aPoints[1] =CGPointMake(X+len, Y);//坐标2
+        }
+        else
+        {
+            len = topMargin + (size.height+rowSpan) *len;
+            aPoints[0] =CGPointMake(X, Y);//坐标1
+            aPoints[1] =CGPointMake(X, Y+len);//坐标2
+        }
+        
+        const CGFloat *rgba = CGColorGetComponents(line.lineColor.CGColor);
+        CGContextSetRGBStrokeColor(context, rgba[0], rgba[1], rgba[2], rgba[3]);
+
+        CGContextSetLineWidth(context, 1.0);
+        CGContextAddLines(context, aPoints, 2);//添加线
+        CGContextDrawPath(context, kCGPathStroke); //根据坐标绘制路径
+    }
+    
     //画光标
     if ([settingStore isShowCaret]) {
         CGFloat X = leftMargin + (size.width+columnSpan) * settings.caret.pos.x;
-        CGFloat Y = topMargin + (size.height+rowSpan) * (settings.caret.pos.y+1)-6.0;
+        CGFloat Y = topMargin + (size.height+rowSpan) * (settings.caret.pos.y+1)-3.0;
         [[UIColor redColor] setFill];
         CGContextFillRect(context, CGRectMake(X, Y, size.width, settingStore.cursorHeight));
         CGContextStrokePath(context);
+    }
+    
+    
+    //画icon
+    for (id key in [[stringShowList iconDict] allKeys]) {
+        IconArgs *icon = [[stringShowList iconDict] objectForKey:key];
+        UIImage* img = [UIImage imageNamed: [NSString stringWithFormat:@"vt_%@", icon.Iconid]];
+        
+        CGFloat X = leftMargin + (size.width+columnSpan) *icon.X;
+        CGFloat Y = (topMargin + (size.height+rowSpan) * icon.Y);
+        
+        CGFloat width =(size.width+columnSpan) *(icon.width);
+        CGFloat height =(size.height+rowSpan) * (icon.height);
+        
+        CGRect imgRect = CGRectMake(X, Y, width, height);
+        
+//        img = [self scaleImage:img maxWidth:imgRect.size.width maxHeight:imgRect.size.height];
+        
+        UIGraphicsPushContext( context );
+        [img drawInRect:imgRect];
+        UIGraphicsPopContext();
     }
     
     myFont = nil;

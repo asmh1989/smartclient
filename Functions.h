@@ -51,10 +51,15 @@
 //
 //    #endif
 
-    #define USE_IOS7_METHOD NO
+#define USE_IOS7_METHOD NO
 #else
-    #define USE_IOS7_METHOD YES
+#define USE_IOS7_METHOD YES
 #endif
 
 @interface Functions : NSObject
++ (NSDictionary *)getXMLAttrs:(NSString *) content xpath:(NSString *)path;
++ (NSArray *)getXMLAttrsFromList:(NSString *)content;
++ (UIColor *)getColorFromRGB:(NSString *)str;
++ (NSString *)getRightValueFromDict:(NSDictionary *)dict key:(NSString *)key defValue:(NSString *)value;
++ (UIImage *)scaleImage:(UIImage *) image maxWidth:(float) maxWidth maxHeight:(float) maxHeight;
 @end
