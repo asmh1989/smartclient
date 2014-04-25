@@ -51,6 +51,7 @@
 		A46492D218222B2E00B39E7E /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A46492CE18222B2E00B39E7E /* UIViewController+MMDrawerController.m */; };
 		A46492DB18222D5300B39E7E /* MMNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A46492DA18222D5300B39E7E /* MMNavigationController.m */; };
 		A46B626B183459200080AAA4 /* libZXingWidget.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46B626A183459200080AAA4 /* libZXingWidget.a */; };
+		A46F7E27190A29C000882F72 /* ListFormTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A46F7E26190A29C000882F72 /* ListFormTableViewController.m */; };
 		A470DB9F1834654700C7DB1A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A470DB9E1834654700C7DB1A /* AudioToolbox.framework */; };
 		A470DBA11834655200C7DB1A /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A470DBA01834655100C7DB1A /* CoreVideo.framework */; };
 		A470DBA31834656300C7DB1A /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A470DBA21834656300C7DB1A /* libiconv.dylib */; };
@@ -189,6 +190,8 @@
 		A46492D918222D5300B39E7E /* MMNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMNavigationController.h; path = ../MMNavigationController.h; sourceTree = "<group>"; };
 		A46492DA18222D5300B39E7E /* MMNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMNavigationController.m; path = ../MMNavigationController.m; sourceTree = "<group>"; };
 		A46B626A183459200080AAA4 /* libZXingWidget.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libZXingWidget.a; sourceTree = "<group>"; };
+		A46F7E25190A29C000882F72 /* ListFormTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListFormTableViewController.h; sourceTree = "<group>"; };
+		A46F7E26190A29C000882F72 /* ListFormTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListFormTableViewController.m; sourceTree = "<group>"; };
 		A470DB9E1834654700C7DB1A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A470DBA01834655100C7DB1A /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		A470DBA21834656300C7DB1A /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -332,6 +335,8 @@
 				A4632063180F8114000F9C69 /* SmartClinetViewController.mm */,
 				A4353A0F18331D42006D51FC /* ScanViewController.h */,
 				A4353A1018331D42006D51FC /* ScanViewController.m */,
+				A46F7E25190A29C000882F72 /* ListFormTableViewController.h */,
+				A46F7E26190A29C000882F72 /* ListFormTableViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -721,6 +726,7 @@
 				A43D1FEF1810C5F90067FB2B /* ParserMsg.m in Sources */,
 				A4E5912B1827990100265F60 /* AboutSettingViewController.m in Sources */,
 				A482E06D1823DB5A0056E0C2 /* JMStaticContentTableViewController.m in Sources */,
+				A46F7E27190A29C000882F72 /* ListFormTableViewController.m in Sources */,
 				A4632079180FB7AD000F9C69 /* GCDAsyncSocket.m in Sources */,
 				A429C763181775FB0037666D /* StringShowList.m in Sources */,
 				A44CB6BD1818C862006B5946 /* Functions.m in Sources */,

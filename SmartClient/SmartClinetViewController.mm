@@ -18,6 +18,7 @@
 #import "CameraImage.h"
 #import "CustomIOS7AlertView.h"
 #import "MMDrawerBarButtonItem.h"
+#import "ListFormTableViewController.h"
 
 #import "IconArgs.h"
 #import "ListFormArgs.h"
@@ -957,6 +958,15 @@ int lastScale;
             }
             args.sectionTitle = parseData[0];
             args.listContents = parseData[1];
+            
+            UINavigationController *navController = [[UINavigationController alloc] init];
+            [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+            
+            ListFormTableViewController *vc = [[ListFormTableViewController alloc] initWithData:args parent:self];
+            navController  = [navController initWithRootViewController:vc];
+            [self presentViewController:navController animated:YES completion:^{
+                
+            }];
         }
         else if([vtProtocol isEqualToString:CUSACTIVE_HTML])
         {
@@ -1117,7 +1127,7 @@ int lastScale;
     else
     {
         ToolbarArgs *args = [myToolbars objectAtIndex:index];
-        [self dispatchMessage:[NSString stringWithFormat:@"%@ ID=\"%@\" Action=\"%@\"/>", TOOLBAR_SEND, args.ID, @"Click"] tag:1];
+        [self dispatchMessage:[NSString stringWithFormat:@"%@ ID=\"%@\" Action=\"%@\"/>", CUSACTIVE_TOOLBAR_SEND, args.ID, @"Click"] tag:1];
     }
 }
 - (void)tabView:(RKTabView *)tabView tabBecameEnabledAtIndex:(int)index tab:(RKTabItem *)tabItem

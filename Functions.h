@@ -29,9 +29,6 @@
 #define MYKEY_RIGHT               COMBINE(0x1b, @"[C")
 #define MYKEY_DOWN                COMBINE(0x1b, @"[B")
 
-#define TOOLBAR_SEND              COMBINE(0x1b, @"<TOOLBAR")
-
-
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < 70000 // iOS 5.0 supported
 

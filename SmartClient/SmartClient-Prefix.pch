@@ -36,6 +36,9 @@
 #define CUSACTIVE_INPUT             CUSACTIVE(@"<INPUT >")
 #define CUSACTIVE_HTML              CUSACTIVE(@"<HTML >")
 
+#define CUSACTIVE_TOOLBAR_SEND       CUSACTIVE(@"<TOOLBAR ")
+#define CUSACTIVE_LIST_SEND          CUSACTIVE(@"<LISTFORM ")
+
 #define CUSACTIVE_IMG               @""
 #define CUSACTIVE_MSG               @""
 #define CUSACTIVE_WAV               @""
