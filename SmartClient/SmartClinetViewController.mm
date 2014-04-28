@@ -991,7 +991,7 @@ int lastScale;
             args.text = [Functions getRightValueFromDict:result key:@"Text" defValue:args.text];
             NSString *col = [Functions getRightValueFromDict:result key:@"ForeColor" defValue:@"255255255"];
             args.fgColor = [Functions getColorFromRGB:col];
-            col = [Functions getRightValueFromDict:result key:@"ForeColor" defValue:@"255255255"];
+            col = [Functions getRightValueFromDict:result key:@"BackColor" defValue:@"255255255"];
             args.bgColor = [Functions getColorFromRGB:col];
             
             if (args.text.length == 0) {
@@ -1118,7 +1118,7 @@ int lastScale;
     [UIView beginAnimations:nil context:context];
     [UIView setAnimationDuration:1.5];
     // View changes go here
-    [infobar setAlpha:0.8f];     //设置属性的变换，可以对frame的位置进行变换来实现移动的效果
+    [infobar setAlpha:1.0f];     //设置属性的变换，可以对frame的位置进行变换来实现移动的效果
     [UIView commitAnimations];
 }
 
