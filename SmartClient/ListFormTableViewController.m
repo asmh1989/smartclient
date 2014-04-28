@@ -79,6 +79,11 @@
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return datas.sectionTitle;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];

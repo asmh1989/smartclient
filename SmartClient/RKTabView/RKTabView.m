@@ -22,7 +22,6 @@ const int RIGHT_ITEM_LENGTH =  60;
     self = [super initWithFrame:frame];
     if (self) {
         self.tabItems = tabItems;
-        [self setScroll];
         [self setRightItem:item];
         [self buildUI];
     }
@@ -65,7 +64,6 @@ const int RIGHT_ITEM_LENGTH =  60;
 }
 
 - (void)setTabItems:(NSArray *)tabItems {
-    [self setScroll];
     _tabItems = tabItems;
     [self buildUI];
 }
@@ -110,6 +108,8 @@ const int RIGHT_ITEM_LENGTH =  60;
     //clean before layout items
     [self cleanTabView];
     
+    [self setScroll];
+
     CGSize newSize = CGSizeMake((int)(RIGHT_ITEM_LENGTH*self.tabItems.count / self.scroll.frame.size.width + 1)*self.scroll.frame.size.width, self.frame.size.height);
     [self.scroll setContentSize:newSize];
     
@@ -133,11 +133,16 @@ const int RIGHT_ITEM_LENGTH =  60;
     
     if(self.tabItems.count == 0)
     {
-        RKTabItem *backItem = [RKTabItem createUsualItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_back.png"]];
-        backItem.titleString = @"返回";
-        UIControl *tab = [self tabForItem:backItem];
-        [self.scroll addSubview: tab];
-        [self.tabViews addObject: tab];
+        if(self.defalutItem == nil)
+        {
+            NSLog(@"please set defaultitem ...");
+        }
+        else
+        {
+            UIControl *tab = [self tabForItem:self.defalutItem];
+            [self.scroll addSubview: tab];
+            [self.tabViews addObject: tab];
+        }
     }
     
     //build UI
@@ -150,6 +155,11 @@ const int RIGHT_ITEM_LENGTH =  60;
 }
 
 - (void)swtichTab:(RKTabItem *)tabItem {
+    if(tabItem == nil){
+//        NSLog(@"当前没有指定的item");
+        [self.delegate tabView:self tabBecameEnabledAtIndex:0 tab:tabItem];
+        return;
+    }
     switch (tabItem.tabType) {
         case TabTypeButton:
             //Do nothing. It has own handler and it does not affect other tabs.
@@ -205,6 +215,11 @@ const int RIGHT_ITEM_LENGTH =  60;
 
 - (void)pressedTab:(id)sender {
     UIControl *tabView = (UIControl *)sender;
+    if(self.tabItems.count == 0)
+    {
+        [self swtichTab:nil];
+        return;
+    }
     RKTabItem *tabItem = [self tabItemForTab:tabView];
     [self swtichTab:tabItem];
 }
@@ -249,7 +264,7 @@ const int RIGHT_ITEM_LENGTH =  60;
     @catch (NSException *exception) {
         
     }
-    return self.tabItems.count > 0 ? itemLen: restrictedWidth;
+    return itemLen;
 }
 
 - (CGFloat)tabItemHeight {
@@ -267,7 +282,12 @@ const int RIGHT_ITEM_LENGTH =  60;
 - (CGRect)frameForTab:(RKTabItem *)tabItem {
     CGFloat width  = [self tabItemWidth];
     CGFloat height = [self tabItemHeight];
-    CGFloat x = self.horizontalInsets.left + [self indexOfTab:tabItem] * width;
+    CGFloat x = 0.0F;
+    if(self.tabItems.count > 0)
+    {
+        x = self.horizontalInsets.left + [self indexOfTab:tabItem] * width;
+    }
+
 //    NSLog(@"frameForTab X = %f, width = %f", x, width);
     return CGRectMake(x, 0, width, height);
 }

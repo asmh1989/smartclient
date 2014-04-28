@@ -35,6 +35,7 @@ static inline HorizontalEdgeInsets HorizontalEdgeInsetsMake (CGFloat left, CGFlo
 @property (nonatomic, strong) UIColor *titlesFontColor;
 @property (nonatomic, strong) NSArray *tabItems;
 @property (nonatomic, strong) RKTabItem *rightItem;
+@property (nonatomic, strong) RKTabItem *defalutItem;
 @property (nonatomic, readwrite) HorizontalEdgeInsets horizontalInsets;
 
 - (id)initWithFrame:(CGRect)frame andTabItems:(NSArray *)tabItems rightItem:(RKTabItem *)item;

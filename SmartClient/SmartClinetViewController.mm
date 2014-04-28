@@ -108,9 +108,12 @@
     
     RKTabItem * enterItem = [RKTabItem createButtonItemWithImage:[UIImage imageNamed:@"vt_enter.png"] target:self selector:@selector(clickToolBarEnter:)];
     enterItem.titleString = @"回车";
+    RKTabItem *item = [RKTabItem createUnexcludableItemWithImageEnabled:nil imageDisabled:[UIImage imageNamed:@"vt_back.png"]];
+    item.titleString = @"后退";
     
     self.toolBar = [[RKTabView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, 44)];
     self.toolBar.rightItem = enterItem;
+    self.toolBar.defalutItem = item;
     self.toolBar.drawSeparators = YES;
     self.toolBar.horizontalInsets = HorizontalEdgeInsetsMake(0, 0);
     [self.toolBar setDelegate:self];
@@ -228,6 +231,9 @@
     if (hostPort != [settingStore hostPort] || ![hostip isEqualToString:[settingStore hostIp]]) {
         //        [parser reset];
         [socket disconnect];
+        if(self.toolBar){
+            [self.toolBar setTabItems:@[]];
+        }
         [self sendFirstConnectInfo];
     }
 }
